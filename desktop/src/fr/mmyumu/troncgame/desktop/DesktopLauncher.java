@@ -4,7 +4,6 @@ import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 
 import fr.mmyumu.troncgame.DaggerAdapter;
-import fr.mmyumu.troncgame.GameModule;
 import fr.mmyumu.troncgame.TroncGame;
 
 public class DesktopLauncher {
@@ -13,7 +12,7 @@ public class DesktopLauncher {
 		config.title = "Tronc";
 		config.height = 900;
 		config.width = 1600;
-		DaggerAdapter daggerAdapter = new DaggerAdapter(TroncGame.class, new GameModule());
+		DaggerAdapter daggerAdapter = new DaggerAdapter(TroncGame.class);
 		new LwjglApplication(daggerAdapter, config);
 	}
 }

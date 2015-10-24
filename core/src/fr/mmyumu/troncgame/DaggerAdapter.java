@@ -2,7 +2,6 @@ package fr.mmyumu.troncgame;
 
 import com.badlogic.gdx.ApplicationListener;
 
-import dagger.ObjectGraph;
 
 public class DaggerAdapter implements ApplicationListener {
 
@@ -10,67 +9,47 @@ public class DaggerAdapter implements ApplicationListener {
     private ApplicationListener delegateApplicationListener;
     private Object[] daggerModules;
 
-    public DaggerAdapter(Class<? extends ApplicationListener> applicationListener,
+    public DaggerAdapter(Class<? extends ApplicationListener> applicationListenerClass,
                          Object... daggerModules) {
-        this.setApplicationListenerClass(applicationListener);
-        this.setDaggerModules(daggerModules);
+        this.applicationListenerClass = applicationListenerClass;
     }
 
     @Override
     public void create() {
-        final ObjectGraph objectGraph = ObjectGraph.create(this.getDaggerModules());
-        final ApplicationListener applicationListener =
-                (ApplicationListener) objectGraph.get(this.getInjectableGameClass());
-        this.setDelegateApplicationListener(applicationListener);
-        this.getDelegateApplicationListener().create();
+//        final ObjectGraph objectGraph = ObjectGraph.create(daggerModules);
+//        final ApplicationListener applicationListener =
+//                (ApplicationListener) objectGraph.get(applicationListenerClass);
+//        delegateApplicationListener = applicationListener;
+//        Dagger_TroncGameComponent.create().createTroncGame();
+//        TroncGameComponent comp = Da
+
+        TroncGame troncGame = new TroncGame();
+        delegateApplicationListener = troncGame;
+        delegateApplicationListener.create();
     }
 
     @Override
     public void resize(int width, int height) {
-        this.getDelegateApplicationListener().resize(width, height);
+        delegateApplicationListener.resize(width, height);
     }
 
     @Override
     public void render() {
-        this.getDelegateApplicationListener().render();
+        delegateApplicationListener.render();
     }
 
     @Override
     public void pause() {
-        this.getDelegateApplicationListener().pause();
+        delegateApplicationListener.pause();
     }
 
     @Override
     public void resume() {
-        this.getDelegateApplicationListener().resume();
+        delegateApplicationListener.resume();
     }
 
     @Override
     public void dispose() {
-        this.getDelegateApplicationListener().dispose();
-    }
-
-    public Class getInjectableGameClass() {
-        return applicationListenerClass;
-    }
-
-    private void setApplicationListenerClass(Class injectableGameClass) {
-        this.applicationListenerClass = injectableGameClass;
-    }
-
-    private Object[] getDaggerModules() {
-        return this.daggerModules;
-    }
-
-    private void setDaggerModules(Object[] daggerModules) {
-        this.daggerModules = daggerModules;
-    }
-
-    private ApplicationListener getDelegateApplicationListener() {
-        return delegateApplicationListener;
-    }
-
-    private void setDelegateApplicationListener(ApplicationListener applicationListener) {
-        this.delegateApplicationListener = applicationListener;
+        delegateApplicationListener.dispose();
     }
 }

@@ -53,7 +53,9 @@ project(":android") {
 
     dependencies {
         compile project(":core")
-        apt "com.squareup.dagger:dagger-compiler:1.2.2"
+        compile 'com.google.dagger:dagger:2.0.1'
+        apt 'com.google.dagger:dagger-compiler:2.0.1'
+        compile 'javax.annotation:jsr250-api:1.0'
         compile "com.badlogicgames.gdx:gdx-backend-android:$gdxVersion"
         natives "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-armeabi"
         natives "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-armeabi-v7a"
@@ -102,8 +104,8 @@ project(":core") {
     dependencies {
         compile "com.badlogicgames.gdx:gdx:$gdxVersion"
         compile "com.badlogicgames.gdx:gdx-box2d:$gdxVersion"
-        compile "com.squareup.dagger:dagger:1.2.2"
-        compile "com.squareup.dagger:dagger-compiler:1.2.2"
+        compile 'com.google.dagger:dagger:2.0.1'
+        compile 'com.google.dagger:dagger-compiler:2.0.1'
     }
 }
 

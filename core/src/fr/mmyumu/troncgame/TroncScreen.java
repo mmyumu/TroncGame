@@ -1,22 +1,19 @@
 package fr.mmyumu.troncgame;
 
-import dagger.Module;
-import dagger.Provides;
+import com.badlogic.gdx.ScreenAdapter;
 
 /**
  * Created by mmyumu on 24/10/2015.
  */
-@Module
-public class GameModule {
+public class TroncScreen extends ScreenAdapter {
 
     private TroncGame troncGame;
 
-    public GameModule(TroncGame troncGame) {
+    public TroncScreen(TroncGame troncGame) {
         this.troncGame = troncGame;
     }
 
-    @Provides
-    public TroncGame provideTroncGame() {
+    public TroncGame getTroncGame() {
         return troncGame;
     }
 }
