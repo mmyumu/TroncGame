@@ -21,7 +21,7 @@ public class LoadingScreen extends ScreenAdapter {
 
     @Override
     public void show() {
-        assetManager.load("main_menu.png", Texture.class);
+        assetManager.load("data/main_menu.png", Texture.class);
     }
 
     @Override

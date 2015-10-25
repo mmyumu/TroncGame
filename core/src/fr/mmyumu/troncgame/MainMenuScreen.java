@@ -4,16 +4,17 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.utils.Scaling;
+import com.badlogic.gdx.utils.viewport.ScalingViewport;
 
 import javax.inject.Inject;
 
@@ -22,21 +23,11 @@ import javax.inject.Inject;
  */
 public class MainMenuScreen extends ScreenAdapter {
 
-    private OrthographicCamera cam;
-
-    private Stage stage;
-
-    private SpriteBatch batch;
-    private BitmapFont font;
-    private BitmapFont font72;
     private Texture mainMenu;
-    private ShapeRenderer shapeRenderer;
+    private Stage stage;
 
     private TroncGame troncGame;
     private AssetManager assetManager;
-
-    float xRatio;
-    float yRatio;
 
     @Inject
     public MainMenuScreen(TroncGame troncGame, AssetManager assetManager) {
@@ -46,54 +37,18 @@ public class MainMenuScreen extends ScreenAdapter {
 
     @Override
     public void render(float delta) {
-        //cam.update();
-        //batch.setProjectionMatrix(cam.combined);
         Gdx.gl.glClearColor(0, 1, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         stage.draw();
-
-        shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
-        //shapeRenderer.rect(1133, 1457, 305, 133);
-        //shapeRenderer.scale(xRatio, yRatio, 1);
-        shapeRenderer.rect(650, 200, 200, 100);
-        shapeRenderer.end();
     }
 
     @Override
     public void show() {
-        batch = new SpriteBatch();
-        font = new BitmapFont();
-        shapeRenderer = new ShapeRenderer();
-        mainMenu = assetManager.get("main_menu.png", Texture.class);
+        mainMenu = assetManager.get("data/main_menu.png", Texture.class);
 
-        System.out.println("### mainMenu.getWidth()=" + mainMenu.getWidth());
-        System.out.println("### mainMenu.getHeight()=" + mainMenu.getHeight());
-
-        System.out.println("### Gdx.graphics.getWidth()=" + Gdx.graphics.getWidth());
-        System.out.println("### Gdx.graphics.getHeight()=" + Gdx.graphics.getHeight());
-
-        xRatio = mainMenu.getWidth() / (float) Gdx.graphics.getWidth();
-        yRatio = mainMenu.getHeight() / (float) Gdx.graphics.getHeight();
-        //xRatio = Gdx.graphics.getWidth() / (float) mainMenu.getWidth();
-        //yRatio = Gdx.graphics.getHeight() / (float) mainMenu.getHeight();
-
-        System.out.println("### xRatio=" + xRatio);
-        System.out.println("### yRatio=" + yRatio);
-
-
-        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/PressStart2P.ttf"));
-        FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        parameter.size = 12;
-        font72 = generator.generateFont(parameter); // font size 12 pixels
-        generator.dispose(); // don't forget to dispose to avoid memory leaks!
-
-        //cam = new OrthographicCamera(2000 * xRatio, 500 * yRatio);
-        //cam.position.set(cam.viewportWidth / 2f, cam.viewportHeight / 2f, 0);
-        //cam.update();
-
-        stage = new Stage(new FitViewport(mainMenu.getWidth(), mainMenu.getHeight()));
-        stage.addActor(new MyActor());
+        stage = new Stage(new ScalingViewport(Scaling.fit, mainMenu.getWidth(), mainMenu.getHeight()));
+        stage.addActor(new MainMenuActor());
     }
 
     @Override
@@ -101,17 +56,52 @@ public class MainMenuScreen extends ScreenAdapter {
         stage.getViewport().update(width, height);
     }
 
-    public class MyActor extends Actor {
-        //Texture texture = new Texture(Gdx.files.internal("data/jet.png"));
+    public class MainMenuActor extends Actor {
+        private SpriteBatch batch;
+        private BitmapFont font;
+        private ShapeRenderer shapeRenderer;
+        private GlyphLayout layout;
+        private float startX;
+        private float startY;
+
+
+        public MainMenuActor() {
+            shapeRenderer = new ShapeRenderer();
+            layout = new GlyphLayout();
+
+            FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/PressStart2P.ttf"));
+            FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
+            parameter.size = 72;
+            font = generator.generateFont(parameter); // font size 12 pixels
+            generator.dispose(); // don't forget to dispose to avoid memory leaks!
+
+            layout.setText(font, "Start");
+            startX = mainMenu.getWidth() / 2 - layout.width / 2;
+            startY = 300;
+
+            font.setColor(1f, 0.5f, 0.5f, 1f);
+
+        }
 
         @Override
         public void draw(Batch batch, float alpha) {
-            //batch.draw(texture,0,0);
-//            batch.begin();
             batch.draw(mainMenu, 0, 0);
-            font.draw(batch, "TEST String", 200, 200);
-            font72.draw(batch, "test free type", 300, 300);
-  //          batch.end();
+            font.draw(batch, "Start", startX, startY);
+            batch.end();
+
+            shapeRenderer.setProjectionMatrix(batch.getProjectionMatrix());
+            shapeRenderer.setTransformMatrix(batch.getTransformMatrix());
+
+            GL20 gl = Gdx.graphics.getGL20();
+            gl.glEnable(GL20.GL_BLEND);
+            gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
+            shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+            shapeRenderer.setColor(1f, 0.5f, 0.5f, 0.1f);
+            shapeRenderer.rect(startX, startY, layout.width, -layout.height);
+            shapeRenderer.end();
+            gl.glDisable(GL20.GL_BLEND);
+
+            batch.begin();
         }
     }
 }
