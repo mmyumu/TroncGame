@@ -57,7 +57,6 @@ public class MainMenuScreen extends ScreenAdapter {
     }
 
     public class MainMenuActor extends Actor {
-        private SpriteBatch batch;
         private BitmapFont font;
         private ShapeRenderer shapeRenderer;
         private GlyphLayout layout;
@@ -72,8 +71,8 @@ public class MainMenuScreen extends ScreenAdapter {
             FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/PressStart2P.ttf"));
             FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
             parameter.size = 72;
-            font = generator.generateFont(parameter); // font size 12 pixels
-            generator.dispose(); // don't forget to dispose to avoid memory leaks!
+            font = generator.generateFont(parameter);
+            generator.dispose();
 
             layout.setText(font, "Start");
             startX = mainMenu.getWidth() / 2 - layout.width / 2;
