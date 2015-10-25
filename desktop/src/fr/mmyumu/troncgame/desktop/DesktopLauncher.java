@@ -10,8 +10,8 @@ public class DesktopLauncher {
 	public static void main (String[] arg) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 		config.title = "Tronc";
-		config.height = 900;
-		config.width = 1600;
+		config.height = 500;
+		config.width = 2000;
 		DaggerAdapter daggerAdapter = new DaggerAdapter(TroncGame.class);
 		new LwjglApplication(daggerAdapter, config);
 	}
