@@ -1,11 +1,13 @@
-package fr.mmyumu.troncgame;
+package fr.mmyumu.troncgame.modules;
 
 import com.badlogic.gdx.assets.AssetManager;
 
-import javax.inject.Singleton;
-
 import dagger.Module;
 import dagger.Provides;
+import fr.mmyumu.troncgame.ActivityScope;
+import fr.mmyumu.troncgame.LoadingScreen;
+import fr.mmyumu.troncgame.MainMenuScreen;
+import fr.mmyumu.troncgame.TroncGame;
 
 /**
  * Created by mmyumu on 24/10/2015.

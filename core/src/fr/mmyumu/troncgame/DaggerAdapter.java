@@ -16,13 +16,6 @@ public class DaggerAdapter implements ApplicationListener {
 
     @Override
     public void create() {
-//        final ObjectGraph objectGraph = ObjectGraph.create(daggerModules);
-//        final ApplicationListener applicationListener =
-//                (ApplicationListener) objectGraph.get(applicationListenerClass);
-//        delegateApplicationListener = applicationListener;
-//        Dagger_TroncGameComponent.create().createTroncGame();
-//        TroncGameComponent comp = Da
-
         TroncGame troncGame = new TroncGame();
         delegateApplicationListener = troncGame;
         delegateApplicationListener.create();

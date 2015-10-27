@@ -4,6 +4,13 @@ import com.badlogic.gdx.Game;
 
 import javax.inject.Singleton;
 
+import fr.mmyumu.troncgame.components.DaggerGameComponent;
+import fr.mmyumu.troncgame.components.DaggerScreenComponent;
+import fr.mmyumu.troncgame.components.GameComponent;
+import fr.mmyumu.troncgame.components.ScreenComponent;
+import fr.mmyumu.troncgame.modules.GameModule;
+import fr.mmyumu.troncgame.modules.ScreenModule;
+
 @Singleton
 public class TroncGame extends Game {
 
@@ -15,29 +22,14 @@ public class TroncGame extends Game {
 
     @Override
     public void create() {
-//        setupGraph();
         GameModule gameModule = new GameModule(this);
+
         gameComponent = DaggerGameComponent.builder().gameModule(gameModule).build();
         gameComponent.inject(this);
 
         screenComponent = DaggerScreenComponent.builder().screenModule(new ScreenModule()).gameModule(gameModule).gameComponent(gameComponent).build();
         setScreen(screenComponent.createLoadingScreen());
-//        screenComponent = DaggerScreenComponent.create();
-//        LoadingScreen loadingScreen = screenComponent.createLoadingScreen();
-//        setScreen(loadingScreen);
-//        TroncGameComponent troncGameComponent = DaggerTroncGameComponent.create();
-//        TroncGame troncGame = troncGameComponent.createTroncGame();
     }
-
-    private void setupGraph() {
-        gameComponent = DaggerGameComponent.builder().gameModule(new GameModule(this)).build();
-        gameComponent.inject(this);
-    }
-
-//    public ScreenComponent getScreenComponent() {
-//        return screenComponent;
-//    }
-
 
     public ScreenComponent getScreenComponent() {
         return screenComponent;

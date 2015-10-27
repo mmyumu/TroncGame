@@ -1,7 +1,8 @@
-package fr.mmyumu.troncgame;
+package fr.mmyumu.troncgame.modules;
 
 import dagger.Module;
 import dagger.Provides;
+import fr.mmyumu.troncgame.TroncGame;
 
 /**
  * Created by mmyumu on 24/10/2015.

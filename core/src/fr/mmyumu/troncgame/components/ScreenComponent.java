@@ -1,8 +1,7 @@
-package fr.mmyumu.troncgame;
-
-import javax.inject.Singleton;
+package fr.mmyumu.troncgame.components;
 
 import dagger.Component;
+import fr.mmyumu.troncgame.*;
 
 /**
  * Created by mmyumu on 24/10/2015.
@@ -10,7 +9,7 @@ import dagger.Component;
 @ActivityScope
 @Component(
         dependencies = GameComponent.class,
-        modules = ScreenModule.class
+        modules = fr.mmyumu.troncgame.modules.ScreenModule.class
 )
 public interface ScreenComponent {
     LoadingScreen createLoadingScreen();
