@@ -5,7 +5,6 @@ import android.os.Bundle;
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
 
-import fr.mmyumu.troncgame.DaggerAdapter;
 import fr.mmyumu.troncgame.TroncGame;
 
 public class AndroidLauncher extends AndroidApplication {
@@ -14,7 +13,7 @@ public class AndroidLauncher extends AndroidApplication {
 		super.onCreate(savedInstanceState);
 		AndroidApplicationConfiguration config = new AndroidApplicationConfiguration();
 		config.useImmersiveMode = true;
-		DaggerAdapter daggerAdapter = new DaggerAdapter(TroncGame.class);
-		initialize(daggerAdapter, config);
+		TroncGame troncGame = new TroncGame();
+		initialize(troncGame, config);
 	}
 }
