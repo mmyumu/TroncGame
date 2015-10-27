@@ -1,6 +1,8 @@
 package fr.mmyumu.troncgame;
 
+import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
 
 import javax.inject.Singleton;
 
@@ -22,6 +24,7 @@ public class TroncGame extends Game {
 
     @Override
     public void create() {
+        Gdx.app.setLogLevel(Application.LOG_DEBUG);
         GameModule gameModule = new GameModule(this);
 
         gameComponent = DaggerGameComponent.builder().gameModule(gameModule).build();
