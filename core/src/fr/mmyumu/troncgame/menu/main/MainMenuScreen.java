@@ -1,4 +1,4 @@
-package fr.mmyumu.troncgame;
+package fr.mmyumu.troncgame.menu.main;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
@@ -17,6 +17,8 @@ import com.badlogic.gdx.utils.Scaling;
 import com.badlogic.gdx.utils.viewport.ScalingViewport;
 
 import javax.inject.Inject;
+
+import fr.mmyumu.troncgame.TroncGame;
 
 /**
  * Created by mmyumu on 24/10/2015.

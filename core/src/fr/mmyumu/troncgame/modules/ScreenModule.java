@@ -6,7 +6,7 @@ import dagger.Module;
 import dagger.Provides;
 import fr.mmyumu.troncgame.ActivityScope;
 import fr.mmyumu.troncgame.LoadingScreen;
-import fr.mmyumu.troncgame.MainMenuScreen;
+import fr.mmyumu.troncgame.menu.main.MainMenuScreen;
 import fr.mmyumu.troncgame.TroncGame;
 
 /**

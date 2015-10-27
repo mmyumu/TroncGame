@@ -14,5 +14,5 @@ import fr.mmyumu.troncgame.*;
 public interface ScreenComponent {
     LoadingScreen createLoadingScreen();
 
-    MainMenuScreen createMainMenuScreen();
+    fr.mmyumu.troncgame.menu.main.MainMenuScreen createMainMenuScreen();
 }
