@@ -97,7 +97,7 @@ public class MainMenuActor extends Actor implements InputProcessor {
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
         Vector2 convertedPoint = getStage().getViewport().unproject(new Vector2(screenX, screenY));
         if(startBounds.contains(convertedPoint.x, convertedPoint.y)) {
-            // TODO: implement functional code here
+            // TODO: implement functional code here (test github)
             Gdx.app.log(TAG, "### START");
         }
         return false;
