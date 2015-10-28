@@ -2,6 +2,7 @@ package fr.mmyumu.troncgame.components;
 
 import dagger.Component;
 import fr.mmyumu.troncgame.*;
+import fr.mmyumu.troncgame.menu.main.MainMenuScreen;
 
 /**
  * Created by mmyumu on 24/10/2015.
@@ -14,5 +15,5 @@ import fr.mmyumu.troncgame.*;
 public interface ScreenComponent {
     LoadingScreen createLoadingScreen();
 
-    fr.mmyumu.troncgame.menu.main.MainMenuScreen createMainMenuScreen();
+    MainMenuScreen createMainMenuScreen();
 }
