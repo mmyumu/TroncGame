@@ -105,8 +105,9 @@ public class MainMenuActor extends Actor implements InputProcessor {
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
         Vector2 convertedPoint = getStage().getViewport().unproject(new Vector2(screenX, screenY));
         if (startBounds.contains(convertedPoint.x, convertedPoint.y)) {
-            troncGame.setScreen(troncGame.getScreenComponent().createOverworldLoadingScreen());
             Gdx.app.debug(TAG, "Start button pressed");
+            troncGame.setScreen(troncGame.getScreenComponent().createOverworldLoadingScreen());
+            return true;
         }
         return false;
     }
