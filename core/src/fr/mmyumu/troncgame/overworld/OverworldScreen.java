@@ -4,6 +4,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
 
+import javax.inject.Inject;
+
 import fr.mmyumu.troncgame.TroncGame;
 
 /**
@@ -12,7 +14,7 @@ import fr.mmyumu.troncgame.TroncGame;
 public class OverworldScreen extends ScreenAdapter {
     private static final String TAG = "OverworldScreen";
 
-    private TroncGame troncGame;
+    private final TroncGame troncGame;
 
     public OverworldScreen(TroncGame troncGame) {
         this.troncGame = troncGame;

@@ -19,7 +19,7 @@ import fr.mmyumu.troncgame.TroncGame;
  */
 public class MainMenuScreen extends ScreenAdapter {
     private Stage stage;
-    private TroncGame troncGame;
+    private final TroncGame troncGame;
 
     @Inject
     public MainMenuScreen(TroncGame troncGame) {

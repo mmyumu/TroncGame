@@ -26,11 +26,11 @@ public class MainMenuActor extends Actor implements InputProcessor {
 
     private Texture mainMenu;
     private BitmapFont font;
-    private ShapeRenderer shapeRenderer;
-    private Rectangle startBounds;
+    private final ShapeRenderer shapeRenderer;
+    private final Rectangle startBounds;
 
-    private TroncGame troncGame;
-    private AssetManager assetManager;
+    private final TroncGame troncGame;
+    private final AssetManager assetManager;
 
     @Inject
     public MainMenuActor(TroncGame troncGame, AssetManager assetManager) {
@@ -105,6 +105,7 @@ public class MainMenuActor extends Actor implements InputProcessor {
         Vector2 convertedPoint = getStage().getViewport().unproject(new Vector2(screenX, screenY));
         if(startBounds.contains(convertedPoint.x, convertedPoint.y)) {
             troncGame.setScreen(troncGame.getScreenComponent().createOverworldLoadingScreen());
+            Gdx.app.debug(TAG, "Start button pressed");
         }
         return false;
     }

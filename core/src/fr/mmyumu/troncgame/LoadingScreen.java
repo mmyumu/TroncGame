@@ -12,8 +12,8 @@ import javax.inject.Inject;
  */
 public class LoadingScreen extends ScreenAdapter {
     private static final String TAG = "LoadingScreen";
-    private TroncGame troncGame;
-    private AssetManager assetManager;
+    private final TroncGame troncGame;
+    private final AssetManager assetManager;
 
     @Inject
     public LoadingScreen(TroncGame troncGame, AssetManager assetManager) {

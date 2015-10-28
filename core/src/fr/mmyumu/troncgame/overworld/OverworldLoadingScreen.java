@@ -3,7 +3,6 @@ package fr.mmyumu.troncgame.overworld;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.assets.AssetManager;
-import com.badlogic.gdx.graphics.Texture;
 
 import javax.inject.Inject;
 
@@ -14,8 +13,9 @@ import fr.mmyumu.troncgame.TroncGame;
  */
 public class OverworldLoadingScreen extends ScreenAdapter {
     private static final String TAG = "OverworldLoadingScreen";
-    private TroncGame troncGame;
-    private AssetManager assetManager;
+
+    private final TroncGame troncGame;
+    private final AssetManager assetManager;
 
     @Inject
     public OverworldLoadingScreen(TroncGame troncGame, AssetManager assetManager) {
