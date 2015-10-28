@@ -20,17 +20,15 @@ import fr.mmyumu.troncgame.TroncGame;
 public class MainMenuScreen extends ScreenAdapter {
     private Stage stage;
     private TroncGame troncGame;
-    private AssetManager assetManager;
 
     @Inject
-    public MainMenuScreen(TroncGame troncGame, AssetManager assetManager) {
+    public MainMenuScreen(TroncGame troncGame) {
         this.troncGame = troncGame;
-        this.assetManager = assetManager;
     }
 
     @Override
     public void render(float delta) {
-        Gdx.gl.glClearColor(0, 1, 0, 1);
+        Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         stage.draw();
@@ -39,7 +37,7 @@ public class MainMenuScreen extends ScreenAdapter {
     @Override
     public void show() {
         stage = new Stage(new ScalingViewport(Scaling.fit, Constants.WIDTH, Constants.HEIGHT));
-        MainMenuActor mainMenuActor = new MainMenuActor(assetManager);
+        MainMenuActor mainMenuActor = troncGame.getScreenComponent().createMainMenuActor();
         stage.addActor(mainMenuActor);
         Gdx.input.setInputProcessor(mainMenuActor);
     }

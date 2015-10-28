@@ -14,8 +14,12 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
+import javax.inject.Inject;
+
+import fr.mmyumu.troncgame.TroncGame;
+
 /**
- * Created by mmyumuE on 27/10/2015.
+ * Created by mmyumu on 27/10/2015.
  */
 public class MainMenuActor extends Actor implements InputProcessor {
     private static final String TAG = "MainMenuActor";
@@ -25,9 +29,12 @@ public class MainMenuActor extends Actor implements InputProcessor {
     private ShapeRenderer shapeRenderer;
     private Rectangle startBounds;
 
+    private TroncGame troncGame;
     private AssetManager assetManager;
 
-    public MainMenuActor(AssetManager assetManager) {
+    @Inject
+    public MainMenuActor(TroncGame troncGame, AssetManager assetManager) {
+        this.troncGame = troncGame;
         this.assetManager = assetManager;
 
         shapeRenderer = new ShapeRenderer();
@@ -97,8 +104,7 @@ public class MainMenuActor extends Actor implements InputProcessor {
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
         Vector2 convertedPoint = getStage().getViewport().unproject(new Vector2(screenX, screenY));
         if(startBounds.contains(convertedPoint.x, convertedPoint.y)) {
-            // TODO: implement functional code here (test github)
-            Gdx.app.log(TAG, "### START");
+            troncGame.setScreen(troncGame.getScreenComponent().createOverworldLoadingScreen());
         }
         return false;
     }
