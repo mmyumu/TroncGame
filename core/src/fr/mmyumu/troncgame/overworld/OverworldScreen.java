@@ -16,6 +16,7 @@ public class OverworldScreen extends ScreenAdapter {
 
     private final TroncGame troncGame;
 
+    @Inject
     public OverworldScreen(TroncGame troncGame) {
         this.troncGame = troncGame;
     }
