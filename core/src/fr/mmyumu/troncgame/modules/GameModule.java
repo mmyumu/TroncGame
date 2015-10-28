@@ -10,7 +10,7 @@ import fr.mmyumu.troncgame.TroncGame;
 @Module
 public class GameModule {
 
-    private TroncGame troncGame;
+    private final TroncGame troncGame;
 
     public GameModule(TroncGame troncGame) {
         this.troncGame = troncGame;
