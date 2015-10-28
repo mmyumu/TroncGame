@@ -13,11 +13,13 @@ import fr.mmyumu.troncgame.Constants;
 import fr.mmyumu.troncgame.TroncGame;
 
 /**
+ * Main menu screen
  * Created by mmyumu on 24/10/2015.
  */
 public class MainMenuScreen extends ScreenAdapter {
-    private Stage stage;
     private final TroncGame troncGame;
+    private Stage stage;
+
 
     @Inject
     public MainMenuScreen(TroncGame troncGame) {

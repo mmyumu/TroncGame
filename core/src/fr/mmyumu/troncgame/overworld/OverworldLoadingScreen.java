@@ -9,6 +9,7 @@ import javax.inject.Inject;
 import fr.mmyumu.troncgame.TroncGame;
 
 /**
+ *
  * Created by mmyumu on 28/10/2015.
  */
 public class OverworldLoadingScreen extends ScreenAdapter {

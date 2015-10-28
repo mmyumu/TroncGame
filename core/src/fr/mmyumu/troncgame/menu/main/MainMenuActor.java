@@ -19,18 +19,19 @@ import javax.inject.Inject;
 import fr.mmyumu.troncgame.TroncGame;
 
 /**
+ * Actor to display main menu
  * Created by mmyumu on 27/10/2015.
  */
 public class MainMenuActor extends Actor implements InputProcessor {
     private static final String TAG = "MainMenuActor";
 
-    private Texture mainMenu;
-    private BitmapFont font;
-    private final ShapeRenderer shapeRenderer;
-    private final Rectangle startBounds;
-
     private final TroncGame troncGame;
     private final AssetManager assetManager;
+    private final Rectangle startBounds;
+    private final ShapeRenderer shapeRenderer;
+
+    private Texture mainMenu;
+    private BitmapFont font;
 
     @Inject
     public MainMenuActor(TroncGame troncGame, AssetManager assetManager) {
@@ -103,7 +104,7 @@ public class MainMenuActor extends Actor implements InputProcessor {
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
         Vector2 convertedPoint = getStage().getViewport().unproject(new Vector2(screenX, screenY));
-        if(startBounds.contains(convertedPoint.x, convertedPoint.y)) {
+        if (startBounds.contains(convertedPoint.x, convertedPoint.y)) {
             troncGame.setScreen(troncGame.getScreenComponent().createOverworldLoadingScreen());
             Gdx.app.debug(TAG, "Start button pressed");
         }

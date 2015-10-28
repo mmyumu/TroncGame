@@ -5,6 +5,7 @@ import dagger.Provides;
 import fr.mmyumu.troncgame.TroncGame;
 
 /**
+ * Dagger module to provide game
  * Created by mmyumu on 24/10/2015.
  */
 @Module

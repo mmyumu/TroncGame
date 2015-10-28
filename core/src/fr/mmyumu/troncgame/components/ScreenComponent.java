@@ -9,6 +9,7 @@ import fr.mmyumu.troncgame.overworld.OverworldLoadingScreen;
 import fr.mmyumu.troncgame.overworld.OverworldScreen;
 
 /**
+ * Dagger component for the different screens
  * Created by mmyumu on 24/10/2015.
  */
 @ActivityScope

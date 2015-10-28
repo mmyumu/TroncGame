@@ -12,6 +12,7 @@ import fr.mmyumu.troncgame.overworld.OverworldLoadingScreen;
 import fr.mmyumu.troncgame.overworld.OverworldScreen;
 
 /**
+ * Dagger module providing screens
  * Created by mmyumu on 24/10/2015.
  */
 @Module(includes = {GameModule.class})

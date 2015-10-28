@@ -8,10 +8,12 @@ import com.badlogic.gdx.graphics.Texture;
 import javax.inject.Inject;
 
 /**
+ * Loading screen when the application is started
  * Created by mmyumu on 24/10/2015.
  */
 public class LoadingScreen extends ScreenAdapter {
     private static final String TAG = "LoadingScreen";
+
     private final TroncGame troncGame;
     private final AssetManager assetManager;
 

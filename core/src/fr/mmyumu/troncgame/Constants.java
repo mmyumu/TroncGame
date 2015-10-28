@@ -1,6 +1,7 @@
 package fr.mmyumu.troncgame;
 
 /**
+ * General game constants
  * Created by mmyumu on 27/10/2015.
  */
 public interface Constants {

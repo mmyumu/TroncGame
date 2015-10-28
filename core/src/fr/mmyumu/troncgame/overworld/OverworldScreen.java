@@ -9,6 +9,7 @@ import javax.inject.Inject;
 import fr.mmyumu.troncgame.TroncGame;
 
 /**
+ * Overworld screen displaying a top-down view to the world
  * Created by mmyumu on 28/10/2015.
  */
 public class OverworldScreen extends ScreenAdapter {
