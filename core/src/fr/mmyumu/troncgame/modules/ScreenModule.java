@@ -6,6 +6,7 @@ import dagger.Module;
 import dagger.Provides;
 import fr.mmyumu.troncgame.ActivityScope;
 import fr.mmyumu.troncgame.LoadingScreen;
+import fr.mmyumu.troncgame.Utils;
 import fr.mmyumu.troncgame.menu.main.MainMenuScreen;
 import fr.mmyumu.troncgame.TroncGame;
 import fr.mmyumu.troncgame.overworld.OverworldLoadingScreen;
@@ -43,7 +44,7 @@ public class ScreenModule {
 
     @Provides
     @ActivityScope
-    OverworldScreen provideOverworldScreen(TroncGame troncGame) {
-        return new OverworldScreen(troncGame);
+    OverworldScreen provideOverworldScreen(TroncGame troncGame, AssetManager assetManager, Utils utils) {
+        return new OverworldScreen(troncGame, assetManager, utils);
     }
 }
