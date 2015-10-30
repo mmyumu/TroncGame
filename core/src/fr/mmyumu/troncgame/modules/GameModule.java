@@ -3,6 +3,7 @@ package fr.mmyumu.troncgame.modules;
 import dagger.Module;
 import dagger.Provides;
 import fr.mmyumu.troncgame.TroncGame;
+import fr.mmyumu.troncgame.Utils;
 
 /**
  * Dagger module to provide game
@@ -20,5 +21,10 @@ public class GameModule {
     @Provides
     public TroncGame provideTroncGame() {
         return troncGame;
+    }
+
+    @Provides
+    public Utils provideUtils() {
+        return new Utils();
     }
 }
