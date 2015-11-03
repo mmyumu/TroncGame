@@ -29,9 +29,11 @@ public class OverworldLoadingScreen extends ScreenAdapter {
     public void show() {
         Gdx.app.debug(TAG, "Loading overworld");
 
-        assetManager.load("data/tiledirt.png", Texture.class);
-        assetManager.load("data/tilegrass.png", Texture.class);
-        assetManager.load("data/tilewall.png", Texture.class);
+        assetManager.load(OverworldConstants.TexturePath.TILE_DIRT, Texture.class);
+        assetManager.load(OverworldConstants.TexturePath.TILE_GRASS, Texture.class);
+        assetManager.load(OverworldConstants.TexturePath.TILE_WALL, Texture.class);
+
+        assetManager.load(OverworldConstants.TexturePath.MAIN_CHARACTER, Texture.class);
     }
 
     @Override

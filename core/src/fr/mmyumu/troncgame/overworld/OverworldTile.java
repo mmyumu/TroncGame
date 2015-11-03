@@ -3,26 +3,22 @@ package fr.mmyumu.troncgame.overworld;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.math.GridPoint2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
-import javax.inject.Inject;
-
 /**
+ * Tile displayed in the Overworld
  * Created by mmyumu on 30/10/2015.
  */
 public class OverworldTile extends Actor {
 
-    @Inject AssetManager assetManager;
-    private final OverworldCharacter mainCharacter;
-    private final int x;
-    private final int y;
+    private final GridPoint2 bottomLeft;
     private final Type type;
+    private final AssetManager assetManager;
 
 
-    public OverworldTile(OverworldCharacter mainCharacter, int x, int y, char typeChar, AssetManager assetManager) {
-        this.mainCharacter = mainCharacter;
-        this.x = x;
-        this.y = y;
+    public OverworldTile(int x, int y, char typeChar, AssetManager assetManager) {
+        this.bottomLeft = new GridPoint2(x, y);
         this.type = Type.getType(typeChar);
         this.assetManager = assetManager;
 
@@ -34,15 +30,15 @@ public class OverworldTile extends Actor {
     @Override
     public void draw(Batch batch, float parentAlpha) {
         Texture texture = assetManager.get(type.getTexturePath(), Texture.class);
-        batch.draw(texture, x, y, OverworldConstants.TILE_WIDTH, OverworldConstants.TILE_HEIGHT);
+        batch.draw(texture, bottomLeft.x, bottomLeft.y, OverworldConstants.TILE_WIDTH, OverworldConstants.TILE_HEIGHT);
     }
 
     public enum Type {
         // TODO: add a collision attribute to the tiles?
-        NONE(' ', null), DIRT('D', "data/tiledirt.png"), GRASS('G', "data/tilegrass.png"), WALL('W', "data/tilewall.png");
+        NONE(' ', null), DIRT('D', OverworldConstants.TexturePath.TILE_DIRT), GRASS('G', OverworldConstants.TexturePath.TILE_GRASS), WALL('W', OverworldConstants.TexturePath.TILE_WALL);
 
-        private char typeChar;
-        private String texturePath;
+        private final char typeChar;
+        private final String texturePath;
 
         Type(char typeChar, String texturePath) {
             this.typeChar = typeChar;

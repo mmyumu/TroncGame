@@ -4,7 +4,7 @@ package fr.mmyumu.troncgame.overworld;
  * Exception about the Overworld
  * Created by mmyumu on 26/09/2015.
  */
-public class OverworldException extends RuntimeException {
+class OverworldException extends RuntimeException {
     public OverworldException() {
     }
 

@@ -5,6 +5,7 @@ import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.math.GridPoint2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Scaling;
 import com.badlogic.gdx.utils.viewport.ScalingViewport;
@@ -44,6 +45,7 @@ public class OverworldScreen extends ScreenAdapter {
     public void show() {
         Gdx.app.debug(TAG, "Showing Overworld");
 
+
         stage = new Stage(new ScalingViewport(Scaling.fit, Constants.WIDTH, Constants.HEIGHT));
 
         FileHandle fileHandle = Gdx.files.internal("maps/village.txt");
@@ -51,6 +53,17 @@ public class OverworldScreen extends ScreenAdapter {
         String map = utils.convertStreamToString(is);
 
         loadMap(map);
+        loadCharacter();
+
+    }
+
+    private void loadCharacter() {
+        Double centerX = OverworldConstants.TILE_WIDTH * 1.5;
+        Double centerY = OverworldConstants.TILE_HEIGHT * 1.5;
+
+        mainCharacter = new OverworldCharacter(new GridPoint2(centerX.intValue(), centerY.intValue()), assetManager);
+
+        stage.addActor(mainCharacter);
     }
 
     @Override
@@ -86,7 +99,7 @@ public class OverworldScreen extends ScreenAdapter {
             for (int i = 0; i < width; i++) {
                 if (i < line.length()) {
                     char ch = line.charAt(i);
-                    OverworldTile t = new OverworldTile(mainCharacter, i * OverworldConstants.TILE_WIDTH, j * OverworldConstants.TILE_WIDTH, ch, assetManager);
+                    OverworldTile t = new OverworldTile(i * OverworldConstants.TILE_WIDTH, j * OverworldConstants.TILE_WIDTH, ch, assetManager);
                     stage.addActor(t);
                 }
             }
