@@ -1,7 +1,14 @@
 package fr.mmyumu.troncgame.modules;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.utils.I18NBundle;
+
+import java.util.Locale;
+
 import dagger.Module;
 import dagger.Provides;
+import fr.mmyumu.troncgame.ActivityScope;
 import fr.mmyumu.troncgame.TroncGame;
 import fr.mmyumu.troncgame.Utils;
 
@@ -24,7 +31,17 @@ public class GameModule {
     }
 
     @Provides
+    @ActivityScope
     public Utils provideUtils() {
         return new Utils();
+    }
+
+    @Provides
+    @ActivityScope
+    public I18NBundle provideI18NBundle() {
+        FileHandle baseFileHandle = Gdx.files.internal("i18n/myBundle");
+
+//        Locale locale = new Locale("fr", "CA", "VAR1");
+        return I18NBundle.createBundle(baseFileHandle, Locale.getDefault());
     }
 }

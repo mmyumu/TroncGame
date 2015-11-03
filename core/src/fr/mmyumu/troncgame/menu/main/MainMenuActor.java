@@ -13,9 +13,11 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.utils.I18NBundle;
 
 import javax.inject.Inject;
 
+import fr.mmyumu.troncgame.Constants;
 import fr.mmyumu.troncgame.TroncGame;
 
 /**
@@ -27,6 +29,7 @@ public class MainMenuActor extends Actor implements InputProcessor {
 
     private final TroncGame troncGame;
     private final AssetManager assetManager;
+    private final I18NBundle bundle;
     private final Rectangle startBounds;
     private final ShapeRenderer shapeRenderer;
 
@@ -34,9 +37,10 @@ public class MainMenuActor extends Actor implements InputProcessor {
     private BitmapFont font;
 
     @Inject
-    public MainMenuActor(TroncGame troncGame, AssetManager assetManager) {
+    public MainMenuActor(TroncGame troncGame, AssetManager assetManager, I18NBundle bundle) {
         this.troncGame = troncGame;
         this.assetManager = assetManager;
+        this.bundle = bundle;
 
         shapeRenderer = new ShapeRenderer();
 
@@ -44,7 +48,7 @@ public class MainMenuActor extends Actor implements InputProcessor {
         loadTexture();
 
         GlyphLayout layout = new GlyphLayout();
-        layout.setText(font, "Start");
+        layout.setText(font, bundle.get("start"));
         float startX = mainMenu.getWidth() / 2 - layout.width / 2;
         float startY = 300;
 
@@ -52,7 +56,7 @@ public class MainMenuActor extends Actor implements InputProcessor {
     }
 
     private void loadFonts() {
-        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/PressStart2P.ttf"));
+        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal(Constants.FontPath.PRESS_START_2P));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
         parameter.size = 72;
         font = generator.generateFont(parameter);
@@ -62,13 +66,13 @@ public class MainMenuActor extends Actor implements InputProcessor {
     }
 
     private void loadTexture() {
-        mainMenu = assetManager.get("data/main_menu.png", Texture.class);
+        mainMenu = assetManager.get(Constants.TexturePath.MAIN_MENU, Texture.class);
     }
 
     @Override
     public void draw(Batch batch, float alpha) {
         batch.draw(mainMenu, 0, 0);
-        font.draw(batch, "Start", startBounds.getX(), startBounds.getY() + startBounds.getHeight());
+        font.draw(batch, bundle.get("start"), startBounds.getX(), startBounds.getY() + startBounds.getHeight());
         batch.end();
 
         shapeRenderer.setProjectionMatrix(batch.getProjectionMatrix());
