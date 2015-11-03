@@ -14,7 +14,7 @@ import java.io.InputStreamReader;
 public class Utils {
     private static final String TAG = "Utils";
 
-    public static String convertStreamToString(InputStream is) {
+    public String convertStreamToString(InputStream is) {
         BufferedReader reader = new BufferedReader(new InputStreamReader(is));
         StringBuilder sb = new StringBuilder();
 
