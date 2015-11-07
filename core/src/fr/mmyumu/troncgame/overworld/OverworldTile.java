@@ -25,6 +25,8 @@ public class OverworldTile extends Actor {
         if (this.type == null) {
             throw new OverworldException("The type " + typeChar + " is not a registered Overworld tile.");
         }
+
+        setBounds(x, y, OverworldConstants.TILE_WIDTH, OverworldConstants.TILE_HEIGHT);
     }
 
     @Override

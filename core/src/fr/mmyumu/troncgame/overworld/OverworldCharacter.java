@@ -29,7 +29,8 @@ class OverworldCharacter extends Actor {
     }
 
     private void initHitBoxes(GridPoint2 p) {
-        hitBox = new Rectangle(retrieveLeft(p), retrieveBottom(p), OverworldConstants.TILE_WIDTH, OverworldConstants.TILE_HEIGHT);
+        setBounds(retrieveLeft(p), retrieveBottom(p), OverworldConstants.TILE_WIDTH, OverworldConstants.TILE_HEIGHT);
+//        hitBox = new Rectangle(retrieveLeft(p), retrieveBottom(p), OverworldConstants.TILE_WIDTH, OverworldConstants.TILE_HEIGHT);
     }
 
     private int retrieveLeft(GridPoint2 p) {
