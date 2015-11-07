@@ -7,17 +7,21 @@ import com.badlogic.gdx.Gdx;
 import javax.inject.Singleton;
 
 import fr.mmyumu.troncgame.components.DaggerGameComponent;
-import fr.mmyumu.troncgame.components.DaggerScreenComponent;
+import fr.mmyumu.troncgame.components.DaggerMainMenuComponent;
+import fr.mmyumu.troncgame.components.DaggerOverworldComponent;
 import fr.mmyumu.troncgame.components.GameComponent;
-import fr.mmyumu.troncgame.components.ScreenComponent;
+import fr.mmyumu.troncgame.components.MainMenuComponent;
+import fr.mmyumu.troncgame.components.OverworldComponent;
 import fr.mmyumu.troncgame.modules.GameModule;
-import fr.mmyumu.troncgame.modules.ScreenModule;
+import fr.mmyumu.troncgame.modules.MainMenuModule;
+import fr.mmyumu.troncgame.modules.OverworldModule;
 
 @Singleton
 public class TroncGame extends Game {
 
     private GameComponent gameComponent;
-    private ScreenComponent screenComponent;
+    private MainMenuComponent mainMenuComponent;
+    private OverworldComponent overworldComponent;
 
     public TroncGame() {
     }
@@ -30,11 +34,17 @@ public class TroncGame extends Game {
         gameComponent = DaggerGameComponent.builder().gameModule(gameModule).build();
         gameComponent.inject(this);
 
-        screenComponent = DaggerScreenComponent.builder().screenModule(new ScreenModule()).gameModule(gameModule).gameComponent(gameComponent).build();
-        setScreen(screenComponent.createLoadingScreen());
+        mainMenuComponent = DaggerMainMenuComponent.builder().mainMenuModule(new MainMenuModule()).gameModule(gameModule).gameComponent(gameComponent).build();
+        overworldComponent = DaggerOverworldComponent.builder().overworldModule(new OverworldModule()).gameModule(gameModule).gameComponent(gameComponent).build();
+
+        setScreen(mainMenuComponent.createMainMenuLoadingScreen());
     }
 
-    public ScreenComponent getScreenComponent() {
-        return screenComponent;
+    public MainMenuComponent getMainMenuComponent() {
+        return mainMenuComponent;
+    }
+
+    public OverworldComponent getOverworldComponent() {
+        return overworldComponent;
     }
 }

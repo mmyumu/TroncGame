@@ -110,7 +110,7 @@ public class MainMenuActor extends Actor implements InputProcessor {
         Vector2 convertedPoint = getStage().getViewport().unproject(new Vector2(screenX, screenY));
         if (startBounds.contains(convertedPoint.x, convertedPoint.y)) {
             Gdx.app.debug(TAG, "Start button pressed");
-            troncGame.setScreen(troncGame.getScreenComponent().createOverworldLoadingScreen());
+            troncGame.setScreen(troncGame.getOverworldComponent().createOverworldLoadingScreen());
             return true;
         }
         return false;

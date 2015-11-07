@@ -1,6 +1,7 @@
 package fr.mmyumu.troncgame.modules;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.I18NBundle;
 
@@ -43,5 +44,11 @@ public class GameModule {
 
 //        Locale locale = new Locale("fr", "CA", "VAR1");
         return I18NBundle.createBundle(baseFileHandle, Locale.getDefault());
+    }
+
+    @Provides
+    @ActivityScope
+    AssetManager provideAssetManager() {
+        return new AssetManager();
     }
 }

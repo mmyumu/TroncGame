@@ -39,7 +39,7 @@ public class OverworldLoadingScreen extends ScreenAdapter {
     @Override
     public void render(float delta) {
         if (assetManager.update()) {
-            troncGame.setScreen(troncGame.getScreenComponent().createOverworldScreen());
+            troncGame.setScreen(troncGame.getOverworldComponent().createOverworldScreen());
         }
         Gdx.app.debug(TAG, ".");
     }

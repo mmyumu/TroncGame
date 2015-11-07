@@ -1,4 +1,4 @@
-package fr.mmyumu.troncgame;
+package fr.mmyumu.troncgame.menu.main;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
@@ -7,18 +7,20 @@ import com.badlogic.gdx.graphics.Texture;
 
 import javax.inject.Inject;
 
+import fr.mmyumu.troncgame.TroncGame;
+
 /**
  * Loading screen when the application is started
  * Created by mmyumu on 24/10/2015.
  */
-public class LoadingScreen extends ScreenAdapter {
+public class MainMenuLoadingScreen extends ScreenAdapter {
     private static final String TAG = "LoadingScreen";
 
     private final TroncGame troncGame;
     private final AssetManager assetManager;
 
     @Inject
-    public LoadingScreen(TroncGame troncGame, AssetManager assetManager) {
+    public MainMenuLoadingScreen(TroncGame troncGame, AssetManager assetManager) {
         this.troncGame = troncGame;
         this.assetManager = assetManager;
     }
@@ -32,7 +34,7 @@ public class LoadingScreen extends ScreenAdapter {
     @Override
     public void render(float delta) {
         if (assetManager.update()) {
-            troncGame.setScreen(troncGame.getScreenComponent().createMainMenuScreen());
+            troncGame.setScreen(troncGame.getMainMenuComponent().createMainMenuScreen());
         }
         Gdx.app.debug(TAG, ".");
     }
