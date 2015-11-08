@@ -1,36 +1,17 @@
 package fr.mmyumu.troncgame.overworld;
 
+import com.badlogic.gdx.math.Vector2;
+
 /**
  * Represent the speed (x and y components) in a plan
  * Created by mmyumu on 03/10/2015.
  */
-class Speed {
-    private double x;
-    private double y;
-
+class Speed extends Vector2 {
     public Speed() {
-        super();
     }
 
-    public Speed(double x, double y) {
-        this.x = x;
-        this.y = y;
-    }
-
-    public double getX() {
-        return x;
-    }
-
-    public void setX(double x) {
-        this.x = x;
-    }
-
-    public double getY() {
-        return y;
-    }
-
-    public void setY(double y) {
-        this.y = y;
+    public Speed(float x, float y) {
+        super(x, y);
     }
 
     public void invertX() {

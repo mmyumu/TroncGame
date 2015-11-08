@@ -8,6 +8,10 @@ interface OverworldConstants {
     int TILE_WIDTH = 60;
     int TILE_HEIGHT = 60;
 
+    interface MapPath {
+        String VILLAGE = "maps/village.txt";
+    }
+
     interface TexturePath {
         String MAIN_CHARACTER = "data/character.png";
         String TILE_DIRT = "data/tile_dirt.png";
