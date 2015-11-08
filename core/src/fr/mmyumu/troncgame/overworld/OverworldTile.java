@@ -35,16 +35,24 @@ public class OverworldTile extends Actor {
         batch.draw(texture, bottomLeft.x, bottomLeft.y, OverworldConstants.TILE_WIDTH, OverworldConstants.TILE_HEIGHT);
     }
 
+    public Type getType() {
+        return type;
+    }
+
     public enum Type {
-        // TODO: add a collision attribute to the tiles?
-        NONE(' ', null), DIRT('D', OverworldConstants.TexturePath.TILE_DIRT), GRASS('G', OverworldConstants.TexturePath.TILE_GRASS), WALL('W', OverworldConstants.TexturePath.TILE_WALL);
+        NONE(' ', null, false),
+        DIRT('D', OverworldConstants.TexturePath.TILE_DIRT, false),
+        GRASS('G', OverworldConstants.TexturePath.TILE_GRASS, false),
+        WALL('W', OverworldConstants.TexturePath.TILE_WALL, true);
 
         private final char typeChar;
         private final String texturePath;
+        private final boolean obstacle;
 
-        Type(char typeChar, String texturePath) {
+        Type(char typeChar, String texturePath, boolean obstacle) {
             this.typeChar = typeChar;
             this.texturePath = texturePath;
+            this.obstacle = obstacle;
         }
 
         public static Type getType(char typeChar) {
@@ -58,6 +66,10 @@ public class OverworldTile extends Actor {
 
         public String getTexturePath() {
             return texturePath;
+        }
+
+        public boolean isObstacle() {
+            return obstacle;
         }
     }
 }
