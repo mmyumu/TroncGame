@@ -1,5 +1,6 @@
 package fr.mmyumu.troncgame.overworld;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.math.GridPoint2;
 import com.badlogic.gdx.math.Vector2;
@@ -11,7 +12,7 @@ import javax.inject.Inject;
  * Created by mmyumu on 07/11/2015.
  */
 public class OverworldGameInputProcessor extends InputAdapter {
-
+    private static final String TAG = "OverworldGameInputProcessor";
     private OverworldScreen overworldScreen;
 
     @Inject
@@ -26,6 +27,7 @@ public class OverworldGameInputProcessor extends InputAdapter {
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+        Gdx.app.debug(TAG, "touchDown x=" + screenX + " y=" + screenY);
         initMainCharacterMoveTarget(screenX, screenY);
 //        Actor actor = gameStage.hit(touchCoords.x, touchCoords.y, true);
         return false;
@@ -33,6 +35,7 @@ public class OverworldGameInputProcessor extends InputAdapter {
 
     @Override
     public boolean touchDragged(int screenX, int screenY, int pointer) {
+        Gdx.app.debug(TAG, "touchDragged x=" + screenX + " y=" + screenY);
         initMainCharacterMoveTarget(screenX, screenY);
         return false;
     }

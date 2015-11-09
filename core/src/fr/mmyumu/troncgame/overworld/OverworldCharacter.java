@@ -5,7 +5,6 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.GridPoint2;
-import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
 /**
@@ -70,8 +69,6 @@ class OverworldCharacter extends Actor {
         if (moveTarget != null) {
             Gdx.app.debug(TAG, "centerX=" + center.x + " centerY=" + center.y);
             Gdx.app.debug(TAG, "moveTarget x=" + moveTarget.x + " y=" + moveTarget.y);
-            Gdx.app.debug(TAG, "moveTarget.y - centerY=" + (moveTarget.y - center.x));
-            Gdx.app.debug(TAG, "moveTarget.x - centerX=" + (moveTarget.x - center.y));
 
             if (!isTargetCloserThanMaxMovement()) {
                 speed = computeSpeed();
@@ -100,7 +97,6 @@ class OverworldCharacter extends Actor {
             int yDistance = moveTarget.y - center.y;
 
             double slope = yDistance / (double) xDistance;
-            Gdx.app.debug(TAG, "slope=" + slope);
             speed.x = (float) (MOVE_SPEED / Math.sqrt(slope * slope + 1));
             speed.y = (float) Math.sqrt(MOVE_SPEED * MOVE_SPEED - speed.x * speed.x);
         }
@@ -113,7 +109,7 @@ class OverworldCharacter extends Actor {
             speed.invertY();
         }
 
-        System.out.println("speedX=" + speed.x + " speedY=" + speed.y);
+        Gdx.app.debug(TAG, "speedX=" + speed.x + " speedY=" + speed.y);
         return speed;
     }
 
@@ -133,5 +129,13 @@ class OverworldCharacter extends Actor {
     public void applyVerticalMovement() {
         center.y += speed.y;
         initBounds(center);
+    }
+
+    public void cameraMoved(float x, float y) {
+        if (moveTarget != null) {
+            Gdx.app.debug(TAG, "Camera moved x=" + x + " y=" + y);
+            moveTarget.x += x;
+            moveTarget.y += y;
+        }
     }
 }

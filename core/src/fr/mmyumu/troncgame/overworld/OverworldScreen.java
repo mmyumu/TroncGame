@@ -98,6 +98,16 @@ public class OverworldScreen extends ScreenAdapter {
 
     private void draw() {
         gameStage.draw();
+        float oldX = gameStage.getCamera().position.x;
+        float oldY = gameStage.getCamera().position.y;
+        gameStage.getCamera().position.x = Math.max(mainCharacter.getX(), Constants.WIDTH / 2);
+        gameStage.getCamera().position.y = Math.max(mainCharacter.getY(), Constants.HEIGHT / 2);
+
+        cameraMoved(gameStage.getCamera().position.x - oldX, gameStage.getCamera().position.y - oldY);
+    }
+
+    private void cameraMoved(float x, float y) {
+        mainCharacter.cameraMoved(x, y);
     }
 
     private void moveMainCharacter() {
@@ -183,7 +193,7 @@ public class OverworldScreen extends ScreenAdapter {
             for (int i = 0; i < width; i++) {
                 if (i < line.length()) {
                     char ch = line.charAt(i);
-                    OverworldTile t = new OverworldTile(i * OverworldConstants.TILE_WIDTH, j * OverworldConstants.TILE_WIDTH, ch, assetManager);
+                    OverworldTile t = new OverworldTile(i * OverworldConstants.TILE_WIDTH, (lines.size() - j) * OverworldConstants.TILE_HEIGHT, ch, assetManager);
                     gameStage.addActor(t);
                     if (t.getType().isObstacle()) {
                         obstacles.add(t);
@@ -200,7 +210,7 @@ public class OverworldScreen extends ScreenAdapter {
         Double centerX = OverworldConstants.TILE_WIDTH * 1.5;
         Double centerY = OverworldConstants.TILE_HEIGHT * 1.5;
 
-        OverworldCharacter character = new OverworldCharacter(new GridPoint2(centerX.intValue(), centerY.intValue()), assetManager);
+        OverworldCharacter character = new OverworldCharacter(new GridPoint2(centerX.intValue() + OverworldConstants.TILE_WIDTH, centerY.intValue() + OverworldConstants.TILE_HEIGHT), assetManager);
 
         gameStage.addActor(character);
 

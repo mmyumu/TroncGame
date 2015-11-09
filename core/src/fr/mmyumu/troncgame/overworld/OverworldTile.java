@@ -31,8 +31,10 @@ public class OverworldTile extends Actor {
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
-        Texture texture = assetManager.get(type.getTexturePath(), Texture.class);
-        batch.draw(texture, bottomLeft.x, bottomLeft.y, OverworldConstants.TILE_WIDTH, OverworldConstants.TILE_HEIGHT);
+        if(type != Type.NONE) {
+            Texture texture = assetManager.get(type.getTexturePath(), Texture.class);
+            batch.draw(texture, bottomLeft.x, bottomLeft.y, OverworldConstants.TILE_WIDTH, OverworldConstants.TILE_HEIGHT);
+        }
     }
 
     public Type getType() {
