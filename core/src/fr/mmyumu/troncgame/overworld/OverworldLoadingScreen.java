@@ -3,7 +3,10 @@ package fr.mmyumu.troncgame.overworld;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 
 import javax.inject.Inject;
 
@@ -28,6 +31,9 @@ public class OverworldLoadingScreen extends ScreenAdapter {
     @Override
     public void show() {
         Gdx.app.debug(TAG, "Loading overworld");
+
+        assetManager.setLoader(TiledMap.class, new TmxMapLoader(new InternalFileHandleResolver()));
+        assetManager.load(OverworldConstants.MapPath.VILLAGE, TiledMap.class);
 
         assetManager.load(OverworldConstants.TexturePath.TILE_DIRT, Texture.class);
         assetManager.load(OverworldConstants.TexturePath.TILE_GRASS, Texture.class);

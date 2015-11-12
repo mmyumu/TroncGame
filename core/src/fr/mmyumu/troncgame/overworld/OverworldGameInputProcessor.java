@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.math.GridPoint2;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
 
 import javax.inject.Inject;
 
@@ -21,7 +22,8 @@ public class OverworldGameInputProcessor extends InputAdapter {
     }
 
     private void initMainCharacterMoveTarget(int screenX, int screenY) {
-        Vector2 touchCoords = overworldScreen.getGameStage().getViewport().unproject(new Vector2(screenX, screenY));
+
+        Vector2 touchCoords = overworldScreen.getViewport().unproject(new Vector2(screenX, screenY));
         overworldScreen.getMainCharacter().setMoveTarget(new GridPoint2((int) touchCoords.x, (int) touchCoords.y));
     }
 

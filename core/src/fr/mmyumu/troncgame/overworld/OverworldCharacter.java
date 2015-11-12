@@ -2,8 +2,10 @@ package fr.mmyumu.troncgame.overworld;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.GridPoint2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
@@ -13,18 +15,25 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
  */
 class OverworldCharacter extends Actor {
     private static final String TAG = "OverworldCharacter";
-    private static final int MOVE_SPEED = 20;
+    private static final int MOVE_SPEED = 30;
 
     private final AssetManager assetManager;
     private GridPoint2 center;
+    private Camera camera;
     private GridPoint2 moveTarget;
     private Speed speed;
 
-    public OverworldCharacter(GridPoint2 center, AssetManager assetManager) {
+    private SpriteBatch batch;
+
+    public OverworldCharacter(GridPoint2 center, Camera camera, AssetManager assetManager) {
         this.center = center;
+        this.camera = camera;
         this.assetManager = assetManager;
 
         this.moveTarget = null;
+
+        this.batch = new SpriteBatch();
+
         initBounds(center);
     }
 
@@ -40,8 +49,7 @@ class OverworldCharacter extends Actor {
         return p.y - OverworldConstants.TILE_HEIGHT / 2;
     }
 
-    @Override
-    public void act(float delta) {
+    public void update(float delta) {
         super.act(delta);
 
         if (moveTarget != null) {
@@ -49,10 +57,12 @@ class OverworldCharacter extends Actor {
         }
     }
 
-    @Override
-    public void draw(Batch batch, float parentAlpha) {
+    public void draw() {
+        batch.begin();
         Texture texture = assetManager.get(OverworldConstants.TexturePath.MAIN_CHARACTER, Texture.class);
+        batch.setProjectionMatrix(camera.combined);
         batch.draw(texture, getX(), getY(), OverworldConstants.TILE_WIDTH, OverworldConstants.TILE_HEIGHT);
+        batch.end();
     }
 
     public void setMoveTarget(GridPoint2 moveTarget) {
