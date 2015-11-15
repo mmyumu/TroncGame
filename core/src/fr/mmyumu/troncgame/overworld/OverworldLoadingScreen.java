@@ -35,10 +35,6 @@ public class OverworldLoadingScreen extends ScreenAdapter {
         assetManager.setLoader(TiledMap.class, new TmxMapLoader(new InternalFileHandleResolver()));
         assetManager.load(OverworldConstants.MapPath.VILLAGE, TiledMap.class);
 
-        assetManager.load(OverworldConstants.TexturePath.TILE_DIRT, Texture.class);
-        assetManager.load(OverworldConstants.TexturePath.TILE_GRASS, Texture.class);
-        assetManager.load(OverworldConstants.TexturePath.TILE_WALL, Texture.class);
-
         assetManager.load(OverworldConstants.TexturePath.MAIN_CHARACTER, Texture.class);
     }
 

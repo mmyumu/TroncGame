@@ -7,7 +7,6 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.GridPoint2;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
@@ -61,7 +60,7 @@ public class OverworldScreen extends ScreenAdapter {
 
 
         camera = new OrthographicCamera();
-//        camera.setToOrtho(false);
+        camera.setToOrtho(false);
         viewport = new FitViewport(Constants.WIDTH, Constants.HEIGHT, camera);
         viewport.apply();
 
@@ -94,22 +93,15 @@ public class OverworldScreen extends ScreenAdapter {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         update(delta);
-
         draw();
-
-        camera.update();
     }
 
     private void update(float delta) {
-        moveMainCharacter();
-//        gameStage.act(delta);
+//        moveMainCharacter();
+        mainCharacter.update(delta);
     }
 
     private void draw() {
-        map.drawBackground();
-        mainCharacter.draw();
-        map.drawForeground();
-//        gameStage.draw();
         float oldX = camera.position.x;
         float oldY = camera.position.y;
 
@@ -119,10 +111,18 @@ public class OverworldScreen extends ScreenAdapter {
         float minY = Math.max(mainCharacter.getY(), Constants.HEIGHT / 2);
         float newY = Math.min((map.getHeight() - Constants.HEIGHT / 2), minY);
 
-//        camera.position.set(newX, newY, 0);
-        camera.position.set(mainCharacter.getX(), mainCharacter.getY(), 0);
+        camera.position.set(newX, newY, 0);
+//        camera.position.set(mainCharacter.getX(), mainCharacter.getY(), 0);
 //        gameStage.getCamera().position.x = newX;
 //        gameStage.getCamera().position.y = newY;
+
+
+        camera.update();
+
+        map.drawBackground();
+        mainCharacter.draw();
+        map.drawForeground();
+
         cameraMoved(camera.position.x - oldX, camera.position.y - oldY);
     }
 
@@ -130,70 +130,14 @@ public class OverworldScreen extends ScreenAdapter {
         mainCharacter.cameraMoved(x, y);
     }
 
-    private void moveMainCharacter() {
-        mainCharacter.computeMovement();
-
-        float maximumHorizontalMovement = computeMaximumHorizontalMovementOnCollision(mainCharacter.getSpeed().x);
-        mainCharacter.getSpeed().x = maximumHorizontalMovement;
-        mainCharacter.applyHorizontalMovement();
-
-        float maximumVerticalMovement = computeMaximumVerticalMovementOnCollision(mainCharacter.getSpeed().y);
-        mainCharacter.getSpeed().y = maximumVerticalMovement;
-        mainCharacter.applyVerticalMovement();
-    }
-
-    private float computeMaximumHorizontalMovementOnCollision(float speedX) {
-//        for (OverworldTile obstacle : map.getObstacles()) {
-//            Rectangle characterHitboxAfterMove = new Rectangle(mainCharacter.getX() + speedX, mainCharacter.getY(), mainCharacter.getWidth(), mainCharacter.getHeight());
-//            Rectangle obstacleHitbox = new Rectangle(obstacle.getX(), obstacle.getY(), obstacle.getWidth(), obstacle.getHeight());
-//            Rectangle intersection = new Rectangle();
-//            if (Intersector.intersectRectangles(characterHitboxAfterMove, obstacleHitbox, intersection)) {
-//                Gdx.app.debug(TAG, "Horizontal collision detected");
-//                if (intersection.x > characterHitboxAfterMove.x) {
-//                    return speedX - intersection.width;
-//                } else if (intersection.x + intersection.width < characterHitboxAfterMove.x + characterHitboxAfterMove.width) {
-//                    return speedX + intersection.width;
-//                } else {
-//                    Gdx.app.error(TAG, "Should not happen");
-//                }
-//            }
-//        }
-
-        return speedX;
-    }
-
-    private float computeMaximumVerticalMovementOnCollision(float speedY) {
-//        for (OverworldTile obstacle : map.getObstacles()) {
-//            Rectangle characterHitboxAfterMove = new Rectangle(mainCharacter.getX(), mainCharacter.getY() + speedY, mainCharacter.getWidth(), mainCharacter.getHeight());
-//            Rectangle obstacleHitbox = new Rectangle(obstacle.getX(), obstacle.getY(), obstacle.getWidth(), obstacle.getHeight());
-//            Rectangle intersection = new Rectangle();
-//            if (Intersector.intersectRectangles(characterHitboxAfterMove, obstacleHitbox, intersection)) {
-//                Gdx.app.debug(TAG, "Vertical collision detected");
-//                if (intersection.y > characterHitboxAfterMove.y) {
-//                    return speedY - intersection.height;
-//                } else if (intersection.y + intersection.height < characterHitboxAfterMove.y + characterHitboxAfterMove.height) {
-//                    return speedY + intersection.height;
-//                } else {
-//                    Gdx.app.error(TAG, "Should not happen");
-//                }
-//            }
-//        }
-
-        return speedY;
-    }
-
     /**
      * Load the character and add it to the gameStage
      */
     private OverworldCharacter loadMainCharacter() {
-        Double centerX = OverworldConstants.TILE_WIDTH * 1.5;
-        Double centerY = OverworldConstants.TILE_HEIGHT * 1.5;
+        float centerX = OverworldConstants.TILE_WIDTH * 1.5f;
+        float centerY = OverworldConstants.TILE_HEIGHT * 1.5f;
 
-        Vector2 newCoords = new Vector2(centerX.floatValue(), centerY.floatValue());
-
-        OverworldCharacter character = new OverworldCharacter(new GridPoint2((int) newCoords.x, (int) newCoords.y), camera, assetManager);
-
-//        gameStage.addActor(character);
+        OverworldCharacter character = new OverworldCharacter(new GridPoint2((int) centerX, (int) centerY), camera, map.getObstaclesLayer(), assetManager);
 
         return character;
     }
@@ -201,7 +145,6 @@ public class OverworldScreen extends ScreenAdapter {
     @Override
     public void resize(int width, int height) {
         viewport.update(width, height);
-//        gameStage.getViewport().update(width, height);
     }
 
     public Viewport getViewport() {

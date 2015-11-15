@@ -5,8 +5,8 @@ package fr.mmyumu.troncgame.overworld;
  * Created by mmyumu on 30/10/2015.
  */
 interface OverworldConstants {
-    int TILE_WIDTH = 120;
-    int TILE_HEIGHT = 120;
+    int TILE_WIDTH = 90;
+    int TILE_HEIGHT = 90;
 
     interface MapPath {
         String VILLAGE = "maps/village.tmx";

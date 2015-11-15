@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 
 import java.util.List;
@@ -32,7 +33,7 @@ public class OverworldMap {
         this.camera = camera;
 
         map = assetManager.get(mapPath);
-        renderer = new OrthogonalTiledMapRenderer(map);
+
 
         MapProperties prop = map.getProperties();
         int mapWidth = prop.get("width", Integer.class);
@@ -40,8 +41,12 @@ public class OverworldMap {
         int tilePixelWidth = prop.get("tilewidth", Integer.class);
         int tilePixelHeight = prop.get("tileheight", Integer.class);
 
-        width = mapWidth * tilePixelWidth;
-        height = mapHeight * tilePixelHeight;
+        float ratio = OverworldConstants.TILE_HEIGHT / (float) tilePixelHeight;
+
+        width = (int) (mapWidth * tilePixelWidth * ratio);
+        height = (int) (mapHeight * tilePixelHeight * ratio);
+
+        renderer = new OrthogonalTiledMapRenderer(map, ratio);
     }
 
     public void drawBackground() {
@@ -70,5 +75,9 @@ public class OverworldMap {
 
     public int getHeight() {
         return height;
+    }
+
+    public TiledMapTileLayer getObstaclesLayer() {
+        return (TiledMapTileLayer) map.getLayers().get("Obstacles");
     }
 }
