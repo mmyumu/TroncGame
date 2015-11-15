@@ -175,15 +175,8 @@ class OverworldCharacter {
     }
 
     private float computeMaximumHorizontalMovementOnCollision(float speedX) {
-//        if (speed.x < 0) {
-//            return computeMaximumLeftMovementOnCollision();
-//        } else if (speed.x > 0) {
-//            computeMaximumRightMovementOnCollision();
-//        }
-
         Rectangle characterHitboxAfterMove = new Rectangle(getX() + speedX, getY(), OverworldConstants.TILE_WIDTH, OverworldConstants.TILE_HEIGHT);
         List<Rectangle> obstaclesHitbox = retrieveSurroundingHitboxes(characterHitboxAfterMove);
-
 
         for (Rectangle obstacleHitbox : obstaclesHitbox) {
             Rectangle intersection = new Rectangle();
@@ -202,37 +195,40 @@ class OverworldCharacter {
         return speedX;
     }
 
-    private float computeMaximumLeftMovementOnCollision() {
-        Rectangle characterHitboxAfterMove = new Rectangle(getX() + speed.x, getY(), OverworldConstants.TILE_WIDTH, OverworldConstants.TILE_HEIGHT);
+    private float computeMaximumVerticalMovementOnCollision(float speedY) {
+        Rectangle characterHitboxAfterMove = new Rectangle(getX(), getY() + speedY, OverworldConstants.TILE_WIDTH, OverworldConstants.TILE_HEIGHT);
         List<Rectangle> obstaclesHitbox = retrieveSurroundingHitboxes(characterHitboxAfterMove);
 
-        float collisionSpeed = speed.x;
         for (Rectangle obstacleHitbox : obstaclesHitbox) {
             Rectangle intersection = new Rectangle();
             if (Intersector.intersectRectangles(characterHitboxAfterMove, obstacleHitbox, intersection)) {
-                if (speed.x + intersection.width > collisionSpeed) {
-                    collisionSpeed = speed.x + intersection.width;
+                Gdx.app.debug(TAG, "Vertical collision detected");
+                if (intersection.y > characterHitboxAfterMove.y) {
+                    return speedY - intersection.height;
+                } else if (intersection.y + intersection.height < characterHitboxAfterMove.y + characterHitboxAfterMove.height) {
+                    return speedY + intersection.height;
+                } else {
+                    Gdx.app.error(TAG, "Should not happen");
                 }
-                Gdx.app.debug(TAG, "obstacleHitbox.x=" + obstacleHitbox.x + " characterHitboxAfterMove.x=" + characterHitboxAfterMove.x);
             }
         }
 
-        return collisionSpeed;
+        return speedY;
     }
 
     /**
-     * Get the
+     * Get the hitboxes surrounding the given hitbox
      *
      * @return
      */
-    private List<Rectangle> retrieveSurroundingHitboxes(Rectangle characterHitboxAfterMove) {
+    private List<Rectangle> retrieveSurroundingHitboxes(Rectangle hitbox) {
         List<Rectangle> leftCellsHitboxes = new ArrayList<Rectangle>();
-        float left = characterHitboxAfterMove.x;
-        float center = characterHitboxAfterMove.x + characterHitboxAfterMove.width / 2;
-        float right = characterHitboxAfterMove.x + characterHitboxAfterMove.width;
-        float bottom = characterHitboxAfterMove.y;
-        float middle = characterHitboxAfterMove.y + characterHitboxAfterMove.height / 2;
-        float top = characterHitboxAfterMove.y + characterHitboxAfterMove.height;
+        float left = hitbox.x;
+        float center = hitbox.x + hitbox.width / 2;
+        float right = hitbox.x + hitbox.width;
+        float bottom = hitbox.y;
+        float middle = hitbox.y + hitbox.height / 2;
+        float top = hitbox.y + hitbox.height;
 
         int leftIndex = (int) (left / OverworldConstants.TILE_WIDTH);
         int centerIndex = (int) (center / OverworldConstants.TILE_WIDTH);
@@ -284,38 +280,5 @@ class OverworldCharacter {
         }
 
         return leftCellsHitboxes;
-    }
-
-    private float computeMaximumVerticalMovementOnCollision(float speedY) {
-        Rectangle characterHitboxAfterMove = new Rectangle(getX(), getY() + speedY, OverworldConstants.TILE_WIDTH, OverworldConstants.TILE_HEIGHT);
-        List<Rectangle> obstaclesHitbox = retrieveSurroundingHitboxes(characterHitboxAfterMove);
-
-
-        for (Rectangle obstacleHitbox : obstaclesHitbox) {
-            Rectangle intersection = new Rectangle();
-            if (Intersector.intersectRectangles(characterHitboxAfterMove, obstacleHitbox, intersection)) {
-                Gdx.app.debug(TAG, "Vertical collision detected");
-                if (intersection.y > characterHitboxAfterMove.y) {
-                    return speedY - intersection.height;
-                } else if (intersection.y + intersection.height < characterHitboxAfterMove.y + characterHitboxAfterMove.height) {
-                    return speedY + intersection.height;
-                } else {
-                    Gdx.app.error(TAG, "Should not happen");
-                }
-            }
-        }
-
-        return speedY;
-    }
-
-    public Rectangle createRectangle(TiledMapTileLayer.Cell cell) {
-        if (cell != null) {
-            float x = cell.getTile().getProperties().get("x", Float.class);
-            float y = cell.getTile().getProperties().get("y", Float.class);
-
-            return new Rectangle(x, y, OverworldConstants.TILE_WIDTH, OverworldConstants.TILE_HEIGHT);
-        }
-
-        return null;
     }
 }
