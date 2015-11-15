@@ -4,7 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.math.GridPoint2;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.math.Vector3;
 
 import javax.inject.Inject;
 
@@ -14,7 +13,7 @@ import javax.inject.Inject;
  */
 public class OverworldGameInputProcessor extends InputAdapter {
     private static final String TAG = "OverworldGameInputProcessor";
-    private OverworldScreen overworldScreen;
+    private final OverworldScreen overworldScreen;
 
     @Inject
     public OverworldGameInputProcessor(OverworldScreen overworldScreen) {
@@ -31,7 +30,6 @@ public class OverworldGameInputProcessor extends InputAdapter {
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
         Gdx.app.debug(TAG, "touchDown x=" + screenX + " y=" + screenY);
         initMainCharacterMoveTarget(screenX, screenY);
-//        Actor actor = gameStage.hit(touchCoords.x, touchCoords.y, true);
         return false;
     }
 

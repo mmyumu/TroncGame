@@ -1,5 +1,6 @@
 package fr.mmyumu.troncgame.overworld;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.MapProperties;
@@ -8,8 +9,6 @@ import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 
-import java.util.List;
-
 /**
  * Manage the map of the Overworld
  * Created by mmyumu on 10/11/2015.
@@ -17,23 +16,17 @@ import java.util.List;
 public class OverworldMap {
     private static final String TAG = "OverworldMap";
 
-    private final AssetManager assetManager;
+    private final TiledMap map;
+    private final OrthographicCamera camera;
+    private final int width;
+    private final int height;
 
-    private TiledMap map;
-    private OrthographicCamera camera;
-    private List<OverworldTile> tiles;
-    private List<OverworldTile> obstacles;
-    private int width;
-    private int height;
-
-    private TiledMapRenderer renderer;
+    private final TiledMapRenderer renderer;
 
     public OverworldMap(String mapPath, OrthographicCamera camera, AssetManager assetManager) {
-        this.assetManager = assetManager;
         this.camera = camera;
 
         map = assetManager.get(mapPath);
-
 
         MapProperties prop = map.getProperties();
         int mapWidth = prop.get("width", Integer.class);
@@ -45,6 +38,8 @@ public class OverworldMap {
 
         width = (int) (mapWidth * tilePixelWidth * ratio);
         height = (int) (mapHeight * tilePixelHeight * ratio);
+
+        Gdx.app.debug(TAG, "width=" + width + " height=" + height);
 
         renderer = new OrthogonalTiledMapRenderer(map, ratio);
     }
@@ -60,14 +55,6 @@ public class OverworldMap {
         renderer.setView(camera);
         renderer.render(foregroundLayers);
     }
-
-//    public List<OverworldTile> getTiles() {
-//        return tiles;
-//    }
-
-//    public List<OverworldTile> getObstacles() {
-//        return obstacles;
-//    }
 
     public int getWidth() {
         return width;

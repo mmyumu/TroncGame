@@ -10,10 +10,6 @@ class Speed extends Vector2 {
     public Speed() {
     }
 
-    public Speed(float x, float y) {
-        super(x, y);
-    }
-
     public void invertX() {
         x = -x;
     }

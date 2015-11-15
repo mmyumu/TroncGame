@@ -24,12 +24,11 @@ class OverworldCharacter {
     private final AssetManager assetManager;
     private final Camera camera;
     private final TiledMapTileLayer obstaclesLayer;
-    private GridPoint2 center;
+    private final GridPoint2 center;
+    private final Rectangle hitbox;
+    private final SpriteBatch batch;
     private GridPoint2 moveTarget;
     private Speed speed;
-    private Rectangle hitbox;
-
-    private SpriteBatch batch;
 
     public OverworldCharacter(GridPoint2 center, Camera camera, TiledMapTileLayer obstaclesLayer, AssetManager assetManager) {
         this.center = center;
@@ -97,17 +96,16 @@ class OverworldCharacter {
     private void move() {
         computeMovement();
 
-        float maximumHorizontalMovement = computeMaximumHorizontalMovementOnCollision(speed.x);
-        speed.x = maximumHorizontalMovement;
+        speed.x = computeMaximumHorizontalMovementOnCollision(speed.x);
         applyHorizontalMovement();
 
-        float maximumVerticalMovement = computeMaximumVerticalMovementOnCollision(speed.y);
-        speed.y = maximumVerticalMovement;
+        speed.y = computeMaximumVerticalMovementOnCollision(speed.y);
         applyVerticalMovement();
     }
 
-    public void computeMovement() {
-        speed = new Speed(0, 0);
+    private void computeMovement() {
+        speed.x = 0;
+        speed.y = 0;
 
         if (moveTarget != null) {
             Gdx.app.debug(TAG, "centerX=" + center.x + " centerY=" + center.y);
@@ -219,7 +217,7 @@ class OverworldCharacter {
     /**
      * Get the hitboxes surrounding the given hitbox
      *
-     * @return
+     * @return the surrounding hitboxes
      */
     private List<Rectangle> retrieveSurroundingHitboxes(Rectangle hitbox) {
         List<Rectangle> leftCellsHitboxes = new ArrayList<Rectangle>();
