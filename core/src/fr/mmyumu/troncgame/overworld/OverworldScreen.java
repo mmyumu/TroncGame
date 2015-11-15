@@ -23,6 +23,7 @@ public class OverworldScreen extends ScreenAdapter {
     private static final String TAG = "OverworldScreen";
     private final TroncGame troncGame;
     private final AssetManager assetManager;
+    private final OverworldUIStage uiStage;
     private OverworldCharacter mainCharacter;
     private OverworldMap map;
     private OrthographicCamera camera;
@@ -32,6 +33,7 @@ public class OverworldScreen extends ScreenAdapter {
     public OverworldScreen(TroncGame troncGame, AssetManager assetManager) {
         this.troncGame = troncGame;
         this.assetManager = assetManager;
+        this.uiStage = new OverworldUIStage();
     }
 
     public OverworldCharacter getMainCharacter() {
@@ -47,14 +49,10 @@ public class OverworldScreen extends ScreenAdapter {
         viewport = new FitViewport(Constants.WIDTH, Constants.HEIGHT, camera);
         viewport.apply();
 
-        loadMap(OverworldConstants.MapPath.VILLAGE);
+        map = new OverworldMap(OverworldConstants.MapPath.VILLAGE, camera, assetManager);
         mainCharacter = loadMainCharacter();
 
         initInputProcessors();
-    }
-
-    private void loadMap(String mapPath) {
-        map = new OverworldMap(mapPath, camera, assetManager);
     }
 
     /**
@@ -79,6 +77,7 @@ public class OverworldScreen extends ScreenAdapter {
 
     private void update(float delta) {
         mainCharacter.update(delta);
+        uiStage.act(delta);
     }
 
     private void draw() {
@@ -97,6 +96,8 @@ public class OverworldScreen extends ScreenAdapter {
         map.drawBackground();
         mainCharacter.draw();
         map.drawForeground();
+
+        uiStage.draw();
 
         cameraMoved(camera.position.x - oldX, camera.position.y - oldY);
     }
