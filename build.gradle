@@ -109,6 +109,7 @@ project(":core") {
     dependencies {
         compile "com.badlogicgames.gdx:gdx:$gdxVersion"
         compile "com.badlogicgames.gdx:gdx-box2d:$gdxVersion"
+        compile "com.badlogicgames.gdx:gdx-tools:$gdxVersion"
         compile 'com.google.dagger:dagger:2.0.1'
         compile 'com.google.dagger:dagger-compiler:2.0.1'
         compile "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
