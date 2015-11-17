@@ -3,7 +3,7 @@ package fr.mmyumu.troncgame.components;
 import dagger.Component;
 import fr.mmyumu.troncgame.ActivityScope;
 import fr.mmyumu.troncgame.modules.OverworldModule;
-import fr.mmyumu.troncgame.overworld.OverworldGameInputProcessor;
+import fr.mmyumu.troncgame.overworld.game.OverworldGameInputProcessor;
 import fr.mmyumu.troncgame.overworld.OverworldLoadingScreen;
 import fr.mmyumu.troncgame.overworld.OverworldScreen;
 import fr.mmyumu.troncgame.overworld.ui.OverworldFPSActor;

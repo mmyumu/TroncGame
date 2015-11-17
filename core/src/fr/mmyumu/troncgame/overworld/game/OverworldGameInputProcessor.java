@@ -1,4 +1,4 @@
-package fr.mmyumu.troncgame.overworld;
+package fr.mmyumu.troncgame.overworld.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputAdapter;
@@ -6,6 +6,8 @@ import com.badlogic.gdx.math.GridPoint2;
 import com.badlogic.gdx.math.Vector2;
 
 import javax.inject.Inject;
+
+import fr.mmyumu.troncgame.overworld.OverworldScreen;
 
 /**
  * Manage the inputs on the Game when Overworld is displayed

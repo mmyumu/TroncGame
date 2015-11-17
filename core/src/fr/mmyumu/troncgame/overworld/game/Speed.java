@@ -1,4 +1,4 @@
-package fr.mmyumu.troncgame.overworld;
+package fr.mmyumu.troncgame.overworld.game;
 
 import com.badlogic.gdx.math.Vector2;
 

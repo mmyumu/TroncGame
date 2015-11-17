@@ -1,4 +1,4 @@
-package fr.mmyumu.troncgame.overworld;
+package fr.mmyumu.troncgame.overworld.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
@@ -8,6 +8,8 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+
+import fr.mmyumu.troncgame.overworld.OverworldConstants;
 
 /**
  * Manage the map of the Overworld

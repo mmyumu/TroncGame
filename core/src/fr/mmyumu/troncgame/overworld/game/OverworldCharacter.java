@@ -1,4 +1,4 @@
-package fr.mmyumu.troncgame.overworld;
+package fr.mmyumu.troncgame.overworld.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
@@ -13,11 +13,14 @@ import com.badlogic.gdx.math.Rectangle;
 import java.util.ArrayList;
 import java.util.List;
 
+import fr.mmyumu.troncgame.overworld.OverworldConstants;
+
+
 /**
  * Character which is displayed on the Overworld map
  * Created by mmyumu on 30/10/2015.
  */
-class OverworldCharacter {
+public class OverworldCharacter {
     private static final String TAG = "OverworldCharacter";
     private static final int MOVE_SPEED = 30;
 
