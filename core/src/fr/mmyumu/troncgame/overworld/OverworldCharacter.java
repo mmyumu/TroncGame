@@ -27,8 +27,8 @@ class OverworldCharacter {
     private final GridPoint2 center;
     private final Rectangle hitbox;
     private final SpriteBatch batch;
+    private final Speed speed;
     private GridPoint2 moveTarget;
-    private Speed speed;
 
     public OverworldCharacter(GridPoint2 center, Camera camera, TiledMapTileLayer obstaclesLayer, AssetManager assetManager) {
         this.center = center;
@@ -36,8 +36,8 @@ class OverworldCharacter {
         this.obstaclesLayer = obstaclesLayer;
         this.assetManager = assetManager;
 
-        this.moveTarget = null;
-
+        this.moveTarget = new GridPoint2();
+        this.speed = new Speed();
         this.batch = new SpriteBatch();
 
         this.hitbox = new Rectangle();
@@ -112,7 +112,7 @@ class OverworldCharacter {
             Gdx.app.debug(TAG, "moveTarget x=" + moveTarget.x + " y=" + moveTarget.y);
 
             if (!isTargetCloserThanMaxMovement()) {
-                speed = computeSpeed();
+                computeSpeed();
             } else {
                 moveTarget = null;
             }
@@ -125,8 +125,7 @@ class OverworldCharacter {
         return Math.sqrt((xDistance * xDistance) + (yDistance * yDistance)) < MOVE_SPEED;
     }
 
-    private Speed computeSpeed() {
-        Speed speed = new Speed();
+    private void computeSpeed() {
         if (isVerticalMovement()) {
             speed.x = 0;
             speed.y = MOVE_SPEED;
@@ -151,7 +150,6 @@ class OverworldCharacter {
         }
 
         Gdx.app.debug(TAG, "speedX=" + speed.x + " speedY=" + speed.y);
-        return speed;
     }
 
     private boolean isVerticalMovement() {

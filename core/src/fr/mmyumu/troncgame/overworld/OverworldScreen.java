@@ -14,6 +14,7 @@ import javax.inject.Inject;
 
 import fr.mmyumu.troncgame.Constants;
 import fr.mmyumu.troncgame.TroncGame;
+import fr.mmyumu.troncgame.overworld.ui.OverworldUIStage;
 
 /**
  * Overworld screen displaying a top-down view to the world
@@ -33,7 +34,8 @@ public class OverworldScreen extends ScreenAdapter {
     public OverworldScreen(TroncGame troncGame, AssetManager assetManager) {
         this.troncGame = troncGame;
         this.assetManager = assetManager;
-        this.uiStage = new OverworldUIStage();
+
+        this.uiStage = troncGame.getOverworldComponent().createOverworldUIStage();
     }
 
     public OverworldCharacter getMainCharacter() {
