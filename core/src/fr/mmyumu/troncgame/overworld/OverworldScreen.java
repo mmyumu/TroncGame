@@ -10,6 +10,8 @@ import com.badlogic.gdx.math.GridPoint2;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
+import java.util.concurrent.ThreadLocalRandom;
+
 import javax.inject.Inject;
 
 import fr.mmyumu.troncgame.Constants;
@@ -117,7 +119,7 @@ public class OverworldScreen extends ScreenAdapter {
         float centerX = OverworldConstants.TILE_WIDTH * 1.5f;
         float centerY = OverworldConstants.TILE_HEIGHT * 1.5f;
 
-        return new OverworldCharacter(new GridPoint2((int) centerX, (int) centerY), camera, map.getObstaclesLayer(), assetManager);
+        return new OverworldCharacter(troncGame, new GridPoint2((int) centerX, (int) centerY), camera, map.getObstaclesLayer(), assetManager);
     }
 
     @Override

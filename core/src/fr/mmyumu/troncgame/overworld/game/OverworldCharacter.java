@@ -12,7 +12,9 @@ import com.badlogic.gdx.math.Rectangle;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 
+import fr.mmyumu.troncgame.TroncGame;
 import fr.mmyumu.troncgame.overworld.OverworldConstants;
 
 
@@ -23,8 +25,10 @@ import fr.mmyumu.troncgame.overworld.OverworldConstants;
 public class OverworldCharacter {
     private static final String TAG = "OverworldCharacter";
     private static final int MOVE_SPEED = 30;
+    private static final int MAX = 500;
 
     private final AssetManager assetManager;
+    private final TroncGame troncGame;
     private final Camera camera;
     private final TiledMapTileLayer obstaclesLayer;
     private final GridPoint2 center;
@@ -33,13 +37,13 @@ public class OverworldCharacter {
     private final Speed speed;
     private GridPoint2 moveTarget;
 
-    public OverworldCharacter(GridPoint2 center, Camera camera, TiledMapTileLayer obstaclesLayer, AssetManager assetManager) {
+    public OverworldCharacter(TroncGame troncGame, GridPoint2 center, Camera camera, TiledMapTileLayer obstaclesLayer, AssetManager assetManager) {
+        this.troncGame = troncGame;
         this.center = center;
         this.camera = camera;
         this.obstaclesLayer = obstaclesLayer;
         this.assetManager = assetManager;
 
-        this.moveTarget = new GridPoint2();
         this.speed = new Speed();
         this.batch = new SpriteBatch();
 
@@ -63,6 +67,13 @@ public class OverworldCharacter {
         if (moveTarget != null) {
             Gdx.app.debug(TAG, "moveTarget = " + moveTarget.x + ", " + moveTarget.y);
             move();
+            int random = ThreadLocalRandom.current().nextInt(0, MAX);
+            Gdx.app.debug(TAG, "Random=" + random);
+            if (random == MAX - 1) {
+                moveTarget = null;
+                Gdx.input.setInputProcessor(null);
+                troncGame.setScreen(troncGame.getFightComponent().createFightLoadingScreen());
+            }
         }
     }
 
