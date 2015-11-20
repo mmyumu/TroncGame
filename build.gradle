@@ -105,6 +105,7 @@ project(":html") {
 project(":core") {
     apply plugin: "java"
 
+    sourceSets.test.java.srcDirs = [ "test/" ]
 
     dependencies {
         compile "com.badlogicgames.gdx:gdx:$gdxVersion"
@@ -113,6 +114,9 @@ project(":core") {
         compile 'com.google.dagger:dagger:2.0.1'
         compile 'com.google.dagger:dagger-compiler:2.0.1'
         compile "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
+
+        testCompile "junit:junit:4.12"
+        testCompile "com.badlogicgames.gdx:gdx-backend-headless:$gdxVersion"
     }
 }
 
