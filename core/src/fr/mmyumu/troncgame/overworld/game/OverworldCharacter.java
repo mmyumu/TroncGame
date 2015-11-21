@@ -27,8 +27,8 @@ import fr.mmyumu.troncgame.overworld.OverworldConstants;
  */
 public class OverworldCharacter {
     private static final String TAG = "OverworldCharacter";
-    private static final int MOVE_SPEED = 30;
-    private static final int MAX = 500;
+    private static final int MOVE_SPEED = 900;
+    private static final int MAX = 10;
 
     private final AssetManager assetManager;
     private final TroncGame troncGame;
@@ -79,14 +79,8 @@ public class OverworldCharacter {
     public void update(float delta) {
         if (moveTarget != null) {
             Gdx.app.debug(TAG, "moveTarget = " + moveTarget.x + ", " + moveTarget.y);
-            move();
-            int random = ThreadLocalRandom.current().nextInt(0, MAX);
-            Gdx.app.debug(TAG, "Random=" + random);
-            if (random == MAX - 1) {
-                moveTarget = null;
-                Gdx.input.setInputProcessor(null);
-                troncGame.setScreen(troncGame.getFightComponent().createFightLoadingScreen());
-            }
+            move(delta);
+            checkFight(delta);
         }
     }
 
@@ -120,8 +114,8 @@ public class OverworldCharacter {
     }
 
 
-    private void move() {
-        computeMovement();
+    private void move(float delta) {
+        computeMovement(delta);
 
         speed.x = computeMaximumHorizontalMovementOnCollision(speed.x);
         applyHorizontalMovement();
@@ -130,7 +124,7 @@ public class OverworldCharacter {
         applyVerticalMovement();
     }
 
-    private void computeMovement() {
+    private void computeMovement(float delta) {
         speed.x = 0;
         speed.y = 0;
 
@@ -138,34 +132,35 @@ public class OverworldCharacter {
             Gdx.app.debug(TAG, "centerX=" + center.x + " centerY=" + center.y);
             Gdx.app.debug(TAG, "moveTarget x=" + moveTarget.x + " y=" + moveTarget.y);
 
-            if (!isTargetCloserThanMaxMovement()) {
-                computeSpeed();
+            if (!isTargetCloserThanMaxMovement(delta)) {
+                computeSpeed(delta);
             } else {
                 moveTarget = null;
             }
         }
     }
 
-    private boolean isTargetCloserThanMaxMovement() {
+    private boolean isTargetCloserThanMaxMovement(float delta) {
         float xDistance = moveTarget.x - center.x;
         float yDistance = moveTarget.y - center.y;
-        return Math.sqrt((xDistance * xDistance) + (yDistance * yDistance)) < MOVE_SPEED;
+        return Math.sqrt((xDistance * xDistance) + (yDistance * yDistance)) < MOVE_SPEED * delta;
     }
 
-    private void computeSpeed() {
+    private void computeSpeed(float delta) {
+        float moveSpeed = MOVE_SPEED * delta;
         if (isVerticalMovement()) {
             speed.x = 0;
-            speed.y = MOVE_SPEED;
+            speed.y = moveSpeed;
         } else if (isHorizontalMovement()) {
-            speed.x = MOVE_SPEED;
+            speed.x = moveSpeed;
             speed.y = 0;
         } else {
             float xDistance = moveTarget.x - center.x;
             float yDistance = moveTarget.y - center.y;
 
             double slope = yDistance / (double) xDistance;
-            speed.x = (float) (MOVE_SPEED / Math.sqrt(slope * slope + 1));
-            speed.y = (float) Math.sqrt(MOVE_SPEED * MOVE_SPEED - speed.x * speed.x);
+            speed.x = (float) (moveSpeed / Math.sqrt(slope * slope + 1));
+            speed.y = (float) Math.sqrt(moveSpeed * moveSpeed - speed.x * speed.x);
         }
 
         if (moveTarget.x < center.x) {
@@ -303,5 +298,16 @@ public class OverworldCharacter {
         }
 
         return leftCellsHitboxes;
+    }
+
+    private void checkFight(float delta) {
+        int randomMax = (int) (MAX / delta);
+        int random = ThreadLocalRandom.current().nextInt(0, randomMax);
+        Gdx.app.debug(TAG, "Random=" + random + " randomMax=" + randomMax);
+        if (random == randomMax - 1) {
+            moveTarget = null;
+            Gdx.input.setInputProcessor(null);
+            troncGame.setScreen(troncGame.getFightComponent().createFightLoadingScreen());
+        }
     }
 }
