@@ -9,10 +9,13 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.GridPoint2;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
+
+import javax.inject.Inject;
 
 import fr.mmyumu.troncgame.TroncGame;
 import fr.mmyumu.troncgame.overworld.OverworldConstants;
@@ -30,25 +33,35 @@ public class OverworldCharacter {
     private final AssetManager assetManager;
     private final TroncGame troncGame;
     private final Camera camera;
-    private final TiledMapTileLayer obstaclesLayer;
-    private final GridPoint2 center;
     private final Rectangle hitbox;
     private final SpriteBatch batch;
     private final Speed speed;
+    private TiledMapTileLayer obstaclesLayer;
+    private GridPoint2 center;
     private GridPoint2 moveTarget;
 
-    public OverworldCharacter(TroncGame troncGame, GridPoint2 center, Camera camera, TiledMapTileLayer obstaclesLayer, AssetManager assetManager) {
+    @Inject
+    public OverworldCharacter(TroncGame troncGame, AssetManager assetManager, Camera camera) {
         this.troncGame = troncGame;
-        this.center = center;
-        this.camera = camera;
-        this.obstaclesLayer = obstaclesLayer;
         this.assetManager = assetManager;
+        this.camera = camera;
 
+        this.center = new GridPoint2(0, 0);
         this.speed = new Speed();
         this.batch = new SpriteBatch();
 
         this.hitbox = new Rectangle();
         initHitbox(center);
+    }
+
+    public void initCenter(int x, int y) {
+        center.x = x;
+        center.y = y;
+        initHitbox(center);
+    }
+
+    public void setObstaclesLayer(TiledMapTileLayer obstaclesLayer) {
+        this.obstaclesLayer = obstaclesLayer;
     }
 
     private void initHitbox(GridPoint2 p) {

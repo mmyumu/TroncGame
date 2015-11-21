@@ -6,11 +6,8 @@ import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.math.GridPoint2;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-
-import java.util.concurrent.ThreadLocalRandom;
 
 import javax.inject.Inject;
 
@@ -35,9 +32,10 @@ public class OverworldScreen extends ScreenAdapter {
     private Viewport viewport;
 
     @Inject
-    public OverworldScreen(TroncGame troncGame, AssetManager assetManager) {
+    public OverworldScreen(TroncGame troncGame, AssetManager assetManager, OrthographicCamera camera) {
         this.troncGame = troncGame;
         this.assetManager = assetManager;
+        this.camera = camera;
 
         this.uiStage = troncGame.getOverworldComponent().createOverworldUIStage();
     }
@@ -50,7 +48,6 @@ public class OverworldScreen extends ScreenAdapter {
     public void show() {
         Gdx.app.debug(TAG, "Showing Overworld");
 
-        camera = new OrthographicCamera();
         camera.setToOrtho(false);
         viewport = new FitViewport(Constants.WIDTH, Constants.HEIGHT, camera);
         viewport.apply();
@@ -119,7 +116,14 @@ public class OverworldScreen extends ScreenAdapter {
         float centerX = OverworldConstants.TILE_WIDTH * 1.5f;
         float centerY = OverworldConstants.TILE_HEIGHT * 1.5f;
 
-        return new OverworldCharacter(troncGame, new GridPoint2((int) centerX, (int) centerY), camera, map.getObstaclesLayer(), assetManager);
+
+
+
+        OverworldCharacter overworldCharacter = troncGame.getOverworldComponent().createOverworldCharacter();
+        overworldCharacter.initCenter((int) centerX, (int) centerY);
+        overworldCharacter.setObstaclesLayer(map.getObstaclesLayer());
+
+        return overworldCharacter;
     }
 
     @Override

@@ -1,6 +1,7 @@
 package fr.mmyumu.troncgame.modules;
 
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.utils.I18NBundle;
 
 import dagger.Module;
@@ -9,6 +10,7 @@ import fr.mmyumu.troncgame.ActivityScope;
 import fr.mmyumu.troncgame.TroncGame;
 import fr.mmyumu.troncgame.overworld.OverworldLoadingScreen;
 import fr.mmyumu.troncgame.overworld.OverworldScreen;
+import fr.mmyumu.troncgame.overworld.game.OverworldCharacter;
 import fr.mmyumu.troncgame.overworld.ui.OverworldFPSActor;
 import fr.mmyumu.troncgame.overworld.ui.OverworldUIStage;
 
@@ -26,8 +28,8 @@ public class OverworldModule {
 
     @Provides
     @ActivityScope
-    OverworldScreen provideOverworldScreen(TroncGame troncGame, AssetManager assetManager) {
-        return new OverworldScreen(troncGame, assetManager);
+    OverworldScreen provideOverworldScreen(TroncGame troncGame, AssetManager assetManager, OrthographicCamera camera) {
+        return new OverworldScreen(troncGame, assetManager, camera);
     }
 
     @Provides
@@ -40,5 +42,11 @@ public class OverworldModule {
     @ActivityScope
     OverworldFPSActor provideOverworldFPSActor(I18NBundle bundle) {
         return new OverworldFPSActor(bundle);
+    }
+
+    @Provides
+    @ActivityScope
+    OverworldCharacter provideOverworldCharacter(TroncGame troncGame, AssetManager assetManager, OrthographicCamera camera) {
+        return new OverworldCharacter(troncGame, assetManager, camera);
     }
 }

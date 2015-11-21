@@ -3,6 +3,7 @@ package fr.mmyumu.troncgame.modules;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.utils.I18NBundle;
 
 import java.util.Locale;
@@ -50,5 +51,11 @@ public class GameModule {
     @ActivityScope
     AssetManager provideAssetManager() {
         return new AssetManager();
+    }
+
+    @Provides
+    @ActivityScope
+    OrthographicCamera provideOrthographicCamera() {
+        return new OrthographicCamera();
     }
 }
