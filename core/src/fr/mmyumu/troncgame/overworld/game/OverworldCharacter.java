@@ -37,7 +37,7 @@ public class OverworldCharacter {
     private final SpriteBatch batch;
     private final Speed speed;
     private TiledMapTileLayer obstaclesLayer;
-    private GridPoint2 center;
+    private Vector2 center;
     private GridPoint2 moveTarget;
 
     @Inject
@@ -46,7 +46,7 @@ public class OverworldCharacter {
         this.assetManager = assetManager;
         this.camera = camera;
 
-        this.center = new GridPoint2(0, 0);
+        this.center = new Vector2(0, 0);
         this.speed = new Speed();
         this.batch = new SpriteBatch();
 
@@ -64,15 +64,15 @@ public class OverworldCharacter {
         this.obstaclesLayer = obstaclesLayer;
     }
 
-    private void initHitbox(GridPoint2 p) {
+    private void initHitbox(Vector2 p) {
         hitbox.set(retrieveLeft(p), retrieveBottom(p), OverworldConstants.TILE_WIDTH, OverworldConstants.TILE_HEIGHT);
     }
 
-    private int retrieveLeft(GridPoint2 p) {
+    private float retrieveLeft(Vector2 p) {
         return p.x - OverworldConstants.TILE_WIDTH / 2;
     }
 
-    private int retrieveBottom(GridPoint2 p) {
+    private float retrieveBottom(Vector2 p) {
         return p.y - OverworldConstants.TILE_HEIGHT / 2;
     }
 
@@ -147,8 +147,8 @@ public class OverworldCharacter {
     }
 
     private boolean isTargetCloserThanMaxMovement() {
-        int xDistance = moveTarget.x - center.x;
-        int yDistance = moveTarget.y - center.y;
+        float xDistance = moveTarget.x - center.x;
+        float yDistance = moveTarget.y - center.y;
         return Math.sqrt((xDistance * xDistance) + (yDistance * yDistance)) < MOVE_SPEED;
     }
 
@@ -160,8 +160,8 @@ public class OverworldCharacter {
             speed.x = MOVE_SPEED;
             speed.y = 0;
         } else {
-            int xDistance = moveTarget.x - center.x;
-            int yDistance = moveTarget.y - center.y;
+            float xDistance = moveTarget.x - center.x;
+            float yDistance = moveTarget.y - center.y;
 
             double slope = yDistance / (double) xDistance;
             speed.x = (float) (MOVE_SPEED / Math.sqrt(slope * slope + 1));
