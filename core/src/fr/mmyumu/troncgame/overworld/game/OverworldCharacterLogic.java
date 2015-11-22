@@ -71,10 +71,6 @@ public class OverworldCharacterLogic {
         }
     }
 
-    public void draw() {
-
-    }
-
     public void setMoveTarget(GridPoint2 moveTarget) {
         this.moveTarget = moveTarget;
     }
@@ -242,7 +238,6 @@ public class OverworldCharacterLogic {
         TiledMapTileLayer.Cell topLeftCell = obstaclesLayer.getCell(leftIndex, topIndex);
 
         TiledMapTileLayer.Cell bottomCenterCell = obstaclesLayer.getCell(centerIndex, bottomIndex);
-        TiledMapTileLayer.Cell middleCenterCell = obstaclesLayer.getCell(centerIndex, middleIndex);
         TiledMapTileLayer.Cell topCenterCell = obstaclesLayer.getCell(centerIndex, topIndex);
 
         TiledMapTileLayer.Cell bottomRightCell = obstaclesLayer.getCell(rightIndex, bottomIndex);
@@ -261,9 +256,6 @@ public class OverworldCharacterLogic {
 
         if (bottomCenterCell != null) {
             leftCellsHitboxes.add(new Rectangle(centerIndex * OverworldConstants.TILE_WIDTH, bottomIndex * OverworldConstants.TILE_HEIGHT, OverworldConstants.TILE_WIDTH, OverworldConstants.TILE_HEIGHT));
-        }
-        if (middleCenterCell != null) {
-            leftCellsHitboxes.add(new Rectangle(centerIndex * OverworldConstants.TILE_WIDTH, middleIndex * OverworldConstants.TILE_HEIGHT, OverworldConstants.TILE_WIDTH, OverworldConstants.TILE_HEIGHT));
         }
         if (topCenterCell != null) {
             leftCellsHitboxes.add(new Rectangle(centerIndex * OverworldConstants.TILE_WIDTH, topIndex * OverworldConstants.TILE_HEIGHT, OverworldConstants.TILE_WIDTH, OverworldConstants.TILE_HEIGHT));
