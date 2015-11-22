@@ -14,6 +14,7 @@ import javax.inject.Inject;
 import fr.mmyumu.troncgame.Constants;
 import fr.mmyumu.troncgame.TroncGame;
 import fr.mmyumu.troncgame.overworld.game.OverworldCharacter;
+import fr.mmyumu.troncgame.overworld.game.OverworldGameInputProcessor;
 import fr.mmyumu.troncgame.overworld.game.OverworldMap;
 import fr.mmyumu.troncgame.overworld.ui.OverworldUIStage;
 
@@ -62,9 +63,9 @@ public class OverworldScreen extends ScreenAdapter {
      * Init the multiplexer and the input processors
      */
     private void initInputProcessors() {
-        fr.mmyumu.troncgame.overworld.game.OverworldGameInputProcessor overworldGameInputProcessor = troncGame.getOverworldComponent().createOverworldGameInputProcessor();
+        OverworldGameInputProcessor overworldGameInputProcessor = troncGame.getOverworldComponent().createOverworldGameInputProcessor();
         InputMultiplexer multiplexer = new InputMultiplexer();
-        multiplexer.addProcessor(new OverworldUIInputProcessor());
+//        multiplexer.addProcessor(new OverworldUIInputProcessor());
         multiplexer.addProcessor(overworldGameInputProcessor);
         Gdx.input.setInputProcessor(multiplexer);
     }
@@ -115,8 +116,6 @@ public class OverworldScreen extends ScreenAdapter {
     private OverworldCharacter loadMainCharacter() {
         float centerX = OverworldConstants.TILE_WIDTH * 1.5f;
         float centerY = OverworldConstants.TILE_HEIGHT * 1.5f;
-
-
 
 
         OverworldCharacter overworldCharacter = troncGame.getOverworldComponent().createOverworldCharacter();
