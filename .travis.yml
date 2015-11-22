@@ -1,4 +1,4 @@
 language: java
 
 script:
-    - ./gradle :core:test
+    - ./gradlew :core:test
