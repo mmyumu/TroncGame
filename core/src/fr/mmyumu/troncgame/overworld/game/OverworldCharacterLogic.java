@@ -280,8 +280,12 @@ public class OverworldCharacterLogic {
         Gdx.app.debug(TAG, "Random=" + random + " randomMax=" + randomMax);
         if (random == randomMax - 1) {
             moveTarget = null;
-            Gdx.input.setInputProcessor(null);
-            troncGame.setScreen(troncGame.getFightComponent().createFightLoadingScreen());
+            startFight();
         }
+    }
+
+    private void startFight() {
+        Gdx.input.setInputProcessor(null);
+        troncGame.setScreen(troncGame.getFightComponent().createFightLoadingScreen());
     }
 }
