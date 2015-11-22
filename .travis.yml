@@ -8,4 +8,4 @@ before_install:
     - chmod +x gradlew
 
 script:
-    - ./gradle :core:test
+    - ./gradlew :core:test
