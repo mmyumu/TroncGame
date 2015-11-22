@@ -28,11 +28,6 @@ public class TroncGame extends Game {
     private FightComponent fightComponent;
 
     public TroncGame() {
-    }
-
-    @Override
-    public void create() {
-        Gdx.app.setLogLevel(Application.LOG_DEBUG);
         GameModule gameModule = new GameModule(this);
 
         gameComponent = DaggerGameComponent.builder().gameModule(gameModule).build();
@@ -41,7 +36,11 @@ public class TroncGame extends Game {
         mainMenuComponent = DaggerMainMenuComponent.builder().mainMenuModule(new MainMenuModule()).gameModule(gameModule).gameComponent(gameComponent).build();
         overworldComponent = DaggerOverworldComponent.builder().overworldModule(new OverworldModule()).gameModule(gameModule).gameComponent(gameComponent).build();
         fightComponent = DaggerFightComponent.builder().fightModule(new FightModule()).gameModule(gameModule).gameComponent(gameComponent).build();
+    }
 
+    @Override
+    public void create() {
+        Gdx.app.setLogLevel(Application.LOG_DEBUG);
         setScreen(mainMenuComponent.createMainMenuLoadingScreen());
     }
 
