@@ -3,15 +3,11 @@ package fr.mmyumu.troncgame.fight;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.assets.AssetManager;
-import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import com.badlogic.gdx.audio.Music;
 
 import javax.inject.Inject;
 
 import fr.mmyumu.troncgame.TroncGame;
-import fr.mmyumu.troncgame.overworld.OverworldConstants;
 
 /**
  * Screen to be displayed when loading the fights
@@ -33,9 +29,7 @@ public class FightLoadingScreen extends ScreenAdapter {
     public void show() {
         Gdx.app.debug(TAG, "Loading fight");
 
-        assetManager.setLoader(TiledMap.class, new TmxMapLoader(new InternalFileHandleResolver()));
-        assetManager.load(OverworldConstants.MapPath.VILLAGE, TiledMap.class);
-        assetManager.load(OverworldConstants.TexturePath.MAIN_CHARACTER, Texture.class);
+        assetManager.load(FightConstants.MusicPath.FIRST_CHIPTUNE, Music.class);
     }
 
     @Override

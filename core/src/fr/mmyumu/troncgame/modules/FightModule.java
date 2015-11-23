@@ -23,7 +23,7 @@ public class FightModule {
 
     @Provides
     @ActivityScope
-    FightScreen provideFightScreen() {
-        return new FightScreen();
+    FightScreen provideFightScreen(TroncGame troncGame, AssetManager assetManager) {
+        return new FightScreen(troncGame, assetManager);
     }
 }
