@@ -8,4 +8,8 @@ public interface FightConstants {
     interface MusicPath {
         String FIRST_CHIPTUNE = "music/first_chiptune.ogg";
     }
+
+    interface TexturePath {
+        String BACKGROUND_PLAIN = "data/fight/background_plain.png";
+    }
 }

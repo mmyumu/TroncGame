@@ -1,6 +1,7 @@
 package fr.mmyumu.troncgame.modules;
 
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 
 import dagger.Module;
 import dagger.Provides;
@@ -23,7 +24,7 @@ public class FightModule {
 
     @Provides
     @ActivityScope
-    FightScreen provideFightScreen(TroncGame troncGame, AssetManager assetManager) {
-        return new FightScreen(troncGame, assetManager);
+    FightScreen provideFightScreen(TroncGame troncGame, AssetManager assetManager, OrthographicCamera camera) {
+        return new FightScreen(troncGame, assetManager, camera);
     }
 }

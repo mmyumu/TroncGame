@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.graphics.Texture;
 
 import javax.inject.Inject;
 
@@ -30,6 +31,7 @@ public class FightLoadingScreen extends ScreenAdapter {
         Gdx.app.debug(TAG, "Loading fight");
 
         assetManager.load(FightConstants.MusicPath.FIRST_CHIPTUNE, Music.class);
+        assetManager.load(FightConstants.TexturePath.BACKGROUND_PLAIN, Texture.class);
     }
 
     @Override
