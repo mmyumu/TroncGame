@@ -9,6 +9,8 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
+import java.util.concurrent.ThreadLocalRandom;
+
 import javax.inject.Inject;
 
 import fr.mmyumu.troncgame.Constants;
@@ -24,6 +26,9 @@ import fr.mmyumu.troncgame.overworld.ui.OverworldUIStage;
  */
 public class OverworldScreen extends ScreenAdapter {
     private static final String TAG = "OverworldScreen";
+
+    private static final int MAX = 10;
+
     private final TroncGame troncGame;
     private final AssetManager assetManager;
     private final OverworldUIStage uiStage;
@@ -80,6 +85,7 @@ public class OverworldScreen extends ScreenAdapter {
     }
 
     private void update(float delta) {
+        checkFight(delta);
         mainCharacter.update(delta);
         uiStage.act(delta);
     }
@@ -132,5 +138,23 @@ public class OverworldScreen extends ScreenAdapter {
 
     public Viewport getViewport() {
         return viewport;
+    }
+
+    private void checkFight(float delta) {
+        if(mainCharacter.getMoveTarget() != null) {
+            int randomMax = (int) (MAX / delta);
+            int random = ThreadLocalRandom.current().nextInt(0, randomMax);
+            Gdx.app.debug(TAG, "Random=" + random + " randomMax=" + randomMax);
+            if (random == randomMax - 1) {
+                mainCharacter.setMoveTarget(null);
+                startFight();
+            }
+        }
+
+    }
+
+    public void startFight() {
+        Gdx.input.setInputProcessor(null);
+        troncGame.setScreen(troncGame.getFightComponent().createFightLoadingScreen());
     }
 }

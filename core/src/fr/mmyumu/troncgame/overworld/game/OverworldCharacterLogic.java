@@ -9,9 +9,7 @@ import com.badlogic.gdx.math.Vector2;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ThreadLocalRandom;
 
-import fr.mmyumu.troncgame.TroncGame;
 import fr.mmyumu.troncgame.overworld.OverworldConstants;
 
 /**
@@ -21,9 +19,7 @@ import fr.mmyumu.troncgame.overworld.OverworldConstants;
 public class OverworldCharacterLogic {
     private static final String TAG = "OverworldCharacter";
     private static final int MOVE_SPEED = 900;
-    private static final int MAX = 10;
 
-    private final TroncGame troncGame;
     private final Rectangle hitbox;
 
     private final Speed speed;
@@ -31,9 +27,7 @@ public class OverworldCharacterLogic {
     private Vector2 center;
     private GridPoint2 moveTarget;
 
-    public OverworldCharacterLogic(TroncGame troncGame) {
-        this.troncGame = troncGame;
-
+    public OverworldCharacterLogic() {
         this.center = new Vector2(0, 0);
         this.speed = new Speed();
 
@@ -67,7 +61,6 @@ public class OverworldCharacterLogic {
         if (moveTarget != null) {
             Gdx.app.debug(TAG, "moveTarget = " + moveTarget.x + ", " + moveTarget.y);
             move(delta);
-            checkFight(delta);
         }
     }
 
@@ -91,6 +84,9 @@ public class OverworldCharacterLogic {
         return hitbox.y;
     }
 
+    public GridPoint2 getMoveTarget() {
+        return moveTarget;
+    }
 
     private void move(float delta) {
         computeMovement(delta);
@@ -272,20 +268,5 @@ public class OverworldCharacterLogic {
         }
 
         return leftCellsHitboxes;
-    }
-
-    private void checkFight(float delta) {
-        int randomMax = (int) (MAX / delta);
-        int random = ThreadLocalRandom.current().nextInt(0, randomMax);
-        Gdx.app.debug(TAG, "Random=" + random + " randomMax=" + randomMax);
-        if (random == randomMax - 1) {
-            moveTarget = null;
-            startFight();
-        }
-    }
-
-    private void startFight() {
-        Gdx.input.setInputProcessor(null);
-        troncGame.setScreen(troncGame.getFightComponent().createFightLoadingScreen());
     }
 }

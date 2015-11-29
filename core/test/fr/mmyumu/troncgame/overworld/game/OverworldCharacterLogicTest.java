@@ -18,9 +18,6 @@ import org.powermock.modules.junit4.PowerMockRunner;
 import java.util.concurrent.ThreadLocalRandom;
 
 import fr.mmyumu.troncgame.TestUtils;
-import fr.mmyumu.troncgame.TroncGame;
-import fr.mmyumu.troncgame.components.FightComponent;
-import fr.mmyumu.troncgame.fight.FightLoadingScreen;
 import fr.mmyumu.troncgame.overworld.OverworldConstants;
 
 import static junit.framework.Assert.assertNotNull;
@@ -28,8 +25,6 @@ import static junit.framework.Assert.assertNull;
 import static junit.framework.TestCase.assertEquals;
 import static org.mockito.Mockito.anyInt;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 /**
@@ -41,15 +36,13 @@ import static org.mockito.Mockito.when;
 public class OverworldCharacterLogicTest {
 
     private OverworldCharacterLogic overworldCharacterLogic;
-    private TroncGame troncGame;
 
     @Before
     public void setUp() {
         Gdx.app = mock(Application.class);
         Gdx.input = mock(Input.class);
 
-        troncGame = mock(TroncGame.class);
-        overworldCharacterLogic = new OverworldCharacterLogic(troncGame);
+        overworldCharacterLogic = new OverworldCharacterLogic();
     }
 
     @Test
@@ -285,25 +278,26 @@ public class OverworldCharacterLogicTest {
         checkSpeed(speedX, speedY);
     }
 
-    @Test
-    public void testFightTriggered() throws Exception {
-        FightLoadingScreen fightLoadingScreen = mock(FightLoadingScreen.class);
-        FightComponent fightComponent = mock(FightComponent.class);
-        when(troncGame.getFightComponent()).thenReturn(fightComponent);
-        when(fightComponent.createFightLoadingScreen()).thenReturn(fightLoadingScreen);
-
-        mockRandom(999);
-
-        overworldCharacterLogic.initCenter(500, 200);
-        overworldCharacterLogic.setObstaclesLayer(mock(TiledMapTileLayer.class));
-        overworldCharacterLogic.setMoveTarget(new GridPoint2(800, 600));
-
-        overworldCharacterLogic.update(0.01f);
-        GridPoint2 moveTarget = (GridPoint2) TestUtils.retrieveValueFromObject(overworldCharacterLogic, "moveTarget");
-        assertNull("Move target after camera move", moveTarget);
-
-        verify(troncGame, times(1)).setScreen(fightLoadingScreen);
-    }
+    // TODO: move to Overworld Screen unit tests
+//    @Test
+//    public void testFightTriggered() throws Exception {
+//        FightLoadingScreen fightLoadingScreen = mock(FightLoadingScreen.class);
+//        FightComponent fightComponent = mock(FightComponent.class);
+//        when(troncGame.getFightComponent()).thenReturn(fightComponent);
+//        when(fightComponent.createFightLoadingScreen()).thenReturn(fightLoadingScreen);
+//
+//        mockRandom(999);
+//
+//        overworldCharacterLogic.initCenter(500, 200);
+//        overworldCharacterLogic.setObstaclesLayer(mock(TiledMapTileLayer.class));
+//        overworldCharacterLogic.setMoveTarget(new GridPoint2(800, 600));
+//
+//        overworldCharacterLogic.update(0.01f);
+//        GridPoint2 moveTarget = (GridPoint2) TestUtils.retrieveValueFromObject(overworldCharacterLogic, "moveTarget");
+//        assertNull("Move target after camera move", moveTarget);
+//
+//        verify(troncGame, times(1)).setScreen(fightLoadingScreen);
+//    }
 
     private void checkCenterAndHitbox(int x, int y) {
         Vector2 center = (Vector2) TestUtils.retrieveValueFromObject(overworldCharacterLogic, "center");

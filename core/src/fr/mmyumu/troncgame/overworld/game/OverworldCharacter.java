@@ -7,7 +7,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import javax.inject.Inject;
 
-import fr.mmyumu.troncgame.TroncGame;
 import fr.mmyumu.troncgame.overworld.OverworldConstants;
 
 
@@ -21,8 +20,8 @@ public class OverworldCharacter extends OverworldCharacterLogic {
     private final AssetManager assetManager;
 
     @Inject
-    public OverworldCharacter(TroncGame troncGame, AssetManager assetManager, Camera camera) {
-        super(troncGame);
+    public OverworldCharacter(AssetManager assetManager, Camera camera) {
+        super();
         this.assetManager = assetManager;
         this.camera = camera;
         this.batch = new SpriteBatch();

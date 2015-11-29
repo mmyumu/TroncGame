@@ -46,7 +46,7 @@ public class OverworldModule {
 
     @Provides
     @ActivityScope
-    OverworldCharacter provideOverworldCharacter(TroncGame troncGame, AssetManager assetManager, OrthographicCamera camera) {
-        return new OverworldCharacter(troncGame, assetManager, camera);
+    OverworldCharacter provideOverworldCharacter(AssetManager assetManager, OrthographicCamera camera) {
+        return new OverworldCharacter(assetManager, camera);
     }
 }
