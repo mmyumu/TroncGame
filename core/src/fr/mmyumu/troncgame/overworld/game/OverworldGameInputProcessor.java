@@ -1,6 +1,7 @@
 package fr.mmyumu.troncgame.overworld.game;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.math.GridPoint2;
 import com.badlogic.gdx.math.Vector2;
@@ -47,5 +48,13 @@ public class OverworldGameInputProcessor extends InputAdapter {
         // TODO: add a preference to manage if the touch up set the move target to null or not
         overworldScreen.getMainCharacter().setMoveTarget(null);
         return false;
+    }
+
+    @Override
+    public boolean keyDown(int keycode) {
+        if(keycode == Input.Keys.F) {
+            overworldScreen.startFight();
+        }
+        return super.keyDown(keycode);
     }
 }
