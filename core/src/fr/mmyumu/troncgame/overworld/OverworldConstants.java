@@ -13,9 +13,6 @@ public interface OverworldConstants {
     }
 
     interface TexturePath {
-        String MAIN_CHARACTER = "data/character.png";
-        String TILE_DIRT = "data/tile_dirt.png";
-        String TILE_GRASS = "data/tile_grass.png";
-        String TILE_WALL = "data/tile_wall.png";
+        String MAIN_CHARACTER = "data/overworld/character.png";
     }
 }
