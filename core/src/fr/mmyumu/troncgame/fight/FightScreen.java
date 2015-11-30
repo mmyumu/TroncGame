@@ -28,6 +28,8 @@ public class FightScreen extends ScreenAdapter {
     private final OrthographicCamera camera;
     private Viewport viewport;
 
+    private FightGameStage fightGameStage;
+
     private SpriteBatch batch;
 
     @Inject
@@ -41,6 +43,10 @@ public class FightScreen extends ScreenAdapter {
     public void show() {
         Gdx.app.debug(TAG, "Showing Fight");
 
+
+        fightGameStage = new FightGameStage();
+        FightMainCharacter fightMainCharacter = troncGame.getFightComponent().createFightMainCharacter();
+        fightGameStage.addActor(fightMainCharacter);
 
         OrthographicCamera camera = new OrthographicCamera();
         camera.setToOrtho(false);
@@ -71,6 +77,8 @@ public class FightScreen extends ScreenAdapter {
         batch.begin();
         batch.draw(assetManager.get(FightConstants.TexturePath.BACKGROUND_PLAIN, Texture.class), 0, 0, Constants.WIDTH, Constants.HEIGHT);
         batch.end();
+
+        fightGameStage.draw();
     }
 
     @Override

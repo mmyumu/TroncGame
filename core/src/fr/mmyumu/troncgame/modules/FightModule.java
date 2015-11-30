@@ -8,6 +8,7 @@ import dagger.Provides;
 import fr.mmyumu.troncgame.ActivityScope;
 import fr.mmyumu.troncgame.TroncGame;
 import fr.mmyumu.troncgame.fight.FightLoadingScreen;
+import fr.mmyumu.troncgame.fight.FightMainCharacter;
 import fr.mmyumu.troncgame.fight.FightScreen;
 
 /**
@@ -26,5 +27,11 @@ public class FightModule {
     @ActivityScope
     FightScreen provideFightScreen(TroncGame troncGame, AssetManager assetManager, OrthographicCamera camera) {
         return new FightScreen(troncGame, assetManager, camera);
+    }
+
+    @Provides
+    @ActivityScope
+    FightMainCharacter provideFightMainCharacter(AssetManager assetManager) {
+        return new FightMainCharacter(assetManager);
     }
 }
