@@ -3,6 +3,7 @@ package fr.mmyumu.troncgame.components;
 import javax.inject.Singleton;
 
 import dagger.Component;
+import fr.mmyumu.troncgame.GameInputProcessor;
 import fr.mmyumu.troncgame.TroncGame;
 import fr.mmyumu.troncgame.modules.GameModule;
 
@@ -14,4 +15,6 @@ import fr.mmyumu.troncgame.modules.GameModule;
 @Component(modules = {GameModule.class})
 public interface GameComponent {
     void inject(TroncGame troncGame);
+
+    GameInputProcessor createGameInputProcessor();
 }

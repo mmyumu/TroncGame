@@ -15,12 +15,13 @@ import javax.inject.Inject;
 
 import fr.mmyumu.troncgame.Constants;
 import fr.mmyumu.troncgame.TroncGame;
+import fr.mmyumu.troncgame.audio.Musical;
 
 /**
  * Screen to be displayed when fight is engaged
  * Created by mmyumu on 17/11/2015.
  */
-public class FightScreen extends ScreenAdapter {
+public class FightScreen extends ScreenAdapter implements Musical {
     private static final String TAG = "FightScreen";
 
     private final TroncGame troncGame;
@@ -29,8 +30,8 @@ public class FightScreen extends ScreenAdapter {
     private Viewport viewport;
 
     private FightGameStage fightGameStage;
-
     private SpriteBatch batch;
+    private Music firstChipTune;
 
     @Inject
     public FightScreen(TroncGame troncGame, AssetManager assetManager, OrthographicCamera camera) {
@@ -55,9 +56,19 @@ public class FightScreen extends ScreenAdapter {
 
         batch = new SpriteBatch();
 
-        Music firstChipTune = assetManager.get(FightConstants.MusicPath.FIRST_CHIPTUNE, Music.class);
+        firstChipTune = assetManager.get(FightConstants.MusicPath.FIRST_CHIPTUNE, Music.class);
         firstChipTune.setLooping(true);
         firstChipTune.play();
+
+        initInputProcessors();
+    }
+
+    /**
+     * Init the multiplexer and the input processors
+     */
+    private void initInputProcessors() {
+        // TODO: add UI input processor
+        troncGame.setInputProcessors();
     }
 
     @Override
@@ -84,5 +95,20 @@ public class FightScreen extends ScreenAdapter {
     @Override
     public void resize(int width, int height) {
         viewport.update(width, height);
+    }
+
+    @Override
+    public boolean isPlaying() {
+        return firstChipTune.isPlaying();
+    }
+
+    @Override
+    public void play() {
+        firstChipTune.play();
+    }
+
+    @Override
+    public void stopPlaying() {
+        firstChipTune.stop();
     }
 }

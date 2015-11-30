@@ -3,6 +3,8 @@ package fr.mmyumu.troncgame;
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputMultiplexer;
+import com.badlogic.gdx.InputProcessor;
 
 import javax.inject.Singleton;
 
@@ -54,5 +56,17 @@ public class TroncGame extends Game {
 
     public FightComponent getFightComponent() {
         return fightComponent;
+    }
+
+    public void setInputProcessors(InputProcessor... inputProcessors) {
+        GameInputProcessor gameInputProcessor = gameComponent.createGameInputProcessor();
+        InputMultiplexer multiplexer = new InputMultiplexer();
+        multiplexer.addProcessor(gameInputProcessor);
+
+        for (InputProcessor inputProcessor : inputProcessors) {
+            multiplexer.addProcessor(inputProcessor);
+        }
+
+        Gdx.input.setInputProcessor(multiplexer);
     }
 }

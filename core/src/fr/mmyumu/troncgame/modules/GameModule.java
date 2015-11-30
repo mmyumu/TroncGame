@@ -11,6 +11,7 @@ import java.util.Locale;
 import dagger.Module;
 import dagger.Provides;
 import fr.mmyumu.troncgame.ActivityScope;
+import fr.mmyumu.troncgame.GameInputProcessor;
 import fr.mmyumu.troncgame.TroncGame;
 import fr.mmyumu.troncgame.Utils;
 
@@ -57,5 +58,10 @@ public class GameModule {
     @ActivityScope
     OrthographicCamera provideOrthographicCamera() {
         return new OrthographicCamera();
+    }
+
+    @Provides
+    GameInputProcessor provideGameInputProcessor() {
+        return new GameInputProcessor(troncGame);
     }
 }

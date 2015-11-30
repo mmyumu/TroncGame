@@ -1,7 +1,6 @@
 package fr.mmyumu.troncgame.overworld;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.GL20;
@@ -69,10 +68,8 @@ public class OverworldScreen extends ScreenAdapter {
      */
     private void initInputProcessors() {
         OverworldGameInputProcessor overworldGameInputProcessor = troncGame.getOverworldComponent().createOverworldGameInputProcessor();
-        InputMultiplexer multiplexer = new InputMultiplexer();
-//        multiplexer.addProcessor(new OverworldUIInputProcessor());
-        multiplexer.addProcessor(overworldGameInputProcessor);
-        Gdx.input.setInputProcessor(multiplexer);
+        // TODO: add UI input processor
+        troncGame.setInputProcessors(overworldGameInputProcessor);
     }
 
     @Override
@@ -141,7 +138,7 @@ public class OverworldScreen extends ScreenAdapter {
     }
 
     private void checkFight(float delta) {
-        if(mainCharacter.getMoveTarget() != null) {
+        if (mainCharacter.getMoveTarget() != null) {
             int randomMax = (int) (MAX / delta);
             int random = ThreadLocalRandom.current().nextInt(0, randomMax);
             Gdx.app.debug(TAG, "Random=" + random + " randomMax=" + randomMax);
