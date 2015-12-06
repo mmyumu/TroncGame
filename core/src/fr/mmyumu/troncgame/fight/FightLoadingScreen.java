@@ -33,6 +33,7 @@ public class FightLoadingScreen extends ScreenAdapter {
         assetManager.load(FightConstants.MusicPath.FIRST_CHIPTUNE, Music.class);
         assetManager.load(FightConstants.TexturePath.BACKGROUND_PLAIN, Texture.class);
         assetManager.load(FightConstants.TexturePath.MAIN_CHARACTER, Texture.class);
+        assetManager.load(FightConstants.TexturePath.SIDEKICK_CHARACTER, Texture.class);
     }
 
     @Override

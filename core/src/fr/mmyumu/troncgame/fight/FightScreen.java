@@ -67,6 +67,9 @@ public class FightScreen extends ScreenAdapter implements Musical {
 
         FightMainCharacter fightMainCharacter = troncGame.getFightComponent().createFightMainCharacter();
         fightGameStage.addActor(fightMainCharacter);
+
+        FightSideKickCharacter fightSideKickCharacter = troncGame.getFightComponent().createFightSideKickCharacter();
+        fightGameStage.addActor(fightSideKickCharacter);
     }
 
     /**

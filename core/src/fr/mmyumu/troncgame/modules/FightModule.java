@@ -11,6 +11,7 @@ import fr.mmyumu.troncgame.fight.FightBackground;
 import fr.mmyumu.troncgame.fight.FightLoadingScreen;
 import fr.mmyumu.troncgame.fight.FightMainCharacter;
 import fr.mmyumu.troncgame.fight.FightScreen;
+import fr.mmyumu.troncgame.fight.FightSideKickCharacter;
 
 /**
  * Dagger module to provide Fight
@@ -40,5 +41,11 @@ public class FightModule {
     @ActivityScope
     FightMainCharacter provideFightMainCharacter(AssetManager assetManager) {
         return new FightMainCharacter(assetManager);
+    }
+
+    @Provides
+    @ActivityScope
+    FightSideKickCharacter provideFightSideKickCharacter(AssetManager assetManager) {
+        return new FightSideKickCharacter(assetManager);
     }
 }

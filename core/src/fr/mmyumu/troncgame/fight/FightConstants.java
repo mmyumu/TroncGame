@@ -16,5 +16,6 @@ public interface FightConstants {
     interface TexturePath {
         String BACKGROUND_PLAIN = "data/fight/background_plain.png";
         String MAIN_CHARACTER = "data/fight/main_character.png";
+        String SIDEKICK_CHARACTER = "data/fight/sidekick_character.png";
     }
 }
