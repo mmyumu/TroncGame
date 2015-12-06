@@ -6,9 +6,8 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.utils.Scaling;
+import com.badlogic.gdx.utils.viewport.ScalingViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
 import javax.inject.Inject;
@@ -30,7 +29,6 @@ public class FightScreen extends ScreenAdapter implements Musical {
     private Viewport viewport;
 
     private FightGameStage fightGameStage;
-    private SpriteBatch batch;
     private Music firstChipTune;
 
     @Inject
@@ -44,23 +42,31 @@ public class FightScreen extends ScreenAdapter implements Musical {
     public void show() {
         Gdx.app.debug(TAG, "Showing Fight");
 
-
-        fightGameStage = new FightGameStage();
-        FightMainCharacter fightMainCharacter = troncGame.getFightComponent().createFightMainCharacter();
-        fightGameStage.addActor(fightMainCharacter);
-
         OrthographicCamera camera = new OrthographicCamera();
         camera.setToOrtho(false);
-        viewport = new FitViewport(Constants.WIDTH, Constants.HEIGHT, camera);
+        viewport = new ScalingViewport(Scaling.fit, Constants.WIDTH, Constants.HEIGHT);
+
+        initStage();
+        initMusic();
+        initInputProcessors();
+
         viewport.apply();
+    }
 
-        batch = new SpriteBatch();
-
+    private void initMusic() {
         firstChipTune = assetManager.get(FightConstants.MusicPath.FIRST_CHIPTUNE, Music.class);
         firstChipTune.setLooping(true);
         firstChipTune.play();
+    }
 
-        initInputProcessors();
+    private void initStage() {
+        fightGameStage = new FightGameStage(viewport);
+
+        FightBackground fightBackground = troncGame.getFightComponent().createFightBackground();
+        fightGameStage.addActor(fightBackground);
+
+        FightMainCharacter fightMainCharacter = troncGame.getFightComponent().createFightMainCharacter();
+        fightGameStage.addActor(fightMainCharacter);
     }
 
     /**
@@ -81,15 +87,12 @@ public class FightScreen extends ScreenAdapter implements Musical {
     }
 
     private void update(float delta) {
-
+        fightGameStage.act(delta);
     }
 
     private void draw() {
-        batch.begin();
-        batch.draw(assetManager.get(FightConstants.TexturePath.BACKGROUND_PLAIN, Texture.class), 0, 0, Constants.WIDTH, Constants.HEIGHT);
-        batch.end();
-
         fightGameStage.draw();
+        camera.update();
     }
 
     @Override

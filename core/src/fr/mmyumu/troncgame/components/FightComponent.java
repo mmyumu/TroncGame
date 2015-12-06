@@ -2,6 +2,7 @@ package fr.mmyumu.troncgame.components;
 
 import dagger.Component;
 import fr.mmyumu.troncgame.ActivityScope;
+import fr.mmyumu.troncgame.fight.FightBackground;
 import fr.mmyumu.troncgame.fight.FightLoadingScreen;
 import fr.mmyumu.troncgame.fight.FightMainCharacter;
 import fr.mmyumu.troncgame.fight.FightScreen;
@@ -20,6 +21,8 @@ public interface FightComponent {
     FightLoadingScreen createFightLoadingScreen();
 
     FightScreen createFightScreen();
+
+    FightBackground createFightBackground();
 
     FightMainCharacter createFightMainCharacter();
 }
