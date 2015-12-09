@@ -3,13 +3,18 @@ package fr.mmyumu.troncgame.modules;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 
+import javax.inject.Named;
+
 import dagger.Module;
 import dagger.Provides;
 import fr.mmyumu.troncgame.ActivityScope;
+import fr.mmyumu.troncgame.CompassPoint;
 import fr.mmyumu.troncgame.TroncGame;
 import fr.mmyumu.troncgame.fight.FightBackground;
+import fr.mmyumu.troncgame.fight.FightConstants;
 import fr.mmyumu.troncgame.fight.FightLoadingScreen;
 import fr.mmyumu.troncgame.fight.FightMainCharacter;
+import fr.mmyumu.troncgame.fight.FightPopUpMenuIcon;
 import fr.mmyumu.troncgame.fight.FightScreen;
 import fr.mmyumu.troncgame.fight.FightSideKickCharacter;
 
@@ -47,5 +52,19 @@ public class FightModule {
     @ActivityScope
     FightSideKickCharacter provideFightSideKickCharacter(AssetManager assetManager) {
         return new FightSideKickCharacter(assetManager);
+    }
+
+    @Provides
+    @ActivityScope
+    @Named("spells")
+    FightPopUpMenuIcon provideFightPopUpMenuSpellIcon(AssetManager assetManager) {
+        return new FightPopUpMenuIcon(FightConstants.TexturePath.SPELLS_ICON, CompassPoint.NORTH, assetManager);
+    }
+
+    @Provides
+    @ActivityScope
+    @Named("weapons")
+    FightPopUpMenuIcon provideFightPopUpMenuWeaponsIcon(AssetManager assetManager) {
+        return new FightPopUpMenuIcon(FightConstants.TexturePath.WEAPONS_ICON, CompassPoint.SOUTH, assetManager);
     }
 }
