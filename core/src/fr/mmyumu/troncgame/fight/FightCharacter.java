@@ -4,8 +4,6 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.actions.MoveToAction;
-import com.badlogic.gdx.utils.Pool;
 
 /**
  * Generic behaviors of characters in a Fight
@@ -18,6 +16,7 @@ public abstract class FightCharacter extends Actor {
         this.assetManager = assetManager;
 
         setPosition(x, y);
+        setBounds(x, y, FightConstants.CHARACTER_WIDTH, FightConstants.CHARACTER_HEIGHT);
     }
 
 
