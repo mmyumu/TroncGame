@@ -8,6 +8,9 @@ public interface FightConstants {
     int CHARACTER_WIDTH = 180;
     int CHARACTER_HEIGHT = 180;
 
+    int ICON_WIDTH = 128;
+    int ICON_HEIGHT = 128;
+
 
     interface MusicPath {
         String FIRST_CHIPTUNE = "music/first_chiptune.ogg";
@@ -17,5 +20,7 @@ public interface FightConstants {
         String BACKGROUND_PLAIN = "data/fight/background_plain.png";
         String MAIN_CHARACTER = "data/fight/main_character.png";
         String SIDEKICK_CHARACTER = "data/fight/sidekick_character.png";
+        String SPELLS_ICON = "data/fight/spells.png";
+        String WEAPONS_ICON = "data/fight/weapons.png";
     }
 }
