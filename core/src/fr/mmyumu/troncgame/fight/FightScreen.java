@@ -6,6 +6,8 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.Scaling;
 import com.badlogic.gdx.utils.viewport.ScalingViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -29,6 +31,8 @@ public class FightScreen extends ScreenAdapter implements Musical {
     private Viewport viewport;
 
     private FightGameStage fightGameStage;
+    private FightPopUpMenuStage fightPopUpMenuStage;
+
     private Music firstChipTune;
 
     @Inject
@@ -42,11 +46,10 @@ public class FightScreen extends ScreenAdapter implements Musical {
     public void show() {
         Gdx.app.debug(TAG, "Showing Fight");
 
-        OrthographicCamera camera = new OrthographicCamera();
         camera.setToOrtho(false);
-        viewport = new ScalingViewport(Scaling.fit, Constants.WIDTH, Constants.HEIGHT);
+        viewport = new ScalingViewport(Scaling.fit, Constants.WIDTH, Constants.HEIGHT, camera);
 
-        initStage();
+        initStages();
         initMusic();
         initInputProcessors();
 
@@ -59,7 +62,12 @@ public class FightScreen extends ScreenAdapter implements Musical {
         firstChipTune.play();
     }
 
-    private void initStage() {
+    private void initStages() {
+        initFightGameStage();
+        initFightPopUpStage();
+    }
+
+    private void initFightGameStage() {
         fightGameStage = new FightGameStage(viewport);
 
         FightBackground fightBackground = troncGame.getFightComponent().createFightBackground();
@@ -72,12 +80,24 @@ public class FightScreen extends ScreenAdapter implements Musical {
         fightGameStage.addActor(fightSideKickCharacter);
     }
 
+    private void initFightPopUpStage() {
+        fightPopUpMenuStage = new FightPopUpMenuStage(viewport);
+
+        FightPopUpMenuIcon fightPopUpMenuSpellsIcon = troncGame.getFightComponent().createFightPopUpMenuSpellsIcon();
+        fightPopUpMenuStage.addActor(fightPopUpMenuSpellsIcon);
+
+        FightPopUpMenuIcon fightPopUpMenuWeaponsIcon = troncGame.getFightComponent().createFightPopUpMenuWeaponsIcon();
+        fightPopUpMenuStage.addActor(fightPopUpMenuWeaponsIcon);
+    }
+
     /**
      * Init the multiplexer and the input processors
      */
     private void initInputProcessors() {
         // TODO: add UI input processor
-        troncGame.setInputProcessors();
+        FightGameInputProcessor fightGameInputProcessor = troncGame.getFightComponent().createFightGameInputProcessor();
+//        GestureDetector gestureDetector = new GestureDetector(fightGameInputProcessor);
+        troncGame.setInputProcessors(fightGameInputProcessor);
     }
 
     @Override
@@ -91,10 +111,12 @@ public class FightScreen extends ScreenAdapter implements Musical {
 
     private void update(float delta) {
         fightGameStage.act(delta);
+        fightPopUpMenuStage.act(delta);
     }
 
     private void draw() {
         fightGameStage.draw();
+        fightPopUpMenuStage.draw();
         camera.update();
     }
 
@@ -116,5 +138,19 @@ public class FightScreen extends ScreenAdapter implements Musical {
     @Override
     public void stopPlaying() {
         firstChipTune.stop();
+    }
+
+    public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+        Vector2 touchCoords = viewport.unproject(new Vector2(screenX, screenY));
+
+        Actor hitActor = fightGameStage.hit(touchCoords.x, touchCoords.y, true);
+        if (hitActor != null && hitActor instanceof FightCharacter) {
+            Gdx.app.debug(TAG, "Fight character touched !");
+
+            FightCharacter fightCharacter = (FightCharacter) hitActor;
+            fightPopUpMenuStage.characterTouched(fightCharacter, touchCoords);
+        }
+
+        return false;
     }
 }
