@@ -1,6 +1,7 @@
 package fr.mmyumu.troncgame.fight;
 
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
@@ -11,7 +12,6 @@ import com.badlogic.gdx.utils.viewport.Viewport;
  */
 public class FightPopUpMenuStage extends Stage {
     private FightCharacter fightCharacter;
-    private Vector2 menuCenter;
 
     public FightPopUpMenuStage(Viewport viewport) {
         super(viewport);
@@ -19,22 +19,26 @@ public class FightPopUpMenuStage extends Stage {
 
     @Override
     public void draw() {
-        if (menuCenter != null) {
-            super.draw();
-        }
+        super.draw();
     }
 
     public void characterTouched(FightCharacter touchedCharacter, Vector2 touchCoords) {
         if (fightCharacter == touchedCharacter) {
-            fightCharacter = null;
-            menuCenter = null;
+            for (Actor actor : getActors()) {
+                if (actor instanceof FightPopUpMenuIcon) {
+                    FightPopUpMenuIcon fightPopUpMenuIcon = (FightPopUpMenuIcon) actor;
+                    fightCharacter = null;
+                    fightPopUpMenuIcon.hide();
+                }
+            }
         } else {
-            fightCharacter = touchedCharacter;
-            menuCenter = touchCoords;
+            for (Actor actor : getActors()) {
+                if (actor instanceof FightPopUpMenuIcon) {
+                    FightPopUpMenuIcon fightPopUpMenuIcon = (FightPopUpMenuIcon) actor;
+                    fightCharacter = touchedCharacter;
+                    fightPopUpMenuIcon.display(touchCoords);
+                }
+            }
         }
-    }
-
-    public Vector2 getMenuCenter() {
-        return menuCenter;
     }
 }

@@ -20,6 +20,7 @@ public class FightPopUpMenuIcon extends Actor {
     private final String texturePath;
     private final CompassPoint compassPoint;
     private final AssetManager assetManager;
+    private Vector2 menuCenter;
 
     @Inject
     public FightPopUpMenuIcon(String texturePath, CompassPoint compassPoint, AssetManager assetManager) {
@@ -30,10 +31,25 @@ public class FightPopUpMenuIcon extends Actor {
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
-        Vector2 menuCenter = ((FightPopUpMenuStage) getStage()).getMenuCenter();
+        if (menuCenter != null) {
+            batch.draw(assetManager.get(texturePath, Texture.class), getX(), getY(), getWidth(), getHeight());
+        }
+    }
+
+    public void display(Vector2 touchCoords) {
+        menuCenter = touchCoords;
+        Vector2 iconCoords = computeIconCoords();
+        setBounds(iconCoords.x, iconCoords.y, FightConstants.ICON_WIDTH, FightConstants.ICON_HEIGHT);
+    }
+
+    public void hide() {
+        menuCenter = null;
+    }
+
+    private Vector2 computeIconCoords() {
         float x = RADIUS * (float) Math.cos(compassPoint.getRadiansAngle()) + menuCenter.x - FightConstants.ICON_WIDTH / 2;
         float y = RADIUS * (float) Math.sin(compassPoint.getRadiansAngle()) + menuCenter.y - FightConstants.ICON_HEIGHT / 2;
 
-        batch.draw(assetManager.get(texturePath, Texture.class), x, y, FightConstants.ICON_WIDTH, FightConstants.ICON_HEIGHT);
+        return new Vector2(x, y);
     }
 }

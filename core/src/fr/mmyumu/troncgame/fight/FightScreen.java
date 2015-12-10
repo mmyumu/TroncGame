@@ -143,12 +143,17 @@ public class FightScreen extends ScreenAdapter implements Musical {
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
         Vector2 touchCoords = viewport.unproject(new Vector2(screenX, screenY));
 
-        Actor hitActor = fightGameStage.hit(touchCoords.x, touchCoords.y, true);
-        if (hitActor != null && hitActor instanceof FightCharacter) {
-            Gdx.app.debug(TAG, "Fight character touched !");
+        Actor hitIcon = fightPopUpMenuStage.hit(touchCoords.x, touchCoords.y, true);
+        if (hitIcon != null && hitIcon instanceof FightPopUpMenuIcon) {
+            Gdx.app.debug(TAG, "Icon touched !");
+        } else {
+            Actor hitCharacter = fightGameStage.hit(touchCoords.x, touchCoords.y, true);
+            if (hitCharacter != null && hitCharacter instanceof FightCharacter) {
+                Gdx.app.debug(TAG, "Fight character touched !");
 
-            FightCharacter fightCharacter = (FightCharacter) hitActor;
-            fightPopUpMenuStage.characterTouched(fightCharacter, touchCoords);
+                FightCharacter fightCharacter = (FightCharacter) hitCharacter;
+                fightPopUpMenuStage.characterTouched(fightCharacter, touchCoords);
+            }
         }
 
         return false;
