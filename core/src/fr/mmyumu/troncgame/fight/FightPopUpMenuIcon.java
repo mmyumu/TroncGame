@@ -44,6 +44,7 @@ public class FightPopUpMenuIcon extends Actor {
 
     public void hide() {
         menuCenter = null;
+        setBounds(0, 0, 0, 0);
     }
 
     private Vector2 computeIconCoords() {
