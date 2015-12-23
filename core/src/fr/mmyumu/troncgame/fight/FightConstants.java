@@ -11,6 +11,8 @@ public interface FightConstants {
     int ICON_WIDTH = 128;
     int ICON_HEIGHT = 128;
 
+    int MAIN_INFOS_WIDTH = 614;
+    int MAIN_INFOS_HEIGHT = 192;
 
     interface MusicPath {
         String FIRST_CHIPTUNE = "music/first_chiptune.ogg";
@@ -22,5 +24,6 @@ public interface FightConstants {
         String SIDEKICK_CHARACTER = "data/fight/sidekick_character.png";
         String SPELLS_ICON = "data/fight/spells.png";
         String WEAPONS_ICON = "data/fight/weapons.png";
+        String MAIN_INFOS = "data/fight/main_infos.png";
     }
 }
