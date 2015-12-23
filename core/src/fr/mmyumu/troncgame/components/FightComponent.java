@@ -11,6 +11,7 @@ import fr.mmyumu.troncgame.fight.FightMainCharacter;
 import fr.mmyumu.troncgame.fight.FightPopUpMenuIcon;
 import fr.mmyumu.troncgame.fight.FightScreen;
 import fr.mmyumu.troncgame.fight.FightSideKickCharacter;
+import fr.mmyumu.troncgame.fight.ui.FightMainInfos;
 import fr.mmyumu.troncgame.modules.FightModule;
 
 /**
@@ -37,4 +38,6 @@ public interface FightComponent {
 
     @Named("spells") FightPopUpMenuIcon createFightPopUpMenuSpellsIcon();
     @Named("weapons") FightPopUpMenuIcon createFightPopUpMenuWeaponsIcon();
+
+    FightMainInfos createFightMainInfos();
 }

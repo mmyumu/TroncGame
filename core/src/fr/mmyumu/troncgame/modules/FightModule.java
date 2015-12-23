@@ -17,6 +17,7 @@ import fr.mmyumu.troncgame.fight.FightMainCharacter;
 import fr.mmyumu.troncgame.fight.FightPopUpMenuIcon;
 import fr.mmyumu.troncgame.fight.FightScreen;
 import fr.mmyumu.troncgame.fight.FightSideKickCharacter;
+import fr.mmyumu.troncgame.fight.ui.FightMainInfos;
 
 /**
  * Dagger module to provide Fight
@@ -66,5 +67,11 @@ public class FightModule {
     @Named("weapons")
     FightPopUpMenuIcon provideFightPopUpMenuWeaponsIcon(AssetManager assetManager) {
         return new FightPopUpMenuIcon(FightConstants.TexturePath.WEAPONS_ICON, CompassPoint.SOUTH, assetManager);
+    }
+
+    @Provides
+    @ActivityScope
+    FightMainInfos provideFightMainInfos(AssetManager assetManager) {
+        return new FightMainInfos(assetManager);
     }
 }
