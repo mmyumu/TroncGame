@@ -98,7 +98,7 @@ public class FightScreen extends ScreenAdapter implements Musical {
         fightUIStage = new FightUIStage(viewport);
 
         FightMainInfos fightMainInfos = troncGame.getFightComponent().createFightMainInfos();
-        fightPopUpMenuStage.addActor(fightMainInfos);
+        fightUIStage.addActor(fightMainInfos);
     }
 
 
@@ -123,8 +123,8 @@ public class FightScreen extends ScreenAdapter implements Musical {
 
     private void update(float delta) {
         fightGameStage.act(delta);
-        fightPopUpMenuStage.act(delta);
         fightUIStage.act(delta);
+        fightPopUpMenuStage.act(delta);
     }
 
     private void draw() {
