@@ -13,10 +13,13 @@ import java.util.concurrent.ThreadLocalRandom;
 import javax.inject.Inject;
 
 import fr.mmyumu.troncgame.Constants;
+import fr.mmyumu.troncgame.ScreenState;
 import fr.mmyumu.troncgame.TroncGame;
 import fr.mmyumu.troncgame.overworld.game.OverworldCharacter;
 import fr.mmyumu.troncgame.overworld.game.OverworldGameInputProcessor;
 import fr.mmyumu.troncgame.overworld.game.OverworldMap;
+import fr.mmyumu.troncgame.overworld.menu.OverworldMenu;
+import fr.mmyumu.troncgame.overworld.ui.OverworldUIInputProcessor;
 import fr.mmyumu.troncgame.overworld.ui.OverworldUIStage;
 
 /**
@@ -31,10 +34,13 @@ public class OverworldScreen extends ScreenAdapter {
     private final TroncGame troncGame;
     private final AssetManager assetManager;
     private final OverworldUIStage uiStage;
+    private final OverworldMenu overworldMenu;
     private OverworldCharacter mainCharacter;
     private OverworldMap map;
     private OrthographicCamera camera;
     private Viewport viewport;
+
+    private ScreenState screenState;
 
     @Inject
     public OverworldScreen(TroncGame troncGame, AssetManager assetManager, OrthographicCamera camera) {
@@ -43,6 +49,7 @@ public class OverworldScreen extends ScreenAdapter {
         this.camera = camera;
 
         this.uiStage = troncGame.getOverworldComponent().createOverworldUIStage();
+        this.overworldMenu = troncGame.getOverworldComponent().createOverworldMenuStage();
     }
 
     public OverworldCharacter getMainCharacter() {
@@ -52,6 +59,8 @@ public class OverworldScreen extends ScreenAdapter {
     @Override
     public void show() {
         Gdx.app.debug(TAG, "Showing Overworld");
+
+        screenState = ScreenState.RUNNING;
 
         camera.setToOrtho(false);
         viewport = new FitViewport(Constants.WIDTH, Constants.HEIGHT, camera);
@@ -67,9 +76,13 @@ public class OverworldScreen extends ScreenAdapter {
      * Init the multiplexer and the input processors
      */
     private void initInputProcessors() {
-        OverworldGameInputProcessor overworldGameInputProcessor = troncGame.getOverworldComponent().createOverworldGameInputProcessor();
-        // TODO: add UI input processor
-        troncGame.setInputProcessors(overworldGameInputProcessor);
+        if (screenState == ScreenState.RUNNING) {
+            OverworldGameInputProcessor overworldGameInputProcessor = troncGame.getOverworldComponent().createOverworldGameInputProcessor();
+            OverworldUIInputProcessor overworldUIInputProcessor = troncGame.getOverworldComponent().createOverworldUIInputProcessor();
+            troncGame.setInputProcessors(overworldUIInputProcessor, overworldGameInputProcessor);
+        } else if (screenState == ScreenState.PAUSE) {
+            troncGame.setInputProcessors(overworldMenu);
+        }
     }
 
     @Override
@@ -82,12 +95,45 @@ public class OverworldScreen extends ScreenAdapter {
     }
 
     private void update(float delta) {
+        switch (screenState) {
+            case RUNNING:
+                updateRunning(delta);
+                break;
+            case PAUSE:
+                updatePause(delta);
+                break;
+        }
+    }
+
+    private void updatePause(float delta) {
+        overworldMenu.act(delta);
+    }
+
+    private void updateRunning(float delta) {
         checkFight(delta);
         mainCharacter.update(delta);
         uiStage.act(delta);
     }
 
     private void draw() {
+        switch (screenState) {
+            case RUNNING:
+                drawRunning();
+                break;
+            case PAUSE:
+                drawPause();
+                break;
+        }
+    }
+
+    private void drawPause() {
+        map.drawBackground();
+        mainCharacter.draw();
+        map.drawForeground();
+        overworldMenu.draw();
+    }
+
+    private void drawRunning() {
         float oldX = camera.position.x;
         float oldY = camera.position.y;
 
@@ -153,5 +199,15 @@ public class OverworldScreen extends ScreenAdapter {
     public void startFight() {
         Gdx.input.setInputProcessor(null);
         troncGame.setScreen(troncGame.getFightComponent().createFightLoadingScreen());
+    }
+
+    public void pauseGame() {
+        screenState = ScreenState.PAUSE;
+        initInputProcessors();
+    }
+
+    public void resumeGame() {
+        screenState = ScreenState.RUNNING;
+        initInputProcessors();
     }
 }

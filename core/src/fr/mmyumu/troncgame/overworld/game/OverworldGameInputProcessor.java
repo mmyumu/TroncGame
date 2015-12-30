@@ -24,7 +24,6 @@ public class OverworldGameInputProcessor extends InputAdapter {
     }
 
     private void initMainCharacterMoveTarget(int screenX, int screenY) {
-
         Vector2 touchCoords = overworldScreen.getViewport().unproject(new Vector2(screenX, screenY));
         overworldScreen.getMainCharacter().setMoveTarget(new GridPoint2((int) touchCoords.x, (int) touchCoords.y));
     }

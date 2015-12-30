@@ -3,6 +3,7 @@ package fr.mmyumu.troncgame.overworld.ui;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import fr.mmyumu.troncgame.TroncGame;
 
@@ -13,8 +14,7 @@ import fr.mmyumu.troncgame.TroncGame;
 public class OverworldUIStage extends Stage {
 
     @Inject
-    public OverworldUIStage(TroncGame troncGame) {
-        OverworldFPSActor overworldFPSActor = troncGame.getOverworldComponent().createOverworldFPSActor();
+    public OverworldUIStage(TroncGame troncGame, @Named("ui") OverworldFPSActor overworldFPSActor) {
         addActor(overworldFPSActor);
     }
 }

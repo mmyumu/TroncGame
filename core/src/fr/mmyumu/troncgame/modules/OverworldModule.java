@@ -4,6 +4,9 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.utils.I18NBundle;
 
+import javax.inject.Named;
+
+import dagger.Lazy;
 import dagger.Module;
 import dagger.Provides;
 import fr.mmyumu.troncgame.ActivityScope;
@@ -11,6 +14,8 @@ import fr.mmyumu.troncgame.TroncGame;
 import fr.mmyumu.troncgame.overworld.OverworldLoadingScreen;
 import fr.mmyumu.troncgame.overworld.OverworldScreen;
 import fr.mmyumu.troncgame.overworld.game.OverworldCharacter;
+import fr.mmyumu.troncgame.overworld.menu.OverworldMenu;
+import fr.mmyumu.troncgame.overworld.menu.OverworldMenuList;
 import fr.mmyumu.troncgame.overworld.ui.OverworldFPSActor;
 import fr.mmyumu.troncgame.overworld.ui.OverworldUIStage;
 
@@ -34,14 +39,34 @@ public class OverworldModule {
 
     @Provides
     @ActivityScope
-    OverworldUIStage provideOverworldUIStage(TroncGame troncGame) {
-        return new OverworldUIStage(troncGame);
+    OverworldUIStage provideOverworldUIStage(TroncGame troncGame, OverworldFPSActor overworldFPSActor) {
+        return new OverworldUIStage(troncGame, overworldFPSActor);
     }
 
     @Provides
     @ActivityScope
-    OverworldFPSActor provideOverworldFPSActor(I18NBundle bundle) {
+    OverworldMenu provideOverworldMenuStage(Lazy<OverworldScreen> overworldScreen, OverworldFPSActor overworldFPSActor, OverworldMenuList overworldMenuListActor) {
+        return new OverworldMenu(overworldScreen, overworldFPSActor, overworldMenuListActor);
+    }
+
+    @Provides
+    @ActivityScope
+    @Named("ui")
+    OverworldFPSActor provideOverworldFPSGameActor(I18NBundle bundle) {
         return new OverworldFPSActor(bundle);
+    }
+
+    @Provides
+    @ActivityScope
+    @Named("menu")
+    OverworldFPSActor provideOverworldFPSMenuActor(I18NBundle bundle) {
+        return new OverworldFPSActor(bundle);
+    }
+
+    @Provides
+    @ActivityScope
+    OverworldMenuList provideOverworldMenuList(AssetManager assetManager, I18NBundle bundle) {
+        return new OverworldMenuList(assetManager, bundle);
     }
 
     @Provides

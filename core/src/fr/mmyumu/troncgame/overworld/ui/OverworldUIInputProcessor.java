@@ -6,7 +6,6 @@ import com.badlogic.gdx.InputAdapter;
 
 import javax.inject.Inject;
 
-import fr.mmyumu.troncgame.ScreenState;
 import fr.mmyumu.troncgame.overworld.OverworldScreen;
 
 /**
@@ -25,13 +24,8 @@ public class OverworldUIInputProcessor extends InputAdapter {
     @Override
     public boolean keyDown(int keycode) {
         if (keycode == Input.Keys.ESCAPE) {
-            Gdx.app.debug(TAG, "Escape pressed in Overworld");
-            if(overworldScreen.getScreenState() == ScreenState.RUNNING) {
-                overworldScreen.pause();
-            } else if(overworldScreen.getScreenState() == ScreenState.PAUSE) {
-                overworldScreen.resume();
-            }
-
+            Gdx.app.debug(TAG, "Escape pressed in Overworld UI");
+            overworldScreen.pauseGame();
             return true;
         }
         return super.keyDown(keycode);
