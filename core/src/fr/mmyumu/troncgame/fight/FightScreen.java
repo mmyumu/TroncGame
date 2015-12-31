@@ -18,7 +18,7 @@ import fr.mmyumu.troncgame.Constants;
 import fr.mmyumu.troncgame.TroncGame;
 import fr.mmyumu.troncgame.audio.Musical;
 import fr.mmyumu.troncgame.fight.ui.FightMainInfos;
-import fr.mmyumu.troncgame.fight.ui.FightUIStage;
+import fr.mmyumu.troncgame.fight.ui.FightUI;
 
 /**
  * Screen to be displayed when fight is engaged
@@ -34,7 +34,7 @@ public class FightScreen extends ScreenAdapter implements Musical {
 
     private FightGame fightGame;
     private FightPopUpMenu fightPopUpMenu;
-    private FightUIStage fightUIStage;
+    private FightUI fightUI;
 
     private Music firstChipTune;
 
@@ -95,10 +95,10 @@ public class FightScreen extends ScreenAdapter implements Musical {
     }
 
     private void initFightUIStage() {
-        fightUIStage = new FightUIStage(viewport);
+        fightUI = new FightUI(viewport);
 
         FightMainInfos fightMainInfos = troncGame.getFightComponent().createFightMainInfos();
-        fightUIStage.addActor(fightMainInfos);
+        fightUI.addActor(fightMainInfos);
     }
 
 
@@ -123,13 +123,13 @@ public class FightScreen extends ScreenAdapter implements Musical {
 
     private void update(float delta) {
         fightGame.act(delta);
-        fightUIStage.act(delta);
+        fightUI.act(delta);
         fightPopUpMenu.act(delta);
     }
 
     private void draw() {
         fightGame.draw();
-        fightUIStage.draw();
+        fightUI.draw();
         fightPopUpMenu.draw();
         camera.update();
 
