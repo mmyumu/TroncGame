@@ -32,7 +32,7 @@ public class FightScreen extends ScreenAdapter implements Musical {
     private final OrthographicCamera camera;
     private Viewport viewport;
 
-    private FightGameStage fightGameStage;
+    private FightGame fightGame;
     private FightPopUpMenu fightPopUpMenu;
     private FightUIStage fightUIStage;
 
@@ -72,16 +72,16 @@ public class FightScreen extends ScreenAdapter implements Musical {
     }
 
     private void initFightGameStage() {
-        fightGameStage = new FightGameStage(viewport);
+        fightGame = new FightGame(viewport);
 
         FightBackground fightBackground = troncGame.getFightComponent().createFightBackground();
-        fightGameStage.addActor(fightBackground);
+        fightGame.addActor(fightBackground);
 
         FightMainCharacter fightMainCharacter = troncGame.getFightComponent().createFightMainCharacter();
-        fightGameStage.addActor(fightMainCharacter);
+        fightGame.addActor(fightMainCharacter);
 
         FightSideKickCharacter fightSideKickCharacter = troncGame.getFightComponent().createFightSideKickCharacter();
-        fightGameStage.addActor(fightSideKickCharacter);
+        fightGame.addActor(fightSideKickCharacter);
     }
 
     private void initFightPopUpStage() {
@@ -122,13 +122,13 @@ public class FightScreen extends ScreenAdapter implements Musical {
     }
 
     private void update(float delta) {
-        fightGameStage.act(delta);
+        fightGame.act(delta);
         fightUIStage.act(delta);
         fightPopUpMenu.act(delta);
     }
 
     private void draw() {
-        fightGameStage.draw();
+        fightGame.draw();
         fightUIStage.draw();
         fightPopUpMenu.draw();
         camera.update();
@@ -162,7 +162,7 @@ public class FightScreen extends ScreenAdapter implements Musical {
         if (hitIcon != null && hitIcon instanceof FightPopUpMenuIcon) {
             Gdx.app.debug(TAG, "Icon touched !");
         } else {
-            Actor hitCharacter = fightGameStage.hit(touchCoords.x, touchCoords.y, true);
+            Actor hitCharacter = fightGame.hit(touchCoords.x, touchCoords.y, true);
             if (hitCharacter != null && hitCharacter instanceof FightCharacter) {
                 Gdx.app.debug(TAG, "Fight character touched !");
 
