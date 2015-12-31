@@ -11,10 +11,10 @@ import fr.mmyumu.troncgame.TroncGame;
  * Manage the UI of the Overworld
  * Created by mmyumu on 15/11/2015.
  */
-public class OverworldUIStage extends Stage {
+public class OverworldUI extends Stage {
 
     @Inject
-    public OverworldUIStage(TroncGame troncGame, @Named("ui") OverworldFPSActor overworldFPSActor) {
+    public OverworldUI(TroncGame troncGame, @Named("ui") OverworldFPSActor overworldFPSActor) {
         addActor(overworldFPSActor);
     }
 }

@@ -17,7 +17,7 @@ import fr.mmyumu.troncgame.overworld.game.OverworldCharacter;
 import fr.mmyumu.troncgame.overworld.menu.OverworldMenu;
 import fr.mmyumu.troncgame.overworld.menu.OverworldMenuList;
 import fr.mmyumu.troncgame.overworld.ui.OverworldFPSActor;
-import fr.mmyumu.troncgame.overworld.ui.OverworldUIStage;
+import fr.mmyumu.troncgame.overworld.ui.OverworldUI;
 
 /**
  * Dagger module to provide Overworld
@@ -39,8 +39,8 @@ public class OverworldModule {
 
     @Provides
     @ActivityScope
-    OverworldUIStage provideOverworldUIStage(TroncGame troncGame, OverworldFPSActor overworldFPSActor) {
-        return new OverworldUIStage(troncGame, overworldFPSActor);
+    OverworldUI provideOverworldUIStage(TroncGame troncGame, OverworldFPSActor overworldFPSActor) {
+        return new OverworldUI(troncGame, overworldFPSActor);
     }
 
     @Provides

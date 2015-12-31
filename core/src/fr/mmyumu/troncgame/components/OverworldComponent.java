@@ -9,7 +9,7 @@ import fr.mmyumu.troncgame.overworld.game.OverworldCharacter;
 import fr.mmyumu.troncgame.overworld.game.OverworldGameInputProcessor;
 import fr.mmyumu.troncgame.overworld.menu.OverworldMenu;
 import fr.mmyumu.troncgame.overworld.ui.OverworldUIInputProcessor;
-import fr.mmyumu.troncgame.overworld.ui.OverworldUIStage;
+import fr.mmyumu.troncgame.overworld.ui.OverworldUI;
 
 /**
  * Dagger component to instantiate Overworld objects
@@ -27,7 +27,7 @@ public interface OverworldComponent {
 
     OverworldGameInputProcessor createOverworldGameInputProcessor();
 
-    OverworldUIStage createOverworldUIStage();
+    OverworldUI createOverworldUI();
 
     OverworldCharacter createOverworldCharacter();
 

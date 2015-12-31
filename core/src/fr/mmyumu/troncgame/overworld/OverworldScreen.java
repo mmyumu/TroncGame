@@ -20,7 +20,7 @@ import fr.mmyumu.troncgame.overworld.game.OverworldGameInputProcessor;
 import fr.mmyumu.troncgame.overworld.game.OverworldMap;
 import fr.mmyumu.troncgame.overworld.menu.OverworldMenu;
 import fr.mmyumu.troncgame.overworld.ui.OverworldUIInputProcessor;
-import fr.mmyumu.troncgame.overworld.ui.OverworldUIStage;
+import fr.mmyumu.troncgame.overworld.ui.OverworldUI;
 
 /**
  * Overworld screen displaying a top-down view to the world
@@ -33,7 +33,7 @@ public class OverworldScreen extends ScreenAdapter {
 
     private final TroncGame troncGame;
     private final AssetManager assetManager;
-    private final OverworldUIStage uiStage;
+    private final OverworldUI uiStage;
     private final OverworldMenu overworldMenu;
     private OverworldCharacter mainCharacter;
     private OverworldMap map;
@@ -48,7 +48,7 @@ public class OverworldScreen extends ScreenAdapter {
         this.assetManager = assetManager;
         this.camera = camera;
 
-        this.uiStage = troncGame.getOverworldComponent().createOverworldUIStage();
+        this.uiStage = troncGame.getOverworldComponent().createOverworldUI();
         this.overworldMenu = troncGame.getOverworldComponent().createOverworldMenuStage();
     }
 
