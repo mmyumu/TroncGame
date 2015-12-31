@@ -33,5 +33,5 @@ public interface OverworldComponent {
 
     OverworldUIInputProcessor createOverworldUIInputProcessor();
 
-    OverworldMenu createOverworldMenuStage();
+    OverworldMenu createOverworldMenu();
 }

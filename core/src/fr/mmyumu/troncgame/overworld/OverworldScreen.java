@@ -49,7 +49,7 @@ public class OverworldScreen extends ScreenAdapter {
         this.camera = camera;
 
         this.uiStage = troncGame.getOverworldComponent().createOverworldUI();
-        this.overworldMenu = troncGame.getOverworldComponent().createOverworldMenuStage();
+        this.overworldMenu = troncGame.getOverworldComponent().createOverworldMenu();
     }
 
     public OverworldCharacter getMainCharacter() {
