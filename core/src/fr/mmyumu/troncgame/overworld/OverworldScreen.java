@@ -33,7 +33,7 @@ public class OverworldScreen extends ScreenAdapter {
 
     private final TroncGame troncGame;
     private final AssetManager assetManager;
-    private final OverworldUI uiStage;
+    private final OverworldUI overworldUI;
     private final OverworldMenu overworldMenu;
     private OverworldCharacter mainCharacter;
     private OverworldMap map;
@@ -48,7 +48,7 @@ public class OverworldScreen extends ScreenAdapter {
         this.assetManager = assetManager;
         this.camera = camera;
 
-        this.uiStage = troncGame.getOverworldComponent().createOverworldUI();
+        this.overworldUI = troncGame.getOverworldComponent().createOverworldUI();
         this.overworldMenu = troncGame.getOverworldComponent().createOverworldMenu();
     }
 
@@ -112,7 +112,7 @@ public class OverworldScreen extends ScreenAdapter {
     private void updateRunning(float delta) {
         checkFight(delta);
         mainCharacter.update(delta);
-        uiStage.act(delta);
+        overworldUI.act(delta);
     }
 
     private void draw() {
@@ -150,7 +150,7 @@ public class OverworldScreen extends ScreenAdapter {
         mainCharacter.draw();
         map.drawForeground();
 
-        uiStage.draw();
+        overworldUI.draw();
 
         cameraMoved(camera.position.x - oldX, camera.position.y - oldY);
     }
