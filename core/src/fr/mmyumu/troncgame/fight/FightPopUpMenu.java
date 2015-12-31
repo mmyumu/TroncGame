@@ -10,10 +10,10 @@ import com.badlogic.gdx.utils.viewport.Viewport;
  * Stage to display the actors of the pop-up menu
  * Created by mmyumu on 08/12/2015.
  */
-public class FightPopUpMenuStage extends Stage {
+public class FightPopUpMenu extends Stage {
     private FightCharacter fightCharacter;
 
-    public FightPopUpMenuStage(Viewport viewport) {
+    public FightPopUpMenu(Viewport viewport) {
         super(viewport);
     }
 

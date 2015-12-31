@@ -33,7 +33,7 @@ public class FightScreen extends ScreenAdapter implements Musical {
     private Viewport viewport;
 
     private FightGameStage fightGameStage;
-    private FightPopUpMenuStage fightPopUpMenuStage;
+    private FightPopUpMenu fightPopUpMenu;
     private FightUIStage fightUIStage;
 
     private Music firstChipTune;
@@ -85,13 +85,13 @@ public class FightScreen extends ScreenAdapter implements Musical {
     }
 
     private void initFightPopUpStage() {
-        fightPopUpMenuStage = new FightPopUpMenuStage(viewport);
+        fightPopUpMenu = new FightPopUpMenu(viewport);
 
         FightPopUpMenuIcon fightPopUpMenuSpellsIcon = troncGame.getFightComponent().createFightPopUpMenuSpellsIcon();
-        fightPopUpMenuStage.addActor(fightPopUpMenuSpellsIcon);
+        fightPopUpMenu.addActor(fightPopUpMenuSpellsIcon);
 
         FightPopUpMenuIcon fightPopUpMenuWeaponsIcon = troncGame.getFightComponent().createFightPopUpMenuWeaponsIcon();
-        fightPopUpMenuStage.addActor(fightPopUpMenuWeaponsIcon);
+        fightPopUpMenu.addActor(fightPopUpMenuWeaponsIcon);
     }
 
     private void initFightUIStage() {
@@ -124,13 +124,13 @@ public class FightScreen extends ScreenAdapter implements Musical {
     private void update(float delta) {
         fightGameStage.act(delta);
         fightUIStage.act(delta);
-        fightPopUpMenuStage.act(delta);
+        fightPopUpMenu.act(delta);
     }
 
     private void draw() {
         fightGameStage.draw();
         fightUIStage.draw();
-        fightPopUpMenuStage.draw();
+        fightPopUpMenu.draw();
         camera.update();
 
     }
@@ -158,7 +158,7 @@ public class FightScreen extends ScreenAdapter implements Musical {
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
         Vector2 touchCoords = viewport.unproject(new Vector2(screenX, screenY));
 
-        Actor hitIcon = fightPopUpMenuStage.hit(touchCoords.x, touchCoords.y, true);
+        Actor hitIcon = fightPopUpMenu.hit(touchCoords.x, touchCoords.y, true);
         if (hitIcon != null && hitIcon instanceof FightPopUpMenuIcon) {
             Gdx.app.debug(TAG, "Icon touched !");
         } else {
@@ -167,7 +167,7 @@ public class FightScreen extends ScreenAdapter implements Musical {
                 Gdx.app.debug(TAG, "Fight character touched !");
 
                 FightCharacter fightCharacter = (FightCharacter) hitCharacter;
-                fightPopUpMenuStage.characterTouched(fightCharacter, touchCoords);
+                fightPopUpMenu.characterTouched(fightCharacter, touchCoords);
             }
         }
 
