@@ -66,41 +66,10 @@ public class FightScreen extends ScreenAdapter implements Musical {
     }
 
     private void initStages() {
-        initFightGameStage();
-        initFightPopUpStage();
-        initFightUIStage();
+        fightGame = troncGame.getFightComponent().createFightGame();
+        fightPopUpMenu = troncGame.getFightComponent().createFightPopUpMenu();
+        fightUI = troncGame.getFightComponent().createFightUI();
     }
-
-    private void initFightGameStage() {
-        fightGame = new FightGame(viewport);
-
-        FightBackground fightBackground = troncGame.getFightComponent().createFightBackground();
-        fightGame.addActor(fightBackground);
-
-        FightMainCharacter fightMainCharacter = troncGame.getFightComponent().createFightMainCharacter();
-        fightGame.addActor(fightMainCharacter);
-
-        FightSideKickCharacter fightSideKickCharacter = troncGame.getFightComponent().createFightSideKickCharacter();
-        fightGame.addActor(fightSideKickCharacter);
-    }
-
-    private void initFightPopUpStage() {
-        fightPopUpMenu = new FightPopUpMenu(viewport);
-
-        FightPopUpMenuIcon fightPopUpMenuSpellsIcon = troncGame.getFightComponent().createFightPopUpMenuSpellsIcon();
-        fightPopUpMenu.addActor(fightPopUpMenuSpellsIcon);
-
-        FightPopUpMenuIcon fightPopUpMenuWeaponsIcon = troncGame.getFightComponent().createFightPopUpMenuWeaponsIcon();
-        fightPopUpMenu.addActor(fightPopUpMenuWeaponsIcon);
-    }
-
-    private void initFightUIStage() {
-        fightUI = new FightUI(viewport);
-
-        FightMainInfos fightMainInfos = troncGame.getFightComponent().createFightMainInfos();
-        fightUI.addActor(fightMainInfos);
-    }
-
 
     /**
      * Init the multiplexer and the input processors

@@ -33,7 +33,6 @@ public class TroncGame extends Game {
         GameModule gameModule = new GameModule(this);
 
         gameComponent = DaggerGameComponent.builder().gameModule(gameModule).build();
-        gameComponent.inject(this);
 
         mainMenuComponent = DaggerMainMenuComponent.builder().mainMenuModule(new MainMenuModule()).gameModule(gameModule).gameComponent(gameComponent).build();
         overworldComponent = DaggerOverworldComponent.builder().overworldModule(new OverworldModule()).gameModule(gameModule).gameComponent(gameComponent).build();

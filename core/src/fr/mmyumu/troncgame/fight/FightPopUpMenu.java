@@ -3,7 +3,10 @@ package fr.mmyumu.troncgame.fight;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.utils.viewport.Viewport;
+import com.badlogic.gdx.utils.viewport.ScalingViewport;
+
+import javax.inject.Inject;
+import javax.inject.Named;
 
 
 /**
@@ -13,8 +16,12 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 public class FightPopUpMenu extends Stage {
     private FightCharacter fightCharacter;
 
-    public FightPopUpMenu(Viewport viewport) {
+    @Inject
+    public FightPopUpMenu(ScalingViewport viewport, @Named("spells") FightPopUpMenuIcon fightPopUpMenuSpellsIcon, @Named("weapons") FightPopUpMenuIcon fightPopUpMenuWeaponsIcon) {
         super(viewport);
+
+        addActor(fightPopUpMenuSpellsIcon);
+        addActor(fightPopUpMenuWeaponsIcon);
     }
 
     @Override

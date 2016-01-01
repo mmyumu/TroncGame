@@ -12,6 +12,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 import javax.inject.Inject;
 
+import dagger.Lazy;
 import fr.mmyumu.troncgame.Constants;
 import fr.mmyumu.troncgame.ScreenState;
 import fr.mmyumu.troncgame.TroncGame;
@@ -19,8 +20,8 @@ import fr.mmyumu.troncgame.overworld.game.OverworldCharacter;
 import fr.mmyumu.troncgame.overworld.game.OverworldGameInputProcessor;
 import fr.mmyumu.troncgame.overworld.game.OverworldMap;
 import fr.mmyumu.troncgame.overworld.menu.OverworldMenu;
-import fr.mmyumu.troncgame.overworld.ui.OverworldUIInputProcessor;
 import fr.mmyumu.troncgame.overworld.ui.OverworldUI;
+import fr.mmyumu.troncgame.overworld.ui.OverworldUIInputProcessor;
 
 /**
  * Overworld screen displaying a top-down view to the world
@@ -33,11 +34,12 @@ public class OverworldScreen extends ScreenAdapter {
 
     private final TroncGame troncGame;
     private final AssetManager assetManager;
-    private final OverworldUI overworldUI;
-    private final OverworldMenu overworldMenu;
+    private final OrthographicCamera camera;
+    private OverworldUI overworldUI;
+    private OverworldMenu overworldMenu;
+
     private OverworldCharacter mainCharacter;
     private OverworldMap map;
-    private OrthographicCamera camera;
     private Viewport viewport;
 
     private ScreenState screenState;
@@ -48,8 +50,12 @@ public class OverworldScreen extends ScreenAdapter {
         this.assetManager = assetManager;
         this.camera = camera;
 
-        this.overworldUI = troncGame.getOverworldComponent().createOverworldUI();
-        this.overworldMenu = troncGame.getOverworldComponent().createOverworldMenu();
+        initStages();
+    }
+
+    private void initStages() {
+        overworldUI = troncGame.getOverworldComponent().createOverworldUI();
+        overworldMenu = troncGame.getOverworldComponent().createOverworldMenu();
     }
 
     public OverworldCharacter getMainCharacter() {

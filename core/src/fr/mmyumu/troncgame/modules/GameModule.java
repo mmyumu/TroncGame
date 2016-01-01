@@ -5,12 +5,15 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.utils.I18NBundle;
+import com.badlogic.gdx.utils.Scaling;
+import com.badlogic.gdx.utils.viewport.ScalingViewport;
 
 import java.util.Locale;
 
 import dagger.Module;
 import dagger.Provides;
 import fr.mmyumu.troncgame.ActivityScope;
+import fr.mmyumu.troncgame.Constants;
 import fr.mmyumu.troncgame.GameInputProcessor;
 import fr.mmyumu.troncgame.TroncGame;
 import fr.mmyumu.troncgame.Utils;
@@ -58,6 +61,12 @@ public class GameModule {
     @ActivityScope
     OrthographicCamera provideOrthographicCamera() {
         return new OrthographicCamera();
+    }
+
+    @Provides
+    @ActivityScope
+    ScalingViewport provideViewport(OrthographicCamera camera) {
+        return new ScalingViewport(Scaling.fit, Constants.WIDTH, Constants.HEIGHT, camera);
     }
 
     @Provides

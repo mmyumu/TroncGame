@@ -2,6 +2,7 @@ package fr.mmyumu.troncgame.modules;
 
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.utils.viewport.ScalingViewport;
 
 import javax.inject.Named;
 
@@ -12,12 +13,14 @@ import fr.mmyumu.troncgame.CompassPoint;
 import fr.mmyumu.troncgame.TroncGame;
 import fr.mmyumu.troncgame.fight.FightBackground;
 import fr.mmyumu.troncgame.fight.FightConstants;
+import fr.mmyumu.troncgame.fight.FightGame;
 import fr.mmyumu.troncgame.fight.FightLoadingScreen;
 import fr.mmyumu.troncgame.fight.FightMainCharacter;
 import fr.mmyumu.troncgame.fight.FightPopUpMenuIcon;
 import fr.mmyumu.troncgame.fight.FightScreen;
 import fr.mmyumu.troncgame.fight.FightSideKickCharacter;
 import fr.mmyumu.troncgame.fight.ui.FightMainInfos;
+import fr.mmyumu.troncgame.fight.ui.FightUI;
 
 /**
  * Dagger module to provide Fight
@@ -73,5 +76,17 @@ public class FightModule {
     @ActivityScope
     FightMainInfos provideFightMainInfos(AssetManager assetManager) {
         return new FightMainInfos(assetManager);
+    }
+
+    @Provides
+    @ActivityScope
+    FightGame provideFightGame(ScalingViewport viewport, FightBackground fightBackground, FightMainCharacter fightMainCharacter, FightSideKickCharacter fightSideKickCharacter) {
+        return new FightGame(viewport, fightBackground, fightMainCharacter, fightSideKickCharacter);
+    }
+
+    @Provides
+    @ActivityScope
+    FightUI provideFightUI(ScalingViewport viewport, FightMainInfos fightMainInfos) {
+        return new FightUI(viewport, fightMainInfos);
     }
 }

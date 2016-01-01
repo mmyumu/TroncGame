@@ -27,11 +27,11 @@ public interface OverworldComponent {
 
     OverworldGameInputProcessor createOverworldGameInputProcessor();
 
-    OverworldUI createOverworldUI();
-
-    OverworldCharacter createOverworldCharacter();
-
     OverworldUIInputProcessor createOverworldUIInputProcessor();
 
+    OverworldUI createOverworldUI();
+
     OverworldMenu createOverworldMenu();
+
+    OverworldCharacter createOverworldCharacter();
 }

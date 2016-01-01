@@ -15,12 +15,12 @@ import fr.mmyumu.troncgame.Constants;
  * Display the FPS in Overworld UI
  * Created by mmyumu on 16/11/2015.
  */
-public class OverworldFPSActor extends Actor {
+public class OverworldFPS extends Actor {
     private BitmapFont font;
     private final I18NBundle bundle;
 
     @Inject
-    public OverworldFPSActor(I18NBundle bundle) {
+    public OverworldFPS(I18NBundle bundle) {
         this.bundle = bundle;
         loadFonts();
     }
@@ -37,6 +37,6 @@ public class OverworldFPSActor extends Actor {
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
-        font.draw(batch, Gdx.graphics.getFramesPerSecond() + " " + bundle.get("fps"), 5, Gdx.graphics.getHeight() - font.getLineHeight());
+        font.draw(batch, Gdx.graphics.getFramesPerSecond() + " " + bundle.get("fps"), 5, Constants.HEIGHT - font.getLineHeight());
     }
 }

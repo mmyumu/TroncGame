@@ -3,6 +3,7 @@ package fr.mmyumu.troncgame.modules;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.utils.I18NBundle;
+import com.badlogic.gdx.utils.viewport.ScalingViewport;
 
 import javax.inject.Named;
 
@@ -16,7 +17,7 @@ import fr.mmyumu.troncgame.overworld.OverworldScreen;
 import fr.mmyumu.troncgame.overworld.game.OverworldCharacter;
 import fr.mmyumu.troncgame.overworld.menu.OverworldMenu;
 import fr.mmyumu.troncgame.overworld.menu.OverworldMenuList;
-import fr.mmyumu.troncgame.overworld.ui.OverworldFPSActor;
+import fr.mmyumu.troncgame.overworld.ui.OverworldFPS;
 import fr.mmyumu.troncgame.overworld.ui.OverworldUI;
 
 /**
@@ -25,6 +26,7 @@ import fr.mmyumu.troncgame.overworld.ui.OverworldUI;
  */
 @Module(includes = {GameModule.class})
 public class OverworldModule {
+
     @Provides
     @ActivityScope
     OverworldLoadingScreen provideOverworldLoadingScreen(TroncGame troncGame, AssetManager assetManager) {
@@ -39,28 +41,28 @@ public class OverworldModule {
 
     @Provides
     @ActivityScope
-    OverworldUI provideOverworldUIStage(TroncGame troncGame, OverworldFPSActor overworldFPSActor) {
-        return new OverworldUI(troncGame, overworldFPSActor);
+    OverworldUI provideOverworldUI(ScalingViewport viewport, TroncGame troncGame, OverworldFPS overworldFPS) {
+        return new OverworldUI(viewport, troncGame, overworldFPS);
     }
 
     @Provides
     @ActivityScope
-    OverworldMenu provideOverworldMenuStage(Lazy<OverworldScreen> overworldScreen, OverworldFPSActor overworldFPSActor, OverworldMenuList overworldMenuListActor) {
-        return new OverworldMenu(overworldScreen, overworldFPSActor, overworldMenuListActor);
+    OverworldMenu provideOverworldMenu(ScalingViewport viewport, Lazy<OverworldScreen> overworldScreen, OverworldFPS overworldFPS, OverworldMenuList overworldMenuListActor) {
+        return new OverworldMenu(viewport, overworldScreen, overworldFPS, overworldMenuListActor);
     }
 
     @Provides
     @ActivityScope
     @Named("ui")
-    OverworldFPSActor provideOverworldFPSGameActor(I18NBundle bundle) {
-        return new OverworldFPSActor(bundle);
+    OverworldFPS provideOverworldFPSGame(I18NBundle bundle) {
+        return new OverworldFPS(bundle);
     }
 
     @Provides
     @ActivityScope
     @Named("menu")
-    OverworldFPSActor provideOverworldFPSMenuActor(I18NBundle bundle) {
-        return new OverworldFPSActor(bundle);
+    OverworldFPS provideOverworldFPSMenu(I18NBundle bundle) {
+        return new OverworldFPS(bundle);
     }
 
     @Provides

@@ -39,7 +39,7 @@ public class OverworldMenuList extends Table {
 
         setTouchable(Touchable.enabled);
         setBackground(new TextureRegionDrawable(new TextureRegion(assetManager.get(OverworldConstants.TexturePath.MENU_LIST, Texture.class))));
-        setBounds(1000, (Gdx.graphics.getHeight() - OverworldConstants.MENU_LIST_HEIGHT) / 2, OverworldConstants.MENU_LIST_WIDTH, OverworldConstants.MENU_LIST_HEIGHT);
+        setBounds(1000, (Constants.HEIGHT - OverworldConstants.MENU_LIST_HEIGHT) / 2, OverworldConstants.MENU_LIST_WIDTH, OverworldConstants.MENU_LIST_HEIGHT);
 
         initMenuLabels();
     }
