@@ -2,6 +2,7 @@ package fr.mmyumu.troncgame.modules;
 
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.I18NBundle;
 import com.badlogic.gdx.utils.viewport.ScalingViewport;
 
@@ -67,8 +68,8 @@ public class OverworldModule {
 
     @Provides
     @ActivityScope
-    OverworldMenuList provideOverworldMenuList(AssetManager assetManager, I18NBundle bundle) {
-        return new OverworldMenuList(assetManager, bundle);
+    OverworldMenuList provideOverworldMenuList(AssetManager assetManager, I18NBundle bundle, Skin skin) {
+        return new OverworldMenuList(assetManager, bundle, skin);
     }
 
     @Provides

@@ -17,6 +17,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.I18NBundle;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import fr.mmyumu.troncgame.Constants;
 import fr.mmyumu.troncgame.overworld.OverworldConstants;
@@ -27,21 +28,24 @@ import fr.mmyumu.troncgame.overworld.OverworldConstants;
  */
 public class OverworldMenuList extends Table {
     private static final String TAG = "OverworldMenuList";
-    private final BitmapFont font;
+    private final AssetManager assetManager;
     private final Skin skin;
     private final I18NBundle bundle;
 
     @Inject
-    public OverworldMenuList(AssetManager assetManager, I18NBundle bundle) {
+    public OverworldMenuList(AssetManager assetManager, I18NBundle bundle, @Named("press2PStart-normalSize") Skin skin) {
+        this.assetManager = assetManager;
         this.bundle = bundle;
-        font = loadFont();
-        skin = initSkin();
+        this.skin = skin;
 
+        initTable();
+        initMenuLabels();
+    }
+
+    private void initTable() {
         setTouchable(Touchable.enabled);
         setBackground(new TextureRegionDrawable(new TextureRegion(assetManager.get(OverworldConstants.TexturePath.MENU_LIST, Texture.class))));
         setBounds(1000, (Constants.HEIGHT - OverworldConstants.MENU_LIST_HEIGHT) / 2, OverworldConstants.MENU_LIST_WIDTH, OverworldConstants.MENU_LIST_HEIGHT);
-
-        initMenuLabels();
     }
 
     private void initMenuLabels() {
@@ -55,26 +59,5 @@ public class OverworldMenuList extends Table {
             }
         });
         add(exitLabel);
-    }
-
-    private Skin initSkin() {
-        Skin skin = new Skin();
-        skin.addRegions(new TextureAtlas(Gdx.files.internal(OverworldConstants.SkinPath.SKIN_ATLAS)));
-        skin.add("default-font", font);
-        skin.load(Gdx.files.internal(OverworldConstants.SkinPath.SKIN_JSON));
-
-        return skin;
-    }
-
-    private BitmapFont loadFont() {
-        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal(Constants.FontPath.PRESS_START_2P));
-        FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        parameter.size = 20;
-        BitmapFont font = generator.generateFont(parameter);
-        generator.dispose();
-
-        font.setColor(1f, 1f, 1f, 1f);
-
-        return font;
     }
 }
