@@ -26,7 +26,7 @@ import fr.mmyumu.troncgame.fight.ui.FightUI;
  * Dagger module to provide Fight
  * Created by mmyumu on 18/11/2015.
  */
-@Module(includes = {GameModule.class})
+@Module(includes = {GameModule.class, ModelModule.class})
 public class FightModule {
     @Provides
     @ActivityScope

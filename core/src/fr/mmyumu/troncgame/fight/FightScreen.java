@@ -17,7 +17,6 @@ import javax.inject.Inject;
 import fr.mmyumu.troncgame.Constants;
 import fr.mmyumu.troncgame.TroncGame;
 import fr.mmyumu.troncgame.audio.Musical;
-import fr.mmyumu.troncgame.fight.ui.FightMainInfos;
 import fr.mmyumu.troncgame.fight.ui.FightUI;
 
 /**
