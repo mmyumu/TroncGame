@@ -6,8 +6,8 @@ package fr.mmyumu.troncgame.model;
  */
 public class Character {
     private String name;
-    private int hp;
-    private int mp;
+    private Integer hp;
+    private Integer mp;
 
     public void setName(String name) {
         this.name = name;
@@ -19,5 +19,17 @@ public class Character {
 
     public void setMp(int mp) {
         this.mp = mp;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Integer getHp() {
+        return hp;
+    }
+
+    public Integer getMp() {
+        return mp;
     }
 }
