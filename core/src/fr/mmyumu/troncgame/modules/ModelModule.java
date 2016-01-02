@@ -20,8 +20,8 @@ public class ModelModule {
     Character provideMainCharacter() {
         Character character = new Character();
         character.setName("Sophie");
-        character.setHp(125);
-        character.setMp(60);
+        character.setHp(9999);
+        character.setMp(999);
         return character;
     }
 
@@ -31,8 +31,8 @@ public class ModelModule {
     Character provideSideKickCharacter() {
         Character character = new Character();
         character.setName("Le poto");
-        character.setHp(180);
-        character.setMp(35);
+        character.setHp(9999);
+        character.setMp(999);
         return character;
     }
 

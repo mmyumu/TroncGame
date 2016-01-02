@@ -39,10 +39,11 @@ public class FightMainInfos extends Table {
     private void initTable() {
         setBackground(new TextureRegionDrawable(new TextureRegion(assetManager.get(FightConstants.TexturePath.MAIN_INFOS, Texture.class))));
         setBounds(0, 0, FightConstants.MAIN_INFOS_WIDTH, FightConstants.MAIN_INFOS_HEIGHT);
+        setDebug(false);
 
         top();
         left();
-        pad(20);
+        pad(25);
     }
 
     private void initTableLabels() {
@@ -52,6 +53,8 @@ public class FightMainInfos extends Table {
         add(new Label("", skin)).height(10);
 
         for (Character character : team.getCharacters()) {
+//            row().height(10);
+//            add(new Label("", skin)).height(10);
             row().height(FightConstants.MainInfos.ROW_HEIGHT);
             createLabel(character);
         }
@@ -61,17 +64,22 @@ public class FightMainInfos extends Table {
         Label nameLabel = new Label(character.getName(), skin);
         Label hpLabel = new Label(character.getHp().toString(), skin);
         Label mpLabel = new Label(character.getMp().toString(), skin);
-        add(nameLabel).width(FightConstants.MainInfos.NAME_WIDTH).top().left();
-        add(hpLabel).width(FightConstants.MainInfos.HP_WIDTH).top().left();
-        add(mpLabel).width(FightConstants.MainInfos.MP_WIDTH).top().left();
+        FightActionBar fightActionBar = new FightActionBar(assetManager, character);
+
+        add(nameLabel).width(FightConstants.MainInfos.NAME_WIDTH).left();
+        add(hpLabel).width(FightConstants.MainInfos.HP_WIDTH).left();
+        add(mpLabel).width(FightConstants.MainInfos.MP_WIDTH).left();
+        add(fightActionBar).width(FightConstants.MainInfos.ACTION_BAR_WIDTH).left().pad(5, 20, 5, 20);
     }
 
     private void initHeaderRow() {
         Label nameLabel = new Label(bundle.get("mainInfos.name"), skin);
         Label hpLabel = new Label(bundle.get("mainInfos.hp").toString(), skin);
         Label mpLabel = new Label(bundle.get("mainInfos.mp").toString(), skin);
+        Label actionBarLabel = new Label("", skin);
         add(nameLabel).width(FightConstants.MainInfos.NAME_WIDTH).top().left();
         add(hpLabel).width(FightConstants.MainInfos.HP_WIDTH).top().left();
         add(mpLabel).width(FightConstants.MainInfos.MP_WIDTH).top().left();
+        add(actionBarLabel).width(FightConstants.MainInfos.ACTION_BAR_WIDTH).top().center();
     }
 }
