@@ -28,8 +28,7 @@ public class FightScreen extends ScreenAdapter implements Musical {
 
     private final TroncGame troncGame;
     private final AssetManager assetManager;
-    private final OrthographicCamera camera;
-    private Viewport viewport;
+    private final Viewport viewport;
 
     private FightGame fightGame;
     private FightPopUpMenu fightPopUpMenu;
@@ -38,24 +37,19 @@ public class FightScreen extends ScreenAdapter implements Musical {
     private Music firstChipTune;
 
     @Inject
-    public FightScreen(TroncGame troncGame, AssetManager assetManager, OrthographicCamera camera) {
+    public FightScreen(TroncGame troncGame, AssetManager assetManager, ScalingViewport viewport) {
         this.troncGame = troncGame;
         this.assetManager = assetManager;
-        this.camera = camera;
+        this.viewport = viewport;
     }
 
     @Override
     public void show() {
         Gdx.app.debug(TAG, "Showing Fight");
 
-        camera.setToOrtho(false);
-        viewport = new ScalingViewport(Scaling.fit, Constants.WIDTH, Constants.HEIGHT, camera);
-
         initStages();
         initMusic();
         initInputProcessors();
-
-        viewport.apply();
     }
 
     private void initMusic() {
@@ -99,8 +93,6 @@ public class FightScreen extends ScreenAdapter implements Musical {
         fightGame.draw();
         fightUI.draw();
         fightPopUpMenu.draw();
-        camera.update();
-
     }
 
     @Override

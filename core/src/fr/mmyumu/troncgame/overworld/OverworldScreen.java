@@ -5,14 +5,13 @@ import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.utils.viewport.FitViewport;
-import com.badlogic.gdx.utils.viewport.Viewport;
+import com.badlogic.gdx.utils.viewport.ScalingViewport;
 
 import java.util.concurrent.ThreadLocalRandom;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
-import dagger.Lazy;
 import fr.mmyumu.troncgame.Constants;
 import fr.mmyumu.troncgame.ScreenState;
 import fr.mmyumu.troncgame.TroncGame;
@@ -34,21 +33,20 @@ public class OverworldScreen extends ScreenAdapter {
 
     private final TroncGame troncGame;
     private final AssetManager assetManager;
-    private final OrthographicCamera camera;
+    private final ScalingViewport gameViewport;
     private OverworldUI overworldUI;
     private OverworldMenu overworldMenu;
 
     private OverworldCharacter mainCharacter;
     private OverworldMap map;
-    private Viewport viewport;
 
     private ScreenState screenState;
 
     @Inject
-    public OverworldScreen(TroncGame troncGame, AssetManager assetManager, OrthographicCamera camera) {
+    public OverworldScreen(TroncGame troncGame, AssetManager assetManager, @Named("game") ScalingViewport gameViewport) {
         this.troncGame = troncGame;
         this.assetManager = assetManager;
-        this.camera = camera;
+        this.gameViewport = gameViewport;
 
         initStages();
     }
@@ -68,11 +66,8 @@ public class OverworldScreen extends ScreenAdapter {
 
         screenState = ScreenState.RUNNING;
 
-        camera.setToOrtho(false);
-        viewport = new FitViewport(Constants.WIDTH, Constants.HEIGHT, camera);
-        viewport.apply();
-
-        map = new OverworldMap(OverworldConstants.MapPath.VILLAGE, camera, assetManager);
+        OrthographicCamera gameCamera = (OrthographicCamera) gameViewport.getCamera();
+        map = new OverworldMap(OverworldConstants.MapPath.VILLAGE, gameCamera, assetManager);
         mainCharacter = loadMainCharacter();
 
         initInputProcessors();
@@ -140,8 +135,8 @@ public class OverworldScreen extends ScreenAdapter {
     }
 
     private void drawRunning() {
-        float oldX = camera.position.x;
-        float oldY = camera.position.y;
+        float oldX = gameViewport.getCamera().position.x;
+        float oldY = gameViewport.getCamera().position.y;
 
         float minX = Math.max(mainCharacter.getX(), Constants.WIDTH / 2);
         float newX = Math.min((map.getWidth() - Constants.WIDTH / 2), minX);
@@ -149,8 +144,8 @@ public class OverworldScreen extends ScreenAdapter {
         float minY = Math.max(mainCharacter.getY(), Constants.HEIGHT / 2);
         float newY = Math.min((map.getHeight() - Constants.HEIGHT / 2), minY);
 
-        camera.position.set(newX, newY, 0);
-        camera.update();
+        gameViewport.getCamera().position.set(newX, newY, 0);
+        gameViewport.getCamera().update();
 
         map.drawBackground();
         mainCharacter.draw();
@@ -158,7 +153,7 @@ public class OverworldScreen extends ScreenAdapter {
 
         overworldUI.draw();
 
-        cameraMoved(camera.position.x - oldX, camera.position.y - oldY);
+        cameraMoved(gameViewport.getCamera().position.x - oldX, gameViewport.getCamera().position.y - oldY);
     }
 
     private void cameraMoved(float x, float y) {
@@ -182,11 +177,7 @@ public class OverworldScreen extends ScreenAdapter {
 
     @Override
     public void resize(int width, int height) {
-        viewport.update(width, height);
-    }
-
-    public Viewport getViewport() {
-        return viewport;
+        gameViewport.update(width, height);
     }
 
     private void checkFight(float delta) {

@@ -65,18 +65,6 @@ public class GameModule {
     }
 
     @Provides
-    @ActivityScope
-    OrthographicCamera provideOrthographicCamera() {
-        return new OrthographicCamera();
-    }
-
-    @Provides
-    @ActivityScope
-    ScalingViewport provideViewport(OrthographicCamera camera) {
-        return new ScalingViewport(Scaling.fit, Constants.WIDTH, Constants.HEIGHT, camera);
-    }
-
-    @Provides
     GameInputProcessor provideGameInputProcessor() {
         return new GameInputProcessor(troncGame);
     }

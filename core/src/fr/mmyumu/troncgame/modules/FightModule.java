@@ -4,6 +4,7 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.I18NBundle;
+import com.badlogic.gdx.utils.Scaling;
 import com.badlogic.gdx.utils.viewport.ScalingViewport;
 
 import javax.inject.Named;
@@ -12,6 +13,7 @@ import dagger.Module;
 import dagger.Provides;
 import fr.mmyumu.troncgame.ActivityScope;
 import fr.mmyumu.troncgame.CompassPoint;
+import fr.mmyumu.troncgame.Constants;
 import fr.mmyumu.troncgame.TroncGame;
 import fr.mmyumu.troncgame.fight.FightBackground;
 import fr.mmyumu.troncgame.fight.FightConstants;
@@ -33,14 +35,28 @@ import fr.mmyumu.troncgame.model.Team;
 public class FightModule {
     @Provides
     @ActivityScope
+    OrthographicCamera provideOrthographicCamera() {
+        OrthographicCamera camera = new OrthographicCamera();
+        camera.setToOrtho(false);
+        return camera;
+    }
+
+    @Provides
+    @ActivityScope
+    ScalingViewport provideViewport(OrthographicCamera camera) {
+        return new ScalingViewport(Scaling.fit, Constants.WIDTH, Constants.HEIGHT, camera);
+    }
+
+    @Provides
+    @ActivityScope
     FightLoadingScreen provideFightLoadingScreen(TroncGame troncGame, AssetManager assetManager) {
         return new FightLoadingScreen(troncGame, assetManager);
     }
 
     @Provides
     @ActivityScope
-    FightScreen provideFightScreen(TroncGame troncGame, AssetManager assetManager, OrthographicCamera camera) {
-        return new FightScreen(troncGame, assetManager, camera);
+    FightScreen provideFightScreen(TroncGame troncGame, AssetManager assetManager, ScalingViewport viewport) {
+        return new FightScreen(troncGame, assetManager, viewport);
     }
 
     @Provides
