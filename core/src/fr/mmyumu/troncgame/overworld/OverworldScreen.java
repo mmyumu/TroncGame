@@ -199,6 +199,7 @@ public class OverworldScreen extends ScreenAdapter {
     }
 
     public void pauseGame() {
+        mainCharacter.setMoveTarget(null);
         screenState = ScreenState.PAUSE;
         initInputProcessors();
     }
