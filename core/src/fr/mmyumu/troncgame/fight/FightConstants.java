@@ -26,4 +26,11 @@ public interface FightConstants {
         String WEAPONS_ICON = "data/fight/weapons.png";
         String MAIN_INFOS = "data/fight/main_infos.png";
     }
+
+    interface MainInfos {
+        int NAME_WIDTH = 200;
+        int HP_WIDTH = 100;
+        int MP_WIDTH = 100;
+        int ROW_HEIGHT = 30;
+    }
 }
