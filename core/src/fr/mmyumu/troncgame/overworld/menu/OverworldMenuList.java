@@ -33,7 +33,7 @@ public class OverworldMenuList extends Table {
     private final I18NBundle bundle;
 
     @Inject
-    public OverworldMenuList(AssetManager assetManager, I18NBundle bundle, @Named("press2PStart-normalSize") Skin skin) {
+    public OverworldMenuList(AssetManager assetManager, I18NBundle bundle, Skin skin) {
         this.assetManager = assetManager;
         this.bundle = bundle;
         this.skin = skin;

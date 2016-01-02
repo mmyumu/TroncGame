@@ -2,6 +2,8 @@ package fr.mmyumu.troncgame.modules;
 
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.utils.I18NBundle;
 import com.badlogic.gdx.utils.viewport.ScalingViewport;
 
 import javax.inject.Named;
@@ -21,6 +23,7 @@ import fr.mmyumu.troncgame.fight.FightScreen;
 import fr.mmyumu.troncgame.fight.FightSideKickCharacter;
 import fr.mmyumu.troncgame.fight.ui.FightMainInfos;
 import fr.mmyumu.troncgame.fight.ui.FightUI;
+import fr.mmyumu.troncgame.model.Team;
 
 /**
  * Dagger module to provide Fight
@@ -74,8 +77,8 @@ public class FightModule {
 
     @Provides
     @ActivityScope
-    FightMainInfos provideFightMainInfos(AssetManager assetManager) {
-        return new FightMainInfos(assetManager);
+    FightMainInfos provideFightMainInfos(I18NBundle bundle, AssetManager assetManager, Skin skin, Team team) {
+        return new FightMainInfos(bundle, assetManager, skin, team);
     }
 
     @Provides
