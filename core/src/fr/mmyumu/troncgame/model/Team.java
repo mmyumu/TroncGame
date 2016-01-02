@@ -18,7 +18,7 @@ public class Team {
         return characters.add(character);
     }
 
-    public Character remove(int index) {
-        return characters.remove(index);
+    public List<Character> getCharacters() {
+        return characters;
     }
 }
