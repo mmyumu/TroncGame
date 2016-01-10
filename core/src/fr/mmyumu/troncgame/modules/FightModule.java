@@ -16,13 +16,12 @@ import fr.mmyumu.troncgame.CompassPoint;
 import fr.mmyumu.troncgame.Constants;
 import fr.mmyumu.troncgame.TroncGame;
 import fr.mmyumu.troncgame.fight.FightBackground;
+import fr.mmyumu.troncgame.fight.FightCharacter;
 import fr.mmyumu.troncgame.fight.FightConstants;
 import fr.mmyumu.troncgame.fight.FightGame;
 import fr.mmyumu.troncgame.fight.FightLoadingScreen;
-import fr.mmyumu.troncgame.fight.FightMainCharacter;
 import fr.mmyumu.troncgame.fight.FightPopUpMenuIcon;
 import fr.mmyumu.troncgame.fight.FightScreen;
-import fr.mmyumu.troncgame.fight.FightSideKickCharacter;
 import fr.mmyumu.troncgame.fight.ui.FightMainInfos;
 import fr.mmyumu.troncgame.fight.ui.FightUI;
 import fr.mmyumu.troncgame.model.Team;
@@ -67,18 +66,6 @@ public class FightModule {
 
     @Provides
     @ActivityScope
-    FightMainCharacter provideFightMainCharacter(AssetManager assetManager) {
-        return new FightMainCharacter(assetManager);
-    }
-
-    @Provides
-    @ActivityScope
-    FightSideKickCharacter provideFightSideKickCharacter(AssetManager assetManager) {
-        return new FightSideKickCharacter(assetManager);
-    }
-
-    @Provides
-    @ActivityScope
     @Named("spells")
     FightPopUpMenuIcon provideFightPopUpMenuSpellIcon(AssetManager assetManager) {
         return new FightPopUpMenuIcon(FightConstants.TexturePath.SPELLS_ICON, CompassPoint.NORTH, assetManager);
@@ -99,8 +86,8 @@ public class FightModule {
 
     @Provides
     @ActivityScope
-    FightGame provideFightGame(ScalingViewport viewport, FightBackground fightBackground, FightMainCharacter fightMainCharacter, FightSideKickCharacter fightSideKickCharacter) {
-        return new FightGame(viewport, fightBackground, fightMainCharacter, fightSideKickCharacter);
+    FightGame provideFightGame(ScalingViewport viewport, AssetManager assetManager, FightBackground fightBackground, Team team) {
+        return new FightGame(viewport, assetManager, fightBackground, team);
     }
 
     @Provides

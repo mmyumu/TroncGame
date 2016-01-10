@@ -8,28 +8,37 @@ public class GameCharacter {
     private String name;
     private Integer hp;
     private Integer mp;
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setHp(int hp) {
-        this.hp = hp;
-    }
-
-    public void setMp(int mp) {
-        this.mp = mp;
-    }
+    private String fightTexturePath;
 
     public String getName() {
         return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Integer getHp() {
         return hp;
     }
 
+    public void setHp(int hp) {
+        this.hp = hp;
+    }
+
     public Integer getMp() {
         return mp;
+    }
+
+    public void setMp(int mp) {
+        this.mp = mp;
+    }
+
+    public String getFightTexturePath() {
+        return fightTexturePath;
+    }
+
+    public void setFightTexturePath(String fightTexturePath) {
+        this.fightTexturePath = fightTexturePath;
     }
 }

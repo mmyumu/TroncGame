@@ -6,6 +6,7 @@ import dagger.Module;
 import dagger.Provides;
 import fr.mmyumu.troncgame.ActivityScope;
 import fr.mmyumu.troncgame.model.GameCharacter;
+import fr.mmyumu.troncgame.fight.FightConstants;
 import fr.mmyumu.troncgame.model.Team;
 
 /**
@@ -19,6 +20,7 @@ public class ModelModule {
     @Named("main")
     GameCharacter provideMainCharacter() {
         GameCharacter character = new GameCharacter();
+        character.setFightTexturePath(FightConstants.TexturePath.MAIN_CHARACTER);
         character.setName("Sophie");
         character.setHp(9999);
         character.setMp(999);
@@ -30,6 +32,7 @@ public class ModelModule {
     @Named("sideKick")
     GameCharacter provideSideKickCharacter() {
         GameCharacter character = new GameCharacter();
+        character.setFightTexturePath(FightConstants.TexturePath.SIDEKICK_CHARACTER);
         character.setName("Le poto");
         character.setHp(9999);
         character.setMp(999);
