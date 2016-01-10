@@ -4,7 +4,7 @@ package fr.mmyumu.troncgame.model;
  * Manage a character of the game
  * Created by mmyumu on 01/01/2016.
  */
-public class Character {
+public class GameCharacter {
     private String name;
     private Integer hp;
     private Integer mp;

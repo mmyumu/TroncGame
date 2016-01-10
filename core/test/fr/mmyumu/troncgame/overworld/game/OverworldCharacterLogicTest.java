@@ -28,7 +28,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 /**
- * Test the logic of the Overworld Character
+ * Test the logic of the Overworld GameCharacter
  * Created by mmyumu on 21/11/2015.
  */
 @RunWith(PowerMockRunner.class)

@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
 import fr.mmyumu.troncgame.fight.FightConstants;
-import fr.mmyumu.troncgame.model.Character;
+import fr.mmyumu.troncgame.model.GameCharacter;
 
 /**
  * Manage the action bar (bar to show when character can act)
@@ -14,9 +14,9 @@ import fr.mmyumu.troncgame.model.Character;
  */
 public class FightActionBar extends Actor {
     private final AssetManager assetManager;
-    private final Character character;
+    private final GameCharacter character;
 
-    public FightActionBar(AssetManager assetManager, Character character) {
+    public FightActionBar(AssetManager assetManager, GameCharacter character) {
         this.assetManager = assetManager;
         this.character = character;
     }

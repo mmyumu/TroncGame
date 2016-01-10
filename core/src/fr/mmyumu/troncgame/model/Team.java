@@ -8,17 +8,17 @@ import java.util.List;
  * Created by mmyumu on 01/01/2016. (happy new year)
  */
 public class Team {
-    private final List<Character> characters;
+    private final List<GameCharacter> characters;
 
     public Team() {
-        characters = new ArrayList<Character>();
+        characters = new ArrayList<GameCharacter>();
     }
 
-    public boolean add(Character character) {
+    public boolean add(GameCharacter character) {
         return characters.add(character);
     }
 
-    public List<Character> getCharacters() {
+    public List<GameCharacter> getCharacters() {
         return characters;
     }
 }

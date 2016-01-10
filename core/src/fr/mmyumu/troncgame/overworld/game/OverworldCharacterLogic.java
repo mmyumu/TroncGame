@@ -13,7 +13,7 @@ import java.util.List;
 import fr.mmyumu.troncgame.overworld.OverworldConstants;
 
 /**
- * Logic of the Character displayed on the Overworld map
+ * Logic of the GameCharacter displayed on the Overworld map
  * Created by mmyumu on 21/11/2015.
  */
 public class OverworldCharacterLogic {

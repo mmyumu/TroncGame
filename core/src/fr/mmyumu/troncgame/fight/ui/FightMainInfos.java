@@ -12,7 +12,7 @@ import com.badlogic.gdx.utils.I18NBundle;
 import javax.inject.Inject;
 
 import fr.mmyumu.troncgame.fight.FightConstants;
-import fr.mmyumu.troncgame.model.Character;
+import fr.mmyumu.troncgame.model.GameCharacter;
 import fr.mmyumu.troncgame.model.Team;
 
 /**
@@ -52,7 +52,7 @@ public class FightMainInfos extends Table {
         row().height(10);
         add(new Label("", skin)).height(10);
 
-        for (Character character : team.getCharacters()) {
+        for (GameCharacter character : team.getCharacters()) {
 //            row().height(10);
 //            add(new Label("", skin)).height(10);
             row().height(FightConstants.MainInfos.ROW_HEIGHT);
@@ -60,7 +60,7 @@ public class FightMainInfos extends Table {
         }
     }
 
-    private void createLabel(Character character) {
+    private void createLabel(GameCharacter character) {
         Label nameLabel = new Label(character.getName(), skin);
         Label hpLabel = new Label(character.getHp().toString(), skin);
         Label mpLabel = new Label(character.getMp().toString(), skin);

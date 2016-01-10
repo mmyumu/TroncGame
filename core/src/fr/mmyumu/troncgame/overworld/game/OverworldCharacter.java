@@ -11,7 +11,7 @@ import fr.mmyumu.troncgame.overworld.OverworldConstants;
 
 
 /**
- * Character which is displayed on the Overworld map
+ * GameCharacter which is displayed on the Overworld map
  * Created by mmyumu on 30/10/2015.
  */
 public class OverworldCharacter extends OverworldCharacterLogic {
