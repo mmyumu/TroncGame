@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 
 import javax.inject.Inject;
@@ -43,6 +44,10 @@ public class FightLoadingScreen extends ScreenAdapter {
 
     @Override
     public void render(float delta) {
+        // TODO: add transition here such as graphics or blur the screen
+        Gdx.gl.glClearColor(0, 0, 0, 1);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
         if (assetManager.update()) {
             troncGame.setScreen(troncGame.getFightComponent().createFightScreen());
         }

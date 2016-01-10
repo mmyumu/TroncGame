@@ -56,6 +56,7 @@ public class OverworldGameInputProcessor extends InputAdapter {
     @Override
     public boolean keyDown(int keycode) {
         if (keycode == Input.Keys.F) {
+            Gdx.app.debug(TAG, "[Debug mode] Start fight");
             overworldScreen.startFight();
         }
         return super.keyDown(keycode);
