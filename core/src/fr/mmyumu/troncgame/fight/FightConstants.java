@@ -14,6 +14,7 @@ public interface FightConstants {
     int MAIN_INFOS_WIDTH = 800;
     int MAIN_INFOS_HEIGHT = 250;
 
+
     interface MusicPath {
         String FIRST_CHIPTUNE = "music/first_chiptune.ogg";
     }
@@ -36,5 +37,7 @@ public interface FightConstants {
 
         // Action bar 160*25 (done with padding)
         int ACTION_BAR_WIDTH = 200;
+
+        int MAX_ACTION_VALUE = 162;
     }
 }

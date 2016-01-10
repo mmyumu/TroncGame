@@ -11,15 +11,30 @@ import fr.mmyumu.troncgame.model.GameCharacter;
 public class FightCharacterLogic extends Actor {
     private GameCharacter character;
 
+    private double actionValue;
+
     public FightCharacterLogic(int x, int y, GameCharacter character) {
         this.character = character;
         setPosition(x, y);
         setBounds(x, y, FightConstants.CHARACTER_WIDTH, FightConstants.CHARACTER_HEIGHT);
     }
 
+    public GameCharacter getCharacter() {
+        return character;
+    }
+
+    public double getActionValue() {
+        return actionValue;
+    }
+
     @Override
     public void act(float delta) {
         super.act(delta);
 
+        actionValue += character.getActionSpeed() * delta;
+
+        if (actionValue >= FightConstants.MainInfos.MAX_ACTION_VALUE) {
+            actionValue = FightConstants.MainInfos.MAX_ACTION_VALUE;
+        }
     }
 }

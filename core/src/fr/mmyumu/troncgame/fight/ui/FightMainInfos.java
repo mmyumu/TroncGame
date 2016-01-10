@@ -9,11 +9,12 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.I18NBundle;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
+import fr.mmyumu.troncgame.fight.FightCharacter;
 import fr.mmyumu.troncgame.fight.FightConstants;
-import fr.mmyumu.troncgame.model.GameCharacter;
-import fr.mmyumu.troncgame.model.Team;
 
 /**
  * Display the main infos in the Fight Screen
@@ -23,14 +24,14 @@ public class FightMainInfos extends Table {
     private final I18NBundle bundle;
     private final AssetManager assetManager;
     private final Skin skin;
-    private final Team team;
+    private final List<FightCharacter> fightTeam;
 
     @Inject
-    public FightMainInfos(I18NBundle bundle, AssetManager assetManager, Skin skin, Team team) {
+    public FightMainInfos(I18NBundle bundle, AssetManager assetManager, Skin skin, List<FightCharacter> fightTeam) {
         this.bundle = bundle;
         this.assetManager = assetManager;
         this.skin = skin;
-        this.team = team;
+        this.fightTeam = fightTeam;
 
         initTable();
         initTableLabels();
@@ -52,7 +53,7 @@ public class FightMainInfos extends Table {
         row().height(10);
         add(new Label("", skin)).height(10);
 
-        for (GameCharacter character : team.getCharacters()) {
+        for (FightCharacter character : fightTeam) {
 //            row().height(10);
 //            add(new Label("", skin)).height(10);
             row().height(FightConstants.MainInfos.ROW_HEIGHT);
@@ -60,11 +61,11 @@ public class FightMainInfos extends Table {
         }
     }
 
-    private void createLabel(GameCharacter character) {
-        Label nameLabel = new Label(character.getName(), skin);
-        Label hpLabel = new Label(character.getHp().toString(), skin);
-        Label mpLabel = new Label(character.getMp().toString(), skin);
-        FightActionBar fightActionBar = new FightActionBar(assetManager, character);
+    private void createLabel(FightCharacter fightCharacter) {
+        Label nameLabel = new Label(fightCharacter.getCharacter().getName(), skin);
+        Label hpLabel = new Label(fightCharacter.getCharacter().getHp().toString(), skin);
+        Label mpLabel = new Label(fightCharacter.getCharacter().getMp().toString(), skin);
+        FightActionBar fightActionBar = new FightActionBar(assetManager, fightCharacter);
 
         add(nameLabel).width(FightConstants.MainInfos.NAME_WIDTH).left();
         add(hpLabel).width(FightConstants.MainInfos.HP_WIDTH).left();

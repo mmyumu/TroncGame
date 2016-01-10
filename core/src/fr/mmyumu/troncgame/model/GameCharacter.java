@@ -8,6 +8,8 @@ public class GameCharacter {
     private String name;
     private Integer hp;
     private Integer mp;
+    private double actionSpeed;
+
     private String fightTexturePath;
 
     public String getName() {
@@ -22,7 +24,7 @@ public class GameCharacter {
         return hp;
     }
 
-    public void setHp(int hp) {
+    public void setHp(Integer hp) {
         this.hp = hp;
     }
 
@@ -30,8 +32,16 @@ public class GameCharacter {
         return mp;
     }
 
-    public void setMp(int mp) {
+    public void setMp(Integer mp) {
         this.mp = mp;
+    }
+
+    public double getActionSpeed() {
+        return actionSpeed;
+    }
+
+    public void setActionSpeed(double actionSpeed) {
+        this.actionSpeed = actionSpeed;
     }
 
     public String getFightTexturePath() {

@@ -1,14 +1,12 @@
 package fr.mmyumu.troncgame.fight;
 
 import com.badlogic.gdx.assets.AssetManager;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ScalingViewport;
 
-import javax.inject.Inject;
+import java.util.List;
 
-import fr.mmyumu.troncgame.model.GameCharacter;
-import fr.mmyumu.troncgame.model.Team;
+import javax.inject.Inject;
 
 /**
  * Stage to display the game elements of the Fight
@@ -16,16 +14,12 @@ import fr.mmyumu.troncgame.model.Team;
  */
 public class FightGame extends Stage {
     @Inject
-    public FightGame(ScalingViewport viewport, AssetManager assetManager, FightBackground fightBackground, Team team) {
+    public FightGame(ScalingViewport viewport, AssetManager assetManager, FightBackground fightBackground, List<FightCharacter> fightTeam) {
         super(viewport);
 
         addActor(fightBackground);
-
-        int i = 0;
-        for (GameCharacter character : team.getCharacters()) {
-            FightCharacter fightCharacter = new FightCharacter(100, FightConstants.MAIN_INFOS_HEIGHT + 20 + 200 * i, character, assetManager.get(character.getFightTexturePath(), Texture.class));
+        for (FightCharacter fightCharacter : fightTeam) {
             addActor(fightCharacter);
-            i++;
         }
     }
 }

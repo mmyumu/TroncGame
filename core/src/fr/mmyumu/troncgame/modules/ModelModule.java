@@ -24,6 +24,7 @@ public class ModelModule {
         character.setName("Sophie");
         character.setHp(9999);
         character.setMp(999);
+        character.setActionSpeed(40);
         return character;
     }
 
@@ -36,6 +37,7 @@ public class ModelModule {
         character.setName("Le poto");
         character.setHp(9999);
         character.setMp(999);
+        character.setActionSpeed(20);
         return character;
     }
 

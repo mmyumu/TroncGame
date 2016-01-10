@@ -194,6 +194,7 @@ public class OverworldScreen extends ScreenAdapter {
     }
 
     public void startFight() {
+        mainCharacter.setMoveTarget(null);
         Gdx.input.setInputProcessor(null);
         troncGame.setScreen(troncGame.getFightComponent().createFightLoadingScreen());
     }
