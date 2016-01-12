@@ -1,12 +1,19 @@
 package fr.mmyumu.troncgame.fight;
 
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ScalingViewport;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.inject.Inject;
 import javax.inject.Named;
+
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.fadeOut;
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.moveTo;
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.run;
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.sequence;
 
 
 /**
@@ -15,37 +22,68 @@ import javax.inject.Named;
  */
 public class FightPopUpMenu extends Stage {
     private FightCharacter fightCharacter;
+    private List<FightPopUpMenuIcon> fightPopMenuIcons;
+
+    private FightPopUpMenuNotReady fightPopUpMenuNotReady;
 
     @Inject
-    public FightPopUpMenu(ScalingViewport viewport, @Named("spells") FightPopUpMenuIcon fightPopUpMenuSpellsIcon, @Named("weapons") FightPopUpMenuIcon fightPopUpMenuWeaponsIcon) {
+    public FightPopUpMenu(ScalingViewport viewport, FightPopUpMenuNotReady fightPopUpMenuNotReady, @Named("spells") FightPopUpMenuIcon fightPopUpMenuSpellsIcon, @Named("weapons") FightPopUpMenuIcon fightPopUpMenuWeaponsIcon) {
         super(viewport);
 
-        addActor(fightPopUpMenuSpellsIcon);
-        addActor(fightPopUpMenuWeaponsIcon);
+        fightPopMenuIcons = new ArrayList<FightPopUpMenuIcon>();
+        fightPopMenuIcons.add(fightPopUpMenuSpellsIcon);
+        fightPopMenuIcons.add(fightPopUpMenuWeaponsIcon);
+
+        this.fightPopUpMenuNotReady = fightPopUpMenuNotReady;
+
+        addActors();
     }
 
-    @Override
-    public void draw() {
-        super.draw();
+    private void addActors() {
+        for (FightPopUpMenuIcon fightPopUpMenuIcon : fightPopMenuIcons) {
+            addActor(fightPopUpMenuIcon);
+        }
+        addActor(fightPopUpMenuNotReady);
     }
 
     public void characterTouched(FightCharacter touchedCharacter, Vector2 touchCoords) {
         if (fightCharacter == touchedCharacter) {
-            for (Actor actor : getActors()) {
-                if (actor instanceof FightPopUpMenuIcon) {
-                    FightPopUpMenuIcon fightPopUpMenuIcon = (FightPopUpMenuIcon) actor;
-                    fightCharacter = null;
-                    fightPopUpMenuIcon.hide();
-                }
-            }
+            retouchCharacter();
         } else {
-            for (Actor actor : getActors()) {
-                if (actor instanceof FightPopUpMenuIcon) {
-                    FightPopUpMenuIcon fightPopUpMenuIcon = (FightPopUpMenuIcon) actor;
-                    fightCharacter = touchedCharacter;
-                    fightPopUpMenuIcon.display(touchCoords);
-                }
-            }
+            touchCharacter(touchedCharacter, touchCoords);
+        }
+    }
+
+    private void retouchCharacter() {
+        for (FightPopUpMenuIcon fightPopUpMenuIcon : fightPopMenuIcons) {
+            fightCharacter = null;
+            fightPopUpMenuIcon.hide();
+        }
+    }
+
+    private void touchCharacter(FightCharacter touchedCharacter, Vector2 touchCoords) {
+        if (touchedCharacter.isReady()) {
+            displayMenu(touchedCharacter, touchCoords);
+        } else {
+            displayNotReady(touchCoords);
+        }
+    }
+
+    private void displayNotReady(Vector2 touchCoords) {
+        fightCharacter = null;
+        fightPopUpMenuNotReady.display(touchCoords);
+
+        for (FightPopUpMenuIcon fightPopUpMenuIcon : fightPopMenuIcons) {
+            fightPopUpMenuIcon.hide();
+        }
+    }
+
+    private void displayMenu(FightCharacter touchedCharacter, Vector2 touchCoords) {
+        fightCharacter = touchedCharacter;
+        fightPopUpMenuNotReady.hide();
+
+        for (FightPopUpMenuIcon fightPopUpMenuIcon : fightPopMenuIcons) {
+            fightPopUpMenuIcon.display(touchCoords);
         }
     }
 }

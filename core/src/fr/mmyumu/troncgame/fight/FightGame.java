@@ -1,7 +1,10 @@
 package fr.mmyumu.troncgame.fight;
 
+import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ScalingViewport;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -11,11 +14,12 @@ import javax.inject.Inject;
  */
 public class FightGame extends Stage {
     @Inject
-    public FightGame(ScalingViewport viewport, FightBackground fightBackground, FightMainCharacter fightMainCharacter, FightSideKickCharacter fightSideKickCharacter) {
+    public FightGame(ScalingViewport viewport, AssetManager assetManager, FightBackground fightBackground, List<FightCharacter> fightTeam) {
         super(viewport);
 
         addActor(fightBackground);
-        addActor(fightMainCharacter);
-        addActor(fightSideKickCharacter);
+        for (FightCharacter fightCharacter : fightTeam) {
+            addActor(fightCharacter);
+        }
     }
 }
