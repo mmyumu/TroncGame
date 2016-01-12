@@ -37,4 +37,8 @@ public class FightCharacterLogic extends Actor {
             actionValue = FightConstants.MainInfos.MAX_ACTION_VALUE;
         }
     }
+
+    public boolean isReady() {
+        return actionValue == FightConstants.MainInfos.MAX_ACTION_VALUE;
+    }
 }

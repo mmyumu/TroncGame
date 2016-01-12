@@ -3,6 +3,7 @@ package fr.mmyumu.troncgame.modules;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.I18NBundle;
 import com.badlogic.gdx.utils.Scaling;
@@ -25,6 +26,7 @@ import fr.mmyumu.troncgame.fight.FightConstants;
 import fr.mmyumu.troncgame.fight.FightGame;
 import fr.mmyumu.troncgame.fight.FightLoadingScreen;
 import fr.mmyumu.troncgame.fight.FightPopUpMenuIcon;
+import fr.mmyumu.troncgame.fight.FightPopUpMenuNotReady;
 import fr.mmyumu.troncgame.fight.FightScreen;
 import fr.mmyumu.troncgame.fight.ui.FightMainInfos;
 import fr.mmyumu.troncgame.fight.ui.FightUI;
@@ -81,6 +83,12 @@ public class FightModule {
     @Named("weapons")
     FightPopUpMenuIcon provideFightPopUpMenuWeaponsIcon(AssetManager assetManager) {
         return new FightPopUpMenuIcon(FightConstants.TexturePath.WEAPONS_ICON, CompassPoint.SOUTH, assetManager);
+    }
+
+    @Provides
+    @ActivityScope
+    FightPopUpMenuNotReady provideFightPopUpMenuNotReady(I18NBundle bundle, @Named("pressStart2P-normalSize") BitmapFont font) {
+        return new FightPopUpMenuNotReady(bundle, font);
     }
 
     @Provides
