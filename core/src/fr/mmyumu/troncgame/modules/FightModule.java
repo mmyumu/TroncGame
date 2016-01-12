@@ -87,8 +87,8 @@ public class FightModule {
 
     @Provides
     @ActivityScope
-    FightPopUpMenuNotReady provideFightPopUpMenuNotReady(I18NBundle bundle, @Named("pressStart2P-normalSize") BitmapFont font) {
-        return new FightPopUpMenuNotReady(bundle, font);
+    FightPopUpMenuNotReady provideFightPopUpMenuNotReady(I18NBundle bundle, Skin skin) {
+        return new FightPopUpMenuNotReady(bundle, skin);
     }
 
     @Provides

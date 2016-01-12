@@ -10,6 +10,11 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.fadeOut;
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.moveTo;
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.run;
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.sequence;
+
 
 /**
  * Stage to display the actors of the pop-up menu
@@ -39,11 +44,6 @@ public class FightPopUpMenu extends Stage {
             addActor(fightPopUpMenuIcon);
         }
         addActor(fightPopUpMenuNotReady);
-    }
-
-    @Override
-    public void draw() {
-        super.draw();
     }
 
     public void characterTouched(FightCharacter touchedCharacter, Vector2 touchCoords) {
