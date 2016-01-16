@@ -6,8 +6,8 @@ package fr.mmyumu.troncgame.model;
  */
 public class GameCharacter {
     private String name;
-    private Integer hp;
-    private Integer mp;
+    private int hp;
+    private int mp;
     private double actionSpeed;
 
     private String fightTexturePath;
@@ -20,19 +20,19 @@ public class GameCharacter {
         this.name = name;
     }
 
-    public Integer getHp() {
+    public int getHp() {
         return hp;
     }
 
-    public void setHp(Integer hp) {
+    public void setHp(int hp) {
         this.hp = hp;
     }
 
-    public Integer getMp() {
+    public int getMp() {
         return mp;
     }
 
-    public void setMp(Integer mp) {
+    public void setMp(int mp) {
         this.mp = mp;
     }
 
