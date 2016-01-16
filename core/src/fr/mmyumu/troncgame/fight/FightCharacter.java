@@ -11,15 +11,21 @@ import fr.mmyumu.troncgame.model.GameCharacter;
  */
 public class FightCharacter extends FightCharacterLogic {
     private Texture texture;
+    private boolean hasFightPopUpMenu;
 
-    public FightCharacter(int x, int y, GameCharacter character, Texture texture) {
+    public FightCharacter(int x, int y, GameCharacter character, Texture texture, boolean hasFightPopUpMenu) {
         super(x, y, character);
         this.texture = texture;
+        this.hasFightPopUpMenu = hasFightPopUpMenu;
     }
 
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
         batch.draw(texture, getX(), getY(), FightConstants.CHARACTER_WIDTH, FightConstants.CHARACTER_HEIGHT);
+    }
+
+    public boolean hasFightPopUpMenu() {
+        return hasFightPopUpMenu;
     }
 }

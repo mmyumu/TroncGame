@@ -5,16 +5,13 @@ import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.utils.Scaling;
 import com.badlogic.gdx.utils.viewport.ScalingViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
 import javax.inject.Inject;
 
-import fr.mmyumu.troncgame.Constants;
 import fr.mmyumu.troncgame.TroncGame;
 import fr.mmyumu.troncgame.audio.Musical;
 import fr.mmyumu.troncgame.fight.ui.FightUI;
@@ -30,24 +27,26 @@ public class FightScreen extends ScreenAdapter implements Musical {
     private final AssetManager assetManager;
     private final Viewport viewport;
 
-    private FightGame fightGame;
-    private FightPopUpMenu fightPopUpMenu;
-    private FightUI fightUI;
+    private final FightGame fightGame;
+    private final FightPopUpMenu fightPopUpMenu;
+    private final FightUI fightUI;
 
     private Music firstChipTune;
 
     @Inject
-    public FightScreen(TroncGame troncGame, AssetManager assetManager, ScalingViewport viewport) {
+    public FightScreen(TroncGame troncGame, AssetManager assetManager, ScalingViewport viewport, FightGame fightGame, FightPopUpMenu fightPopUpMenu, FightUI fightUI) {
         this.troncGame = troncGame;
         this.assetManager = assetManager;
         this.viewport = viewport;
+        this.fightGame = fightGame;
+        this.fightPopUpMenu = fightPopUpMenu;
+        this.fightUI = fightUI;
     }
 
     @Override
     public void show() {
         Gdx.app.debug(TAG, "Showing Fight");
 
-        initStages();
         initMusic();
         initInputProcessors();
     }
@@ -56,12 +55,6 @@ public class FightScreen extends ScreenAdapter implements Musical {
         firstChipTune = assetManager.get(FightConstants.MusicPath.FIRST_CHIPTUNE, Music.class);
         firstChipTune.setLooping(true);
         firstChipTune.play();
-    }
-
-    private void initStages() {
-        fightGame = troncGame.getFightComponent().createFightGame();
-        fightPopUpMenu = troncGame.getFightComponent().createFightPopUpMenu();
-        fightUI = troncGame.getFightComponent().createFightUI();
     }
 
     /**

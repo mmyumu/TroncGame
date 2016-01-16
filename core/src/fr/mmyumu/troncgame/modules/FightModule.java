@@ -3,7 +3,6 @@ package fr.mmyumu.troncgame.modules;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.I18NBundle;
 import com.badlogic.gdx.utils.Scaling;
@@ -25,9 +24,11 @@ import fr.mmyumu.troncgame.fight.FightCharacter;
 import fr.mmyumu.troncgame.fight.FightConstants;
 import fr.mmyumu.troncgame.fight.FightGame;
 import fr.mmyumu.troncgame.fight.FightLoadingScreen;
+import fr.mmyumu.troncgame.fight.FightPopUpMenu;
 import fr.mmyumu.troncgame.fight.FightPopUpMenuIcon;
 import fr.mmyumu.troncgame.fight.FightPopUpMenuNotReady;
 import fr.mmyumu.troncgame.fight.FightScreen;
+import fr.mmyumu.troncgame.fight.enemy.EnemyFightTeamGenerator;
 import fr.mmyumu.troncgame.fight.ui.FightMainInfos;
 import fr.mmyumu.troncgame.fight.ui.FightUI;
 import fr.mmyumu.troncgame.model.GameCharacter;
@@ -61,8 +62,8 @@ public class FightModule {
 
     @Provides
     @ActivityScope
-    FightScreen provideFightScreen(TroncGame troncGame, AssetManager assetManager, ScalingViewport viewport) {
-        return new FightScreen(troncGame, assetManager, viewport);
+    FightScreen provideFightScreen(TroncGame troncGame, AssetManager assetManager, ScalingViewport viewport, FightGame fightGame, FightPopUpMenu fightPopUpMenu, FightUI fightUI) {
+        return new FightScreen(troncGame, assetManager, viewport, fightGame, fightPopUpMenu, fightUI);
     }
 
     @Provides
@@ -99,8 +100,8 @@ public class FightModule {
 
     @Provides
     @ActivityScope
-    FightGame provideFightGame(ScalingViewport viewport, AssetManager assetManager, FightBackground fightBackground, List<FightCharacter> fightTeam) {
-        return new FightGame(viewport, assetManager, fightBackground, fightTeam);
+    FightGame provideFightGame(ScalingViewport viewport, FightBackground fightBackground, List<FightCharacter> fightTeam, EnemyFightTeamGenerator enemyFightTeamGenerator) {
+        return new FightGame(viewport, fightBackground, fightTeam, enemyFightTeamGenerator);
     }
 
     @Provides
@@ -115,11 +116,18 @@ public class FightModule {
         List<FightCharacter> fightTeam = new ArrayList<FightCharacter>();
         int i = 0;
         for (GameCharacter character : team.getCharacters()) {
-            FightCharacter fightCharacter = new FightCharacter(100, FightConstants.MAIN_INFOS_HEIGHT + 20 + 200 * i, character, assetManager.get(character.getFightTexturePath(), Texture.class));
+            FightCharacter fightCharacter = new FightCharacter(100, FightConstants.MAIN_INFOS_HEIGHT + 20 + 200 * i, character, assetManager.get(character.getFightTexturePath(), Texture.class), true);
             fightTeam.add(fightCharacter);
             i++;
         }
 
         return fightTeam;
+    }
+
+
+    @Provides
+    @ActivityScope
+    EnemyFightTeamGenerator provideEnemyFightTeamGenerator(AssetManager assetManager, @Named("main") GameCharacter mainCharacter) {
+        return new EnemyFightTeamGenerator(assetManager, mainCharacter);
     }
 }
