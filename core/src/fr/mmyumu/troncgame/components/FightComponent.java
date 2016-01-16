@@ -25,10 +25,4 @@ public interface FightComponent {
     FightScreen createFightScreen();
 
     FightGameInputProcessor createFightGameInputProcessor();
-
-    FightGame createFightGame();
-
-    FightPopUpMenu createFightPopUpMenu();
-
-    FightUI createFightUI();
 }

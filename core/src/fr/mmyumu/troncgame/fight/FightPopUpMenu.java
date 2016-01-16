@@ -47,10 +47,12 @@ public class FightPopUpMenu extends Stage {
     }
 
     public void characterTouched(FightCharacter touchedCharacter, Vector2 touchCoords) {
-        if (fightCharacter == touchedCharacter) {
-            retouchCharacter();
-        } else {
-            touchCharacter(touchedCharacter, touchCoords);
+        if(touchedCharacter.hasFightPopUpMenu()) {
+            if (fightCharacter == touchedCharacter) {
+                retouchCharacter();
+            } else {
+                touchCharacter(touchedCharacter, touchCoords);
+            }
         }
     }
 
