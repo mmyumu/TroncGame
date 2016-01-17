@@ -31,6 +31,8 @@ public class FightScreen extends ScreenAdapter implements Musical {
     private final FightPopUpMenu fightPopUpMenu;
     private final FightUI fightUI;
 
+    private CursorState cursorState;
+
     private Music firstChipTune;
 
     @Inject
@@ -41,6 +43,8 @@ public class FightScreen extends ScreenAdapter implements Musical {
         this.fightGame = fightGame;
         this.fightPopUpMenu = fightPopUpMenu;
         this.fightUI = fightUI;
+
+        cursorState = CursorState.NOTHING_SELECTED;
     }
 
     @Override
@@ -77,9 +81,13 @@ public class FightScreen extends ScreenAdapter implements Musical {
     }
 
     private void update(float delta) {
-        fightGame.act(delta);
-        fightUI.act(delta);
-        fightPopUpMenu.act(delta);
+        if (fightGame.isEnded()) {
+            troncGame.setScreen(troncGame.getOverworldComponent().createOverworldLoadingScreen());
+        } else {
+            fightGame.act(delta);
+            fightUI.act(delta);
+            fightPopUpMenu.act(delta);
+        }
     }
 
     private void draw() {
@@ -114,16 +122,37 @@ public class FightScreen extends ScreenAdapter implements Musical {
         Actor hitIcon = fightPopUpMenu.hit(touchCoords.x, touchCoords.y, true);
         if (hitIcon != null && hitIcon instanceof FightPopUpMenuIcon) {
             Gdx.app.debug(TAG, "Icon touched !");
+
+            FightPopUpMenuIcon fightPopUpMenuIcon = (FightPopUpMenuIcon) hitIcon;
+            boolean actionSelected = fightPopUpMenu.iconTouched(fightPopUpMenuIcon, touchCoords);
+            if (actionSelected) {
+                cursorState = CursorState.ACTION_SELECTED;
+            }
         } else {
             Actor hitCharacter = fightGame.hit(touchCoords.x, touchCoords.y, true);
             if (hitCharacter != null && hitCharacter instanceof FightCharacter) {
                 Gdx.app.debug(TAG, "Fight character touched !");
 
                 FightCharacter fightCharacter = (FightCharacter) hitCharacter;
-                fightPopUpMenu.characterTouched(fightCharacter, touchCoords);
+
+                if (cursorState == CursorState.ACTION_SELECTED) {
+                    Gdx.app.debug(TAG, "Action !!");
+                    fightPopUpMenu.getSelectedCharacter().attack(fightCharacter);
+                    fightPopUpMenu.reset();
+                    cursorState = CursorState.NOTHING_SELECTED;
+                } else {
+                    boolean characterSelected = fightPopUpMenu.characterTouched(fightCharacter, touchCoords);
+                    if (characterSelected) {
+                        cursorState = CursorState.CHARACTER_SELECTED;
+                    }
+                }
             }
         }
 
         return false;
+    }
+
+    private enum CursorState {
+        NOTHING_SELECTED, CHARACTER_SELECTED, ACTION_SELECTED
     }
 }
