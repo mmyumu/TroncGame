@@ -14,6 +14,8 @@ import fr.mmyumu.troncgame.fight.enemy.EnemyFightTeamGenerator;
  * Created by mmyumu on 30/11/2015.
  */
 public class FightGame extends Stage {
+    private final List<FightCharacter> enemyFightTeam;
+
     @Inject
     public FightGame(ScalingViewport viewport, FightBackground fightBackground, List<FightCharacter> fightTeam, EnemyFightTeamGenerator enemyFightTeamGenerator) {
         super(viewport);
@@ -23,9 +25,18 @@ public class FightGame extends Stage {
             addActor(fightCharacter);
         }
 
-        List<FightCharacter> enemyFightTeam = enemyFightTeamGenerator.generate();
+        enemyFightTeam = enemyFightTeamGenerator.generate();
         for(FightCharacter enemyCharacter : enemyFightTeam) {
             addActor(enemyCharacter);
         }
+    }
+
+    public boolean isEnded() {
+        for (FightCharacter enemy : enemyFightTeam) {
+            if(enemy.getCharacter().isAlive()) {
+                return false;
+            }
+        }
+        return true;
     }
 }
