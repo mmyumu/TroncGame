@@ -9,6 +9,7 @@ public class GameCharacter {
     private int hp;
     private int mp;
     private double actionSpeed;
+    private int attack;
 
     private String fightTexturePath;
 
@@ -44,11 +45,27 @@ public class GameCharacter {
         this.actionSpeed = actionSpeed;
     }
 
+    public int getAttack() {
+        return attack;
+    }
+
+    public void setAttack(int attack) {
+        this.attack = attack;
+    }
+
     public String getFightTexturePath() {
         return fightTexturePath;
     }
 
     public void setFightTexturePath(String fightTexturePath) {
         this.fightTexturePath = fightTexturePath;
+    }
+
+    public void attack(GameCharacter character) {
+        character.setHp(character.getHp() - attack);
+    }
+
+    public boolean isAlive() {
+        return hp > 0;
     }
 }
