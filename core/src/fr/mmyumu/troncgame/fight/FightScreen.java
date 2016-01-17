@@ -82,6 +82,7 @@ public class FightScreen extends ScreenAdapter implements Musical {
 
     private void update(float delta) {
         if (fightGame.isEnded()) {
+            stopPlaying();
             troncGame.setScreen(troncGame.getOverworldComponent().createOverworldLoadingScreen());
         } else {
             fightGame.act(delta);
