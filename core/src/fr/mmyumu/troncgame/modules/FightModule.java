@@ -76,14 +76,14 @@ public class FightModule {
     @ActivityScope
     @Named("spells")
     FightPopUpMenuIcon provideFightPopUpMenuSpellIcon(AssetManager assetManager) {
-        return new FightPopUpMenuIcon(FightConstants.TexturePath.SPELLS_ICON, CompassPoint.NORTH, assetManager);
+        return new FightPopUpMenuIcon(FightConstants.TexturePath.SPELLS_ICON, CompassPoint.NORTH, assetManager, false);
     }
 
     @Provides
     @ActivityScope
     @Named("weapons")
     FightPopUpMenuIcon provideFightPopUpMenuWeaponsIcon(AssetManager assetManager) {
-        return new FightPopUpMenuIcon(FightConstants.TexturePath.WEAPONS_ICON, CompassPoint.SOUTH, assetManager);
+        return new FightPopUpMenuIcon(FightConstants.TexturePath.WEAPONS_ICON, CompassPoint.SOUTH, assetManager, true);
     }
 
     @Provides

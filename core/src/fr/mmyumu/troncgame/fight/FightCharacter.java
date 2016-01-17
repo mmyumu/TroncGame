@@ -22,7 +22,9 @@ public class FightCharacter extends FightCharacterLogic {
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
-        batch.draw(texture, getX(), getY(), FightConstants.CHARACTER_WIDTH, FightConstants.CHARACTER_HEIGHT);
+        if(getCharacter().getHp() > 0) {
+            batch.draw(texture, getX(), getY(), FightConstants.CHARACTER_WIDTH, FightConstants.CHARACTER_HEIGHT);
+        }
     }
 
     public boolean hasFightPopUpMenu() {

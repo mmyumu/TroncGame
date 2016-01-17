@@ -41,4 +41,9 @@ public class FightCharacterLogic extends Actor {
     public boolean isReady() {
         return actionValue == FightConstants.MainInfos.MAX_ACTION_VALUE;
     }
+
+    public void attack(FightCharacter targetCharacter) {
+        getCharacter().attack(targetCharacter.getCharacter());
+        actionValue = 0;
+    }
 }
