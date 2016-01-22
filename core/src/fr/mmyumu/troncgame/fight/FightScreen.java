@@ -31,20 +31,19 @@ public class FightScreen extends ScreenAdapter implements Musical {
     private final FightPopUpMenu fightPopUpMenu;
     private final FightUI fightUI;
 
-    private CursorState cursorState;
+    private final FightLogic fightLogic;
 
     private Music firstChipTune;
 
     @Inject
-    public FightScreen(TroncGame troncGame, AssetManager assetManager, ScalingViewport viewport, FightGame fightGame, FightPopUpMenu fightPopUpMenu, FightUI fightUI) {
+    public FightScreen(TroncGame troncGame, AssetManager assetManager, ScalingViewport viewport, FightGame fightGame, FightPopUpMenu fightPopUpMenu, FightUI fightUI, FightLogic fightLogic) {
         this.troncGame = troncGame;
         this.assetManager = assetManager;
         this.viewport = viewport;
         this.fightGame = fightGame;
         this.fightPopUpMenu = fightPopUpMenu;
         this.fightUI = fightUI;
-
-        cursorState = CursorState.NOTHING_SELECTED;
+        this.fightLogic = fightLogic;
     }
 
     @Override
@@ -81,7 +80,7 @@ public class FightScreen extends ScreenAdapter implements Musical {
     }
 
     private void update(float delta) {
-        if (fightGame.isEnded()) {
+        if (fightLogic.isEnded()) {
             stopPlaying();
             troncGame.setScreen(troncGame.getOverworldComponent().createOverworldLoadingScreen());
         } else {
@@ -122,38 +121,18 @@ public class FightScreen extends ScreenAdapter implements Musical {
 
         Actor hitIcon = fightPopUpMenu.hit(touchCoords.x, touchCoords.y, true);
         if (hitIcon != null && hitIcon instanceof FightPopUpMenuIcon) {
-            Gdx.app.debug(TAG, "Icon touched !");
-
-            FightPopUpMenuIcon fightPopUpMenuIcon = (FightPopUpMenuIcon) hitIcon;
-            boolean actionSelected = fightPopUpMenu.iconTouched(fightPopUpMenuIcon, touchCoords);
-            if (actionSelected) {
-                cursorState = CursorState.ACTION_SELECTED;
-            }
+            FightPopUpMenuIcon touchedIcon = (FightPopUpMenuIcon) hitIcon;
+            fightLogic.iconTouched(touchedIcon);
         } else {
             Actor hitCharacter = fightGame.hit(touchCoords.x, touchCoords.y, true);
             if (hitCharacter != null && hitCharacter instanceof FightCharacter) {
-                Gdx.app.debug(TAG, "Fight character touched !");
-
-                FightCharacter fightCharacter = (FightCharacter) hitCharacter;
-
-                if (cursorState == CursorState.ACTION_SELECTED) {
-                    Gdx.app.debug(TAG, "Action !!");
-                    fightPopUpMenu.getSelectedCharacter().attack(fightCharacter);
-                    fightPopUpMenu.reset();
-                    cursorState = CursorState.NOTHING_SELECTED;
-                } else {
-                    boolean characterSelected = fightPopUpMenu.characterTouched(fightCharacter, touchCoords);
-                    if (characterSelected) {
-                        cursorState = CursorState.CHARACTER_SELECTED;
-                    }
-                }
+                FightCharacter touchedCharacter = (FightCharacter) hitCharacter;
+                fightLogic.characterTouched(touchedCharacter);
             }
         }
 
         return false;
     }
 
-    private enum CursorState {
-        NOTHING_SELECTED, CHARACTER_SELECTED, ACTION_SELECTED
-    }
+
 }
