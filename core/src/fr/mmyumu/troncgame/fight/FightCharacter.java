@@ -17,12 +17,14 @@ public class FightCharacter extends FightCharacterLogic {
         super(x, y, character);
         this.texture = texture;
         this.hasFightPopUpMenu = hasFightPopUpMenu;
+
+        setName(character.getName());
     }
 
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
-        if(getCharacter().getHp() > 0) {
+        if (getCharacter().getHp() > 0) {
             batch.draw(texture, getX(), getY(), FightConstants.CHARACTER_WIDTH, FightConstants.CHARACTER_HEIGHT);
         }
     }
