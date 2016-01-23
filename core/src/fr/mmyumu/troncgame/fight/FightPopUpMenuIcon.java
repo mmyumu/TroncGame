@@ -13,7 +13,6 @@ import fr.mmyumu.troncgame.CompassPoint;
 public class FightPopUpMenuIcon extends FightPopUpMenuElement {
     private static final float RADIUS = 200f;
 
-    private final String texturePath;
     private final Texture texture;
 
     private final boolean action;
@@ -23,10 +22,10 @@ public class FightPopUpMenuIcon extends FightPopUpMenuElement {
 
     public FightPopUpMenuIcon(String texturePath, CompassPoint compassPoint, AssetManager assetManager, boolean action) {
         super(compassPoint);
-        this.texturePath = texturePath;
         this.texture = assetManager.get(texturePath, Texture.class);
         this.action = action;
         alpha = 1f;
+        setName(texturePath);
     }
 
     @Override
