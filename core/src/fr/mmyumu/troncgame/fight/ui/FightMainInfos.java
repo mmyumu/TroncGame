@@ -9,12 +9,11 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.I18NBundle;
 
-import java.util.List;
-
 import javax.inject.Inject;
 
 import fr.mmyumu.troncgame.fight.FightCharacter;
 import fr.mmyumu.troncgame.fight.FightConstants;
+import fr.mmyumu.troncgame.fight.FightLogic;
 
 /**
  * Display the main infos in the Fight Screen
@@ -24,14 +23,14 @@ public class FightMainInfos extends Table {
     private final I18NBundle bundle;
     private final AssetManager assetManager;
     private final Skin skin;
-    private final List<FightCharacter> fightTeam;
+    private final FightLogic fightLogic;
 
     @Inject
-    public FightMainInfos(I18NBundle bundle, AssetManager assetManager, Skin skin, List<FightCharacter> fightTeam) {
+    public FightMainInfos(I18NBundle bundle, AssetManager assetManager, Skin skin, FightLogic fightLogic) {
         this.bundle = bundle;
         this.assetManager = assetManager;
         this.skin = skin;
-        this.fightTeam = fightTeam;
+        this.fightLogic = fightLogic;
 
         initTable();
         initTableLabels();
@@ -53,7 +52,7 @@ public class FightMainInfos extends Table {
         row().height(10);
         add(new Label("", skin)).height(10);
 
-        for (FightCharacter character : fightTeam) {
+        for (FightCharacter character : fightLogic.getFightTeam()) {
 //            row().height(10);
 //            add(new Label("", skin)).height(10);
             row().height(FightConstants.MainInfos.ROW_HEIGHT);

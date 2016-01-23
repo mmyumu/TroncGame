@@ -1,5 +1,6 @@
 package fr.mmyumu.troncgame.fight;
 
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
 import fr.mmyumu.troncgame.model.GameCharacter;
@@ -45,5 +46,11 @@ public class FightCharacterLogic extends Actor {
     public void attack(FightCharacter targetCharacter) {
         getCharacter().attack(targetCharacter.getCharacter());
         actionValue = 0;
+    }
+
+    public Vector2 getCenter() {
+        float x = getX() + getWidth() / 2;
+        float y = getY() + getHeight() / 2;
+        return new Vector2(x, y);
     }
 }
