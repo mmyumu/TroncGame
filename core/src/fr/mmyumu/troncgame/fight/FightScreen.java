@@ -14,6 +14,8 @@ import javax.inject.Inject;
 
 import fr.mmyumu.troncgame.TroncGame;
 import fr.mmyumu.troncgame.audio.Musical;
+import fr.mmyumu.troncgame.fight.game.FightGame;
+import fr.mmyumu.troncgame.fight.popup.FightPopUpMenuIcon;
 import fr.mmyumu.troncgame.fight.ui.FightUI;
 
 /**
@@ -27,8 +29,8 @@ public class FightScreen extends ScreenAdapter implements Musical {
     private final AssetManager assetManager;
     private final Viewport viewport;
 
-    private final FightGame fightGame;
-    private final FightPopUpMenu fightPopUpMenu;
+    private final fr.mmyumu.troncgame.fight.game.FightGame fightGame;
+    private final fr.mmyumu.troncgame.fight.popup.FightPopUpMenu fightPopUpMenu;
     private final FightUI fightUI;
 
     private final FightLogic fightLogic;
@@ -36,7 +38,7 @@ public class FightScreen extends ScreenAdapter implements Musical {
     private Music firstChipTune;
 
     @Inject
-    public FightScreen(TroncGame troncGame, AssetManager assetManager, ScalingViewport viewport, FightGame fightGame, FightPopUpMenu fightPopUpMenu, FightUI fightUI, FightLogic fightLogic) {
+    public FightScreen(TroncGame troncGame, AssetManager assetManager, ScalingViewport viewport, FightGame fightGame, fr.mmyumu.troncgame.fight.popup.FightPopUpMenu fightPopUpMenu, FightUI fightUI, FightLogic fightLogic) {
         this.troncGame = troncGame;
         this.assetManager = assetManager;
         this.viewport = viewport;
@@ -65,7 +67,7 @@ public class FightScreen extends ScreenAdapter implements Musical {
      */
     private void initInputProcessors() {
         // TODO: add UI input processor
-        FightGameInputProcessor fightGameInputProcessor = troncGame.getFightComponent().createFightGameInputProcessor();
+        fr.mmyumu.troncgame.fight.game.FightGameInputProcessor fightGameInputProcessor = troncGame.getFightComponent().createFightGameInputProcessor();
 //        GestureDetector gestureDetector = new GestureDetector(fightGameInputProcessor);
         troncGame.setInputProcessors(fightGameInputProcessor);
     }
@@ -120,8 +122,8 @@ public class FightScreen extends ScreenAdapter implements Musical {
         Vector2 touchCoords = viewport.unproject(new Vector2(screenX, screenY));
 
         Actor hitIcon = fightPopUpMenu.hit(touchCoords.x, touchCoords.y, true);
-        if (hitIcon != null && hitIcon instanceof FightPopUpMenuIcon) {
-            FightPopUpMenuIcon touchedIcon = (FightPopUpMenuIcon) hitIcon;
+        if (hitIcon != null && hitIcon instanceof fr.mmyumu.troncgame.fight.popup.FightPopUpMenuIcon) {
+            fr.mmyumu.troncgame.fight.popup.FightPopUpMenuIcon touchedIcon = (FightPopUpMenuIcon) hitIcon;
             fightLogic.iconTouched(touchedIcon);
         } else {
             Actor hitCharacter = fightGame.hit(touchCoords.x, touchCoords.y, true);

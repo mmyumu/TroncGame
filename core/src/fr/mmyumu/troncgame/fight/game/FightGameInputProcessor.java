@@ -1,8 +1,10 @@
-package fr.mmyumu.troncgame.fight;
+package fr.mmyumu.troncgame.fight.game;
 
 import com.badlogic.gdx.InputAdapter;
 
 import javax.inject.Inject;
+
+import fr.mmyumu.troncgame.fight.FightScreen;
 
 /**
  * Manage the inputs for the game in the Fights
