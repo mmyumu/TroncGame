@@ -1,10 +1,11 @@
-package fr.mmyumu.troncgame.fight;
+package fr.mmyumu.troncgame.fight.popup;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
 import fr.mmyumu.troncgame.CompassPoint;
+import fr.mmyumu.troncgame.fight.FightConstants;
 
 /**
  * Element of the pop up menu in Fight (icons, not ready text)
