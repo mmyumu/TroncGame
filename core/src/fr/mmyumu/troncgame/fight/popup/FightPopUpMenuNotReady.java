@@ -1,4 +1,4 @@
-package fr.mmyumu.troncgame.fight;
+package fr.mmyumu.troncgame.fight.popup;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Vector2;

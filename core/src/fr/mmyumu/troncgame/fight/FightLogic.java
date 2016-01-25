@@ -10,6 +10,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import fr.mmyumu.troncgame.fight.enemy.EnemyFightTeamGenerator;
+import fr.mmyumu.troncgame.fight.popup.*;
 import fr.mmyumu.troncgame.model.GameCharacter;
 import fr.mmyumu.troncgame.model.Team;
 
@@ -26,7 +27,7 @@ public class FightLogic {
     private final FightPopUpMenuLogic popUpMenuLogic;
 
     private FightCharacter selectedCharacter;
-    private FightPopUpMenuIcon selectedIcon;
+    private fr.mmyumu.troncgame.fight.popup.FightPopUpMenuIcon selectedIcon;
     private FightCharacter targetCharacter;
 
     private List<FightCharacter> fightTeam;
@@ -63,7 +64,7 @@ public class FightLogic {
         return fightTeam;
     }
 
-    public void iconTouched(FightPopUpMenuIcon touchedIcon) {
+    public void iconTouched(fr.mmyumu.troncgame.fight.popup.FightPopUpMenuIcon touchedIcon) {
         Gdx.app.debug(TAG, "Icon touched [" + touchedIcon.getName() + "]");
         selectedIcon = touchedIcon;
 

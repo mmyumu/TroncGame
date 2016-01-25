@@ -1,9 +1,13 @@
-package fr.mmyumu.troncgame.fight;
+package fr.mmyumu.troncgame.fight.game;
 
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ScalingViewport;
 
 import javax.inject.Inject;
+
+import fr.mmyumu.troncgame.fight.FightBackground;
+import fr.mmyumu.troncgame.fight.FightCharacter;
+import fr.mmyumu.troncgame.fight.FightLogic;
 
 /**
  * Stage to display the game elements of the Fight

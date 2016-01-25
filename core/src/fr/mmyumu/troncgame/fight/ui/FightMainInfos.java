@@ -62,8 +62,8 @@ public class FightMainInfos extends Table {
 
     private void createLabel(FightCharacter fightCharacter) {
         Label nameLabel = new Label(fightCharacter.getCharacter().getName(), skin);
-        Label hpLabel = new Label(String.valueOf(fightCharacter.getCharacter().getHp()), skin);
-        Label mpLabel = new Label(String.valueOf(fightCharacter.getCharacter().getMp()), skin);
+        Label hpLabel = new FightHPLabel(fightCharacter, skin);
+        Label mpLabel = new FightMPLabel(fightCharacter, skin);
         FightActionBar fightActionBar = new FightActionBar(assetManager, fightCharacter);
 
         add(nameLabel).width(FightConstants.MainInfos.NAME_WIDTH).left();
