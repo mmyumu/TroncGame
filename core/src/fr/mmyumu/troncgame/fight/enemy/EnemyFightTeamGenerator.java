@@ -46,7 +46,7 @@ public class EnemyFightTeamGenerator {
         enemy.setHp(20);
         enemy.setMp(5);
         enemy.setActionSpeed(10);
-        enemy.setFightTexturePath(FightConstants.TexturePath.SIDEKICK_CHARACTER);
+        enemy.setFightTexturePath(FightConstants.TexturePath.ENEMY);
         return enemy;
     }
 }

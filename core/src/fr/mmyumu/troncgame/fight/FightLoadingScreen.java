@@ -37,6 +37,7 @@ public class FightLoadingScreen extends ScreenAdapter {
         assetManager.load(FightConstants.TexturePath.SIDEKICK_CHARACTER, Texture.class);
         assetManager.load(FightConstants.TexturePath.SPELLS_ICON, Texture.class);
         assetManager.load(FightConstants.TexturePath.WEAPONS_ICON, Texture.class);
+        assetManager.load(FightConstants.TexturePath.ENEMY, Texture.class);
 
         assetManager.load(FightConstants.TexturePath.MAIN_INFOS, Texture.class);
         assetManager.load(FightConstants.TexturePath.ACTION_BAR, Texture.class);

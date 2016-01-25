@@ -23,6 +23,7 @@ public interface FightConstants {
         String BACKGROUND_PLAIN = "data/fight/background_plain.png";
         String MAIN_CHARACTER = "data/fight/heroine_droite.png";
         String SIDEKICK_CHARACTER = "data/fight/compagnon_droite.png";
+        String ENEMY = "data/fight/ennemi_gauche.png";
         String SPELLS_ICON = "data/fight/spells.png";
         String WEAPONS_ICON = "data/fight/weapons.png";
         String MAIN_INFOS = "data/fight/main_infos.png";
