@@ -16,7 +16,7 @@ public interface OverworldConstants {
     }
 
     interface TexturePath {
-        String MAIN_CHARACTER = "data/overworld/character.png";
+        String MAIN_CHARACTER = "data/overworld/heroine_droite.png";
         String MENU_LIST = "data/overworld/menu_list.png";
     }
 
