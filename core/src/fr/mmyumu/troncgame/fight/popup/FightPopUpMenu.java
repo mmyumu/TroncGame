@@ -3,6 +3,8 @@ package fr.mmyumu.troncgame.fight.popup;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ScalingViewport;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 
@@ -11,17 +13,13 @@ import javax.inject.Inject;
  * Created by mmyumu on 08/12/2015.
  */
 public class FightPopUpMenu extends Stage {
-    private final FightPopUpMenuLogic fightPopUpMenuLogic;
-
     @Inject
-    public FightPopUpMenu(ScalingViewport viewport, FightPopUpMenuLogic fightPopUpMenuLogic) {
+    public FightPopUpMenu(ScalingViewport viewport) {
         super(viewport);
-        this.fightPopUpMenuLogic = fightPopUpMenuLogic;
-        addActors();
     }
 
-    private void addActors() {
-        for (FightPopUpMenuElement popUpMenuElement : fightPopUpMenuLogic.getActors()) {
+    public void initPopUpElements(List<FightPopUpMenuElement> elements) {
+        for (FightPopUpMenuElement popUpMenuElement : elements) {
             addActor(popUpMenuElement);
         }
     }

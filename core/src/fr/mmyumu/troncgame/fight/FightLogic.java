@@ -3,6 +3,8 @@ package fr.mmyumu.troncgame.fight;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.utils.I18NBundle;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +14,7 @@ import javax.inject.Inject;
 import fr.mmyumu.troncgame.fight.enemy.EnemyFightTeamGenerator;
 import fr.mmyumu.troncgame.fight.popup.FightPopUpMenuIcon;
 import fr.mmyumu.troncgame.fight.popup.FightPopUpMenuLogic;
+import fr.mmyumu.troncgame.fight.ui.FightMainInfos;
 import fr.mmyumu.troncgame.model.GameCharacter;
 import fr.mmyumu.troncgame.model.Team;
 
@@ -23,6 +26,8 @@ public class FightLogic {
     private static final String TAG = "FightLogic";
 
     private final AssetManager assetManager;
+    private final I18NBundle bundle;
+    private final Skin skin;
     private final Team team;
     private final EnemyFightTeamGenerator enemyFightTeamGenerator;
     private final FightPopUpMenuLogic popUpMenuLogic;
@@ -31,14 +36,19 @@ public class FightLogic {
     private FightPopUpMenuIcon selectedIcon;
     private FightCharacter targetCharacter;
 
+    private FightBackground fightBackground;
     private List<FightCharacter> fightTeam;
     private List<FightCharacter> enemyFightTeam;
+    private FightMainInfos fightMainInfos;
 
     private FightState fightState;
 
+
     @Inject
-    public FightLogic(AssetManager assetManager, Team team, EnemyFightTeamGenerator enemyFightTeamGenerator, FightPopUpMenuLogic popUpMenuLogic) {
+    public FightLogic(AssetManager assetManager, I18NBundle bundle, Skin skin, Team team, EnemyFightTeamGenerator enemyFightTeamGenerator, FightPopUpMenuLogic popUpMenuLogic) {
         this.assetManager = assetManager;
+        this.bundle = bundle;
+        this.skin = skin;
         this.team = team;
         this.enemyFightTeamGenerator = enemyFightTeamGenerator;
         this.popUpMenuLogic = popUpMenuLogic;
@@ -46,11 +56,15 @@ public class FightLogic {
         startNew();
     }
 
-    private void startNew() {
+    public void startNew() {
         resetCharacterSelection();
 
+        fightBackground = new FightBackground(assetManager);
         enemyFightTeam = enemyFightTeamGenerator.generate();
         fightTeam = createFightTeam();
+
+        fightMainInfos = new FightMainInfos(bundle, assetManager, skin);
+        fightMainInfos.initFightTeam(fightTeam);
     }
 
     private List<FightCharacter> createFightTeam() {
@@ -109,7 +123,7 @@ public class FightLogic {
     private void unselectCharacterIfAlreadySelected(FightCharacter touchedCharacter) {
         if (selectedCharacter.equals(touchedCharacter)) {
             popUpMenuLogic.unselectCharacter();
-            startNew();
+            resetCharacterSelection();
         }
     }
 
@@ -133,6 +147,10 @@ public class FightLogic {
         fightState = FightState.CHARACTER_SELECTED;
     }
 
+    public FightBackground getFightBackground() {
+        return fightBackground;
+    }
+
     public List<FightCharacter> getFightTeam() {
         return fightTeam;
     }
@@ -148,5 +166,13 @@ public class FightLogic {
             }
         }
         return true;
+    }
+
+    public FightPopUpMenuLogic getPopUpMenuLogic() {
+        return popUpMenuLogic;
+    }
+
+    public FightMainInfos getMainInfos() {
+        return fightMainInfos;
     }
 }

@@ -9,11 +9,12 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.I18NBundle;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import fr.mmyumu.troncgame.fight.FightCharacter;
 import fr.mmyumu.troncgame.fight.FightConstants;
-import fr.mmyumu.troncgame.fight.FightLogic;
 
 /**
  * Display the main infos in the Fight Screen
@@ -23,17 +24,18 @@ public class FightMainInfos extends Table {
     private final I18NBundle bundle;
     private final AssetManager assetManager;
     private final Skin skin;
-    private final FightLogic fightLogic;
 
     @Inject
-    public FightMainInfos(I18NBundle bundle, AssetManager assetManager, Skin skin, FightLogic fightLogic) {
+    public FightMainInfos(I18NBundle bundle, AssetManager assetManager, Skin skin) {
         this.bundle = bundle;
         this.assetManager = assetManager;
         this.skin = skin;
-        this.fightLogic = fightLogic;
 
         initTable();
-        initTableLabels();
+    }
+
+    public void initFightTeam(List<FightCharacter> fightTeam) {
+        initTableLabels(fightTeam);
     }
 
     private void initTable() {
@@ -46,15 +48,13 @@ public class FightMainInfos extends Table {
         pad(25);
     }
 
-    private void initTableLabels() {
+    private void initTableLabels(List<FightCharacter> fightTeam) {
         row().height(30);
         initHeaderRow();
         row().height(10);
         add(new Label("", skin)).height(10);
 
-        for (FightCharacter character : fightLogic.getFightTeam()) {
-//            row().height(10);
-//            add(new Label("", skin)).height(10);
+        for (FightCharacter character : fightTeam) {
             row().height(FightConstants.MainInfos.ROW_HEIGHT);
             createLabel(character);
         }

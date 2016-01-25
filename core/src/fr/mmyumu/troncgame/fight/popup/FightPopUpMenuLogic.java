@@ -8,7 +8,6 @@ import javax.inject.Named;
 
 import fr.mmyumu.troncgame.fight.FightCharacter;
 
-
 /**
  * Manage the logic of the pop up menu
  * Created by mmyumu on 22/01/2016.
@@ -26,7 +25,7 @@ public class FightPopUpMenuLogic {
         popMenuIcons.add(fightPopUpMenuWeaponsIcon);
     }
 
-    public List<FightPopUpMenuElement> getActors() {
+    public List<FightPopUpMenuElement> getPopUpMenuElements() {
         List<FightPopUpMenuElement> actors = new ArrayList<FightPopUpMenuElement>();
         for (FightPopUpMenuIcon popUpMenuIcon : popMenuIcons) {
             actors.add(popUpMenuIcon);

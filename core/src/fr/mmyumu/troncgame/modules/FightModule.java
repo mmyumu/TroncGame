@@ -15,17 +15,15 @@ import fr.mmyumu.troncgame.ActivityScope;
 import fr.mmyumu.troncgame.CompassPoint;
 import fr.mmyumu.troncgame.Constants;
 import fr.mmyumu.troncgame.TroncGame;
-import fr.mmyumu.troncgame.fight.FightBackground;
 import fr.mmyumu.troncgame.fight.FightConstants;
-import fr.mmyumu.troncgame.fight.game.FightGame;
 import fr.mmyumu.troncgame.fight.FightLoadingScreen;
 import fr.mmyumu.troncgame.fight.FightLogic;
-import fr.mmyumu.troncgame.fight.popup.FightPopUpMenu;
+import fr.mmyumu.troncgame.fight.FightScreen;
+import fr.mmyumu.troncgame.fight.enemy.EnemyFightTeamGenerator;
+import fr.mmyumu.troncgame.fight.game.FightGame;
 import fr.mmyumu.troncgame.fight.popup.FightPopUpMenuIcon;
 import fr.mmyumu.troncgame.fight.popup.FightPopUpMenuLogic;
 import fr.mmyumu.troncgame.fight.popup.FightPopUpMenuNotReady;
-import fr.mmyumu.troncgame.fight.FightScreen;
-import fr.mmyumu.troncgame.fight.enemy.EnemyFightTeamGenerator;
 import fr.mmyumu.troncgame.fight.ui.FightMainInfos;
 import fr.mmyumu.troncgame.fight.ui.FightUI;
 import fr.mmyumu.troncgame.model.GameCharacter;
@@ -58,15 +56,8 @@ public class FightModule {
     }
 
     @Provides
-    @ActivityScope
-    FightScreen provideFightScreen(TroncGame troncGame, AssetManager assetManager, ScalingViewport viewport, FightGame fightGame, FightPopUpMenu fightPopUpMenu, FightUI fightUI, FightLogic fightLogic) {
-        return new FightScreen(troncGame, assetManager, viewport, fightGame, fightPopUpMenu, fightUI, fightLogic);
-    }
-
-    @Provides
-    @ActivityScope
-    FightBackground provideFightBackground(AssetManager assetManager) {
-        return new FightBackground(assetManager);
+    FightScreen provideFightScreen(TroncGame troncGame, AssetManager assetManager, ScalingViewport viewport, FightLogic fightLogic) {
+        return new FightScreen(troncGame, assetManager, viewport, fightLogic);
     }
 
     @Provides
@@ -91,20 +82,20 @@ public class FightModule {
 
     @Provides
     @ActivityScope
-    FightMainInfos provideFightMainInfos(I18NBundle bundle, AssetManager assetManager, Skin skin, FightLogic fightLogic) {
-        return new FightMainInfos(bundle, assetManager, skin, fightLogic);
+    FightMainInfos provideFightMainInfos(I18NBundle bundle, AssetManager assetManager, Skin skin) {
+        return new FightMainInfos(bundle, assetManager, skin);
     }
 
     @Provides
     @ActivityScope
-    FightGame provideFightGame(ScalingViewport viewport, FightBackground fightBackground, FightLogic fightLogic) {
-        return new FightGame(viewport, fightBackground, fightLogic);
+    FightGame provideFightGame(ScalingViewport viewport) {
+        return new FightGame(viewport);
     }
 
     @Provides
     @ActivityScope
-    FightUI provideFightUI(ScalingViewport viewport, FightMainInfos fightMainInfos) {
-        return new FightUI(viewport, fightMainInfos);
+    FightUI provideFightUI(ScalingViewport viewport) {
+        return new FightUI(viewport);
     }
 
     @Provides
@@ -114,14 +105,12 @@ public class FightModule {
     }
 
     @Provides
-    @ActivityScope
     FightPopUpMenuLogic provideFightPopUpMenuLogic(FightPopUpMenuNotReady fightPopUpMenuNotReady, @Named("spells") FightPopUpMenuIcon fightPopUpMenuSpellsIcon, @Named("weapons") FightPopUpMenuIcon fightPopUpMenuWeaponsIcon) {
         return new FightPopUpMenuLogic(fightPopUpMenuNotReady, fightPopUpMenuSpellsIcon, fightPopUpMenuWeaponsIcon);
     }
 
     @Provides
-    @ActivityScope
-    FightLogic provideFightLogic(AssetManager assetManager, Team team, EnemyFightTeamGenerator enemyFightTeamGenerator, FightPopUpMenuLogic fightPopUpMenuLogic) {
-        return new FightLogic(assetManager, team, enemyFightTeamGenerator, fightPopUpMenuLogic);
+    FightLogic provideFightLogic(AssetManager assetManager, I18NBundle bundle, Skin skin, Team team, EnemyFightTeamGenerator enemyFightTeamGenerator, FightPopUpMenuLogic fightPopUpMenuLogic) {
+        return new FightLogic(assetManager, bundle, skin, team, enemyFightTeamGenerator, fightPopUpMenuLogic);
     }
 }
