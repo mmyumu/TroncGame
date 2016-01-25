@@ -3,11 +3,12 @@ package fr.mmyumu.troncgame.fight.game;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ScalingViewport;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import fr.mmyumu.troncgame.fight.FightBackground;
 import fr.mmyumu.troncgame.fight.FightCharacter;
-import fr.mmyumu.troncgame.fight.FightLogic;
 
 /**
  * Stage to display the game elements of the Fight
@@ -15,15 +16,22 @@ import fr.mmyumu.troncgame.fight.FightLogic;
  */
 public class FightGame extends Stage {
     @Inject
-    public FightGame(ScalingViewport viewport, FightBackground fightBackground, FightLogic fightLogic) {
+    public FightGame(ScalingViewport viewport) {
         super(viewport);
+    }
 
+    public void initBackground(FightBackground fightBackground) {
         addActor(fightBackground);
-        for (FightCharacter fightCharacter : fightLogic.getFightTeam()) {
+    }
+
+    public void initFightTeam(List<FightCharacter> fightTeam) {
+        for (FightCharacter fightCharacter : fightTeam) {
             addActor(fightCharacter);
         }
+    }
 
-        for (FightCharacter enemyCharacter : fightLogic.getEnemyFightTeam()) {
+    public void initEnemyTeam(List<FightCharacter> enemyTeam) {
+        for (FightCharacter enemyCharacter : enemyTeam) {
             addActor(enemyCharacter);
         }
     }

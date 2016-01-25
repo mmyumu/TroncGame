@@ -1,6 +1,7 @@
 package fr.mmyumu.troncgame.fight;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
@@ -15,7 +16,6 @@ import javax.inject.Inject;
 import fr.mmyumu.troncgame.TroncGame;
 import fr.mmyumu.troncgame.audio.Musical;
 import fr.mmyumu.troncgame.fight.game.FightGame;
-import fr.mmyumu.troncgame.fight.game.FightGameInputProcessor;
 import fr.mmyumu.troncgame.fight.popup.FightPopUpMenu;
 import fr.mmyumu.troncgame.fight.popup.FightPopUpMenuIcon;
 import fr.mmyumu.troncgame.fight.ui.FightUI;
@@ -24,7 +24,7 @@ import fr.mmyumu.troncgame.fight.ui.FightUI;
  * Screen to be displayed when fight is engaged
  * Created by mmyumu on 17/11/2015.
  */
-public class FightScreen extends ScreenAdapter implements Musical {
+public class FightScreen extends ScreenAdapter implements Musical, InputProcessor {
     private static final String TAG = "FightScreen";
 
     private final TroncGame troncGame;
@@ -40,14 +40,38 @@ public class FightScreen extends ScreenAdapter implements Musical {
     private Music firstChipTune;
 
     @Inject
-    public FightScreen(TroncGame troncGame, AssetManager assetManager, ScalingViewport viewport, FightGame fightGame, FightPopUpMenu fightPopUpMenu, FightUI fightUI, FightLogic fightLogic) {
+    public FightScreen(TroncGame troncGame, AssetManager assetManager, ScalingViewport viewport, FightLogic fightLogic) {
         this.troncGame = troncGame;
         this.assetManager = assetManager;
         this.viewport = viewport;
-        this.fightGame = fightGame;
-        this.fightPopUpMenu = fightPopUpMenu;
-        this.fightUI = fightUI;
         this.fightLogic = fightLogic;
+
+        fightGame = troncGame.getFightComponent().createFightGame();
+        fightUI = troncGame.getFightComponent().createFightUI();
+        fightPopUpMenu = new FightPopUpMenu(viewport);
+
+        initStages();
+    }
+
+    private void initStages() {
+        initGame();
+        initUI();
+        initFightPopUpMenu();
+    }
+
+
+    private void initGame() {
+        fightGame.initBackground(fightLogic.getFightBackground());
+        fightGame.initFightTeam(fightLogic.getFightTeam());
+        fightGame.initEnemyTeam(fightLogic.getEnemyFightTeam());
+    }
+
+    private void initUI() {
+        fightUI.initMainInfos(fightLogic.getMainInfos());
+    }
+
+    private void initFightPopUpMenu() {
+        fightPopUpMenu.initPopUpElements(fightLogic.getPopUpMenuLogic().getPopUpMenuElements());
     }
 
     @Override
@@ -69,9 +93,7 @@ public class FightScreen extends ScreenAdapter implements Musical {
      */
     private void initInputProcessors() {
         // TODO: add UI input processor
-        FightGameInputProcessor fightGameInputProcessor = troncGame.getFightComponent().createFightGameInputProcessor();
-//        GestureDetector gestureDetector = new GestureDetector(fightGameInputProcessor);
-        troncGame.setInputProcessors(fightGameInputProcessor);
+        troncGame.setInputProcessors(this);
     }
 
     @Override
@@ -120,6 +142,22 @@ public class FightScreen extends ScreenAdapter implements Musical {
         firstChipTune.stop();
     }
 
+    @Override
+    public boolean keyDown(int keycode) {
+        return false;
+    }
+
+    @Override
+    public boolean keyUp(int keycode) {
+        return false;
+    }
+
+    @Override
+    public boolean keyTyped(char character) {
+        return false;
+    }
+
+    @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
         Vector2 touchCoords = viewport.unproject(new Vector2(screenX, screenY));
 
@@ -138,5 +176,23 @@ public class FightScreen extends ScreenAdapter implements Musical {
         return false;
     }
 
+    @Override
+    public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+        return false;
+    }
 
+    @Override
+    public boolean touchDragged(int screenX, int screenY, int pointer) {
+        return false;
+    }
+
+    @Override
+    public boolean mouseMoved(int screenX, int screenY) {
+        return false;
+    }
+
+    @Override
+    public boolean scrolled(int amount) {
+        return false;
+    }
 }

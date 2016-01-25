@@ -2,9 +2,10 @@ package fr.mmyumu.troncgame.components;
 
 import dagger.Component;
 import fr.mmyumu.troncgame.ActivityScope;
-import fr.mmyumu.troncgame.fight.game.FightGameInputProcessor;
 import fr.mmyumu.troncgame.fight.FightLoadingScreen;
 import fr.mmyumu.troncgame.fight.FightScreen;
+import fr.mmyumu.troncgame.fight.game.FightGame;
+import fr.mmyumu.troncgame.fight.ui.FightUI;
 import fr.mmyumu.troncgame.modules.FightModule;
 
 /**
@@ -21,5 +22,7 @@ public interface FightComponent {
 
     FightScreen createFightScreen();
 
-    FightGameInputProcessor createFightGameInputProcessor();
+    FightGame createFightGame();
+
+    FightUI createFightUI();
 }
