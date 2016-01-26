@@ -49,6 +49,13 @@ public class OverworldScreen extends ScreenAdapter {
         this.gameViewport = gameViewport;
 
         initStages();
+
+        screenState = ScreenState.RUNNING;
+
+        OrthographicCamera gameCamera = (OrthographicCamera) gameViewport.getCamera();
+        map = new OverworldMap(OverworldConstants.MapPath.VILLAGE, gameCamera, assetManager);
+
+        mainCharacter = loadMainCharacter();
     }
 
     private void initStages() {
@@ -63,12 +70,6 @@ public class OverworldScreen extends ScreenAdapter {
     @Override
     public void show() {
         Gdx.app.debug(TAG, "Showing Overworld");
-
-        screenState = ScreenState.RUNNING;
-
-        OrthographicCamera gameCamera = (OrthographicCamera) gameViewport.getCamera();
-        map = new OverworldMap(OverworldConstants.MapPath.VILLAGE, gameCamera, assetManager);
-        mainCharacter = loadMainCharacter();
 
         initInputProcessors();
     }
@@ -164,12 +165,8 @@ public class OverworldScreen extends ScreenAdapter {
      * Load the character and add it to the gameStage
      */
     private OverworldCharacter loadMainCharacter() {
-        float centerX = OverworldConstants.TILE_WIDTH * 1.5f;
-        float centerY = OverworldConstants.TILE_HEIGHT * 1.5f;
-
-
         OverworldCharacter overworldCharacter = troncGame.getOverworldComponent().createOverworldCharacter();
-        overworldCharacter.initCenter((int) centerX, (int) centerY);
+//        overworldCharacter.initCenter((int) centerX, (int) centerY);
         overworldCharacter.setObstaclesLayer(map.getObstaclesLayer());
 
         return overworldCharacter;
