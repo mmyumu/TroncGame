@@ -106,7 +106,7 @@ public class FightLogic {
                 unselectCharacterIfAlreadySelected(touchedCharacter);
                 break;
             case ACTION_SELECTED:
-                doAction(touchedCharacter);
+                tryToTargetCharacter(touchedCharacter);
                 break;
         }
     }
@@ -124,6 +124,14 @@ public class FightLogic {
         if (selectedCharacter.equals(touchedCharacter)) {
             popUpMenuLogic.unselectCharacter();
             resetCharacterSelection();
+        }
+    }
+
+    private void tryToTargetCharacter(FightCharacter touchedCharacter) {
+        if(selectedCharacter.equals(touchedCharacter)) {
+            resetCharacterSelection();
+        } else if(!touchedCharacter.getCharacter().isFriendly()){
+            doAction(touchedCharacter);
         }
     }
 
