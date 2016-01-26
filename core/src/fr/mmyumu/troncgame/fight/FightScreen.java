@@ -1,7 +1,9 @@
 package fr.mmyumu.troncgame.fight;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
@@ -107,13 +109,17 @@ public class FightScreen extends ScreenAdapter implements Musical, InputProcesso
 
     private void update(float delta) {
         if (fightLogic.isEnded()) {
-            stopPlaying();
-            troncGame.setScreen(troncGame.getOverworldComponent().createOverworldLoadingScreen());
+            endFight();
         } else {
             fightGame.act(delta);
             fightUI.act(delta);
             fightPopUpMenu.act(delta);
         }
+    }
+
+    private void endFight() {
+        stopPlaying();
+        troncGame.setScreen(troncGame.getOverworldComponent().createOverworldLoadingScreen());
     }
 
     private void draw() {
