@@ -10,6 +10,7 @@ public class GameCharacter {
     private int mp;
     private double actionSpeed;
     private int attack;
+    private boolean friendly;
 
     private String fightTexturePath;
 
@@ -67,5 +68,13 @@ public class GameCharacter {
 
     public boolean isAlive() {
         return hp > 0;
+    }
+
+    public boolean isFriendly() {
+        return friendly;
+    }
+
+    public void setFriendly(boolean friendly) {
+        this.friendly = friendly;
     }
 }
