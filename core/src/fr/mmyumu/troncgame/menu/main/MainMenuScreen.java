@@ -3,13 +3,14 @@ package fr.mmyumu.troncgame.menu.main;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.utils.Scaling;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.viewport.ScalingViewport;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.inject.Inject;
 
-import fr.mmyumu.troncgame.Constants;
 import fr.mmyumu.troncgame.TroncGame;
 
 /**
@@ -18,12 +19,29 @@ import fr.mmyumu.troncgame.TroncGame;
  */
 public class MainMenuScreen extends ScreenAdapter {
     private final TroncGame troncGame;
-    private Stage stage;
+    private final ScalingViewport viewport;
+    private MainMenu mainMenu;
 
 
     @Inject
-    public MainMenuScreen(TroncGame troncGame) {
+    public MainMenuScreen(TroncGame troncGame, ScalingViewport viewport) {
         this.troncGame = troncGame;
+        this.viewport = viewport;
+
+        initStages();
+    }
+
+    private void initStages() {
+        List<Actor> buttons = new ArrayList<Actor>();
+        buttons.add(troncGame.getMainMenuComponent().createMainMenuContinue());
+        buttons.add(troncGame.getMainMenuComponent().createMainMenuStart());
+
+        MainMenuBackground mainMenuBackground = troncGame.getMainMenuComponent().createMainMenuBackground();
+
+        mainMenu = troncGame.getMainMenuComponent().createMainMenu();
+        mainMenu.init(mainMenuBackground, buttons);
+
+        Gdx.input.setInputProcessor(mainMenu);
     }
 
     @Override
@@ -31,15 +49,9 @@ public class MainMenuScreen extends ScreenAdapter {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        stage.draw();
-    }
 
-    @Override
-    public void show() {
-        stage = new Stage(new ScalingViewport(Scaling.fit, Constants.WIDTH, Constants.HEIGHT));
-        MainMenuStart mainMenuStart = troncGame.getMainMenuComponent().createMainMenuStart();
-        stage.addActor(mainMenuStart);
-        Gdx.input.setInputProcessor(mainMenuStart);
+
+        mainMenu.draw();
     }
 
     @Override
@@ -49,6 +61,6 @@ public class MainMenuScreen extends ScreenAdapter {
 
     @Override
     public void resize(int width, int height) {
-        stage.getViewport().update(width, height);
+        viewport.update(width, height);
     }
 }
