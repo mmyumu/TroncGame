@@ -24,17 +24,18 @@ public class FightMainInfos extends Table {
     private final I18NBundle bundle;
     private final AssetManager assetManager;
     private final Skin skin;
-    private final List<FightCharacter> fightTeam;
 
     @Inject
-    public FightMainInfos(I18NBundle bundle, AssetManager assetManager, Skin skin, List<FightCharacter> fightTeam) {
+    public FightMainInfos(I18NBundle bundle, AssetManager assetManager, Skin skin) {
         this.bundle = bundle;
         this.assetManager = assetManager;
         this.skin = skin;
-        this.fightTeam = fightTeam;
 
         initTable();
-        initTableLabels();
+    }
+
+    public void initFightTeam(List<FightCharacter> fightTeam) {
+        initTableLabels(fightTeam);
     }
 
     private void initTable() {
@@ -47,15 +48,13 @@ public class FightMainInfos extends Table {
         pad(25);
     }
 
-    private void initTableLabels() {
+    private void initTableLabels(List<FightCharacter> fightTeam) {
         row().height(30);
         initHeaderRow();
         row().height(10);
         add(new Label("", skin)).height(10);
 
         for (FightCharacter character : fightTeam) {
-//            row().height(10);
-//            add(new Label("", skin)).height(10);
             row().height(FightConstants.MainInfos.ROW_HEIGHT);
             createLabel(character);
         }
@@ -63,8 +62,8 @@ public class FightMainInfos extends Table {
 
     private void createLabel(FightCharacter fightCharacter) {
         Label nameLabel = new Label(fightCharacter.getCharacter().getName(), skin);
-        Label hpLabel = new Label(fightCharacter.getCharacter().getHp().toString(), skin);
-        Label mpLabel = new Label(fightCharacter.getCharacter().getMp().toString(), skin);
+        Label hpLabel = new FightHPLabel(fightCharacter, skin);
+        Label mpLabel = new FightMPLabel(fightCharacter, skin);
         FightActionBar fightActionBar = new FightActionBar(assetManager, fightCharacter);
 
         add(nameLabel).width(FightConstants.MainInfos.NAME_WIDTH).left();
@@ -75,8 +74,8 @@ public class FightMainInfos extends Table {
 
     private void initHeaderRow() {
         Label nameLabel = new Label(bundle.get("mainInfos.name"), skin);
-        Label hpLabel = new Label(bundle.get("mainInfos.hp").toString(), skin);
-        Label mpLabel = new Label(bundle.get("mainInfos.mp").toString(), skin);
+        Label hpLabel = new Label(bundle.get("mainInfos.hp"), skin);
+        Label mpLabel = new Label(bundle.get("mainInfos.mp"), skin);
         Label actionBarLabel = new Label("", skin);
         add(nameLabel).width(FightConstants.MainInfos.NAME_WIDTH).top().left();
         add(hpLabel).width(FightConstants.MainInfos.HP_WIDTH).top().left();

@@ -25,6 +25,8 @@ public class ModelModule {
         character.setHp(9999);
         character.setMp(999);
         character.setActionSpeed(40);
+        character.setAttack(10);
+        character.setFriendly(true);
         return character;
     }
 
@@ -38,6 +40,8 @@ public class ModelModule {
         character.setHp(9999);
         character.setMp(999);
         character.setActionSpeed(20);
+        character.setAttack(10);
+        character.setFriendly(true);
         return character;
     }
 

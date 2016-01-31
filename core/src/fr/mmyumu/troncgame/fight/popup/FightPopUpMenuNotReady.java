@@ -1,7 +1,8 @@
-package fr.mmyumu.troncgame.fight;
+package fr.mmyumu.troncgame.fight.popup;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.actions.RunnableAction;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.I18NBundle;
@@ -11,6 +12,7 @@ import javax.inject.Inject;
 import fr.mmyumu.troncgame.CompassPoint;
 
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.fadeOut;
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.sequence;
 
 /**
  * Manage the display of the "not ready" message when the user tries to open the menu of a character with an action bar not filled
@@ -36,9 +38,19 @@ public class FightPopUpMenuNotReady extends FightPopUpMenuElement {
     @Override
     public void display(Vector2 touchCoords) {
         super.display(touchCoords);
+
         label.clearActions();
         label.setColor(1, 1, 1, 1);
-        label.addAction(fadeOut(1));
+
+        RunnableAction run = new RunnableAction();
+        run.setRunnable(new Runnable() {
+            @Override
+            public void run() {
+                hide();
+            }
+        });
+
+        label.addAction(sequence(fadeOut(1), run));
         label.setBounds(getX(), getY(), getWidth(), getHeight());
     }
 
