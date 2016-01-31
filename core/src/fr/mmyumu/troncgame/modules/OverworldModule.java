@@ -22,6 +22,7 @@ import fr.mmyumu.troncgame.overworld.menu.OverworldMenu;
 import fr.mmyumu.troncgame.overworld.menu.OverworldMenuList;
 import fr.mmyumu.troncgame.overworld.ui.OverworldFPS;
 import fr.mmyumu.troncgame.overworld.ui.OverworldUI;
+import fr.mmyumu.troncgame.persistence.GameStatePersister;
 
 /**
  * Dagger module to provide Overworld
@@ -70,8 +71,8 @@ public class OverworldModule {
 
     @Provides
     @ActivityScope
-    OverworldScreen provideOverworldScreen(TroncGame troncGame, AssetManager assetManager, @Named("game") ScalingViewport gameViewport) {
-        return new OverworldScreen(troncGame, assetManager, gameViewport);
+    OverworldScreen provideOverworldScreen(TroncGame troncGame, AssetManager assetManager, @Named("game") ScalingViewport gameViewport, GameStatePersister gameStatePersister) {
+        return new OverworldScreen(troncGame, assetManager, gameViewport, gameStatePersister);
     }
 
     @Provides
