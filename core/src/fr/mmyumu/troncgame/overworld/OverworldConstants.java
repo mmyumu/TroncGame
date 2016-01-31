@@ -12,7 +12,7 @@ public interface OverworldConstants {
     int MENU_LIST_HEIGHT = 768;
 
     interface MapPath {
-        String VILLAGE = "maps/village.tmx";
+        String VILLAGE = "maps/map-01.tmx";
     }
 
     interface TexturePath {
