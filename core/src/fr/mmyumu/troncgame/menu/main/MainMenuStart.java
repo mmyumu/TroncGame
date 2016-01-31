@@ -24,8 +24,8 @@ import fr.mmyumu.troncgame.TroncGame;
  * Actor to display main menu
  * Created by mmyumu on 27/10/2015.
  */
-public class MainMenuActor extends Actor implements InputProcessor {
-    private static final String TAG = "MainMenuActor";
+public class MainMenuStart extends Actor implements InputProcessor {
+    private static final String TAG = "MainMenuStart";
 
     private final TroncGame troncGame;
     private final AssetManager assetManager;
@@ -37,7 +37,7 @@ public class MainMenuActor extends Actor implements InputProcessor {
     private BitmapFont font;
 
     @Inject
-    public MainMenuActor(TroncGame troncGame, AssetManager assetManager, I18NBundle bundle) {
+    public MainMenuStart(TroncGame troncGame, AssetManager assetManager, I18NBundle bundle) {
         this.troncGame = troncGame;
         this.assetManager = assetManager;
         this.bundle = bundle;

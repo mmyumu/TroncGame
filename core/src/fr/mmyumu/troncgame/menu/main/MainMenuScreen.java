@@ -37,9 +37,9 @@ public class MainMenuScreen extends ScreenAdapter {
     @Override
     public void show() {
         stage = new Stage(new ScalingViewport(Scaling.fit, Constants.WIDTH, Constants.HEIGHT));
-        MainMenuActor mainMenuActor = troncGame.getMainMenuComponent().createMainMenuActor();
-        stage.addActor(mainMenuActor);
-        Gdx.input.setInputProcessor(mainMenuActor);
+        MainMenuStart mainMenuStart = troncGame.getMainMenuComponent().createMainMenuStart();
+        stage.addActor(mainMenuStart);
+        Gdx.input.setInputProcessor(mainMenuStart);
     }
 
     @Override

@@ -7,7 +7,7 @@ import dagger.Module;
 import dagger.Provides;
 import fr.mmyumu.troncgame.ActivityScope;
 import fr.mmyumu.troncgame.TroncGame;
-import fr.mmyumu.troncgame.menu.main.MainMenuActor;
+import fr.mmyumu.troncgame.menu.main.MainMenuStart;
 import fr.mmyumu.troncgame.menu.main.MainMenuLoadingScreen;
 import fr.mmyumu.troncgame.menu.main.MainMenuScreen;
 
@@ -31,7 +31,7 @@ public class MainMenuModule {
 
     @Provides
     @ActivityScope
-    MainMenuActor provideMainMenuActor(TroncGame troncGame, AssetManager assetManager, I18NBundle bundle) {
-        return new MainMenuActor(troncGame, assetManager, bundle);
+    MainMenuStart provideMainMenuStart(TroncGame troncGame, AssetManager assetManager, I18NBundle bundle) {
+        return new MainMenuStart(troncGame, assetManager, bundle);
     }
 }

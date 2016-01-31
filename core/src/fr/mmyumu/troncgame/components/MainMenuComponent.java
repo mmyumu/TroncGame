@@ -2,7 +2,7 @@ package fr.mmyumu.troncgame.components;
 
 import dagger.Component;
 import fr.mmyumu.troncgame.ActivityScope;
-import fr.mmyumu.troncgame.menu.main.MainMenuActor;
+import fr.mmyumu.troncgame.menu.main.MainMenuStart;
 import fr.mmyumu.troncgame.menu.main.MainMenuLoadingScreen;
 import fr.mmyumu.troncgame.menu.main.MainMenuScreen;
 import fr.mmyumu.troncgame.modules.MainMenuModule;
@@ -21,5 +21,5 @@ public interface MainMenuComponent {
 
     MainMenuScreen createMainMenuScreen();
 
-    MainMenuActor createMainMenuActor();
+    MainMenuStart createMainMenuStart();
 }
