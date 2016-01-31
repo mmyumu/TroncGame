@@ -12,6 +12,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import fr.mmyumu.troncgame.TroncGame;
+import fr.mmyumu.troncgame.persistence.GameStatePersister;
 
 /**
  * Main menu screen
@@ -20,36 +21,43 @@ import fr.mmyumu.troncgame.TroncGame;
 public class MainMenuScreen extends ScreenAdapter {
     private final TroncGame troncGame;
     private final ScalingViewport viewport;
+    private final GameStatePersister gameStatePersister;
     private MainMenu mainMenu;
 
 
     @Inject
-    public MainMenuScreen(TroncGame troncGame, ScalingViewport viewport) {
+    public MainMenuScreen(TroncGame troncGame, ScalingViewport viewport, GameStatePersister gameStatePersister) {
         this.troncGame = troncGame;
         this.viewport = viewport;
+        this.gameStatePersister = gameStatePersister;
+    }
 
+    @Override
+    public void show() {
+        super.show();
         initStages();
     }
 
     private void initStages() {
         List<Actor> buttons = new ArrayList<Actor>();
-        buttons.add(troncGame.getMainMenuComponent().createMainMenuContinue());
         buttons.add(troncGame.getMainMenuComponent().createMainMenuStart());
+
+        if(gameStatePersister.hasSavedGame()) {
+            buttons.add(troncGame.getMainMenuComponent().createMainMenuContinue());
+        }
 
         MainMenuBackground mainMenuBackground = troncGame.getMainMenuComponent().createMainMenuBackground();
 
         mainMenu = troncGame.getMainMenuComponent().createMainMenu();
         mainMenu.init(mainMenuBackground, buttons);
 
-        Gdx.input.setInputProcessor(mainMenu);
+        troncGame.setInputProcessors(mainMenu);
     }
 
     @Override
     public void render(float delta) {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
-
 
         mainMenu.draw();
     }

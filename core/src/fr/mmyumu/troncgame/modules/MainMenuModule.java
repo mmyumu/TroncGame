@@ -12,11 +12,11 @@ import fr.mmyumu.troncgame.ActivityScope;
 import fr.mmyumu.troncgame.Constants;
 import fr.mmyumu.troncgame.TroncGame;
 import fr.mmyumu.troncgame.menu.main.MainMenu;
-import fr.mmyumu.troncgame.menu.main.MainMenuButton;
 import fr.mmyumu.troncgame.menu.main.MainMenuContinue;
 import fr.mmyumu.troncgame.menu.main.MainMenuLoadingScreen;
 import fr.mmyumu.troncgame.menu.main.MainMenuScreen;
 import fr.mmyumu.troncgame.menu.main.MainMenuStart;
+import fr.mmyumu.troncgame.persistence.GameStatePersister;
 
 /**
  * Dagger module to provide Main Menu
@@ -46,8 +46,8 @@ public class MainMenuModule {
 
     @Provides
     @ActivityScope
-    MainMenuScreen provideMainMenuScreen(TroncGame troncGame, ScalingViewport viewport) {
-        return new MainMenuScreen(troncGame, viewport);
+    MainMenuScreen provideMainMenuScreen(TroncGame troncGame, ScalingViewport viewport, GameStatePersister gameStatePersister) {
+        return new MainMenuScreen(troncGame, viewport, gameStatePersister);
     }
 
     @Provides
@@ -58,13 +58,13 @@ public class MainMenuModule {
 
     @Provides
     @ActivityScope
-    MainMenuStart provideMainMenuStart(TroncGame troncGame, AssetManager assetManager, I18NBundle bundle) {
-        return new MainMenuStart(troncGame, assetManager, bundle, 500);
+    MainMenuStart provideMainMenuStart(TroncGame troncGame, AssetManager assetManager, I18NBundle bundle, GameStatePersister gameStatePersister) {
+        return new MainMenuStart(troncGame, assetManager, bundle, gameStatePersister, 400);
     }
 
     @Provides
     @ActivityScope
-    MainMenuContinue provideMainMenuContinue(TroncGame troncGame, AssetManager assetManager, I18NBundle bundle) {
-        return new MainMenuContinue(troncGame, assetManager, bundle, 400);
+    MainMenuContinue provideMainMenuContinue(TroncGame troncGame, AssetManager assetManager, I18NBundle bundle, GameStatePersister gameStatePersister) {
+        return new MainMenuContinue(troncGame, assetManager, bundle, gameStatePersister, 500);
     }
 }

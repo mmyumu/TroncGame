@@ -41,6 +41,10 @@ public class OverworldCharacterLogic {
         initHitbox(center);
     }
 
+    public Vector2 getCenter() {
+        return center;
+    }
+
     public void setObstaclesLayer(TiledMapTileLayer obstaclesLayer) {
         this.obstaclesLayer = obstaclesLayer;
     }
