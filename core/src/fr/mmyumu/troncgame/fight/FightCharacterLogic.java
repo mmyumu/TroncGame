@@ -10,7 +10,7 @@ import fr.mmyumu.troncgame.model.GameCharacter;
  * Created by mmyumu on 10/01/2016.
  */
 public class FightCharacterLogic extends Actor {
-    private GameCharacter character;
+    private final GameCharacter character;
 
     private double actionValue;
 
@@ -44,7 +44,8 @@ public class FightCharacterLogic extends Actor {
     }
 
     public void attack(FightCharacter targetCharacter) {
-        getCharacter().attack(targetCharacter.getCharacter());
+        int damage = getCharacter().attack(targetCharacter.getCharacter());
+        targetCharacter.displayDamage(damage);
         actionValue = 0;
     }
 

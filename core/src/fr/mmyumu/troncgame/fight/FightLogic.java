@@ -71,7 +71,7 @@ public class FightLogic {
         List<FightCharacter> fightTeam = new ArrayList<FightCharacter>();
         int i = 0;
         for (GameCharacter character : team.getCharacters()) {
-            FightCharacter fightCharacter = new FightCharacter(100, FightConstants.MAIN_INFOS_HEIGHT + 20 + 200 * i, character, assetManager.get(character.getFightTexturePath(), Texture.class), true);
+            FightCharacter fightCharacter = new FightCharacter(skin, 100, FightConstants.MAIN_INFOS_HEIGHT + 20 + 200 * i, character, assetManager.get(character.getFightTexturePath(), Texture.class), true);
             fightTeam.add(fightCharacter);
             i++;
         }
