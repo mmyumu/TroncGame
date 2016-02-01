@@ -62,8 +62,9 @@ public class GameCharacter {
         this.fightTexturePath = fightTexturePath;
     }
 
-    public void attack(GameCharacter character) {
+    public int attack(GameCharacter character) {
         character.setHp(character.getHp() - attack);
+        return attack;
     }
 
     public boolean isAlive() {

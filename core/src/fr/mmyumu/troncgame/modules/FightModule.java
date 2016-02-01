@@ -100,8 +100,8 @@ public class FightModule {
 
     @Provides
     @ActivityScope
-    EnemyFightTeamGenerator provideEnemyFightTeamGenerator(AssetManager assetManager, @Named("main") GameCharacter mainCharacter) {
-        return new EnemyFightTeamGenerator(assetManager, mainCharacter);
+    EnemyFightTeamGenerator provideEnemyFightTeamGenerator(AssetManager assetManager, @Named("main") GameCharacter mainCharacter, Skin skin) {
+        return new EnemyFightTeamGenerator(assetManager, mainCharacter, skin);
     }
 
     @Provides

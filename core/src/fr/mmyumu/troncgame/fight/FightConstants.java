@@ -14,6 +14,8 @@ public interface FightConstants {
     int MAIN_INFOS_WIDTH = 800;
     int MAIN_INFOS_HEIGHT = 250;
 
+    int LABEL_WIDTH = 100;
+    int LABEL_HEIGHT = 50;
 
     interface MusicPath {
         String FIRST_CHIPTUNE = "music/first_chiptune.ogg";
