@@ -1,10 +1,14 @@
 package fr.mmyumu.troncgame.model;
 
+import com.badlogic.gdx.Gdx;
+
 /**
  * Manage a character of the game
  * Created by mmyumu on 01/01/2016.
  */
 public class GameCharacter {
+    private static final String TAG = "GameCharacter";
+
     private String name;
     private int hp;
     private int mp;
@@ -64,6 +68,7 @@ public class GameCharacter {
 
     public int attack(GameCharacter character) {
         character.setHp(character.getHp() - attack);
+        Gdx.app.debug(TAG, getName() + " is attacking " + character.getName() + " for " + attack + " damage. " + character.getHp() + "HP left.");
         return attack;
     }
 

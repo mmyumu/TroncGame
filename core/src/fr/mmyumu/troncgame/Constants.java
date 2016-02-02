@@ -14,5 +14,6 @@ public interface Constants {
 
     interface FontPath {
         String PRESS_START_2P = "fonts/PressStart2P.ttf";
+        String BM_BLOCK = "fonts/BMblock.TTF";
     }
 }

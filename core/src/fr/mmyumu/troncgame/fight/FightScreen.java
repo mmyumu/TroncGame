@@ -114,6 +114,7 @@ public class FightScreen extends ScreenAdapter implements Musical, InputProcesso
             fightGame.act(delta);
             fightUI.act(delta);
             fightPopUpMenu.act(delta);
+            fightLogic.act(delta);
         }
     }
 

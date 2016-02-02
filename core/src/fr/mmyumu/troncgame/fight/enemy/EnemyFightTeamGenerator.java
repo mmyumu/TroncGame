@@ -34,8 +34,8 @@ public class EnemyFightTeamGenerator {
 
         // TODO: generate according to the location of the game character
 
-        GameCharacter enemy1 = createEnemy();
-        GameCharacter enemy2 = createEnemy();
+        GameCharacter enemy1 = createEnemy(1);
+        GameCharacter enemy2 = createEnemy(2);
 
         enemyFightTeam.add(new FightCharacter(skin, 1500, FightConstants.MAIN_INFOS_HEIGHT + 20 + 200 * 1, enemy1, assetManager.get(enemy1.getFightTexturePath(), Texture.class), false));
         enemyFightTeam.add(new FightCharacter(skin, 1500, FightConstants.MAIN_INFOS_HEIGHT + 20 + 200 * 2, enemy2, assetManager.get(enemy2.getFightTexturePath(), Texture.class), false));
@@ -43,12 +43,13 @@ public class EnemyFightTeamGenerator {
         return enemyFightTeam;
     }
 
-    private GameCharacter createEnemy() {
+    private GameCharacter createEnemy(int number) {
         GameCharacter enemy = new GameCharacter();
-        enemy.setName("Mirror");
+        enemy.setName("Mirror " + number);
         enemy.setHp(20);
         enemy.setMp(5);
-        enemy.setActionSpeed(10);
+        enemy.setActionSpeed(30);
+        enemy.setAttack(12);
         enemy.setFightTexturePath(FightConstants.TexturePath.ENEMY);
         enemy.setFriendly(false);
         return enemy;
