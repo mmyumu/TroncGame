@@ -8,6 +8,7 @@ import com.badlogic.gdx.utils.I18NBundle;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 
 import javax.inject.Inject;
 
@@ -62,7 +63,6 @@ public class FightLogic {
         fightBackground = new FightBackground(assetManager);
         enemyFightTeam = enemyFightTeamGenerator.generate();
         fightTeam = createFightTeam();
-
         fightMainInfos = new FightMainInfos(bundle, assetManager, skin);
         fightMainInfos.initFightTeam(fightTeam);
     }
@@ -128,9 +128,9 @@ public class FightLogic {
     }
 
     private void tryToTargetCharacter(FightCharacter touchedCharacter) {
-        if(selectedCharacter.equals(touchedCharacter)) {
+        if (selectedCharacter.equals(touchedCharacter)) {
             resetCharacterSelection();
-        } else if(!touchedCharacter.getCharacter().isFriendly()){
+        } else if (!touchedCharacter.getCharacter().isFriendly()) {
             doAction(touchedCharacter);
         }
     }
@@ -182,5 +182,23 @@ public class FightLogic {
 
     public FightMainInfos getMainInfos() {
         return fightMainInfos;
+    }
+
+    public void act(float delta) {
+        playAICharacters();
+    }
+
+    private void playAICharacters() {
+        for (FightCharacter character : enemyFightTeam) {
+            if (character.getCharacter().getHp() > 0 && character.isReady()) {
+                FightCharacter targetCharacter = computeTargetCharacter();
+                character.attack(targetCharacter);
+            }
+        }
+    }
+
+    private FightCharacter computeTargetCharacter() {
+        int random = ThreadLocalRandom.current().nextInt(0, fightTeam.size());
+        return fightTeam.get(random);
     }
 }
