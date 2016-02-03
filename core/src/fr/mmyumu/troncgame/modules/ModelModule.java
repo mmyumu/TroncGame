@@ -27,6 +27,7 @@ public class ModelModule {
         character.setActionSpeed(40);
         character.setAttack(10);
         character.setFriendly(true);
+        character.setUsingAI(false);
         return character;
     }
 
@@ -42,6 +43,7 @@ public class ModelModule {
         character.setActionSpeed(20);
         character.setAttack(10);
         character.setFriendly(true);
+        character.setUsingAI(false);
         return character;
     }
 

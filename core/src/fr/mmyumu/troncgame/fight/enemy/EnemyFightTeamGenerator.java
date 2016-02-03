@@ -52,6 +52,7 @@ public class EnemyFightTeamGenerator {
         enemy.setAttack(12);
         enemy.setFightTexturePath(FightConstants.TexturePath.ENEMY);
         enemy.setFriendly(false);
+        enemy.setUsingAI(true);
         return enemy;
     }
 }
