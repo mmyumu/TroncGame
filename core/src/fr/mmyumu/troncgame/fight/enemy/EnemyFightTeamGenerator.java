@@ -49,7 +49,7 @@ public class EnemyFightTeamGenerator {
         enemy.setHp(20);
         enemy.setMp(5);
         enemy.setActionSpeed(30);
-        enemy.setAttack(12);
+        enemy.setAttack(12 + number);
         enemy.setFightTexturePath(FightConstants.TexturePath.ENEMY);
         enemy.setFriendly(false);
         enemy.setUsingAI(true);

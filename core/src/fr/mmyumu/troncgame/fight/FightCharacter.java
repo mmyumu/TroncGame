@@ -3,10 +3,13 @@ package fr.mmyumu.troncgame.fight;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.actions.RunnableAction;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Align;
+
+import java.util.LinkedList;
 
 import fr.mmyumu.troncgame.CompassPoint;
 import fr.mmyumu.troncgame.model.GameCharacter;
@@ -26,6 +29,7 @@ public class FightCharacter extends FightCharacterLogic {
     private final Texture texture;
     private final boolean hasFightPopUpMenu;
     private final Label label;
+    private final LinkedList<Integer> queueDamages;
 
     public FightCharacter(Skin skin, int x, int y, GameCharacter character, Texture texture, boolean hasFightPopUpMenu) {
         super(x, y, character);
@@ -34,6 +38,7 @@ public class FightCharacter extends FightCharacterLogic {
         this.label = new Label("", skin);
 
         this.label.setAlignment(Align.center);
+        this.queueDamages = new LinkedList<Integer>();
 
         setName(character.getName());
     }
@@ -42,6 +47,12 @@ public class FightCharacter extends FightCharacterLogic {
     public void act(float delta) {
         super.act(delta);
         label.act(delta);
+
+        if (label.getActions().size == 0 && !queueDamages.isEmpty()) {
+            Integer damage = queueDamages.pop();
+            Vector2 coords = retrieveLabelCoords();
+            initDamageLabel(coords.x, coords.y, damage);
+        }
     }
 
     @Override
@@ -58,30 +69,41 @@ public class FightCharacter extends FightCharacterLogic {
     }
 
     protected void displayDamage(int damage) {
-        float x = RADIUS * (float) Math.cos(CompassPoint.NORTH.getRadiansAngle()) + getCenter().x - FightConstants.LABEL_WIDTH / 2;
-        float y = RADIUS * (float) Math.sin(CompassPoint.NORTH.getRadiansAngle()) + getCenter().y - FightConstants.LABEL_HEIGHT / 2;
-        Vector2 iconCoords = new Vector2(x, y);
+        Vector2 coords = retrieveLabelCoords();
 
-        label.setBounds(iconCoords.x, iconCoords.y, FightConstants.LABEL_WIDTH, FightConstants.LABEL_HEIGHT);
+        if (label.getActions().size == 0) {
+            initDamageLabel(coords.x, coords.y, damage);
+        } else {
+            queueDamages.add(damage);
+        }
+    }
 
+    private Vector2 retrieveLabelCoords() {
+        final float x = RADIUS * (float) Math.cos(CompassPoint.NORTH.getRadiansAngle()) + getCenter().x - FightConstants.LABEL_WIDTH / 2;
+        final float y = RADIUS * (float) Math.sin(CompassPoint.NORTH.getRadiansAngle()) + getCenter().y - FightConstants.LABEL_HEIGHT / 2;
+        return new Vector2(x, y);
+    }
 
-        label.clearActions();
-        label.setColor(1f, 0.1f, 0.1f, 1f);
-        label.setText(String.valueOf(damage));
+    private void hideDamage() {
+        label.clear();
+        label.setBounds(0, 0, 0, 0);
+    }
 
+    private void initDamageLabel(float x, float y, int damage) {
         RunnableAction run = new RunnableAction();
         run.setRunnable(new Runnable() {
             @Override
             public void run() {
-                hide();
+                hideDamage();
             }
         });
 
-        label.addAction(sequence(parallel(fadeOut(1), moveTo(x, y + 50, 1)), run));
-    }
+        Action action = sequence(moveTo(x, y), parallel(fadeOut(1), moveTo(x, y + 50, 1)), run);
 
-    private void hide() {
-        label.clear();
-        label.setBounds(0, 0, 0, 0);
+        label.clearActions();
+        label.setBounds(x, y, FightConstants.LABEL_WIDTH, FightConstants.LABEL_HEIGHT);
+        label.setColor(1f, 0.1f, 0.1f, 1f);
+        label.setText(String.valueOf(damage));
+        label.addAction(action);
     }
 }
