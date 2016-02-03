@@ -17,6 +17,7 @@ public class GameCharacter {
     private boolean friendly;
 
     private String fightTexturePath;
+    private boolean usingAI;
 
     public String getName() {
         return name;
@@ -82,5 +83,13 @@ public class GameCharacter {
 
     public void setFriendly(boolean friendly) {
         this.friendly = friendly;
+    }
+
+    public void setUsingAI(boolean usingAI) {
+        this.usingAI = usingAI;
+    }
+
+    public boolean isUsingAI() {
+        return usingAI;
     }
 }

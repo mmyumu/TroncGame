@@ -112,11 +112,15 @@ public class FightLogic {
     }
 
     private void tryToSelectCharacter(FightCharacter touchedCharacter) {
-        if (touchedCharacter.isReady()) {
-            selectCharacter(touchedCharacter);
-            popUpMenuLogic.selectReadyCharacter(touchedCharacter);
+        if (touchedCharacter.getCharacter().isUsingAI()) {
+            Gdx.app.debug(TAG, "Character " + touchedCharacter.getCharacter().getName() + " using AI cannot be selected.");
         } else {
-            popUpMenuLogic.selectNotReadyCharacter(touchedCharacter);
+            if (touchedCharacter.isReady()) {
+                selectCharacter(touchedCharacter);
+                popUpMenuLogic.selectReadyCharacter(touchedCharacter);
+            } else {
+                popUpMenuLogic.selectNotReadyCharacter(touchedCharacter);
+            }
         }
     }
 
