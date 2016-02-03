@@ -169,12 +169,12 @@ public class FightScreen extends ScreenAdapter implements Musical, InputProcesso
         Vector2 touchCoords = viewport.unproject(new Vector2(screenX, screenY));
 
         Actor hitIcon = fightPopUpMenu.hit(touchCoords.x, touchCoords.y, true);
-        if (hitIcon != null && hitIcon instanceof FightPopUpMenuIcon) {
+        if (hitIcon instanceof FightPopUpMenuIcon) {
             FightPopUpMenuIcon touchedIcon = (FightPopUpMenuIcon) hitIcon;
             fightLogic.iconTouched(touchedIcon);
         } else {
             Actor hitCharacter = fightGame.hit(touchCoords.x, touchCoords.y, true);
-            if (hitCharacter != null && hitCharacter instanceof FightCharacter) {
+            if (hitCharacter instanceof FightCharacter) {
                 FightCharacter touchedCharacter = (FightCharacter) hitCharacter;
                 fightLogic.characterTouched(touchedCharacter);
             }
