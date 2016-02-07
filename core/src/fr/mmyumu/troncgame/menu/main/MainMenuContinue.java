@@ -32,6 +32,8 @@ public class MainMenuContinue extends MainMenuButton {
     protected void buttonClicked(InputEvent event, float x, float y) {
         Gdx.app.debug(TAG, "Continue button pressed");
 
+        gameStatePersister.loadModel();
+
         ScreenID screenID = gameStatePersister.loadScreen();
         Screen screen;
         switch (screenID) {
