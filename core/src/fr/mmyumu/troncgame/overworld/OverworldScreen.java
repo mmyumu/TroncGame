@@ -14,7 +14,6 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import fr.mmyumu.troncgame.Constants;
-import fr.mmyumu.troncgame.persistence.GameStatePersister;
 import fr.mmyumu.troncgame.ScreenState;
 import fr.mmyumu.troncgame.TroncGame;
 import fr.mmyumu.troncgame.overworld.game.OverworldCharacter;
@@ -23,6 +22,7 @@ import fr.mmyumu.troncgame.overworld.game.OverworldMap;
 import fr.mmyumu.troncgame.overworld.menu.OverworldMenu;
 import fr.mmyumu.troncgame.overworld.ui.OverworldUI;
 import fr.mmyumu.troncgame.overworld.ui.OverworldUIInputProcessor;
+import fr.mmyumu.troncgame.persistence.GameStatePersister;
 import fr.mmyumu.troncgame.persistence.ScreenID;
 
 /**
@@ -59,6 +59,7 @@ public class OverworldScreen extends ScreenAdapter {
 
         OrthographicCamera gameCamera = (OrthographicCamera) gameViewport.getCamera();
         map = new OverworldMap(OverworldConstants.MapPath.VILLAGE, gameCamera, assetManager);
+
 
         mainCharacter = loadMainCharacter();
     }
@@ -175,7 +176,7 @@ public class OverworldScreen extends ScreenAdapter {
         overworldCharacter.setObstaclesLayer(map.getObstaclesLayer());
 
         Vector2 position = gameStatePersister.loadPosition();
-        if(position == null) {
+        if (position == null) {
             position = new Vector2(OverworldConstants.TILE_WIDTH * 1.5f, OverworldConstants.TILE_HEIGHT * 1.5f);
         }
 
@@ -227,6 +228,8 @@ public class OverworldScreen extends ScreenAdapter {
 
     private void saveState() {
         Gdx.app.debug(TAG, "Save state in overworld");
+        gameStatePersister.saveModel();
+
         gameStatePersister.save(mainCharacter);
         gameStatePersister.save(ScreenID.OVERWORLD);
     }

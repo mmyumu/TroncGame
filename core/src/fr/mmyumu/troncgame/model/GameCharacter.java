@@ -8,7 +8,7 @@ import com.badlogic.gdx.Gdx;
  */
 public class GameCharacter {
     private static final String TAG = "GameCharacter";
-
+    private String identifier;
     private String name;
     private int hp;
     private int mp;
@@ -18,6 +18,14 @@ public class GameCharacter {
 
     private String fightTexturePath;
     private boolean usingAI;
+
+    public String getIdentifier() {
+        return identifier;
+    }
+
+    public void setIdentifier(String identifier) {
+        this.identifier = identifier;
+    }
 
     public String getName() {
         return name;
@@ -85,11 +93,11 @@ public class GameCharacter {
         this.friendly = friendly;
     }
 
-    public void setUsingAI(boolean usingAI) {
-        this.usingAI = usingAI;
-    }
-
     public boolean isUsingAI() {
         return usingAI;
+    }
+
+    public void setUsingAI(boolean usingAI) {
+        this.usingAI = usingAI;
     }
 }

@@ -18,10 +18,11 @@ import dagger.Provides;
 import fr.mmyumu.troncgame.ActivityScope;
 import fr.mmyumu.troncgame.Constants;
 import fr.mmyumu.troncgame.GameInputProcessor;
-import fr.mmyumu.troncgame.persistence.GameStatePersister;
 import fr.mmyumu.troncgame.TroncGame;
 import fr.mmyumu.troncgame.Utils;
+import fr.mmyumu.troncgame.model.Team;
 import fr.mmyumu.troncgame.overworld.OverworldConstants;
+import fr.mmyumu.troncgame.persistence.GameStatePersister;
 
 /**
  * Dagger module to provide game
@@ -91,7 +92,7 @@ public class GameModule {
     }
 
     @Provides
-    GameStatePersister provideGameStatePersister() {
-        return new GameStatePersister();
+    GameStatePersister provideGameStatePersister(Team team) {
+        return new GameStatePersister(team);
     }
 }
