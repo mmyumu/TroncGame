@@ -33,7 +33,7 @@ import fr.mmyumu.troncgame.model.Team;
  * Dagger module to provide Fight
  * Created by mmyumu on 18/11/2015.
  */
-@Module(includes = {GameModule.class, ModelModule.class})
+@Module
 public class FightModule {
     @Provides
     @ActivityScope

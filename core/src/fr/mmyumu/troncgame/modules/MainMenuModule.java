@@ -22,7 +22,7 @@ import fr.mmyumu.troncgame.persistence.GameStatePersister;
  * Dagger module to provide Main Menu
  * Created by mmyumu on 07/11/2015.
  */
-@Module(includes = {GameModule.class})
+@Module
 public class MainMenuModule {
     @Provides
     @ActivityScope

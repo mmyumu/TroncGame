@@ -6,37 +6,37 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.InputProcessor;
 
-import javax.inject.Singleton;
-
-import fr.mmyumu.troncgame.components.DaggerFightComponent;
-import fr.mmyumu.troncgame.components.DaggerGameComponent;
-import fr.mmyumu.troncgame.components.DaggerMainMenuComponent;
-import fr.mmyumu.troncgame.components.DaggerOverworldComponent;
+import fr.mmyumu.troncgame.components.DaggerModelComponent;
 import fr.mmyumu.troncgame.components.FightComponent;
 import fr.mmyumu.troncgame.components.GameComponent;
 import fr.mmyumu.troncgame.components.MainMenuComponent;
+import fr.mmyumu.troncgame.components.ModelComponent;
 import fr.mmyumu.troncgame.components.OverworldComponent;
 import fr.mmyumu.troncgame.modules.FightModule;
 import fr.mmyumu.troncgame.modules.GameModule;
 import fr.mmyumu.troncgame.modules.MainMenuModule;
+import fr.mmyumu.troncgame.modules.ModelModule;
 import fr.mmyumu.troncgame.modules.OverworldModule;
 
-@Singleton
 public class TroncGame extends Game {
-
+    private ModelComponent modelComponent;
     private GameComponent gameComponent;
     private MainMenuComponent mainMenuComponent;
     private OverworldComponent overworldComponent;
     private FightComponent fightComponent;
 
     public TroncGame() {
+        ModelModule modelModule = new ModelModule();
         GameModule gameModule = new GameModule(this);
+        FightModule fightModule = new FightModule();
+        MainMenuModule mainMenuModule = new MainMenuModule();
+        OverworldModule overworldModule = new OverworldModule();
 
-        gameComponent = DaggerGameComponent.builder().gameModule(gameModule).build();
-
-        mainMenuComponent = DaggerMainMenuComponent.builder().mainMenuModule(new MainMenuModule()).gameModule(gameModule).gameComponent(gameComponent).build();
-        overworldComponent = DaggerOverworldComponent.builder().overworldModule(new OverworldModule()).gameModule(gameModule).gameComponent(gameComponent).build();
-        fightComponent = DaggerFightComponent.builder().fightModule(new FightModule()).gameModule(gameModule).gameComponent(gameComponent).build();
+        modelComponent = DaggerModelComponent.builder().modelModule(modelModule).build();
+        gameComponent = modelComponent.createGameComponent(gameModule);
+        fightComponent = gameComponent.createFightComponent(fightModule);
+        mainMenuComponent = gameComponent.createMainMenuComponent(mainMenuModule);
+        overworldComponent = gameComponent.createOverworldComponent(overworldModule);
     }
 
     @Override

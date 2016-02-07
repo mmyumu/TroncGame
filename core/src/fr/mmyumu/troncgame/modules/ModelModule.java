@@ -5,15 +5,15 @@ import javax.inject.Named;
 import dagger.Module;
 import dagger.Provides;
 import fr.mmyumu.troncgame.ActivityScope;
-import fr.mmyumu.troncgame.model.GameCharacter;
 import fr.mmyumu.troncgame.fight.FightConstants;
+import fr.mmyumu.troncgame.model.GameCharacter;
 import fr.mmyumu.troncgame.model.Team;
 
 /**
  * Dagger module to provide Overworld
  * Created by mmyumu on 07/11/2015.
  */
-@Module(includes = {GameModule.class})
+@Module
 public class ModelModule {
     @Provides
     @ActivityScope
@@ -21,6 +21,7 @@ public class ModelModule {
     GameCharacter provideMainCharacter() {
         GameCharacter character = new GameCharacter();
         character.setFightTexturePath(FightConstants.TexturePath.MAIN_CHARACTER);
+        character.setIdentifier("sophie");
         character.setName("Sophie");
         character.setHp(9999);
         character.setMp(999);
@@ -37,6 +38,7 @@ public class ModelModule {
     GameCharacter provideSideKickCharacter() {
         GameCharacter character = new GameCharacter();
         character.setFightTexturePath(FightConstants.TexturePath.SIDEKICK_CHARACTER);
+        character.setIdentifier("le.poto");
         character.setName("Le poto");
         character.setHp(9999);
         character.setMp(999);

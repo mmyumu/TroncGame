@@ -4,6 +4,10 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.math.Vector2;
 
+import javax.inject.Inject;
+
+import fr.mmyumu.troncgame.model.GameCharacter;
+import fr.mmyumu.troncgame.model.Team;
 import fr.mmyumu.troncgame.overworld.game.OverworldCharacter;
 
 /**
@@ -11,15 +15,20 @@ import fr.mmyumu.troncgame.overworld.game.OverworldCharacter;
  * Created by mmyumu on 31/01/2016.
  */
 public class GameStatePersister {
-    public static final String PREF_NAME_OPTION = "gameState";
+    private static final String PREF_NAME_OPTION = "gameState";
 
     private static final String SCREEN = "screen";
     private static final String OVERWORLD_CHARACTER_X = "overworld.character.x";
     private static final String OVERWORLD_CHARACTER_Y = "overworld.character.y";
+    private static final String CHARACTER_HP = "character.hp";
+    private static final String CHARACTER_MP = "character.mp";
 
+    private final Team team;
     private Preferences preferences;
 
-    public GameStatePersister() {
+    @Inject
+    public GameStatePersister(Team team) {
+        this.team = team;
         this.preferences = Gdx.app.getPreferences(PREF_NAME_OPTION);
     }
 
@@ -63,6 +72,29 @@ public class GameStatePersister {
     public boolean hasSavedGame() {
         int ordinal = preferences.getInteger(SCREEN, -1);
         return ScreenID.getScreenID(ordinal) != null;
+    }
+
+    public void saveModel() {
+        saveTeam();
+    }
+
+    private void saveTeam() {
+        for (GameCharacter character : team.getCharacters()) {
+            preferences.putInteger(CHARACTER_HP + "." + character.getIdentifier(), character.getHp());
+            preferences.putInteger(CHARACTER_MP + "." + character.getIdentifier(), character.getMp());
+        }
+        preferences.flush();
+    }
+
+    public void loadModel() {
+        loadTeam();
+    }
+
+    private void loadTeam() {
+        for (GameCharacter character : team.getCharacters()) {
+            character.setHp(preferences.getInteger(CHARACTER_HP + "." + character.getIdentifier()));
+            character.setMp(preferences.getInteger(CHARACTER_MP + "." + character.getIdentifier()));
+        }
     }
 }
 

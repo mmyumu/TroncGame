@@ -1,6 +1,6 @@
 package fr.mmyumu.troncgame.components;
 
-import dagger.Component;
+import dagger.Subcomponent;
 import fr.mmyumu.troncgame.ActivityScope;
 import fr.mmyumu.troncgame.fight.FightLoadingScreen;
 import fr.mmyumu.troncgame.fight.FightScreen;
@@ -13,8 +13,7 @@ import fr.mmyumu.troncgame.modules.FightModule;
  * Created by mmyumu on 18/11/2015.
  */
 @ActivityScope
-@Component(
-        dependencies = GameComponent.class,
+@Subcomponent(
         modules = FightModule.class
 )
 public interface FightComponent {
