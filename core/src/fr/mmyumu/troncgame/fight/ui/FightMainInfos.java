@@ -2,7 +2,9 @@ package fr.mmyumu.troncgame.fight.ui;
 
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.scenes.scene2d.ui.Cell;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -24,6 +26,8 @@ public class FightMainInfos extends Table {
     private final I18NBundle bundle;
     private final AssetManager assetManager;
     private final Skin skin;
+
+    private boolean darkened;
 
     @Inject
     public FightMainInfos(I18NBundle bundle, AssetManager assetManager, Skin skin) {
@@ -81,5 +85,30 @@ public class FightMainInfos extends Table {
         add(hpLabel).width(FightConstants.MainInfos.HP_WIDTH).top().left();
         add(mpLabel).width(FightConstants.MainInfos.MP_WIDTH).top().left();
         add(actionBarLabel).width(FightConstants.MainInfos.ACTION_BAR_WIDTH).top().center();
+    }
+
+    public void setDarkened(boolean darkened) {
+        this.darkened = darkened;
+    }
+
+    @Override
+    public void draw(Batch batch, float parentAlpha) {
+        if (darkened) {
+            updateColor(0.5f, 0.5f, 0.5f, 1f);
+        }
+
+        super.draw(batch, parentAlpha);
+
+        if (darkened) {
+            updateColor(1f, 1f, 1f, 1f);
+        }
+    }
+
+    private void updateColor(float r, float g, float b, float a) {
+        setColor(r, g, b, a);
+
+        for (Cell cell : getCells()) {
+            cell.getActor().setColor(r, g, b, a);
+        }
     }
 }
