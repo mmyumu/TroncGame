@@ -31,6 +31,8 @@ public class FightCharacter extends FightCharacterLogic {
     private final Label label;
     private final LinkedList<Integer> queueDamages;
 
+    private boolean darkened;
+
     public FightCharacter(Skin skin, int x, int y, GameCharacter character, Texture texture, boolean hasFightPopUpMenu) {
         super(x, y, character);
         this.texture = texture;
@@ -58,10 +60,19 @@ public class FightCharacter extends FightCharacterLogic {
     @Override
     public void draw(Batch batch, float parentAlpha) {
         super.draw(batch, parentAlpha);
+
+        if(darkened) {
+            batch.setColor(0.5f, 0.5f, 0.5f, 1f);
+        }
+
         if (getCharacter().getHp() > 0) {
             batch.draw(texture, getX(), getY(), FightConstants.CHARACTER_WIDTH, FightConstants.CHARACTER_HEIGHT);
         }
         label.draw(batch, parentAlpha);
+
+        if(darkened) {
+            batch.setColor(1f, 1f, 1f, 1f);
+        }
     }
 
     public boolean hasFightPopUpMenu() {
@@ -105,5 +116,9 @@ public class FightCharacter extends FightCharacterLogic {
         label.setColor(1f, 0.1f, 0.1f, 1f);
         label.setText(String.valueOf(damage));
         label.addAction(action);
+    }
+
+    public void setDarkened(boolean darkened) {
+        this.darkened = darkened;
     }
 }

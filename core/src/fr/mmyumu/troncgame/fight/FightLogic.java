@@ -88,6 +88,8 @@ public class FightLogic {
             case ACTION_SELECTED:
                 if (selectedIcon.isAction()) {
                     fightState = FightState.ACTION_SELECTED;
+                } else {
+                    fightState = FightState.CHARACTER_SELECTED;
                 }
                 popUpMenuLogic.selectIcon(touchedIcon);
                 break;
@@ -188,10 +190,6 @@ public class FightLogic {
         return fightMainInfos;
     }
 
-    public void act(float delta) {
-        playAICharacters();
-    }
-
     private void playAICharacters() {
         for (FightCharacter character : enemyFightTeam) {
             if (character.getCharacter().getHp() > 0 && character.isReady()) {
@@ -204,5 +202,33 @@ public class FightLogic {
     private FightCharacter computeTargetCharacter() {
         int random = ThreadLocalRandom.current().nextInt(0, fightTeam.size());
         return fightTeam.get(random);
+    }
+
+    public void update(float delta) {
+        playAICharacters();
+
+        switch(fightState) {
+            case NOTHING_SELECTED:
+                fightBackground.setDarkened(false);
+                darkenCharacters(fightTeam, false);
+                darkenCharacters(enemyFightTeam, false);
+                break;
+            case CHARACTER_SELECTED:
+                fightBackground.setDarkened(true);
+                darkenCharacters(fightTeam, true);
+                darkenCharacters(enemyFightTeam, true);
+                break;
+            case ACTION_SELECTED:
+                fightBackground.setDarkened(true);
+                darkenCharacters(fightTeam, true);
+                darkenCharacters(enemyFightTeam, false);
+                break;
+        }
+    }
+
+    private void darkenCharacters(List<FightCharacter> characters, boolean darkened) {
+        for (FightCharacter character : characters) {
+            character.setDarkened(darkened);
+        }
     }
 }
