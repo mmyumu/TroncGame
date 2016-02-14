@@ -111,10 +111,10 @@ public class FightScreen extends ScreenAdapter implements Musical, InputProcesso
         if (fightLogic.isEnded()) {
             endFight();
         } else {
+            fightLogic.update(delta);
             fightGame.act(delta);
             fightUI.act(delta);
             fightPopUpMenu.act(delta);
-            fightLogic.act(delta);
         }
     }
 

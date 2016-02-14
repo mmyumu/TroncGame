@@ -5,8 +5,6 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
-import javax.inject.Inject;
-
 import fr.mmyumu.troncgame.Constants;
 
 /**
@@ -16,14 +14,27 @@ import fr.mmyumu.troncgame.Constants;
 public class FightBackground extends Actor {
 
     private AssetManager assetManager;
+    private boolean darkened;
 
-    @Inject
     public FightBackground(AssetManager assetManager) {
         this.assetManager = assetManager;
     }
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
+        super.draw(batch, parentAlpha);
+        if (darkened) {
+            batch.setColor(0.5f, 0.5f, 0.5f, 1f);
+        } else {
+            batch.setColor(1f, 1f, 1f, 1f);
+        }
         batch.draw(assetManager.get(FightConstants.TexturePath.BACKGROUND_PLAIN, Texture.class), 0, 0, Constants.WIDTH, Constants.HEIGHT);
+        if (darkened) {
+            batch.setColor(1f, 1f, 1f, 1f);
+        }
+    }
+
+    public void setDarkened(boolean darkened) {
+        this.darkened = darkened;
     }
 }
