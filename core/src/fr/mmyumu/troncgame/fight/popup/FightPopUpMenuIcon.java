@@ -11,7 +11,7 @@ import fr.mmyumu.troncgame.CompassPoint;
  * Created by mmyumu on 08/12/2015.
  */
 public class FightPopUpMenuIcon extends FightPopUpMenuElement {
-    private static final float RADIUS = 200f;
+    private static final float RADIUS = 150f;
 
     private final Texture texture;
 

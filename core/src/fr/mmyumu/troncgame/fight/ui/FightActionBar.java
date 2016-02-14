@@ -48,6 +48,7 @@ public class FightActionBar extends Actor {
             shapeRenderer.setColor(1f, 1f, 1f, 1f);
         }
 
+        shapeRenderer.getColor().mul(getColor());
 
         shapeRenderer.rect(getX() + 19, getY() + 10, (float) fightCharacter.getActionValue(), 15);
         shapeRenderer.end();

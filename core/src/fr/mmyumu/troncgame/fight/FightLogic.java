@@ -210,16 +210,19 @@ public class FightLogic {
         switch(fightState) {
             case NOTHING_SELECTED:
                 fightBackground.setDarkened(false);
+                fightMainInfos.setDarkened(false);
                 darkenCharacters(fightTeam, false);
                 darkenCharacters(enemyFightTeam, false);
                 break;
             case CHARACTER_SELECTED:
                 fightBackground.setDarkened(true);
+                fightMainInfos.setDarkened(true);
                 darkenCharacters(fightTeam, true);
                 darkenCharacters(enemyFightTeam, true);
                 break;
             case ACTION_SELECTED:
                 fightBackground.setDarkened(true);
+                fightMainInfos.setDarkened(true);
                 darkenCharacters(fightTeam, true);
                 darkenCharacters(enemyFightTeam, false);
                 break;

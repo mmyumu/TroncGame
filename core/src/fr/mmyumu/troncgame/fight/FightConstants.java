@@ -27,7 +27,7 @@ public interface FightConstants {
         String SIDEKICK_CHARACTER = "data/fight/compagnon_droite.png";
         String ENEMY = "data/fight/ennemi_gauche.png";
         String SPELLS_ICON = "data/fight/spells.png";
-        String WEAPONS_ICON = "data/fight/weapons.png";
+        String WEAPONS_ICON = "data/fight/icon4.png";
         String MAIN_INFOS = "data/fight/main_infos.png";
         String ACTION_BAR = "data/fight/action_bar.png";
     }
