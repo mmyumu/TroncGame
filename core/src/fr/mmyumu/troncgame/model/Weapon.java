@@ -7,8 +7,8 @@ package fr.mmyumu.troncgame.model;
 public class Weapon extends Item {
     private int attack;
 
-    public Weapon(String identifier, String texturePath, int attack) {
-        super(identifier, texturePath);
+    public Weapon(String identifier, String name, String texturePath, int attack) {
+        super(identifier, name, texturePath);
         this.attack = attack;
     }
 
