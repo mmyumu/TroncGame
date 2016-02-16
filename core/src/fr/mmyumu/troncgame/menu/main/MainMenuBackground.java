@@ -7,8 +7,6 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 
 import javax.inject.Inject;
 
-import fr.mmyumu.troncgame.Constants;
-
 /**
  * The background of the main menu
  * Created by mmyumu on 31/01/2016.
@@ -19,7 +17,7 @@ public class MainMenuBackground extends Actor {
 
     @Inject
     public MainMenuBackground(AssetManager assetManager) {
-        this.texture = assetManager.get(Constants.TexturePath.MAIN_MENU, Texture.class);
+        this.texture = assetManager.get(MainMenuConstants.TexturePath.BACKGROUND, Texture.class);
     }
 
     @Override
