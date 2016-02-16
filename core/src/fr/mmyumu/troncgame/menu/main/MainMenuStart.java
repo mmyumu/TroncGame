@@ -2,14 +2,13 @@ package fr.mmyumu.troncgame.menu.main;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
-import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.I18NBundle;
 
 import javax.inject.Inject;
 
 import fr.mmyumu.troncgame.TroncGame;
+import fr.mmyumu.troncgame.model.manager.ItemManager;
 import fr.mmyumu.troncgame.persistence.GameStatePersister;
 
 /**
@@ -21,13 +20,15 @@ public class MainMenuStart extends MainMenuButton {
 
     private final TroncGame troncGame;
     private final GameStatePersister gameStatePersister;
+    private ItemManager itemManager;
 
     @Inject
-    public MainMenuStart(TroncGame troncGame, AssetManager assetManager, I18NBundle bundle, GameStatePersister gameStatePersister, Integer y) {
+    public MainMenuStart(TroncGame troncGame, AssetManager assetManager, I18NBundle bundle, GameStatePersister gameStatePersister, ItemManager itemManager, Integer y) {
         super(assetManager, bundle, y);
 
         this.troncGame = troncGame;
         this.gameStatePersister = gameStatePersister;
+        this.itemManager = itemManager;
     }
 
     @Override
@@ -35,6 +36,9 @@ public class MainMenuStart extends MainMenuButton {
         Gdx.app.debug(TAG, "Start button pressed");
 
         gameStatePersister.clear();
+
+        troncGame.getModelComponent().mainCharacter().getEquipment().equip(itemManager.basicSword());
+
         troncGame.setScreen(troncGame.getOverworldComponent().createOverworldLoadingScreen());
     }
 
