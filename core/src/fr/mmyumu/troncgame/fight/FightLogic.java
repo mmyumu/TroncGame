@@ -159,6 +159,7 @@ public class FightLogic {
     private void selectCharacter(FightCharacter touchedCharacter) {
         selectedCharacter = touchedCharacter;
         fightState = FightState.CHARACTER_SELECTED;
+        popUpMenuLogic.selectCharacter(selectedCharacter);
     }
 
     public FightBackground getFightBackground() {

@@ -1,5 +1,8 @@
 package fr.mmyumu.troncgame.fight.popup;
 
+import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.graphics.Texture;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,18 +10,25 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import fr.mmyumu.troncgame.fight.FightCharacter;
+import fr.mmyumu.troncgame.model.ModelConstants;
+import fr.mmyumu.troncgame.model.Weapon;
 
 /**
  * Manage the logic of the pop up menu
  * Created by mmyumu on 22/01/2016.
  */
 public class FightPopUpMenuLogic {
-    private List<FightPopUpMenuIcon> popMenuIcons;
-    private FightPopUpMenuNotReady popUpMenuNotReady;
+    private final AssetManager assetManager;
+    private final List<FightPopUpMenuIcon> popMenuIcons;
+    private final FightPopUpMenuIcon fightPopUpMenuWeaponsIcon;
+    private final FightPopUpMenuNotReady popUpMenuNotReady;
 
     @Inject
-    public FightPopUpMenuLogic(FightPopUpMenuNotReady fightPopUpMenuNotReady, @Named("spells") FightPopUpMenuIcon fightPopUpMenuSpellsIcon, @Named("weapons") FightPopUpMenuIcon fightPopUpMenuWeaponsIcon) {
+    public FightPopUpMenuLogic(AssetManager assetManager, FightPopUpMenuNotReady fightPopUpMenuNotReady, @Named("spells") FightPopUpMenuIcon fightPopUpMenuSpellsIcon, @Named("weapons") FightPopUpMenuIcon fightPopUpMenuWeaponsIcon) {
+        this.assetManager = assetManager;
         this.popUpMenuNotReady = fightPopUpMenuNotReady;
+
+        this.fightPopUpMenuWeaponsIcon = fightPopUpMenuWeaponsIcon;
 
         popMenuIcons = new ArrayList<FightPopUpMenuIcon>();
         popMenuIcons.add(fightPopUpMenuSpellsIcon);
@@ -60,5 +70,18 @@ public class FightPopUpMenuLogic {
         for (FightPopUpMenuIcon fightPopUpMenuIcon : popMenuIcons) {
             fightPopUpMenuIcon.hide();
         }
+    }
+
+    public void selectCharacter(FightCharacter selectedCharacter) {
+        Weapon weapon = selectedCharacter.getCharacter().getEquipment().getWeapon();
+
+        Texture texture;
+        if(weapon != null) {
+             texture = assetManager.get(selectedCharacter.getCharacter().getEquipment().getWeapon().getTexturePath(), Texture.class);
+        } else {
+            texture = assetManager.get(ModelConstants.TexturePath.FIST, Texture.class);
+        }
+
+        fightPopUpMenuWeaponsIcon.setTexture(texture);
     }
 }
