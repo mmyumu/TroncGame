@@ -27,6 +27,7 @@ import fr.mmyumu.troncgame.fight.popup.FightPopUpMenuNotReady;
 import fr.mmyumu.troncgame.fight.ui.FightMainInfos;
 import fr.mmyumu.troncgame.fight.ui.FightUI;
 import fr.mmyumu.troncgame.model.GameCharacter;
+import fr.mmyumu.troncgame.model.ModelConstants;
 import fr.mmyumu.troncgame.model.Team;
 
 /**
@@ -100,13 +101,13 @@ public class FightModule {
 
     @Provides
     @ActivityScope
-    EnemyFightTeamGenerator provideEnemyFightTeamGenerator(AssetManager assetManager, @Named("main") GameCharacter mainCharacter, Skin skin) {
+    EnemyFightTeamGenerator provideEnemyFightTeamGenerator(AssetManager assetManager, @Named(ModelConstants.Identifier.MAIN_CHARACTER) GameCharacter mainCharacter, Skin skin) {
         return new EnemyFightTeamGenerator(assetManager, mainCharacter, skin);
     }
 
     @Provides
-    FightPopUpMenuLogic provideFightPopUpMenuLogic(FightPopUpMenuNotReady fightPopUpMenuNotReady, @Named("spells") FightPopUpMenuIcon fightPopUpMenuSpellsIcon, @Named("weapons") FightPopUpMenuIcon fightPopUpMenuWeaponsIcon) {
-        return new FightPopUpMenuLogic(fightPopUpMenuNotReady, fightPopUpMenuSpellsIcon, fightPopUpMenuWeaponsIcon);
+    FightPopUpMenuLogic provideFightPopUpMenuLogic(AssetManager assetManager, FightPopUpMenuNotReady fightPopUpMenuNotReady, @Named("spells") FightPopUpMenuIcon fightPopUpMenuSpellsIcon, @Named("weapons") FightPopUpMenuIcon fightPopUpMenuWeaponsIcon) {
+        return new FightPopUpMenuLogic(assetManager, fightPopUpMenuNotReady, fightPopUpMenuSpellsIcon, fightPopUpMenuWeaponsIcon);
     }
 
     @Provides

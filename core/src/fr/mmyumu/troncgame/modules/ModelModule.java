@@ -7,7 +7,9 @@ import dagger.Provides;
 import fr.mmyumu.troncgame.ActivityScope;
 import fr.mmyumu.troncgame.fight.FightConstants;
 import fr.mmyumu.troncgame.model.GameCharacter;
+import fr.mmyumu.troncgame.model.ModelConstants;
 import fr.mmyumu.troncgame.model.Team;
+import fr.mmyumu.troncgame.model.Weapon;
 
 /**
  * Dagger module to provide Overworld
@@ -17,7 +19,7 @@ import fr.mmyumu.troncgame.model.Team;
 public class ModelModule {
     @Provides
     @ActivityScope
-    @Named("main")
+    @Named(ModelConstants.Identifier.MAIN_CHARACTER)
     GameCharacter provideMainCharacter() {
         GameCharacter character = new GameCharacter();
         character.setFightTexturePath(FightConstants.TexturePath.MAIN_CHARACTER);
@@ -51,7 +53,7 @@ public class ModelModule {
 
     @Provides
     @ActivityScope
-    Team provideTeam(@Named("main") GameCharacter mainCharacter, @Named("sideKick") GameCharacter sideKickCharacter) {
+    Team provideTeam(@Named(ModelConstants.Identifier.MAIN_CHARACTER) GameCharacter mainCharacter, @Named("sideKick") GameCharacter sideKickCharacter) {
         Team team = new Team();
         team.add(mainCharacter);
         team.add(sideKickCharacter);

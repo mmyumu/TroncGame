@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.Texture;
 import javax.inject.Inject;
 
 import fr.mmyumu.troncgame.TroncGame;
+import fr.mmyumu.troncgame.model.ModelConstants;
 
 /**
  * Loading screen when the application is started
@@ -28,7 +29,14 @@ public class MainMenuLoadingScreen extends ScreenAdapter {
     @Override
     public void show() {
         Gdx.app.debug(TAG, "Loading main menu");
-        assetManager.load("data/main_menu.png", Texture.class);
+        assetManager.load(MainMenuConstants.TexturePath.BACKGROUND, Texture.class);
+
+        loadWeapons();
+    }
+
+    private void loadWeapons() {
+        assetManager.load(ModelConstants.TexturePath.FIST, Texture.class);
+        assetManager.load(ModelConstants.TexturePath.BASIC_SWORD, Texture.class);
     }
 
     @Override

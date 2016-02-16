@@ -57,6 +57,10 @@ public class TroncGame extends Game {
         return fightComponent;
     }
 
+    public ModelComponent getModelComponent() {
+        return modelComponent;
+    }
+
     public void setInputProcessors(InputProcessor... inputProcessors) {
         GameInputProcessor gameInputProcessor = gameComponent.createGameInputProcessor();
         InputMultiplexer multiplexer = new InputMultiplexer();

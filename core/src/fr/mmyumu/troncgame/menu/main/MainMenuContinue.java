@@ -34,6 +34,11 @@ public class MainMenuContinue extends MainMenuButton {
 
         gameStatePersister.loadModel();
 
+        Screen screen = loadScreen();
+        troncGame.setScreen(screen);
+    }
+
+    private Screen loadScreen() {
         ScreenID screenID = gameStatePersister.loadScreen();
         Screen screen;
         switch (screenID) {
@@ -47,7 +52,7 @@ public class MainMenuContinue extends MainMenuButton {
             default:
                 screen = troncGame.getMainMenuComponent().createMainMenuLoadingScreen();
         }
-        troncGame.setScreen(screen);
+        return screen;
     }
 
     @Override
