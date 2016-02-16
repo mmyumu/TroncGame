@@ -6,10 +6,12 @@ package fr.mmyumu.troncgame.model;
  */
 public class Item {
     private String identifier;
+    private String name;
     private String texturePath;
 
-    public Item(String identifier, String texturePath) {
+    public Item(String identifier, String name, String texturePath) {
         this.identifier = identifier;
+        this.name = name;
         this.texturePath = texturePath;
     }
 

@@ -8,6 +8,8 @@ import com.badlogic.gdx.utils.I18NBundle;
 import javax.inject.Inject;
 
 import fr.mmyumu.troncgame.TroncGame;
+import fr.mmyumu.troncgame.model.ModelConstants;
+import fr.mmyumu.troncgame.model.Weapon;
 import fr.mmyumu.troncgame.model.manager.ItemManager;
 import fr.mmyumu.troncgame.persistence.GameStatePersister;
 
@@ -37,7 +39,7 @@ public class MainMenuStart extends MainMenuButton {
 
         gameStatePersister.clear();
 
-        troncGame.getModelComponent().mainCharacter().getEquipment().equip(itemManager.basicSword());
+        troncGame.getModelComponent().mainCharacter().getEquipment().equip((Weapon) itemManager.get(ModelConstants.Identifier.BASIC_SWORD));
 
         troncGame.setScreen(troncGame.getOverworldComponent().createOverworldLoadingScreen());
     }

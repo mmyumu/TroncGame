@@ -14,4 +14,7 @@ public interface ModelConstants {
         String FIST = "data/items/weapons/fist.png";
         String BASIC_SWORD = "data/items/weapons/basic_sword.png";
     }
+    interface DataPath {
+        String ITEMS = "data/items/items.xml";
+    }
 }
