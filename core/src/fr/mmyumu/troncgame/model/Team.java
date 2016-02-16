@@ -21,4 +21,8 @@ public class Team {
     public List<GameCharacter> getCharacters() {
         return characters;
     }
+
+    public void clear() {
+        characters.clear();
+    }
 }
