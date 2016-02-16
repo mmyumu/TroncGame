@@ -19,6 +19,12 @@ public class GameCharacter {
     private String fightTexturePath;
     private boolean usingAI;
 
+    private Equipment equipment;
+
+    public GameCharacter() {
+        equipment = new Equipment();
+    }
+
     public String getIdentifier() {
         return identifier;
     }
@@ -76,9 +82,14 @@ public class GameCharacter {
     }
 
     public int attack(GameCharacter character) {
-        character.setHp(character.getHp() - attack);
-        Gdx.app.debug(TAG, getName() + " is attacking " + character.getName() + " for " + attack + " damage. " + character.getHp() + "HP left.");
-        return attack;
+        int totalAttack = attack;
+        Weapon weapon = equipment.getWeapon();
+        if (weapon != null) {
+            totalAttack += weapon.getAttack();
+        }
+        character.setHp(character.getHp() - totalAttack);
+        Gdx.app.debug(TAG, getName() + " is attacking " + character.getName() + " for " + totalAttack + " damage. " + character.getHp() + "HP left.");
+        return totalAttack;
     }
 
     public boolean isAlive() {
@@ -99,5 +110,10 @@ public class GameCharacter {
 
     public void setUsingAI(boolean usingAI) {
         this.usingAI = usingAI;
+    }
+
+    public Equipment getEquipment() {
+
+        return equipment;
     }
 }
