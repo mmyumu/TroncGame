@@ -14,6 +14,7 @@ import dagger.Provides;
 import fr.mmyumu.troncgame.ActivityScope;
 import fr.mmyumu.troncgame.CompassPoint;
 import fr.mmyumu.troncgame.Constants;
+import fr.mmyumu.troncgame.FontManager;
 import fr.mmyumu.troncgame.TroncGame;
 import fr.mmyumu.troncgame.fight.FightConstants;
 import fr.mmyumu.troncgame.fight.FightLoadingScreen;
@@ -64,15 +65,15 @@ public class FightModule {
     @Provides
     @ActivityScope
     @Named("spells")
-    FightPopUpMenuIcon provideFightPopUpMenuSpellIcon(AssetManager assetManager) {
-        return new FightPopUpMenuIcon(FightConstants.TexturePath.SPELLS_ICON, CompassPoint.NORTH, assetManager, false);
+    FightPopUpMenuIcon provideFightPopUpMenuSpellIcon(AssetManager assetManager, I18NBundle bundle, FontManager fontManager) {
+        return new FightPopUpMenuIcon(FightConstants.TexturePath.SPELLS_ICON, CompassPoint.NORTH, assetManager, bundle.get("fight.spells"), fontManager, false);
     }
 
     @Provides
     @ActivityScope
     @Named("weapons")
-    FightPopUpMenuIcon provideFightPopUpMenuWeaponsIcon(AssetManager assetManager) {
-        return new FightPopUpMenuIcon(FightConstants.TexturePath.WEAPONS_ICON, CompassPoint.SOUTH, assetManager, true);
+    FightPopUpMenuIcon provideFightPopUpMenuWeaponsIcon(AssetManager assetManager, I18NBundle bundle, FontManager fontManager) {
+        return new FightPopUpMenuIcon(FightConstants.TexturePath.WEAPONS_ICON, CompassPoint.SOUTH, assetManager, bundle.get("fight.attack"), fontManager, true);
     }
 
     @Provides

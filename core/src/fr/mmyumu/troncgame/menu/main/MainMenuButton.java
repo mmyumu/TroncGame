@@ -72,21 +72,6 @@ public abstract class MainMenuButton extends Actor {
     @Override
     public void draw(Batch batch, float alpha) {
         font.draw(batch, bundle.get(getPropertyKey()), getX(), getY() + getHeight());
-        batch.end();
-
-        shapeRenderer.setProjectionMatrix(batch.getProjectionMatrix());
-        shapeRenderer.setTransformMatrix(batch.getTransformMatrix());
-
-        GL20 gl = Gdx.graphics.getGL20();
-        gl.glEnable(GL20.GL_BLEND);
-        gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
-        shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-        shapeRenderer.setColor(1f, 1f, 1f, 0.0f);
-        shapeRenderer.rect(getX(), getY(), getWidth(), getHeight());
-        shapeRenderer.end();
-        gl.glDisable(GL20.GL_BLEND);
-
-        batch.begin();
     }
 
     protected abstract void buttonClicked(InputEvent event, float x, float y);

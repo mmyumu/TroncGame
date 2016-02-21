@@ -17,6 +17,7 @@ import dagger.Module;
 import dagger.Provides;
 import fr.mmyumu.troncgame.ActivityScope;
 import fr.mmyumu.troncgame.Constants;
+import fr.mmyumu.troncgame.FontManager;
 import fr.mmyumu.troncgame.GameInputProcessor;
 import fr.mmyumu.troncgame.TroncGame;
 import fr.mmyumu.troncgame.Utils;
@@ -95,5 +96,11 @@ public class GameModule {
     @Provides
     GameStatePersister provideGameStatePersister(Team team, ItemManager itemManager) {
         return new GameStatePersister(team, itemManager);
+    }
+
+    @Provides
+    @ActivityScope
+    FontManager provideFontManager() {
+        return new FontManager();
     }
 }
