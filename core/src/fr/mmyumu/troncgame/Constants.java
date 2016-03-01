@@ -16,5 +16,6 @@ public interface Constants {
         String PRESS_START_2P = "fonts/PressStart2P.ttf";
         String BM_BLOCK = "fonts/BMblock.TTF";
         String KARMATIC_ARCADE = "fonts/ka1.TTF";
+        String VISITOR = "fonts/visitor1.ttf";
     }
 }
