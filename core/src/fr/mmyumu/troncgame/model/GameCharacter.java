@@ -1,16 +1,37 @@
 package fr.mmyumu.troncgame.model;
 
+import com.badlogic.gdx.Gdx;
+
 /**
  * Manage a character of the game
  * Created by mmyumu on 01/01/2016.
  */
 public class GameCharacter {
+    private static final String TAG = "GameCharacter";
+    private String identifier;
     private String name;
-    private Integer hp;
-    private Integer mp;
+    private int hp;
+    private int mp;
     private double actionSpeed;
+    private int attack;
+    private boolean friendly;
 
     private String fightTexturePath;
+    private boolean usingAI;
+
+    private Equipment equipment;
+
+    public GameCharacter() {
+        equipment = new Equipment();
+    }
+
+    public String getIdentifier() {
+        return identifier;
+    }
+
+    public void setIdentifier(String identifier) {
+        this.identifier = identifier;
+    }
 
     public String getName() {
         return name;
@@ -20,19 +41,19 @@ public class GameCharacter {
         this.name = name;
     }
 
-    public Integer getHp() {
+    public int getHp() {
         return hp;
     }
 
-    public void setHp(Integer hp) {
+    public void setHp(int hp) {
         this.hp = hp;
     }
 
-    public Integer getMp() {
+    public int getMp() {
         return mp;
     }
 
-    public void setMp(Integer mp) {
+    public void setMp(int mp) {
         this.mp = mp;
     }
 
@@ -44,11 +65,55 @@ public class GameCharacter {
         this.actionSpeed = actionSpeed;
     }
 
+    public int getAttack() {
+        return attack;
+    }
+
+    public void setAttack(int attack) {
+        this.attack = attack;
+    }
+
     public String getFightTexturePath() {
         return fightTexturePath;
     }
 
     public void setFightTexturePath(String fightTexturePath) {
         this.fightTexturePath = fightTexturePath;
+    }
+
+    public int attack(GameCharacter character) {
+        int totalAttack = attack;
+        Weapon weapon = equipment.getWeapon();
+        if (weapon != null) {
+            totalAttack += weapon.getAttack();
+        }
+        character.setHp(character.getHp() - totalAttack);
+        Gdx.app.debug(TAG, getName() + " is attacking " + character.getName() + " for " + totalAttack + " damage. " + character.getHp() + "HP left.");
+        return totalAttack;
+    }
+
+    public boolean isAlive() {
+        return hp > 0;
+    }
+
+    public boolean isFriendly() {
+        return friendly;
+    }
+
+    public void setFriendly(boolean friendly) {
+        this.friendly = friendly;
+    }
+
+    public boolean isUsingAI() {
+        return usingAI;
+    }
+
+    public void setUsingAI(boolean usingAI) {
+        this.usingAI = usingAI;
+    }
+
+    public Equipment getEquipment() {
+
+        return equipment;
     }
 }

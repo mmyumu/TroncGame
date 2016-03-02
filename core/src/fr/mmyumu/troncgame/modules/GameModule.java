@@ -3,14 +3,11 @@ package fr.mmyumu.troncgame.modules;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.files.FileHandle;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.I18NBundle;
-import com.badlogic.gdx.utils.Scaling;
-import com.badlogic.gdx.utils.viewport.ScalingViewport;
 
 import java.util.Locale;
 
@@ -20,10 +17,14 @@ import dagger.Module;
 import dagger.Provides;
 import fr.mmyumu.troncgame.ActivityScope;
 import fr.mmyumu.troncgame.Constants;
+import fr.mmyumu.troncgame.FontManager;
 import fr.mmyumu.troncgame.GameInputProcessor;
 import fr.mmyumu.troncgame.TroncGame;
 import fr.mmyumu.troncgame.Utils;
+import fr.mmyumu.troncgame.model.Team;
+import fr.mmyumu.troncgame.model.manager.ItemManager;
 import fr.mmyumu.troncgame.overworld.OverworldConstants;
+import fr.mmyumu.troncgame.persistence.GameStatePersister;
 
 /**
  * Dagger module to provide game
@@ -65,8 +66,8 @@ public class GameModule {
     }
 
     @Provides
-    GameInputProcessor provideGameInputProcessor() {
-        return new GameInputProcessor(troncGame);
+    GameInputProcessor provideGameInputProcessor(GameStatePersister gameStatePersister) {
+        return new GameInputProcessor(troncGame, gameStatePersister);
     }
 
     @Provides
@@ -90,5 +91,16 @@ public class GameModule {
         skin.load(Gdx.files.internal(OverworldConstants.SkinPath.SKIN_JSON));
 
         return skin;
+    }
+
+    @Provides
+    GameStatePersister provideGameStatePersister(Team team, ItemManager itemManager) {
+        return new GameStatePersister(team, itemManager);
+    }
+
+    @Provides
+    @ActivityScope
+    FontManager provideFontManager() {
+        return new FontManager();
     }
 }

@@ -1,5 +1,6 @@
 package fr.mmyumu.troncgame.fight;
 
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
 import fr.mmyumu.troncgame.model.GameCharacter;
@@ -9,7 +10,7 @@ import fr.mmyumu.troncgame.model.GameCharacter;
  * Created by mmyumu on 10/01/2016.
  */
 public class FightCharacterLogic extends Actor {
-    private GameCharacter character;
+    private final GameCharacter character;
 
     private double actionValue;
 
@@ -40,5 +41,17 @@ public class FightCharacterLogic extends Actor {
 
     public boolean isReady() {
         return actionValue == FightConstants.MainInfos.MAX_ACTION_VALUE;
+    }
+
+    public void attack(FightCharacter targetCharacter) {
+        int damage = getCharacter().attack(targetCharacter.getCharacter());
+        targetCharacter.displayDamage(damage);
+        actionValue = 0;
+    }
+
+    public Vector2 getCenter() {
+        float x = getX() + getWidth() / 2;
+        float y = getY() + getHeight() / 2;
+        return new Vector2(x, y);
     }
 }

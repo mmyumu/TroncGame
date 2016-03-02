@@ -14,6 +14,8 @@ public interface FightConstants {
     int MAIN_INFOS_WIDTH = 800;
     int MAIN_INFOS_HEIGHT = 250;
 
+    int LABEL_WIDTH = 100;
+    int LABEL_HEIGHT = 50;
 
     interface MusicPath {
         String FIRST_CHIPTUNE = "music/first_chiptune.ogg";
@@ -21,10 +23,11 @@ public interface FightConstants {
 
     interface TexturePath {
         String BACKGROUND_PLAIN = "data/fight/background_plain.png";
-        String MAIN_CHARACTER = "data/fight/main_character.png";
-        String SIDEKICK_CHARACTER = "data/fight/sidekick_character.png";
+        String MAIN_CHARACTER = "data/fight/heroine_droite.png";
+        String SIDEKICK_CHARACTER = "data/fight/compagnon_droite.png";
+        String ENEMY = "data/fight/ennemi_gauche.png";
         String SPELLS_ICON = "data/fight/spells.png";
-        String WEAPONS_ICON = "data/fight/weapons.png";
+        String WEAPONS_ICON = "data/fight/icon4.png";
         String MAIN_INFOS = "data/fight/main_infos.png";
         String ACTION_BAR = "data/fight/action_bar.png";
     }

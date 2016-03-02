@@ -5,6 +5,7 @@ import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.viewport.ScalingViewport;
 
 import java.util.concurrent.ThreadLocalRandom;
@@ -21,6 +22,8 @@ import fr.mmyumu.troncgame.overworld.game.OverworldMap;
 import fr.mmyumu.troncgame.overworld.menu.OverworldMenu;
 import fr.mmyumu.troncgame.overworld.ui.OverworldUI;
 import fr.mmyumu.troncgame.overworld.ui.OverworldUIInputProcessor;
+import fr.mmyumu.troncgame.persistence.GameStatePersister;
+import fr.mmyumu.troncgame.persistence.ScreenID;
 
 /**
  * Overworld screen displaying a top-down view to the world
@@ -34,6 +37,7 @@ public class OverworldScreen extends ScreenAdapter {
     private final TroncGame troncGame;
     private final AssetManager assetManager;
     private final ScalingViewport gameViewport;
+    private final GameStatePersister gameStatePersister;
     private OverworldUI overworldUI;
     private OverworldMenu overworldMenu;
 
@@ -43,12 +47,21 @@ public class OverworldScreen extends ScreenAdapter {
     private ScreenState screenState;
 
     @Inject
-    public OverworldScreen(TroncGame troncGame, AssetManager assetManager, @Named("game") ScalingViewport gameViewport) {
+    public OverworldScreen(TroncGame troncGame, AssetManager assetManager, @Named("game") ScalingViewport gameViewport, GameStatePersister gameStatePersister) {
         this.troncGame = troncGame;
         this.assetManager = assetManager;
         this.gameViewport = gameViewport;
+        this.gameStatePersister = gameStatePersister;
 
         initStages();
+
+        screenState = ScreenState.RUNNING;
+
+        OrthographicCamera gameCamera = (OrthographicCamera) gameViewport.getCamera();
+        map = new OverworldMap(OverworldConstants.MapPath.VILLAGE, gameCamera, assetManager);
+
+
+        mainCharacter = loadMainCharacter();
     }
 
     private void initStages() {
@@ -64,13 +77,8 @@ public class OverworldScreen extends ScreenAdapter {
     public void show() {
         Gdx.app.debug(TAG, "Showing Overworld");
 
-        screenState = ScreenState.RUNNING;
-
-        OrthographicCamera gameCamera = (OrthographicCamera) gameViewport.getCamera();
-        map = new OverworldMap(OverworldConstants.MapPath.VILLAGE, gameCamera, assetManager);
-        mainCharacter = loadMainCharacter();
-
         initInputProcessors();
+        saveState();
     }
 
     /**
@@ -164,13 +172,15 @@ public class OverworldScreen extends ScreenAdapter {
      * Load the character and add it to the gameStage
      */
     private OverworldCharacter loadMainCharacter() {
-        float centerX = OverworldConstants.TILE_WIDTH * 1.5f;
-        float centerY = OverworldConstants.TILE_HEIGHT * 1.5f;
-
-
         OverworldCharacter overworldCharacter = troncGame.getOverworldComponent().createOverworldCharacter();
-        overworldCharacter.initCenter((int) centerX, (int) centerY);
         overworldCharacter.setObstaclesLayer(map.getObstaclesLayer());
+
+        Vector2 position = gameStatePersister.loadPosition();
+        if (position == null) {
+            position = new Vector2(OverworldConstants.TILE_WIDTH * 1.5f, OverworldConstants.TILE_HEIGHT * 1.5f);
+        }
+
+        overworldCharacter.initCenter((int) position.x, (int) position.y);
 
         return overworldCharacter;
     }
@@ -208,5 +218,19 @@ public class OverworldScreen extends ScreenAdapter {
     public void resumeGame() {
         screenState = ScreenState.RUNNING;
         initInputProcessors();
+    }
+
+    @Override
+    public void hide() {
+        super.hide();
+        saveState();
+    }
+
+    private void saveState() {
+        Gdx.app.debug(TAG, "Save state in overworld");
+        gameStatePersister.saveModel();
+
+        gameStatePersister.save(mainCharacter);
+        gameStatePersister.save(ScreenID.OVERWORLD);
     }
 }

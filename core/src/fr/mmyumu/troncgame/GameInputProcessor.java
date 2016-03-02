@@ -1,5 +1,6 @@
 package fr.mmyumu.troncgame;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.Screen;
@@ -7,6 +8,7 @@ import com.badlogic.gdx.Screen;
 import javax.inject.Inject;
 
 import fr.mmyumu.troncgame.audio.Musical;
+import fr.mmyumu.troncgame.persistence.GameStatePersister;
 
 /**
  * Input processor that is always added to the game
@@ -14,11 +16,15 @@ import fr.mmyumu.troncgame.audio.Musical;
  */
 public class GameInputProcessor extends InputAdapter {
 
-    private TroncGame troncGame;
+    private static final String TAG = "GameInputProcessor";
+
+    private final GameStatePersister gameStatePersister;
+    private final TroncGame troncGame;
 
     @Inject
-    public GameInputProcessor(TroncGame troncGame) {
+    public GameInputProcessor(TroncGame troncGame, GameStatePersister gameStatePersister) {
         this.troncGame = troncGame;
+        this.gameStatePersister = gameStatePersister;
     }
 
     @Override
@@ -35,6 +41,9 @@ public class GameInputProcessor extends InputAdapter {
                     musicalScreen.play();
                 }
             }
+        } else if (keycode == Input.Keys.C) {
+            Gdx.app.debug(TAG, "Clear game state");
+            gameStatePersister.clear();
         }
         return false;
     }

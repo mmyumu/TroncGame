@@ -1,41 +1,41 @@
 package fr.mmyumu.troncgame.menu.main;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.ScreenAdapter;
+import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
 
-import javax.inject.Inject;
-
+import fr.mmyumu.troncgame.DisplayableLoadingScreen;
 import fr.mmyumu.troncgame.TroncGame;
+import fr.mmyumu.troncgame.model.ModelConstants;
 
 /**
  * Loading screen when the application is started
  * Created by mmyumu on 24/10/2015.
  */
-public class MainMenuLoadingScreen extends ScreenAdapter {
-    private static final String TAG = "LoadingScreen";
+public class MainMenuLoadingScreen extends DisplayableLoadingScreen {
 
-    private final TroncGame troncGame;
-    private final AssetManager assetManager;
-
-    @Inject
     public MainMenuLoadingScreen(TroncGame troncGame, AssetManager assetManager) {
-        this.troncGame = troncGame;
-        this.assetManager = assetManager;
+        super(troncGame, assetManager);
     }
 
     @Override
-    public void show() {
-        Gdx.app.debug(TAG, "Loading main menu");
-        assetManager.load("data/main_menu.png", Texture.class);
+    protected Screen getNextScreen() {
+        return troncGame.getMainMenuComponent().createMainMenuScreen();
     }
 
     @Override
-    public void render(float delta) {
-        if (assetManager.update()) {
-            troncGame.setScreen(troncGame.getMainMenuComponent().createMainMenuScreen());
-        }
-        Gdx.app.debug(TAG, ".");
+    protected void load() {
+        assetManager.load(MainMenuConstants.TexturePath.BACKGROUND, Texture.class);
+        loadWeapons();
+    }
+
+    private void loadWeapons() {
+        assetManager.load(ModelConstants.TexturePath.FIST, Texture.class);
+        assetManager.load(ModelConstants.TexturePath.BASIC_SWORD, Texture.class);
+    }
+
+    @Override
+    protected String getDebugName() {
+        return "main menu";
     }
 }

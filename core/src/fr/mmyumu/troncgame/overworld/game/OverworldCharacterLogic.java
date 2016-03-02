@@ -41,6 +41,10 @@ public class OverworldCharacterLogic {
         initHitbox(center);
     }
 
+    public Vector2 getCenter() {
+        return center;
+    }
+
     public void setObstaclesLayer(TiledMapTileLayer obstaclesLayer) {
         this.obstaclesLayer = obstaclesLayer;
     }
@@ -64,10 +68,6 @@ public class OverworldCharacterLogic {
         }
     }
 
-    public void setMoveTarget(GridPoint2 moveTarget) {
-        this.moveTarget = moveTarget;
-    }
-
     public void cameraMoved(float x, float y) {
         if (moveTarget != null) {
             Gdx.app.debug(TAG, "Camera moved x=" + x + " y=" + y);
@@ -86,6 +86,10 @@ public class OverworldCharacterLogic {
 
     public GridPoint2 getMoveTarget() {
         return moveTarget;
+    }
+
+    public void setMoveTarget(GridPoint2 moveTarget) {
+        this.moveTarget = moveTarget;
     }
 
     private void move(float delta) {
