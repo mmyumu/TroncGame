@@ -9,6 +9,7 @@ import com.badlogic.gdx.InputProcessor;
 import fr.mmyumu.troncgame.components.DaggerModelComponent;
 import fr.mmyumu.troncgame.components.FightComponent;
 import fr.mmyumu.troncgame.components.GameComponent;
+import fr.mmyumu.troncgame.components.IntroductionComponent;
 import fr.mmyumu.troncgame.components.MainMenuComponent;
 import fr.mmyumu.troncgame.components.ModelComponent;
 import fr.mmyumu.troncgame.components.OverworldComponent;
@@ -24,6 +25,7 @@ public class TroncGame extends Game {
     private MainMenuComponent mainMenuComponent;
     private OverworldComponent overworldComponent;
     private FightComponent fightComponent;
+    private IntroductionComponent introductionComponent;
 
     public TroncGame() {
         ModelModule modelModule = new ModelModule();
@@ -37,12 +39,13 @@ public class TroncGame extends Game {
         fightComponent = gameComponent.createFightComponent(fightModule);
         mainMenuComponent = gameComponent.createMainMenuComponent(mainMenuModule);
         overworldComponent = gameComponent.createOverworldComponent(overworldModule);
+        introductionComponent = gameComponent.createIntroductionComponent();
     }
 
     @Override
     public void create() {
         Gdx.app.setLogLevel(Application.LOG_DEBUG);
-        setScreen(mainMenuComponent.createMainMenuLoadingScreen());
+        setScreen(gameComponent.loadingScreen());
     }
 
     public MainMenuComponent getMainMenuComponent() {
@@ -71,5 +74,9 @@ public class TroncGame extends Game {
         }
 
         Gdx.input.setInputProcessor(multiplexer);
+    }
+
+    public IntroductionComponent getIntroductionComponent() {
+        return introductionComponent;
     }
 }

@@ -10,6 +10,7 @@ public interface Constants {
 
     interface TexturePath {
         String MAIN_MENU = "data/main_menu.png";
+        String LOADING = "data/loading_screen.png";
     }
 
     interface FontPath {
