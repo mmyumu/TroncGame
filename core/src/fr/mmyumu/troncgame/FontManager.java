@@ -14,6 +14,10 @@ public class FontManager {
         return loadFont(Constants.FontPath.KARMATIC_ARCADE, color, size);
     }
 
+    public BitmapFont loadVisitor(Color color, int size) {
+        return loadFont(Constants.FontPath.VISITOR, color, size);
+    }
+
     private BitmapFont loadFont(String fontPath, Color color, int size) {
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal(fontPath));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();

@@ -21,7 +21,6 @@ import fr.mmyumu.troncgame.model.Weapon;
  */
 public class ItemManager {
     private static final String TAG = "ItemManager";
-    private static final String BASIC_SWORD = "sword.basic";
 
     private Map<String, Item> items;
 

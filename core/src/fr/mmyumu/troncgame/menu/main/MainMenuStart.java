@@ -41,7 +41,7 @@ public class MainMenuStart extends MainMenuButton {
 
         troncGame.getModelComponent().mainCharacter().getEquipment().equip((Weapon) itemManager.get(ModelConstants.Identifier.BASIC_SWORD));
 
-        troncGame.setScreen(troncGame.getOverworldComponent().createOverworldLoadingScreen());
+        troncGame.setScreen(troncGame.getIntroductionComponent().introductionLoadingScreen());
     }
 
     @Override

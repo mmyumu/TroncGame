@@ -3,6 +3,7 @@ package fr.mmyumu.troncgame.components;
 import dagger.Subcomponent;
 import fr.mmyumu.troncgame.ActivityScope;
 import fr.mmyumu.troncgame.GameInputProcessor;
+import fr.mmyumu.troncgame.GameLoadingScreen;
 import fr.mmyumu.troncgame.TroncGame;
 import fr.mmyumu.troncgame.modules.FightModule;
 import fr.mmyumu.troncgame.modules.GameModule;
@@ -22,10 +23,14 @@ public interface GameComponent {
 
     GameInputProcessor createGameInputProcessor();
 
+    GameLoadingScreen loadingScreen();
+
     /* Sub components */
     FightComponent createFightComponent(FightModule fightModule);
 
     MainMenuComponent createMainMenuComponent(MainMenuModule mainMenuModule);
 
     OverworldComponent createOverworldComponent(OverworldModule overworldModule);
+
+    IntroductionComponent createIntroductionComponent();
 }
