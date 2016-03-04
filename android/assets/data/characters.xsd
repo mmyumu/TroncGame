@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:element name="characters">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element maxOccurs="unbounded" ref="character"></xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="character">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="attack"></xsd:element>
+                <xsd:element ref="actionSpeed"></xsd:element>
+                <xsd:element ref="hp"></xsd:element>
+                <xsd:element ref="mp"></xsd:element>
+                <xsd:element ref="fight"></xsd:element>
+            </xsd:sequence>
+            <xsd:attribute ref="id"></xsd:attribute>
+            <xsd:attribute ref="name"></xsd:attribute>
+            <xsd:attribute ref="friendly"></xsd:attribute>
+            <xsd:attribute ref="usingAI"></xsd:attribute>
+            <xsd:attribute ref="playable"></xsd:attribute>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="fight">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="waitingTexture"></xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="overworld">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="rightTexture"></xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="waitingTexture" type="xsd:string"></xsd:element>
+
+    <xsd:element name="rightTexture" type="xsd:string"></xsd:element>
+
+    <xsd:element name="attack" type="xsd:int"></xsd:element>
+    <xsd:element name="actionSpeed" type="xsd:int"></xsd:element>
+    <xsd:element name="hp" type="xsd:int"></xsd:element>
+    <xsd:element name="mp" type="xsd:int"></xsd:element>
+
+    <xsd:attribute name="id" type="xsd:ID"></xsd:attribute>
+    <xsd:attribute name="name" type="xsd:string"></xsd:attribute>
+    <xsd:attribute name="friendly" type="xsd:boolean" default="false"></xsd:attribute>
+    <xsd:attribute name="usingAI" type="xsd:boolean" default="false"></xsd:attribute>
+    <xsd:attribute name="playable" type="xsd:boolean" default="false"></xsd:attribute>
+</xsd:schema>

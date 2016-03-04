@@ -7,9 +7,8 @@ import com.badlogic.gdx.math.Vector2;
 import javax.inject.Inject;
 
 import fr.mmyumu.troncgame.model.GameCharacter;
-import fr.mmyumu.troncgame.model.Team;
 import fr.mmyumu.troncgame.model.Weapon;
-import fr.mmyumu.troncgame.model.manager.ItemManager;
+import fr.mmyumu.troncgame.model.manager.ModelManager;
 import fr.mmyumu.troncgame.overworld.game.OverworldCharacter;
 
 /**
@@ -26,14 +25,12 @@ public class GameStatePersister {
     private static final String CHARACTER_MP = "character.mp";
     private static final String CHARACTER_EQUIPMENT_WEAPON = "character.equipment.weapon";
 
-    private final Team team;
-    private ItemManager itemManager;
+    private final ModelManager modelManager;
     private Preferences preferences;
 
     @Inject
-    public GameStatePersister(Team team, ItemManager itemManager) {
-        this.team = team;
-        this.itemManager = itemManager;
+    public GameStatePersister(ModelManager modelManager) {
+        this.modelManager = modelManager;
         this.preferences = Gdx.app.getPreferences(PREF_NAME_OPTION);
     }
 
@@ -84,23 +81,23 @@ public class GameStatePersister {
     }
 
     private void saveTeam() {
-        for (GameCharacter character : team.getCharacters()) {
+        for (GameCharacter character : modelManager.getCharacterManager().getTeam().getCharacters()) {
             saveCharacter(character);
         }
         preferences.flush();
     }
 
     private void saveCharacter(GameCharacter character) {
-        preferences.putInteger(CHARACTER_HP + "." + character.getIdentifier(), character.getHp());
-        preferences.putInteger(CHARACTER_MP + "." + character.getIdentifier(), character.getMp());
+        preferences.putInteger(CHARACTER_HP + "." + character.getDefinition().getIdentifier(), character.getCurrentHp());
+        preferences.putInteger(CHARACTER_MP + "." + character.getDefinition().getIdentifier(), character.getCurrentMp());
 
         saveEquipment(character);
     }
 
     private void saveEquipment(GameCharacter character) {
         Weapon weapon = character.getEquipment().getWeapon();
-        if(weapon != null) {
-            preferences.putString(CHARACTER_EQUIPMENT_WEAPON + "." + character.getIdentifier(), weapon.getIdentifier());
+        if (weapon != null) {
+            preferences.putString(CHARACTER_EQUIPMENT_WEAPON + "." + character.getDefinition().getIdentifier(), weapon.getIdentifier());
         }
     }
 
@@ -109,22 +106,23 @@ public class GameStatePersister {
     }
 
     private void loadTeam() {
-        for (GameCharacter character : team.getCharacters()) {
+        modelManager.getCharacterManager().newTeam();
+        for (GameCharacter character : modelManager.getCharacterManager().getTeam().getCharacters()) {
             loadCharacter(character);
         }
     }
 
     private void loadCharacter(GameCharacter character) {
-        character.setHp(preferences.getInteger(CHARACTER_HP + "." + character.getIdentifier()));
-        character.setMp(preferences.getInteger(CHARACTER_MP + "." + character.getIdentifier()));
+        character.setCurrentHp(preferences.getInteger(CHARACTER_HP + "." + character.getDefinition().getIdentifier()));
+        character.setCurrentMp(preferences.getInteger(CHARACTER_MP + "." + character.getDefinition().getIdentifier()));
 
         loadEquipment(character);
     }
 
     private void loadEquipment(GameCharacter character) {
-        String weaponID = preferences.getString(CHARACTER_EQUIPMENT_WEAPON + "." + character.getIdentifier());
-        if(weaponID != null) {
-            Weapon weapon = (Weapon) itemManager.get(weaponID);
+        String weaponID = preferences.getString(CHARACTER_EQUIPMENT_WEAPON + "." + character.getDefinition().getIdentifier());
+        if (weaponID != null) {
+            Weapon weapon = modelManager.getItemManager().getWeapon(weaponID);
             character.getEquipment().equip(weapon);
         }
     }

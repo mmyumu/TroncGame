@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:element name="items">
+        <xsd:complexType>
+            <xsd:choice>
+                <xsd:element maxOccurs="unbounded" ref="weapon"></xsd:element>
+            </xsd:choice>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="weapon">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="attack"></xsd:element>
+                <xsd:element ref="texture"></xsd:element>
+            </xsd:sequence>
+            <xsd:attribute ref="id"></xsd:attribute>
+            <xsd:attribute ref="name"></xsd:attribute>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="attack" type="xsd:int"></xsd:element>
+    <xsd:element name="texture" type="xsd:string"></xsd:element>
+
+    <xsd:attribute name="id" type="xsd:ID"></xsd:attribute>
+    <xsd:attribute name="name" type="xsd:string"></xsd:attribute>
+</xsd:schema>

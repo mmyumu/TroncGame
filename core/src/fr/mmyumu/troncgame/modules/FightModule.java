@@ -27,9 +27,7 @@ import fr.mmyumu.troncgame.fight.popup.FightPopUpMenuLogic;
 import fr.mmyumu.troncgame.fight.popup.FightPopUpMenuNotReady;
 import fr.mmyumu.troncgame.fight.ui.FightMainInfos;
 import fr.mmyumu.troncgame.fight.ui.FightUI;
-import fr.mmyumu.troncgame.model.GameCharacter;
-import fr.mmyumu.troncgame.model.ModelConstants;
-import fr.mmyumu.troncgame.model.Team;
+import fr.mmyumu.troncgame.model.manager.CharacterManager;
 
 /**
  * Dagger module to provide Fight
@@ -102,8 +100,8 @@ public class FightModule {
 
     @Provides
     @ActivityScope
-    EnemyFightTeamGenerator provideEnemyFightTeamGenerator(AssetManager assetManager, @Named(ModelConstants.Identifier.MAIN_CHARACTER) GameCharacter mainCharacter, Skin skin) {
-        return new EnemyFightTeamGenerator(assetManager, mainCharacter, skin);
+    EnemyFightTeamGenerator provideEnemyFightTeamGenerator(AssetManager assetManager, CharacterManager characterManager, Skin skin) {
+        return new EnemyFightTeamGenerator(assetManager, characterManager, skin);
     }
 
     @Provides
@@ -112,7 +110,7 @@ public class FightModule {
     }
 
     @Provides
-    FightLogic provideFightLogic(AssetManager assetManager, I18NBundle bundle, Skin skin, Team team, EnemyFightTeamGenerator enemyFightTeamGenerator, FightPopUpMenuLogic fightPopUpMenuLogic) {
-        return new FightLogic(assetManager, bundle, skin, team, enemyFightTeamGenerator, fightPopUpMenuLogic);
+    FightLogic provideFightLogic(AssetManager assetManager, I18NBundle bundle, Skin skin, CharacterManager characterManager, EnemyFightTeamGenerator enemyFightTeamGenerator, FightPopUpMenuLogic fightPopUpMenuLogic) {
+        return new FightLogic(assetManager, bundle, skin, characterManager, enemyFightTeamGenerator, fightPopUpMenuLogic);
     }
 }

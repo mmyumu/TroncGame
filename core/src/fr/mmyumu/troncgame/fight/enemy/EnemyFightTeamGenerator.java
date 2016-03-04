@@ -12,6 +12,7 @@ import javax.inject.Inject;
 import fr.mmyumu.troncgame.fight.FightCharacter;
 import fr.mmyumu.troncgame.fight.FightConstants;
 import fr.mmyumu.troncgame.model.GameCharacter;
+import fr.mmyumu.troncgame.model.manager.CharacterManager;
 
 /**
  * Generate an enemy team from the location of the character
@@ -19,13 +20,13 @@ import fr.mmyumu.troncgame.model.GameCharacter;
  */
 public class EnemyFightTeamGenerator {
     private final AssetManager assetManager;
-    private final GameCharacter gameCharacter;
+    private final CharacterManager characterManager;
     private final Skin skin;
 
     @Inject
-    public EnemyFightTeamGenerator(AssetManager assetManager, GameCharacter gameCharacter, Skin skin) {
+    public EnemyFightTeamGenerator(AssetManager assetManager, CharacterManager characterManager, Skin skin) {
         this.assetManager = assetManager;
-        this.gameCharacter = gameCharacter;
+        this.characterManager = characterManager;
         this.skin = skin;
     }
 
@@ -34,25 +35,14 @@ public class EnemyFightTeamGenerator {
 
         // TODO: generate according to the location of the game character
 
-        GameCharacter enemy1 = createEnemy(1);
-        GameCharacter enemy2 = createEnemy(2);
+        GameCharacter enemy1 = new GameCharacter(characterManager.getCharacters().get("soldier"));
+        enemy1.setName("Soldier 1");
+        GameCharacter enemy2 = new GameCharacter(characterManager.getCharacters().get("soldier"));
+        enemy1.setName("Soldier 2");
 
-        enemyFightTeam.add(new FightCharacter(skin, 1500, FightConstants.MAIN_INFOS_HEIGHT + 20 + 200 * 1, enemy1, assetManager.get(enemy1.getFightTexturePath(), Texture.class), false));
-        enemyFightTeam.add(new FightCharacter(skin, 1500, FightConstants.MAIN_INFOS_HEIGHT + 20 + 200 * 2, enemy2, assetManager.get(enemy2.getFightTexturePath(), Texture.class), false));
+        enemyFightTeam.add(new FightCharacter(skin, 1500, FightConstants.MAIN_INFOS_HEIGHT + 20 + 200 * 1, enemy1, assetManager.get(enemy1.getDefinition().getFightWaitingTexturePath(), Texture.class), false));
+        enemyFightTeam.add(new FightCharacter(skin, 1500, FightConstants.MAIN_INFOS_HEIGHT + 20 + 200 * 2, enemy2, assetManager.get(enemy2.getDefinition().getFightWaitingTexturePath(), Texture.class), false));
 
         return enemyFightTeam;
-    }
-
-    private GameCharacter createEnemy(int number) {
-        GameCharacter enemy = new GameCharacter();
-        enemy.setName("Mirror " + number);
-        enemy.setHp(20);
-        enemy.setMp(5);
-        enemy.setActionSpeed(30);
-        enemy.setAttack(12 + number);
-        enemy.setFightTexturePath(FightConstants.TexturePath.ENEMY);
-        enemy.setFriendly(false);
-        enemy.setUsingAI(true);
-        return enemy;
     }
 }

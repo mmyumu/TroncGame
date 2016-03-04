@@ -11,15 +11,21 @@ import javax.inject.Inject;
 
 import fr.mmyumu.troncgame.DisplayableLoadingScreen;
 import fr.mmyumu.troncgame.TroncGame;
+import fr.mmyumu.troncgame.model.GameCharacterDef;
+import fr.mmyumu.troncgame.model.Item;
+import fr.mmyumu.troncgame.model.manager.ModelManager;
 
 /**
  * Screen displayed when loading the Overworld
  * Created by mmyumu on 28/10/2015.
  */
 public class OverworldLoadingScreen extends DisplayableLoadingScreen {
+    private ModelManager modelManager;
+
     @Inject
-    public OverworldLoadingScreen(TroncGame troncGame, AssetManager assetManager) {
+    public OverworldLoadingScreen(TroncGame troncGame, AssetManager assetManager, ModelManager modelManager) {
         super(troncGame, assetManager);
+        this.modelManager = modelManager;
     }
 
     @Override
@@ -33,6 +39,21 @@ public class OverworldLoadingScreen extends DisplayableLoadingScreen {
         assetManager.load(OverworldConstants.MapPath.VILLAGE, TiledMap.class);
         assetManager.load(OverworldConstants.TexturePath.MAIN_CHARACTER, Texture.class);
         assetManager.load(OverworldConstants.TexturePath.MENU_LIST, Texture.class);
+
+        loadCharacters();
+        loadItems();
+    }
+
+    private void loadCharacters() {
+        for (GameCharacterDef character : modelManager.getCharacterManager().getCharacters().values()) {
+            assetManager.load(character.getFightWaitingTexturePath(), Texture.class);
+        }
+    }
+
+    private void loadItems() {
+        for (Item item : modelManager.getItemManager().getItems().values()) {
+            assetManager.load(item.getTexturePath(), Texture.class);
+        }
     }
 
     @Override

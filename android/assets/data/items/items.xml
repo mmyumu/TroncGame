@@ -1,7 +1,0 @@
-<?xml version="1.0"?>
-<items>
-    <weapon id="1" identifier="sword.basic" name="Basic sword">
-        <texture>data/items/weapons/basic_sword.png</texture>
-        <attack>7</attack>
-    </weapon>
-</items>

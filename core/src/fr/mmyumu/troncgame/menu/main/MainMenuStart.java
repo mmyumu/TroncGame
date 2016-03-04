@@ -8,9 +8,7 @@ import com.badlogic.gdx.utils.I18NBundle;
 import javax.inject.Inject;
 
 import fr.mmyumu.troncgame.TroncGame;
-import fr.mmyumu.troncgame.model.ModelConstants;
-import fr.mmyumu.troncgame.model.Weapon;
-import fr.mmyumu.troncgame.model.manager.ItemManager;
+import fr.mmyumu.troncgame.model.manager.ModelManager;
 import fr.mmyumu.troncgame.persistence.GameStatePersister;
 
 /**
@@ -22,15 +20,15 @@ public class MainMenuStart extends MainMenuButton {
 
     private final TroncGame troncGame;
     private final GameStatePersister gameStatePersister;
-    private ItemManager itemManager;
+    private ModelManager modelManager;
 
     @Inject
-    public MainMenuStart(TroncGame troncGame, AssetManager assetManager, I18NBundle bundle, GameStatePersister gameStatePersister, ItemManager itemManager, Integer y) {
+    public MainMenuStart(TroncGame troncGame, AssetManager assetManager, I18NBundle bundle, GameStatePersister gameStatePersister, ModelManager modelManager, Integer y) {
         super(assetManager, bundle, y);
 
         this.troncGame = troncGame;
         this.gameStatePersister = gameStatePersister;
-        this.itemManager = itemManager;
+        this.modelManager = modelManager;
     }
 
     @Override
@@ -39,7 +37,7 @@ public class MainMenuStart extends MainMenuButton {
 
         gameStatePersister.clear();
 
-        troncGame.getModelComponent().mainCharacter().getEquipment().equip((Weapon) itemManager.get(ModelConstants.Identifier.BASIC_SWORD));
+        modelManager.newGame();
 
         troncGame.setScreen(troncGame.getIntroductionComponent().introductionLoadingScreen());
     }

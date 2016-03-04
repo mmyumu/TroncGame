@@ -1,12 +1,7 @@
 package fr.mmyumu.troncgame.components;
 
-import javax.inject.Named;
-
 import dagger.Component;
 import fr.mmyumu.troncgame.ActivityScope;
-import fr.mmyumu.troncgame.model.GameCharacter;
-import fr.mmyumu.troncgame.model.ModelConstants;
-import fr.mmyumu.troncgame.model.Weapon;
 import fr.mmyumu.troncgame.modules.GameModule;
 import fr.mmyumu.troncgame.modules.ModelModule;
 
@@ -21,7 +16,4 @@ import fr.mmyumu.troncgame.modules.ModelModule;
 public interface ModelComponent {
     /* Sub components */
     GameComponent createGameComponent(GameModule gameModule);
-
-    @Named(ModelConstants.Identifier.MAIN_CHARACTER)
-    GameCharacter mainCharacter();
 }
