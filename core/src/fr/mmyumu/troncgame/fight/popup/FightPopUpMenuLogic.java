@@ -76,8 +76,8 @@ public class FightPopUpMenuLogic {
         Weapon weapon = selectedCharacter.getCharacter().getEquipment().getWeapon();
 
         Texture texture;
-        if(weapon != null) {
-             texture = assetManager.get(selectedCharacter.getCharacter().getEquipment().getWeapon().getTexturePath(), Texture.class);
+        if (weapon != null) {
+            texture = assetManager.get(selectedCharacter.getCharacter().getEquipment().getWeapon().getDefinition().getTexturePath(), Texture.class);
         } else {
             texture = assetManager.get(ModelConstants.TexturePath.FIST, Texture.class);
         }

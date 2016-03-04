@@ -12,7 +12,7 @@ import javax.inject.Inject;
 import fr.mmyumu.troncgame.DisplayableLoadingScreen;
 import fr.mmyumu.troncgame.TroncGame;
 import fr.mmyumu.troncgame.model.GameCharacterDef;
-import fr.mmyumu.troncgame.model.Item;
+import fr.mmyumu.troncgame.model.ItemDef;
 import fr.mmyumu.troncgame.model.manager.ModelManager;
 
 /**
@@ -51,7 +51,7 @@ public class OverworldLoadingScreen extends DisplayableLoadingScreen {
     }
 
     private void loadItems() {
-        for (Item item : modelManager.getItemManager().getItems().values()) {
+        for (ItemDef item : modelManager.getItemManager().getItems().values()) {
             assetManager.load(item.getTexturePath(), Texture.class);
         }
     }

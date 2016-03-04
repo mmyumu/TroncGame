@@ -97,7 +97,7 @@ public class GameStatePersister {
     private void saveEquipment(GameCharacter character) {
         Weapon weapon = character.getEquipment().getWeapon();
         if (weapon != null) {
-            preferences.putString(CHARACTER_EQUIPMENT_WEAPON + "." + character.getDefinition().getIdentifier(), weapon.getIdentifier());
+            preferences.putString(CHARACTER_EQUIPMENT_WEAPON + "." + character.getDefinition().getIdentifier(), weapon.getDefinition().getIdentifier());
         }
     }
 
@@ -120,9 +120,9 @@ public class GameStatePersister {
     }
 
     private void loadEquipment(GameCharacter character) {
-        String weaponID = preferences.getString(CHARACTER_EQUIPMENT_WEAPON + "." + character.getDefinition().getIdentifier());
+        String weaponID = preferences.getString(CHARACTER_EQUIPMENT_WEAPON + "." + character.getDefinition().getIdentifier(), null);
         if (weaponID != null) {
-            Weapon weapon = modelManager.getItemManager().getWeapon(weaponID);
+            Weapon weapon = modelManager.getItemManager().createWeapon(weaponID);
             character.getEquipment().equip(weapon);
         }
     }

@@ -29,7 +29,7 @@ public class GameCharacter {
         int totalAttack = definition.getAttack();
         Weapon weapon = equipment.getWeapon();
         if (weapon != null) {
-            totalAttack += weapon.getAttack();
+            totalAttack += weapon.getDefinition().getAttack();
         }
         character.setCurrentHp(character.getCurrentHp() - totalAttack);
         Gdx.app.debug(TAG, definition.getName() + " is attacking " + character.getDefinition().getName() + " for " + totalAttack + " damage. " + character.getDefinition().getHp() + "HP left.");
@@ -65,10 +65,6 @@ public class GameCharacter {
 
     public GameCharacterDef getDefinition() {
         return definition;
-    }
-
-    public void setDefinition(GameCharacterDef definition) {
-        this.definition = definition;
     }
 
     public Equipment getEquipment() {

@@ -1,18 +1,17 @@
 package fr.mmyumu.troncgame.model;
 
 /**
- * Weapon which can be used by a character
- * Created by mmyumu on 14/02/2016.
+ *
+ * Created by mmyumu on 04/03/2016.
  */
-public class Weapon extends Item {
-    private int attack;
+public class Weapon {
+    private WeaponDef definition;
 
-    public Weapon(String identifier, String name, String texturePath, int attack) {
-        super(identifier, name, texturePath);
-        this.attack = attack;
+    public Weapon(WeaponDef definition) {
+        this.definition = definition;
     }
 
-    public int getAttack() {
-        return attack;
+    public WeaponDef getDefinition() {
+        return definition;
     }
 }
