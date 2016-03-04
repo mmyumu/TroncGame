@@ -21,8 +21,7 @@ import fr.mmyumu.troncgame.FontManager;
 import fr.mmyumu.troncgame.GameInputProcessor;
 import fr.mmyumu.troncgame.TroncGame;
 import fr.mmyumu.troncgame.Utils;
-import fr.mmyumu.troncgame.model.Team;
-import fr.mmyumu.troncgame.model.manager.ItemManager;
+import fr.mmyumu.troncgame.model.manager.ModelManager;
 import fr.mmyumu.troncgame.overworld.OverworldConstants;
 import fr.mmyumu.troncgame.persistence.GameStatePersister;
 
@@ -94,8 +93,8 @@ public class GameModule {
     }
 
     @Provides
-    GameStatePersister provideGameStatePersister(Team team, ItemManager itemManager) {
-        return new GameStatePersister(team, itemManager);
+    GameStatePersister provideGameStatePersister(ModelManager modelManager) {
+        return new GameStatePersister(modelManager);
     }
 
     @Provides

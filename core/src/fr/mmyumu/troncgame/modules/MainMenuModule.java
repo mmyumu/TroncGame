@@ -16,7 +16,7 @@ import fr.mmyumu.troncgame.menu.main.MainMenuContinue;
 import fr.mmyumu.troncgame.menu.main.MainMenuLoadingScreen;
 import fr.mmyumu.troncgame.menu.main.MainMenuScreen;
 import fr.mmyumu.troncgame.menu.main.MainMenuStart;
-import fr.mmyumu.troncgame.model.manager.ItemManager;
+import fr.mmyumu.troncgame.model.manager.ModelManager;
 import fr.mmyumu.troncgame.persistence.GameStatePersister;
 
 /**
@@ -59,8 +59,8 @@ public class MainMenuModule {
 
     @Provides
     @ActivityScope
-    MainMenuStart provideMainMenuStart(TroncGame troncGame, AssetManager assetManager, I18NBundle bundle, GameStatePersister gameStatePersister, ItemManager itemManager) {
-        return new MainMenuStart(troncGame, assetManager, bundle, gameStatePersister, itemManager, 400);
+    MainMenuStart provideMainMenuStart(TroncGame troncGame, AssetManager assetManager, I18NBundle bundle, GameStatePersister gameStatePersister, ModelManager modelManager) {
+        return new MainMenuStart(troncGame, assetManager, bundle, gameStatePersister, modelManager, 400);
     }
 
     @Provides

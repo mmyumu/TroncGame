@@ -3,37 +3,43 @@ package fr.mmyumu.troncgame.model;
 import com.badlogic.gdx.Gdx;
 
 /**
- * Manage a character of the game
- * Created by mmyumu on 01/01/2016.
+ * Instance of a character of the game
+ * Created by mmyumu on 04/03/2016.
  */
 public class GameCharacter {
     private static final String TAG = "GameCharacter";
-    private String identifier;
-    private String name;
-    private int hp;
-    private int mp;
-    private double actionSpeed;
-    private int attack;
-    private boolean friendly;
 
-    private String fightTexturePath;
-    private boolean usingAI;
+    private GameCharacterDef definition;
+
+    private String name;
+
+    private int currentHp;
+    private int currentMp;
 
     private Equipment equipment;
 
-    public GameCharacter() {
-        equipment = new Equipment();
+    public GameCharacter(GameCharacterDef characterDef) {
+        this.equipment = new Equipment();
+        this.definition = characterDef;
+        this.currentHp = characterDef.getHp();
+        this.currentMp = characterDef.getMp();
     }
 
-    public String getIdentifier() {
-        return identifier;
+    public int attack(GameCharacter character) {
+        int totalAttack = definition.getAttack();
+        Weapon weapon = equipment.getWeapon();
+        if (weapon != null) {
+            totalAttack += weapon.getAttack();
+        }
+        character.setCurrentHp(character.getCurrentHp() - totalAttack);
+        Gdx.app.debug(TAG, definition.getName() + " is attacking " + character.getDefinition().getName() + " for " + totalAttack + " damage. " + character.getDefinition().getHp() + "HP left.");
+        return totalAttack;
     }
 
-    public void setIdentifier(String identifier) {
-        this.identifier = identifier;
-    }
-
-    public String getName() {
+    public String retrieveName() {
+        if (name == null) {
+            return definition.getName();
+        }
         return name;
     }
 
@@ -41,79 +47,40 @@ public class GameCharacter {
         this.name = name;
     }
 
-    public int getHp() {
-        return hp;
+    public int getCurrentMp() {
+        return currentMp;
     }
 
-    public void setHp(int hp) {
-        this.hp = hp;
+    public void setCurrentMp(int currentMp) {
+        this.currentMp = currentMp;
     }
 
-    public int getMp() {
-        return mp;
+    public int getCurrentHp() {
+        return currentHp;
     }
 
-    public void setMp(int mp) {
-        this.mp = mp;
+    public void setCurrentHp(int currentHp) {
+        this.currentHp = currentHp;
     }
 
-    public double getActionSpeed() {
-        return actionSpeed;
+    public GameCharacterDef getDefinition() {
+        return definition;
     }
 
-    public void setActionSpeed(double actionSpeed) {
-        this.actionSpeed = actionSpeed;
-    }
-
-    public int getAttack() {
-        return attack;
-    }
-
-    public void setAttack(int attack) {
-        this.attack = attack;
-    }
-
-    public String getFightTexturePath() {
-        return fightTexturePath;
-    }
-
-    public void setFightTexturePath(String fightTexturePath) {
-        this.fightTexturePath = fightTexturePath;
-    }
-
-    public int attack(GameCharacter character) {
-        int totalAttack = attack;
-        Weapon weapon = equipment.getWeapon();
-        if (weapon != null) {
-            totalAttack += weapon.getAttack();
-        }
-        character.setHp(character.getHp() - totalAttack);
-        Gdx.app.debug(TAG, getName() + " is attacking " + character.getName() + " for " + totalAttack + " damage. " + character.getHp() + "HP left.");
-        return totalAttack;
-    }
-
-    public boolean isAlive() {
-        return hp > 0;
-    }
-
-    public boolean isFriendly() {
-        return friendly;
-    }
-
-    public void setFriendly(boolean friendly) {
-        this.friendly = friendly;
-    }
-
-    public boolean isUsingAI() {
-        return usingAI;
-    }
-
-    public void setUsingAI(boolean usingAI) {
-        this.usingAI = usingAI;
+    public void setDefinition(GameCharacterDef definition) {
+        this.definition = definition;
     }
 
     public Equipment getEquipment() {
-
         return equipment;
+    }
+
+    public double getActionSpeed() {
+        // TODO: compute equipment + definition actionSpeed
+        return definition.getActionSpeed();
+    }
+
+    public boolean isAlive() {
+        return currentHp > 0;
     }
 }

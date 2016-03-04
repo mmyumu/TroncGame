@@ -1,28 +1,33 @@
 package fr.mmyumu.troncgame.model;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 /**
  * Manage the team of characters
  * Created by mmyumu on 01/01/2016. (happy new year)
  */
 public class Team {
-    private final List<GameCharacter> characters;
+    private final Map<String, GameCharacter> characters;
 
     public Team() {
-        characters = new ArrayList<GameCharacter>();
+        characters = new LinkedHashMap<String, GameCharacter>();
     }
 
-    public boolean add(GameCharacter character) {
-        return characters.add(character);
+    public GameCharacter put(String identifier, GameCharacter character) {
+        return characters.put(identifier, character);
     }
 
-    public List<GameCharacter> getCharacters() {
-        return characters;
+    public Collection<GameCharacter> getCharacters() {
+        return characters.values();
     }
 
     public void clear() {
         characters.clear();
+    }
+
+    public GameCharacter getMainCharacter() {
+        return characters.get("main");
     }
 }

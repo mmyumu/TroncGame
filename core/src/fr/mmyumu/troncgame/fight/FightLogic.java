@@ -7,6 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.I18NBundle;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -17,7 +18,7 @@ import fr.mmyumu.troncgame.fight.popup.FightPopUpMenuIcon;
 import fr.mmyumu.troncgame.fight.popup.FightPopUpMenuLogic;
 import fr.mmyumu.troncgame.fight.ui.FightMainInfos;
 import fr.mmyumu.troncgame.model.GameCharacter;
-import fr.mmyumu.troncgame.model.Team;
+import fr.mmyumu.troncgame.model.manager.CharacterManager;
 
 /**
  * Manage the logic of the Fight
@@ -29,7 +30,7 @@ public class FightLogic {
     private final AssetManager assetManager;
     private final I18NBundle bundle;
     private final Skin skin;
-    private final Team team;
+    private final CharacterManager characterManager;
     private final EnemyFightTeamGenerator enemyFightTeamGenerator;
     private final FightPopUpMenuLogic popUpMenuLogic;
 
@@ -46,11 +47,11 @@ public class FightLogic {
 
 
     @Inject
-    public FightLogic(AssetManager assetManager, I18NBundle bundle, Skin skin, Team team, EnemyFightTeamGenerator enemyFightTeamGenerator, FightPopUpMenuLogic popUpMenuLogic) {
+    public FightLogic(AssetManager assetManager, I18NBundle bundle, Skin skin, CharacterManager characterManager, EnemyFightTeamGenerator enemyFightTeamGenerator, FightPopUpMenuLogic popUpMenuLogic) {
         this.assetManager = assetManager;
         this.bundle = bundle;
         this.skin = skin;
-        this.team = team;
+        this.characterManager = characterManager;
         this.enemyFightTeamGenerator = enemyFightTeamGenerator;
         this.popUpMenuLogic = popUpMenuLogic;
 
@@ -69,9 +70,10 @@ public class FightLogic {
 
     private List<FightCharacter> createFightTeam() {
         List<FightCharacter> fightTeam = new ArrayList<FightCharacter>();
+        Collection<GameCharacter> characters = characterManager.getTeam().getCharacters();
         int i = 0;
-        for (GameCharacter character : team.getCharacters()) {
-            FightCharacter fightCharacter = new FightCharacter(skin, 100, FightConstants.MAIN_INFOS_HEIGHT + 20 + 200 * i, character, assetManager.get(character.getFightTexturePath(), Texture.class), true);
+        for (GameCharacter character : characters) {
+            FightCharacter fightCharacter = new FightCharacter(skin, 100, FightConstants.MAIN_INFOS_HEIGHT + 20 + 400 - (200 * i), character, assetManager.get(character.getDefinition().getFightWaitingTexturePath(), Texture.class), true);
             fightTeam.add(fightCharacter);
             i++;
         }
@@ -114,8 +116,8 @@ public class FightLogic {
     }
 
     private void tryToSelectCharacter(FightCharacter touchedCharacter) {
-        if (touchedCharacter.getCharacter().isUsingAI()) {
-            Gdx.app.debug(TAG, "Character " + touchedCharacter.getCharacter().getName() + " using AI cannot be selected.");
+        if (touchedCharacter.getCharacter().getDefinition().isUsingAI()) {
+            Gdx.app.debug(TAG, "Character " + touchedCharacter.getCharacter().retrieveName() + " using AI cannot be selected.");
         } else {
             if (touchedCharacter.isReady()) {
                 selectCharacter(touchedCharacter);
@@ -136,7 +138,7 @@ public class FightLogic {
     private void tryToTargetCharacter(FightCharacter touchedCharacter) {
         if (selectedCharacter.equals(touchedCharacter)) {
             resetCharacterSelection();
-        } else if (!touchedCharacter.getCharacter().isFriendly()) {
+        } else if (!touchedCharacter.getCharacter().getDefinition().isFriendly()) {
             doAction(touchedCharacter);
         }
     }
@@ -193,7 +195,7 @@ public class FightLogic {
 
     private void playAICharacters() {
         for (FightCharacter character : enemyFightTeam) {
-            if (character.getCharacter().getHp() > 0 && character.isReady()) {
+            if (character.getCharacter().isAlive() && character.isReady()) {
                 FightCharacter targetCharacter = computeTargetCharacter();
                 character.attack(targetCharacter);
             }
@@ -208,7 +210,7 @@ public class FightLogic {
     public void update(float delta) {
         playAICharacters();
 
-        switch(fightState) {
+        switch (fightState) {
             case NOTHING_SELECTED:
                 fightBackground.setDarkened(false);
                 fightMainInfos.setDarkened(false);

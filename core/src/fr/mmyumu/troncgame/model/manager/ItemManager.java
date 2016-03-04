@@ -23,10 +23,12 @@ public class ItemManager {
     private static final String TAG = "ItemManager";
 
     private Map<String, Item> items;
+    private Map<String, Weapon> weapons;
 
     @Inject
     public ItemManager() {
         this.items = new HashMap<String, Item>();
+        this.weapons = new HashMap<String, Weapon>();
 
         try {
             loadXml();
@@ -40,17 +42,22 @@ public class ItemManager {
         XmlReader.Element root = reader.parse(new FileHandle(ModelConstants.DataPath.ITEMS));
         Array<XmlReader.Element> weaponElements = root.getChildrenByName("weapon");
         for (XmlReader.Element weaponElement : weaponElements) {
-            String identifier = weaponElement.getAttribute("identifier");
+            String id = weaponElement.getAttribute("id");
             String name = weaponElement.getAttribute("name");
             String texturePath = weaponElement.getChildByName("texture").getText();
             int attack = Integer.valueOf(weaponElement.getChildByName("attack").getText());
 
-            Weapon weapon = new Weapon(identifier, name, texturePath, attack);
-            items.put(identifier, weapon);
+            Weapon weapon = new Weapon(id, name, texturePath, attack);
+            items.put(id, weapon);
+            weapons.put(id, weapon);
         }
     }
 
-    public Item get(String key) {
-        return items.get(key);
+    public Weapon getWeapon(String key) {
+        return weapons.get(key);
+    }
+
+    public Map<String, Item> getItems() {
+        return items;
     }
 }

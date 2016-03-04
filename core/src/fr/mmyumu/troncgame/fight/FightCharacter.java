@@ -42,7 +42,7 @@ public class FightCharacter extends FightCharacterLogic {
         this.label.setAlignment(Align.center);
         this.queueDamages = new LinkedList<Integer>();
 
-        setName(character.getName());
+        setName(character.retrieveName());
     }
 
     @Override
@@ -61,16 +61,16 @@ public class FightCharacter extends FightCharacterLogic {
     public void draw(Batch batch, float parentAlpha) {
         super.draw(batch, parentAlpha);
 
-        if(darkened) {
+        if (darkened) {
             batch.setColor(0.5f, 0.5f, 0.5f, 1f);
         }
 
-        if (getCharacter().getHp() > 0) {
+        if (getCharacter().isAlive()) {
             batch.draw(texture, getX(), getY(), FightConstants.CHARACTER_WIDTH, FightConstants.CHARACTER_HEIGHT);
         }
         label.draw(batch, parentAlpha);
 
-        if(darkened) {
+        if (darkened) {
             batch.setColor(1f, 1f, 1f, 1f);
         }
     }

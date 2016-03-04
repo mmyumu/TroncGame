@@ -44,7 +44,7 @@ public class FightCharacterLogic extends Actor {
     }
 
     public void attack(FightCharacter targetCharacter) {
-        int damage = getCharacter().attack(targetCharacter.getCharacter());
+        int damage = character.attack(targetCharacter.getCharacter());
         targetCharacter.displayDamage(damage);
         actionValue = 0;
     }

@@ -15,6 +15,7 @@ import dagger.Provides;
 import fr.mmyumu.troncgame.ActivityScope;
 import fr.mmyumu.troncgame.Constants;
 import fr.mmyumu.troncgame.TroncGame;
+import fr.mmyumu.troncgame.model.manager.ModelManager;
 import fr.mmyumu.troncgame.overworld.OverworldLoadingScreen;
 import fr.mmyumu.troncgame.overworld.OverworldScreen;
 import fr.mmyumu.troncgame.overworld.game.OverworldCharacter;
@@ -65,8 +66,8 @@ public class OverworldModule {
 
     @Provides
     @ActivityScope
-    OverworldLoadingScreen provideOverworldLoadingScreen(TroncGame troncGame, AssetManager assetManager) {
-        return new OverworldLoadingScreen(troncGame, assetManager);
+    OverworldLoadingScreen provideOverworldLoadingScreen(TroncGame troncGame, AssetManager assetManager, ModelManager modelManager) {
+        return new OverworldLoadingScreen(troncGame, assetManager, modelManager);
     }
 
     @Provides

@@ -13,7 +13,7 @@ public class FightHPLabel extends Label {
     private FightCharacter fightCharacter;
 
     public FightHPLabel(FightCharacter fightCharacter, Skin skin) {
-        super(String.valueOf(fightCharacter.getCharacter().getHp()), skin);
+        super(String.valueOf(fightCharacter.getCharacter().getCurrentHp()), skin);
 
         this.fightCharacter = fightCharacter;
     }
@@ -22,6 +22,6 @@ public class FightHPLabel extends Label {
     public void act(float delta) {
         super.act(delta);
 
-        setText(String.valueOf(fightCharacter.getCharacter().getHp()));
+        setText(String.valueOf(fightCharacter.getCharacter().getCurrentHp()));
     }
 }
