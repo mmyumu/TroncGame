@@ -20,7 +20,7 @@ public class ModelManager {
 
     public void newGame() {
         characterManager.newTeam();
-        characterManager.getTeam().getMainCharacter().getEquipment().equip(itemManager.getWeapon(ModelConstants.Identifier.BASIC_SWORD));
+        characterManager.getTeam().getMainCharacter().getEquipment().equip(itemManager.createWeapon(ModelConstants.Identifier.BASIC_SWORD));
     }
 
     public ItemManager getItemManager() {

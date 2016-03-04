@@ -11,9 +11,11 @@ import java.util.Map;
 
 import javax.inject.Inject;
 
-import fr.mmyumu.troncgame.model.Item;
+import fr.mmyumu.troncgame.model.ItemDef;
 import fr.mmyumu.troncgame.model.ModelConstants;
 import fr.mmyumu.troncgame.model.Weapon;
+import fr.mmyumu.troncgame.model.WeaponDef;
+import fr.mmyumu.troncgame.model.exception.NotFoundException;
 
 /**
  * Manage the items of the game
@@ -22,13 +24,13 @@ import fr.mmyumu.troncgame.model.Weapon;
 public class ItemManager {
     private static final String TAG = "ItemManager";
 
-    private Map<String, Item> items;
-    private Map<String, Weapon> weapons;
+    private Map<String, ItemDef> items;
+    private Map<String, WeaponDef> weapons;
 
     @Inject
     public ItemManager() {
-        this.items = new HashMap<String, Item>();
-        this.weapons = new HashMap<String, Weapon>();
+        this.items = new HashMap<String, ItemDef>();
+        this.weapons = new HashMap<String, WeaponDef>();
 
         try {
             loadXml();
@@ -47,17 +49,25 @@ public class ItemManager {
             String texturePath = weaponElement.getChildByName("texture").getText();
             int attack = Integer.valueOf(weaponElement.getChildByName("attack").getText());
 
-            Weapon weapon = new Weapon(id, name, texturePath, attack);
+            WeaponDef weapon = new WeaponDef(id, name, texturePath, attack);
             items.put(id, weapon);
             weapons.put(id, weapon);
         }
     }
 
-    public Weapon getWeapon(String key) {
+    public WeaponDef getWeapon(String key) {
         return weapons.get(key);
     }
 
-    public Map<String, Item> getItems() {
+    public Weapon createWeapon(String key) {
+        WeaponDef weaponDef = weapons.get(key);
+        if (weaponDef == null) {
+            throw new NotFoundException("The weapon definition with ID=" + key + " cannot be found");
+        }
+        return new Weapon(weaponDef);
+    }
+
+    public Map<String, ItemDef> getItems() {
         return items;
     }
 }
