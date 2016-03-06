@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:element name="themes">
+        <xsd:complexType>
+            <xsd:choice>
+                <xsd:element maxOccurs="unbounded" ref="dialog"></xsd:element>
+            </xsd:choice>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="dialog">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="top"></xsd:element>
+                <xsd:element ref="bottom"></xsd:element>
+                <xsd:element ref="left"></xsd:element>
+                <xsd:element ref="right"></xsd:element>
+                <xsd:element ref="topLeft"></xsd:element>
+                <xsd:element ref="topRight"></xsd:element>
+                <xsd:element ref="bottomLeft"></xsd:element>
+                <xsd:element ref="bottomRight"></xsd:element>
+                <xsd:element ref="backgroundColor"></xsd:element>
+            </xsd:sequence>
+            <xsd:attribute ref="id"></xsd:attribute>
+            <xsd:attribute ref="name"></xsd:attribute>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="backgroundColor">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="red"></xsd:element>
+                <xsd:element ref="green"></xsd:element>
+                <xsd:element ref="blue"></xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="top" type="xsd:string"></xsd:element>
+    <xsd:element name="bottom" type="xsd:string"></xsd:element>
+    <xsd:element name="left" type="xsd:string"></xsd:element>
+    <xsd:element name="right" type="xsd:string"></xsd:element>
+    <xsd:element name="topLeft" type="xsd:string"></xsd:element>
+    <xsd:element name="topRight" type="xsd:string"></xsd:element>
+    <xsd:element name="bottomLeft" type="xsd:string"></xsd:element>
+    <xsd:element name="bottomRight" type="xsd:string"></xsd:element>
+
+    <xsd:element name="red" type="xsd:int"></xsd:element>
+    <xsd:element name="green" type="xsd:int"></xsd:element>
+    <xsd:element name="blue" type="xsd:int"></xsd:element>
+
+    <xsd:attribute name="id" type="xsd:ID"></xsd:attribute>
+    <xsd:attribute name="name" type="xsd:string"></xsd:attribute>
+
+
+</xsd:schema>

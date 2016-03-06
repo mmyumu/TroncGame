@@ -29,7 +29,7 @@ public class FightPopUpMenuIcon extends FightPopUpMenuElement {
         this.title = title;
         this.texture = assetManager.get(texturePath, Texture.class);
         this.action = action;
-        this.font = fontManager.loadKarmaticArcade(new Color(0.5f, 1f, 0.3f, 1f), 20);
+        this.font = fontManager.loadKarmaticArcade(new Color(0.5f, 1f, 0.3f, 1f), fontManager.parameters(20, 0));
         alpha = 1f;
         setName(texturePath);
 

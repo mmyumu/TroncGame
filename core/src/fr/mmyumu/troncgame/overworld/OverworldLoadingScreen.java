@@ -11,6 +11,7 @@ import javax.inject.Inject;
 
 import fr.mmyumu.troncgame.DisplayableLoadingScreen;
 import fr.mmyumu.troncgame.TroncGame;
+import fr.mmyumu.troncgame.dialog.theme.DialogTheme;
 import fr.mmyumu.troncgame.model.GameCharacterDef;
 import fr.mmyumu.troncgame.model.ItemDef;
 import fr.mmyumu.troncgame.model.manager.ModelManager;

@@ -12,6 +12,7 @@ import fr.mmyumu.troncgame.Constants;
 import fr.mmyumu.troncgame.TroncGame;
 import fr.mmyumu.troncgame.introduction.IntroductionLoadingScreen;
 import fr.mmyumu.troncgame.introduction.IntroductionScreen;
+import fr.mmyumu.troncgame.model.manager.ModelManager;
 
 /**
  * Dagger module to provide Main Menu
@@ -21,8 +22,8 @@ import fr.mmyumu.troncgame.introduction.IntroductionScreen;
 public class IntroductionModule {
     @Provides
     @ActivityScope
-    IntroductionLoadingScreen provideIntroductionLoadingScreen(TroncGame troncGame, AssetManager assetManager) {
-        return new IntroductionLoadingScreen(troncGame, assetManager);
+    IntroductionLoadingScreen provideIntroductionLoadingScreen(TroncGame troncGame, AssetManager assetManager, ModelManager modelManager) {
+        return new IntroductionLoadingScreen(troncGame, assetManager, modelManager);
     }
 
     @Provides

@@ -10,23 +10,29 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
  */
 public class FontManager {
 
-    public BitmapFont loadKarmaticArcade(Color color, int size) {
-        return loadFont(Constants.FontPath.KARMATIC_ARCADE, color, size);
+    public BitmapFont loadKarmaticArcade(Color color, FreeTypeFontGenerator.FreeTypeFontParameter parameters) {
+        return loadFont(Constants.FontPath.KARMATIC_ARCADE, color, parameters);
     }
 
-    public BitmapFont loadVisitor(Color color, int size) {
-        return loadFont(Constants.FontPath.VISITOR, color, size);
+    public BitmapFont loadVisitor(Color color, FreeTypeFontGenerator.FreeTypeFontParameter parameters) {
+        return loadFont(Constants.FontPath.VISITOR, color, parameters);
     }
 
-    private BitmapFont loadFont(String fontPath, Color color, int size) {
+    private BitmapFont loadFont(String fontPath, Color color, FreeTypeFontGenerator.FreeTypeFontParameter parameters) {
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal(fontPath));
-        FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        parameter.size = size;
-        BitmapFont font = generator.generateFont(parameter);
+        BitmapFont font = generator.generateFont(parameters);
         generator.dispose();
 
         font.setColor(color);
 
         return font;
+    }
+
+    public FreeTypeFontGenerator.FreeTypeFontParameter parameters(int size, int borderWidth) {
+        FreeTypeFontGenerator.FreeTypeFontParameter parameters = new FreeTypeFontGenerator.FreeTypeFontParameter();
+        parameters.size = size;
+        parameters.borderWidth = borderWidth;
+
+        return parameters;
     }
 }

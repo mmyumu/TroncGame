@@ -6,6 +6,7 @@ import fr.mmyumu.troncgame.ActivityScope;
 import fr.mmyumu.troncgame.model.manager.CharacterManager;
 import fr.mmyumu.troncgame.model.manager.ItemManager;
 import fr.mmyumu.troncgame.model.manager.ModelManager;
+import fr.mmyumu.troncgame.model.manager.ThemeManager;
 
 /**
  * Dagger module to provide Overworld
@@ -27,7 +28,13 @@ public class ModelModule {
 
     @Provides
     @ActivityScope
-    ModelManager provideModelManager(ItemManager itemManager, CharacterManager characterManager) {
-        return new ModelManager(itemManager, characterManager);
+    ThemeManager provideThemeManager() {
+        return new ThemeManager();
+    }
+
+    @Provides
+    @ActivityScope
+    ModelManager provideModelManager(ItemManager itemManager, CharacterManager characterManager, ThemeManager themeManager) {
+        return new ModelManager(itemManager, characterManager, themeManager);
     }
 }
