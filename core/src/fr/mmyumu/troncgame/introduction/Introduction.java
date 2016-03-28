@@ -13,27 +13,12 @@ import fr.mmyumu.troncgame.TroncGame;
  */
 public class Introduction extends Stage {
 
-    private IntroductionText introductionText;
-    private final TroncGame troncGame;
-
     @Inject
-    public Introduction(TroncGame troncGame, ScalingViewport viewport) {
+    public Introduction(ScalingViewport viewport) {
         super(viewport);
-        this.troncGame = troncGame;
     }
 
     public void init(IntroductionText introductionText) {
-        this.introductionText = introductionText;
         addActor(introductionText);
-    }
-
-    @Override
-    public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        if(introductionText.isFullyDisplayed()) {
-            troncGame.setScreen(troncGame.getOverworldComponent().createOverworldLoadingScreen());
-        } else {
-            introductionText.setFullyDisplayed(true);
-        }
-        return super.touchDown(screenX, screenY, pointer, button);
     }
 }

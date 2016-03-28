@@ -5,10 +5,6 @@ package fr.mmyumu.troncgame.model;
  * Created by mmyumu on 14/02/2016.
  */
 public interface ModelConstants {
-    interface Identifier {
-        String BASIC_SWORD = "sword.basic";
-    }
-
     interface TexturePath {
         String FIST = "data/items/weapons/fist.png";
         String BASIC_SWORD = "data/items/weapons/basic_sword.png";
@@ -17,5 +13,6 @@ public interface ModelConstants {
     interface DataPath {
         String ITEMS = "data/items.xml";
         String CHARACTERS = "data/characters.xml";
+        String THEMES = "data/themes.xml";
     }
 }

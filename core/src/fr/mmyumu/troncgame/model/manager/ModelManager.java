@@ -11,16 +11,18 @@ import fr.mmyumu.troncgame.model.ModelConstants;
 public class ModelManager {
     private final ItemManager itemManager;
     private final CharacterManager characterManager;
+    private final ThemeManager themeManager;
 
     @Inject
-    public ModelManager(ItemManager itemManager, CharacterManager characterManager) {
+    public ModelManager(ItemManager itemManager, CharacterManager characterManager, ThemeManager themeManager) {
         this.itemManager = itemManager;
         this.characterManager = characterManager;
+        this.themeManager = themeManager;
     }
 
     public void newGame() {
         characterManager.newTeam();
-        characterManager.getTeam().getMainCharacter().getEquipment().equip(itemManager.createWeapon(ModelConstants.Identifier.BASIC_SWORD));
+        characterManager.getTeam().getMainCharacter().getEquipment().equip(itemManager.createWeapon(ItemManager.ID.BASIC_SWORD));
     }
 
     public ItemManager getItemManager() {
@@ -29,5 +31,9 @@ public class ModelManager {
 
     public CharacterManager getCharacterManager() {
         return characterManager;
+    }
+
+    public ThemeManager getThemeManager() {
+        return themeManager;
     }
 }

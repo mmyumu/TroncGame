@@ -99,4 +99,9 @@ public class CharacterManager {
     public Team getTeam() {
         return team;
     }
+
+    public interface ID {
+        String MAIN = "main";
+        String SIDE_KICK = "sideKick";
+    }
 }

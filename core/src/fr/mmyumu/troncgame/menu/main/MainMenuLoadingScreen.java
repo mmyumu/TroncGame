@@ -27,6 +27,11 @@ public class MainMenuLoadingScreen extends DisplayableLoadingScreen {
     protected void load() {
         assetManager.load(MainMenuConstants.TexturePath.BACKGROUND, Texture.class);
         loadWeapons();
+        loadDialogThemes();
+    }
+
+    private void loadDialogThemes() {
+        assetManager.load(ModelConstants.TexturePath.FIST, Texture.class);
     }
 
     private void loadWeapons() {

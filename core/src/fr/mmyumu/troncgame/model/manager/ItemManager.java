@@ -27,6 +27,10 @@ public class ItemManager {
     private Map<String, ItemDef> items;
     private Map<String, WeaponDef> weapons;
 
+    public interface ID {
+        String BASIC_SWORD = "sword.basic";
+    }
+
     @Inject
     public ItemManager() {
         this.items = new HashMap<String, ItemDef>();

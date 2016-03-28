@@ -4,6 +4,8 @@ import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import fr.mmyumu.troncgame.model.manager.CharacterManager;
+
 /**
  * Manage the team of characters
  * Created by mmyumu on 01/01/2016. (happy new year)
@@ -28,6 +30,10 @@ public class Team {
     }
 
     public GameCharacter getMainCharacter() {
-        return characters.get("main");
+        return characters.get(CharacterManager.ID.MAIN);
+    }
+
+    public GameCharacter getSideKickCharacter() {
+        return characters.get(CharacterManager.ID.SIDE_KICK);
     }
 }

@@ -33,8 +33,6 @@ public class IntroductionScreen extends ScreenAdapter {
 
         introduction = troncGame.getIntroductionComponent().introduction();
         introduction.init(introductionText);
-
-        troncGame.setInputProcessors(introduction);
     }
 
 
