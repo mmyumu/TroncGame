@@ -1,15 +1,14 @@
 package fr.mmyumu.troncgame.fight;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
-import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.viewport.ScalingViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
@@ -28,6 +27,7 @@ import fr.mmyumu.troncgame.fight.ui.FightUI;
  */
 public class FightScreen extends ScreenAdapter implements Musical, InputProcessor {
     private static final String TAG = "FightScreen";
+    private static final float END_DELAY = 1;
 
     private final TroncGame troncGame;
     private final AssetManager assetManager;
@@ -40,6 +40,7 @@ public class FightScreen extends ScreenAdapter implements Musical, InputProcesso
     private final FightLogic fightLogic;
 
     private Music firstChipTune;
+    private boolean ended;
 
     @Inject
     public FightScreen(TroncGame troncGame, AssetManager assetManager, ScalingViewport viewport, FightLogic fightLogic) {
@@ -51,6 +52,8 @@ public class FightScreen extends ScreenAdapter implements Musical, InputProcesso
         fightGame = troncGame.getFightComponent().createFightGame();
         fightUI = troncGame.getFightComponent().createFightUI();
         fightPopUpMenu = new FightPopUpMenu(viewport);
+
+        ended = false;
 
         initStages();
     }
@@ -108,19 +111,29 @@ public class FightScreen extends ScreenAdapter implements Musical, InputProcesso
     }
 
     private void update(float delta) {
-        if (fightLogic.isEnded()) {
+        if (fightLogic.isEnded() && !ended) {
+            ended = true;
             endFight();
-        } else {
-            fightLogic.update(delta);
-            fightGame.act(delta);
-            fightUI.act(delta);
-            fightPopUpMenu.act(delta);
         }
+        fightLogic.update(delta);
+        fightGame.act(delta);
+        fightUI.act(delta);
+        fightPopUpMenu.act(delta);
     }
 
     private void endFight() {
         stopPlaying();
-        troncGame.setScreen(troncGame.getOverworldComponent().createOverworldLoadingScreen());
+
+        Gdx.input.setInputProcessor(null);
+
+        //TODO: Play win music
+
+        Timer.schedule(new Timer.Task() {
+            @Override
+            public void run() {
+                troncGame.setScreen(troncGame.getOverworldComponent().createOverworldLoadingScreen());
+            }
+        }, END_DELAY);
     }
 
     private void draw() {
