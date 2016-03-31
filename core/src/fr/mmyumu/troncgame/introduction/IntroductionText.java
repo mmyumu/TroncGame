@@ -4,7 +4,6 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.I18NBundle;
@@ -15,6 +14,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import fr.mmyumu.troncgame.Constants;
 import fr.mmyumu.troncgame.FontManager;
 import fr.mmyumu.troncgame.TroncGame;
 import fr.mmyumu.troncgame.dialog.DialogCharacter;
@@ -22,6 +22,7 @@ import fr.mmyumu.troncgame.dialog.DialogListener;
 import fr.mmyumu.troncgame.dialog.DialogManager;
 import fr.mmyumu.troncgame.dialog.DialogMode;
 import fr.mmyumu.troncgame.dialog.DialogSlot;
+import fr.mmyumu.troncgame.model.GameCharacterDef;
 import fr.mmyumu.troncgame.model.manager.CharacterManager;
 import fr.mmyumu.troncgame.model.manager.ThemeManager;
 
@@ -38,7 +39,7 @@ public class IntroductionText extends Actor implements DialogListener {
 
 
     @Inject
-    public IntroductionText(TroncGame troncGame, I18NBundle bundle, DialogManager dialogManager, FontManager fontManager, ThemeManager themeManager, CharacterManager characterManager, AssetManager assetManager, ScalingViewport viewport) {
+    public IntroductionText(TroncGame troncGame, I18NBundle bundle, DialogManager dialogManager, FontManager fontManager, CharacterManager characterManager, AssetManager assetManager, ScalingViewport viewport) {
         this.troncGame = troncGame;
         this.dialogManager = dialogManager;
 
@@ -57,7 +58,11 @@ public class IntroductionText extends Actor implements DialogListener {
 
         dialogManager.init(getX(), getY(), getWidth(), getHeight(), ThemeManager.ID.BROWN);
         dialogManager.addListener(this);
-        dialogManager.addLine(fontVisitor, Align.left, bundle.format("introduction.text"), null, DialogMode.CHARACTER_BY_CHARACTER, 0.05f);
+
+        GameCharacterDef mainCharacterDef = characterManager.getCharacters().get(CharacterManager.ID.MAIN);
+        GameCharacterDef princessDef = characterManager.getCharacters().get(CharacterManager.ID.BEST_FRIEND);
+
+        dialogManager.addLine(fontVisitor, Align.left, bundle.format("introduction.text", mainCharacterDef.getName(), Constants.KINGDOM, princessDef.getName()), null, DialogMode.CHARACTER_BY_CHARACTER, 0.05f);
         dialogManager.addLine(fontVisitor, Align.left, "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", loremIpsumCharacters, DialogMode.CHARACTER_BY_CHARACTER, 0.05f);
         dialogManager.start();
     }

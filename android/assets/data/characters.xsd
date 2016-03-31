@@ -15,7 +15,7 @@
                 <xsd:element ref="actionSpeed"></xsd:element>
                 <xsd:element ref="hp"></xsd:element>
                 <xsd:element ref="mp"></xsd:element>
-                <xsd:element ref="fight"></xsd:element>
+                <xsd:element ref="fight" minOccurs="0"></xsd:element>
             </xsd:sequence>
             <xsd:attribute ref="id"></xsd:attribute>
             <xsd:attribute ref="name"></xsd:attribute>

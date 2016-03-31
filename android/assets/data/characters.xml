@@ -28,4 +28,10 @@
             <waitingTexture>data/fight/ennemi_gauche.png</waitingTexture>
         </fight>
     </character>
+    <character id="bestFriend" name="Mirena" usingAI="true">
+        <attack>1</attack>
+        <actionSpeed>10</actionSpeed>
+        <hp>10</hp>
+        <mp>10</mp>
+    </character>
 </characters>
