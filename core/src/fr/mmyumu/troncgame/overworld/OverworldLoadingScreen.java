@@ -47,7 +47,11 @@ public class OverworldLoadingScreen extends DisplayableLoadingScreen {
 
     private void loadCharacters() {
         for (GameCharacterDef character : modelManager.getCharacterManager().getCharacters().values()) {
-            assetManager.load(character.getFightWaitingTexturePath(), Texture.class);
+            String texturePath = character.getFightWaitingTexturePath();
+
+            if(texturePath != null && !texturePath.isEmpty()) {
+                assetManager.load(texturePath, Texture.class);
+            }
         }
     }
 

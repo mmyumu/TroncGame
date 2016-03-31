@@ -76,9 +76,10 @@ public class CharacterManager {
     }
 
     private void parseFightElement(GameCharacterDef character, XmlReader.Element fightElement) {
-        String waitingTexture = fightElement.getChildByName("waitingTexture").getText();
-
-        character.setFightWaitingTexturePath(waitingTexture);
+        if(fightElement != null) {
+            String waitingTexture = fightElement.getChildByName("waitingTexture").getText();
+            character.setFightWaitingTexturePath(waitingTexture);
+        }
     }
 
     public Map<String, GameCharacterDef> getCharacters() {
