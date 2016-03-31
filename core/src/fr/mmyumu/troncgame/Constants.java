@@ -19,4 +19,6 @@ public interface Constants {
         String KARMATIC_ARCADE = "fonts/ka1.TTF";
         String VISITOR = "fonts/visitor1.ttf";
     }
+
+    String KINGDOM = "Takeln";
 }
