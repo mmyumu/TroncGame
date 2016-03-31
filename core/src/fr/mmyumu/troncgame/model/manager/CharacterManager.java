@@ -104,5 +104,6 @@ public class CharacterManager {
     public interface ID {
         String MAIN = "main";
         String SIDE_KICK = "sideKick";
+        String BEST_FRIEND = "bestFriend";
     }
 }
