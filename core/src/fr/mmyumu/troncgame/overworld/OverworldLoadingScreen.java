@@ -11,7 +11,6 @@ import javax.inject.Inject;
 
 import fr.mmyumu.troncgame.DisplayableLoadingScreen;
 import fr.mmyumu.troncgame.TroncGame;
-import fr.mmyumu.troncgame.dialog.theme.DialogTheme;
 import fr.mmyumu.troncgame.model.GameCharacterDef;
 import fr.mmyumu.troncgame.model.ItemDef;
 import fr.mmyumu.troncgame.model.manager.ModelManager;
@@ -38,7 +37,6 @@ public class OverworldLoadingScreen extends DisplayableLoadingScreen {
     protected void load() {
         assetManager.setLoader(TiledMap.class, new TmxMapLoader(new InternalFileHandleResolver()));
         assetManager.load(OverworldConstants.MapPath.VILLAGE, TiledMap.class);
-        assetManager.load(OverworldConstants.TexturePath.MAIN_CHARACTER, Texture.class);
         assetManager.load(OverworldConstants.TexturePath.MENU_LIST, Texture.class);
 
         loadCharacters();
@@ -47,11 +45,18 @@ public class OverworldLoadingScreen extends DisplayableLoadingScreen {
 
     private void loadCharacters() {
         for (GameCharacterDef character : modelManager.getCharacterManager().getCharacters().values()) {
-            String texturePath = character.getFightWaitingTexturePath();
+            loadTexturePath(character.getFightWaitingTexturePath());
 
-            if(texturePath != null && !texturePath.isEmpty()) {
-                assetManager.load(texturePath, Texture.class);
-            }
+            loadTexturePath(character.getOverworldTopTexturePath());
+            loadTexturePath(character.getOverworldBottomTexturePath());
+            loadTexturePath(character.getOverworldLeftTexturePath());
+            loadTexturePath(character.getOverworldRightTexturePath());
+        }
+    }
+
+    private void loadTexturePath(String texturePath) {
+        if(texturePath != null && !texturePath.isEmpty()) {
+            assetManager.load(texturePath, Texture.class);
         }
     }
 

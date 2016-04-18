@@ -16,6 +16,8 @@ import javax.inject.Named;
 import fr.mmyumu.troncgame.Constants;
 import fr.mmyumu.troncgame.ScreenState;
 import fr.mmyumu.troncgame.TroncGame;
+import fr.mmyumu.troncgame.model.GameCharacter;
+import fr.mmyumu.troncgame.model.manager.CharacterManager;
 import fr.mmyumu.troncgame.overworld.game.OverworldCharacter;
 import fr.mmyumu.troncgame.overworld.game.OverworldGameInputProcessor;
 import fr.mmyumu.troncgame.overworld.game.OverworldMap;
@@ -47,7 +49,7 @@ public class OverworldScreen extends ScreenAdapter {
     private ScreenState screenState;
 
     @Inject
-    public OverworldScreen(TroncGame troncGame, AssetManager assetManager, @Named("game") ScalingViewport gameViewport, GameStatePersister gameStatePersister) {
+    public OverworldScreen(TroncGame troncGame, CharacterManager characterManager, AssetManager assetManager, @Named("game") ScalingViewport gameViewport, GameStatePersister gameStatePersister) {
         this.troncGame = troncGame;
         this.assetManager = assetManager;
         this.gameViewport = gameViewport;
@@ -61,7 +63,7 @@ public class OverworldScreen extends ScreenAdapter {
         map = new OverworldMap(OverworldConstants.MapPath.VILLAGE, gameCamera, assetManager);
 
 
-        mainCharacter = loadMainCharacter();
+        mainCharacter = loadOverworldCharacter(characterManager.getTeam().getMainCharacter());
     }
 
     private void initStages() {
@@ -171,8 +173,8 @@ public class OverworldScreen extends ScreenAdapter {
     /**
      * Load the character and add it to the gameStage
      */
-    private OverworldCharacter loadMainCharacter() {
-        OverworldCharacter overworldCharacter = troncGame.getOverworldComponent().createOverworldCharacter();
+    private OverworldCharacter loadOverworldCharacter(GameCharacter character) {
+        OverworldCharacter overworldCharacter = new OverworldCharacter(character, assetManager, gameViewport.getCamera());
         overworldCharacter.setObstaclesLayer(map.getObstaclesLayer());
 
         Vector2 position = gameStatePersister.loadPosition();

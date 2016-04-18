@@ -10,6 +10,7 @@ import com.badlogic.gdx.math.Vector2;
 import java.util.ArrayList;
 import java.util.List;
 
+import fr.mmyumu.troncgame.model.GameCharacter;
 import fr.mmyumu.troncgame.overworld.OverworldConstants;
 
 /**
@@ -23,11 +24,13 @@ public class OverworldCharacterLogic {
     private final Rectangle hitbox;
 
     private final Speed speed;
+    private final GameCharacter character;
     private TiledMapTileLayer obstaclesLayer;
     private Vector2 center;
     private GridPoint2 moveTarget;
 
-    public OverworldCharacterLogic() {
+    public OverworldCharacterLogic(GameCharacter character) {
+        this.character = character;
         this.center = new Vector2(0, 0);
         this.speed = new Speed();
 
@@ -272,5 +275,9 @@ public class OverworldCharacterLogic {
         }
 
         return leftCellsHitboxes;
+    }
+
+    public GameCharacter getCharacter() {
+        return character;
     }
 }
