@@ -71,6 +71,7 @@ public class CharacterManager {
         character.setMp(mp);
 
         parseFightElement(character, characterElement.getChildByName("fight"));
+        parseOverworldElement(character, characterElement.getChildByName("overworld"));
 
         characters.put(id, character);
     }
@@ -79,6 +80,22 @@ public class CharacterManager {
         if(fightElement != null) {
             String waitingTexture = fightElement.getChildByName("waitingTexture").getText();
             character.setFightWaitingTexturePath(waitingTexture);
+        }
+    }
+
+    private void parseOverworldElement(GameCharacterDef character, XmlReader.Element overworldElement) {
+        if(overworldElement != null) {
+            String topTexture = overworldElement.getChildByName("topTexture").getText();
+            character.setOverworldTopTexturePath(topTexture);
+
+            String bottomTexture = overworldElement.getChildByName("bottomTexture").getText();
+            character.setOverworldBottomTexturePath(bottomTexture);
+
+            String leftTexture = overworldElement.getChildByName("leftTexture").getText();
+            character.setOverworldLeftTexturePath(leftTexture);
+
+            String rightTexture = overworldElement.getChildByName("rightTexture").getText();
+            character.setOverworldRightTexturePath(rightTexture);
         }
     }
 
