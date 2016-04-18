@@ -9,6 +9,12 @@
         <fight>
             <waitingTexture>data/fight/heroine_droite.png</waitingTexture>
         </fight>
+        <overworld>
+            <topTexture>data/overworld/heroine_dos.png</topTexture>
+            <bottomTexture>data/overworld/heroine_face.png</bottomTexture>
+            <leftTexture>data/overworld/heroine_gauche.png</leftTexture>
+            <rightTexture>data/overworld/heroine_droite.png</rightTexture>
+        </overworld>
     </character>
     <character id="sideKick" name="Neykallo" friendly="true" playable="true">
         <attack>9</attack>

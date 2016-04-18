@@ -16,6 +16,7 @@
                 <xsd:element ref="hp"></xsd:element>
                 <xsd:element ref="mp"></xsd:element>
                 <xsd:element ref="fight" minOccurs="0"></xsd:element>
+                <xsd:element ref="overworld" minOccurs="0"></xsd:element>
             </xsd:sequence>
             <xsd:attribute ref="id"></xsd:attribute>
             <xsd:attribute ref="name"></xsd:attribute>
@@ -36,6 +37,9 @@
     <xsd:element name="overworld">
         <xsd:complexType>
             <xsd:sequence>
+                <xsd:element ref="topTexture"></xsd:element>
+                <xsd:element ref="bottomTexture"></xsd:element>
+                <xsd:element ref="leftTexture"></xsd:element>
                 <xsd:element ref="rightTexture"></xsd:element>
             </xsd:sequence>
         </xsd:complexType>
@@ -43,6 +47,9 @@
 
     <xsd:element name="waitingTexture" type="xsd:string"></xsd:element>
 
+    <xsd:element name="topTexture" type="xsd:string"></xsd:element>
+    <xsd:element name="bottomTexture" type="xsd:string"></xsd:element>
+    <xsd:element name="leftTexture" type="xsd:string"></xsd:element>
     <xsd:element name="rightTexture" type="xsd:string"></xsd:element>
 
     <xsd:element name="attack" type="xsd:int"></xsd:element>
