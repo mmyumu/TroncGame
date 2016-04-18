@@ -16,6 +16,10 @@ public class GameCharacterDef {
     private String fightWaitingTexturePath;
     private boolean usingAI;
     private boolean playable;
+    private String overworldTopTexturePath;
+    private String overworldBottomTexturePath;
+    private String overworldLeftTexturePath;
+    private String overworldRightTexturePath;
 
     public GameCharacterDef() {
     }
@@ -98,5 +102,37 @@ public class GameCharacterDef {
 
     public void setPlayable(boolean playable) {
         this.playable = playable;
+    }
+
+    public String getOverworldTopTexturePath() {
+        return overworldTopTexturePath;
+    }
+
+    public void setOverworldTopTexturePath(String overworldTopTexturePath) {
+        this.overworldTopTexturePath = overworldTopTexturePath;
+    }
+
+    public String getOverworldBottomTexturePath() {
+        return overworldBottomTexturePath;
+    }
+
+    public void setOverworldBottomTexturePath(String overworldBottomTexturePath) {
+        this.overworldBottomTexturePath = overworldBottomTexturePath;
+    }
+
+    public String getOverworldLeftTexturePath() {
+        return overworldLeftTexturePath;
+    }
+
+    public void setOverworldLeftTexturePath(String overworldLeftTexturePath) {
+        this.overworldLeftTexturePath = overworldLeftTexturePath;
+    }
+
+    public String getOverworldRightTexturePath() {
+        return overworldRightTexturePath;
+    }
+
+    public void setOverworldRightTexturePath(String overworldRightTexturePath) {
+        this.overworldRightTexturePath = overworldRightTexturePath;
     }
 }

@@ -18,6 +18,8 @@ import org.powermock.modules.junit4.PowerMockRunner;
 import java.util.concurrent.ThreadLocalRandom;
 
 import fr.mmyumu.troncgame.TestUtils;
+import fr.mmyumu.troncgame.model.GameCharacter;
+import fr.mmyumu.troncgame.model.GameCharacterDef;
 import fr.mmyumu.troncgame.overworld.OverworldConstants;
 
 import static junit.framework.Assert.assertNotNull;
@@ -42,7 +44,7 @@ public class OverworldCharacterLogicTest {
         Gdx.app = mock(Application.class);
         Gdx.input = mock(Input.class);
 
-        overworldCharacterLogic = new OverworldCharacterLogic();
+        overworldCharacterLogic = new OverworldCharacterLogic(new GameCharacter(new GameCharacterDef()));
     }
 
     @Test

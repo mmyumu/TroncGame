@@ -15,10 +15,10 @@ import dagger.Provides;
 import fr.mmyumu.troncgame.ActivityScope;
 import fr.mmyumu.troncgame.Constants;
 import fr.mmyumu.troncgame.TroncGame;
+import fr.mmyumu.troncgame.model.manager.CharacterManager;
 import fr.mmyumu.troncgame.model.manager.ModelManager;
 import fr.mmyumu.troncgame.overworld.OverworldLoadingScreen;
 import fr.mmyumu.troncgame.overworld.OverworldScreen;
-import fr.mmyumu.troncgame.overworld.game.OverworldCharacter;
 import fr.mmyumu.troncgame.overworld.menu.OverworldMenu;
 import fr.mmyumu.troncgame.overworld.menu.OverworldMenuList;
 import fr.mmyumu.troncgame.overworld.ui.OverworldFPS;
@@ -72,8 +72,8 @@ public class OverworldModule {
 
     @Provides
     @ActivityScope
-    OverworldScreen provideOverworldScreen(TroncGame troncGame, AssetManager assetManager, @Named("game") ScalingViewport gameViewport, GameStatePersister gameStatePersister) {
-        return new OverworldScreen(troncGame, assetManager, gameViewport, gameStatePersister);
+    OverworldScreen provideOverworldScreen(TroncGame troncGame, CharacterManager characterManager, AssetManager assetManager, @Named("game") ScalingViewport gameViewport, GameStatePersister gameStatePersister) {
+        return new OverworldScreen(troncGame, characterManager, assetManager, gameViewport, gameStatePersister);
     }
 
     @Provides
@@ -106,11 +106,5 @@ public class OverworldModule {
     @ActivityScope
     OverworldMenuList provideOverworldMenuList(AssetManager assetManager, I18NBundle bundle, Skin skin) {
         return new OverworldMenuList(assetManager, bundle, skin);
-    }
-
-    @Provides
-    @ActivityScope
-    OverworldCharacter provideOverworldCharacter(AssetManager assetManager, @Named("game") OrthographicCamera gameCamera) {
-        return new OverworldCharacter(assetManager, gameCamera);
     }
 }
