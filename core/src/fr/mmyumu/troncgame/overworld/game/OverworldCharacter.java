@@ -6,7 +6,6 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import fr.mmyumu.troncgame.model.GameCharacter;
-import fr.mmyumu.troncgame.overworld.OverworldConstants;
 
 
 /**
@@ -40,20 +39,20 @@ public class OverworldCharacter extends OverworldCharacterLogic {
     public void draw() {
         batch.begin();
 
-        if(getMoveTarget() != null) {
+        if (getMoveTarget() != null) {
             double angle = Math.toDegrees(computeAngle(getMoveTarget().x, getMoveTarget().y, getCenter().x + 1, getCenter().y, getCenter().x, getCenter().y));
-            if(angle < 0) {
+            if (angle < 0) {
                 angle += 360;
             }
-            if(angle >= 0 && angle < 45) {
+            if (angle >= 0 && angle < 45) {
                 currentTexture = textureRight;
-            } else if(angle >= 45 && angle < 135) {
+            } else if (angle >= 45 && angle < 135) {
                 currentTexture = textureTop;
-            } else if(angle >= 135 && angle < 225) {
+            } else if (angle >= 135 && angle < 225) {
                 currentTexture = textureLeft;
-            } else if(angle >= 225 && angle < 315) {
+            } else if (angle >= 225 && angle < 315) {
                 currentTexture = textureBottom;
-            } else if(angle >= 315 && angle < 360) {
+            } else if (angle >= 315 && angle < 360) {
                 currentTexture = textureRight;
             }
             System.out.println("angle=" + angle);
@@ -61,7 +60,7 @@ public class OverworldCharacter extends OverworldCharacterLogic {
 
         batch.setProjectionMatrix(camera.combined);
         batch.setColor(1, 1, 1, 1);
-        batch.draw(currentTexture, getX(), getY(), OverworldConstants.TILE_WIDTH, OverworldConstants.TILE_HEIGHT);
+        batch.draw(currentTexture, getX(), getY(), 90, 90);
         batch.end();
     }
 

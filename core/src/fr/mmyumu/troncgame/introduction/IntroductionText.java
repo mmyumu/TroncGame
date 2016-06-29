@@ -1,6 +1,5 @@
 package fr.mmyumu.troncgame.introduction;
 
-import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -33,13 +32,12 @@ import fr.mmyumu.troncgame.model.manager.ThemeManager;
 public class IntroductionText extends Actor implements DialogListener {
     private static final int TEXT_WIDTH = 1000;
     private static final int TEXT_HEIGHT = 500;
-
-    private TroncGame troncGame;
     private final DialogManager dialogManager;
+    private TroncGame troncGame;
 
 
     @Inject
-    public IntroductionText(TroncGame troncGame, I18NBundle bundle, DialogManager dialogManager, FontManager fontManager, CharacterManager characterManager, AssetManager assetManager, ScalingViewport viewport) {
+    public IntroductionText(TroncGame troncGame, I18NBundle bundle, DialogManager dialogManager, FontManager fontManager, CharacterManager characterManager, ScalingViewport viewport) {
         this.troncGame = troncGame;
         this.dialogManager = dialogManager;
 

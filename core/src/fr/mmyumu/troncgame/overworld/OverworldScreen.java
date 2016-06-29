@@ -175,11 +175,11 @@ public class OverworldScreen extends ScreenAdapter {
      */
     private OverworldCharacter loadOverworldCharacter(GameCharacter character) {
         OverworldCharacter overworldCharacter = new OverworldCharacter(character, assetManager, gameViewport.getCamera());
-        overworldCharacter.setObstaclesLayer(map.getObstaclesLayer());
+        overworldCharacter.setLayers(map.getTileLayers());
 
         Vector2 position = gameStatePersister.loadPosition();
         if (position == null) {
-            position = new Vector2(OverworldConstants.TILE_WIDTH * 1.5f, OverworldConstants.TILE_HEIGHT * 1.5f);
+            position = new Vector2(500, 500);
         }
 
         overworldCharacter.initCenter((int) position.x, (int) position.y);

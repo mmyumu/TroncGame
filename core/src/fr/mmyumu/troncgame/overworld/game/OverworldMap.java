@@ -3,11 +3,15 @@ package fr.mmyumu.troncgame.overworld.game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import fr.mmyumu.troncgame.overworld.OverworldConstants;
 
@@ -24,6 +28,9 @@ public class OverworldMap {
     private final int height;
 
     private final TiledMapRenderer renderer;
+
+    private int[] backgroundLayersId;
+    private int[] foregroundLayersId;
 
     public OverworldMap(String mapPath, OrthographicCamera camera, AssetManager assetManager) {
         this.camera = camera;
@@ -44,18 +51,44 @@ public class OverworldMap {
         Gdx.app.debug(TAG, "width=" + width + " height=" + height);
 
         renderer = new OrthogonalTiledMapRenderer(map, ratio);
+
+        initBackgroundLayersId();
+        initForegroundLayersId();
+    }
+
+    private void initBackgroundLayersId() {
+        backgroundLayersId = initLayersId("Background");
+    }
+
+    private void initForegroundLayersId() {
+        foregroundLayersId = initLayersId("Foreground");
+    }
+
+    private int[] initLayersId(String filter) {
+        List<Integer> layersIdList = new ArrayList<Integer>();
+        for (MapLayer layer : map.getLayers()) {
+            if (layer.getName().contains(filter)) {
+                layersIdList.add(map.getLayers().getIndex(layer));
+            }
+        }
+
+        int[] layersId = new int[layersIdList.size()];
+        int i = 0;
+        for (Integer id : layersIdList) {
+            layersId[i] = id;
+            i++;
+        }
+        return layersId;
     }
 
     public void drawBackground() {
-        int[] backgroundLayers = {map.getLayers().getIndex("Ground"), map.getLayers().getIndex("Obstacles")};
         renderer.setView(camera);
-        renderer.render(backgroundLayers);
+        renderer.render(backgroundLayersId);
     }
 
     public void drawForeground() {
-        int[] foregroundLayers = {map.getLayers().getIndex("Foreground")};
         renderer.setView(camera);
-        renderer.render(foregroundLayers);
+        renderer.render(foregroundLayersId);
     }
 
     public int getWidth() {
@@ -66,7 +99,15 @@ public class OverworldMap {
         return height;
     }
 
-    public TiledMapTileLayer getObstaclesLayer() {
-        return (TiledMapTileLayer) map.getLayers().get("Obstacles");
+    public List<TiledMapTileLayer> getTileLayers() {
+        List<TiledMapTileLayer> layers = new ArrayList<TiledMapTileLayer>();
+        for (MapLayer layer : map.getLayers()) {
+            if (layer instanceof TiledMapTileLayer) {
+                TiledMapTileLayer tileLayer = (TiledMapTileLayer) layer;
+                layers.add(tileLayer);
+            }
+        }
+
+        return layers;
     }
 }
