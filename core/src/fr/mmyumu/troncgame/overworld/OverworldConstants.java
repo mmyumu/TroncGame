@@ -11,12 +11,13 @@ public interface OverworldConstants {
     int MENU_LIST_WIDTH = 240;
     int MENU_LIST_HEIGHT = 768;
 
+    String BLOCK = "block";
+
     interface MapPath {
-        String VILLAGE = "maps/map-01.tmx";
+        String VILLAGE = "maps/outdoor/outdoor.tmx";
     }
 
     interface TexturePath {
-        String MAIN_CHARACTER = "data/overworld/heroine_droite.png";
         String MENU_LIST = "data/overworld/menu_list.png";
     }
 

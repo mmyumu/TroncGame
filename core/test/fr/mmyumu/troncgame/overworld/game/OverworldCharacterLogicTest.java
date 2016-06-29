@@ -3,6 +3,8 @@ package fr.mmyumu.troncgame.overworld.game;
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.maps.MapProperties;
+import com.badlogic.gdx.maps.tiled.TiledMapTile;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.GridPoint2;
 import com.badlogic.gdx.math.Rectangle;
@@ -15,6 +17,8 @@ import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 import fr.mmyumu.troncgame.TestUtils;
@@ -69,10 +73,10 @@ public class OverworldCharacterLogicTest {
 
     @Test
     public void testSetObstaclesLayer() {
-        overworldCharacterLogic.setObstaclesLayer(mock(TiledMapTileLayer.class));
+        overworldCharacterLogic.setLayers(Arrays.asList(mock(TiledMapTileLayer.class)));
 
-        TiledMapTileLayer obstaclesLayer = (TiledMapTileLayer) TestUtils.retrieveValueFromObject(overworldCharacterLogic, "obstaclesLayer");
-        assertNotNull("Obstacles layer after setter", obstaclesLayer);
+        List<TiledMapTileLayer> layers = (List) TestUtils.retrieveValueFromObject(overworldCharacterLogic, "layers");
+        assertNotNull("Layers after setter", layers);
     }
 
     @Test
@@ -109,7 +113,7 @@ public class OverworldCharacterLogicTest {
         mockRandom(0);
 
         overworldCharacterLogic.initCenter(500, 200);
-        overworldCharacterLogic.setObstaclesLayer(mock(TiledMapTileLayer.class));
+        overworldCharacterLogic.setLayers(Arrays.asList(mock(TiledMapTileLayer.class)));
         overworldCharacterLogic.setMoveTarget(new GridPoint2(500, 300));
 
         overworldCharacterLogic.update(0.01f);
@@ -123,7 +127,7 @@ public class OverworldCharacterLogicTest {
         mockRandom(0);
 
         overworldCharacterLogic.initCenter(500, 200);
-        overworldCharacterLogic.setObstaclesLayer(mock(TiledMapTileLayer.class));
+        overworldCharacterLogic.setLayers(Arrays.asList(mock(TiledMapTileLayer.class)));
         overworldCharacterLogic.setMoveTarget(new GridPoint2(500, 100));
 
         overworldCharacterLogic.update(0.01f);
@@ -137,7 +141,7 @@ public class OverworldCharacterLogicTest {
         mockRandom(0);
 
         overworldCharacterLogic.initCenter(500, 200);
-        overworldCharacterLogic.setObstaclesLayer(mock(TiledMapTileLayer.class));
+        overworldCharacterLogic.setLayers(Arrays.asList(mock(TiledMapTileLayer.class)));
         overworldCharacterLogic.setMoveTarget(new GridPoint2(400, 200));
 
         overworldCharacterLogic.update(0.01f);
@@ -151,7 +155,7 @@ public class OverworldCharacterLogicTest {
         mockRandom(0);
 
         overworldCharacterLogic.initCenter(500, 200);
-        overworldCharacterLogic.setObstaclesLayer(mock(TiledMapTileLayer.class));
+        overworldCharacterLogic.setLayers(Arrays.asList(mock(TiledMapTileLayer.class)));
         overworldCharacterLogic.setMoveTarget(new GridPoint2(600, 200));
 
         overworldCharacterLogic.update(0.01f);
@@ -164,13 +168,16 @@ public class OverworldCharacterLogicTest {
     public void testTopCollision() {
         mockRandom(0);
 
+        TiledMapTileLayer.Cell cell1 = createBlockingCell();
+        TiledMapTileLayer.Cell cell2 = createBlockingCell();
+
         TiledMapTileLayer obstaclesLayer = mock(TiledMapTileLayer.class);
-        when(obstaclesLayer.getCell(5, 3)).thenReturn(mock(TiledMapTileLayer.Cell.class));
-        when(obstaclesLayer.getCell(6, 3)).thenReturn(mock(TiledMapTileLayer.Cell.class));
+        when(obstaclesLayer.getCell(5, 3)).thenReturn(cell1);
+        when(obstaclesLayer.getCell(6, 3)).thenReturn(cell2);
 
 
         overworldCharacterLogic.initCenter(500, 220);
-        overworldCharacterLogic.setObstaclesLayer(obstaclesLayer);
+        overworldCharacterLogic.setLayers(Arrays.asList(obstaclesLayer));
         overworldCharacterLogic.setMoveTarget(new GridPoint2(500, 320));
 
         overworldCharacterLogic.update(0.01f);
@@ -182,14 +189,19 @@ public class OverworldCharacterLogicTest {
     public void testTopAndRightCollision() {
         mockRandom(0);
 
+        TiledMapTileLayer.Cell cell1 = createBlockingCell();
+        TiledMapTileLayer.Cell cell2 = createBlockingCell();
+        TiledMapTileLayer.Cell cell3 = createBlockingCell();
+        TiledMapTileLayer.Cell cell4 = createBlockingCell();
+
         TiledMapTileLayer obstaclesLayer = mock(TiledMapTileLayer.class);
-        when(obstaclesLayer.getCell(5, 3)).thenReturn(mock(TiledMapTileLayer.Cell.class));
-        when(obstaclesLayer.getCell(6, 3)).thenReturn(mock(TiledMapTileLayer.Cell.class));
-        when(obstaclesLayer.getCell(6, 2)).thenReturn(mock(TiledMapTileLayer.Cell.class));
-        when(obstaclesLayer.getCell(6, 1)).thenReturn(mock(TiledMapTileLayer.Cell.class));
+        when(obstaclesLayer.getCell(5, 3)).thenReturn(cell1);
+        when(obstaclesLayer.getCell(6, 3)).thenReturn(cell2);
+        when(obstaclesLayer.getCell(6, 2)).thenReturn(cell3);
+        when(obstaclesLayer.getCell(6, 1)).thenReturn(cell4);
 
         overworldCharacterLogic.initCenter(490, 220);
-        overworldCharacterLogic.setObstaclesLayer(obstaclesLayer);
+        overworldCharacterLogic.setLayers(Arrays.asList(obstaclesLayer));
         overworldCharacterLogic.setMoveTarget(new GridPoint2(600, 320));
 
         overworldCharacterLogic.update(0.01f);
@@ -202,12 +214,15 @@ public class OverworldCharacterLogicTest {
     public void testBottomCollision() {
         mockRandom(0);
 
+        TiledMapTileLayer.Cell cell1 = createBlockingCell();
+        TiledMapTileLayer.Cell cell2 = createBlockingCell();
+
         TiledMapTileLayer obstaclesLayer = mock(TiledMapTileLayer.class);
-        when(obstaclesLayer.getCell(5, 1)).thenReturn(mock(TiledMapTileLayer.Cell.class));
-        when(obstaclesLayer.getCell(6, 1)).thenReturn(mock(TiledMapTileLayer.Cell.class));
+        when(obstaclesLayer.getCell(5, 1)).thenReturn(cell1);
+        when(obstaclesLayer.getCell(6, 1)).thenReturn(cell2);
 
         overworldCharacterLogic.initCenter(500, 230);
-        overworldCharacterLogic.setObstaclesLayer(obstaclesLayer);
+        overworldCharacterLogic.setLayers(Arrays.asList(obstaclesLayer));
         overworldCharacterLogic.setMoveTarget(new GridPoint2(500, 130));
 
         overworldCharacterLogic.update(0.01f);
@@ -219,12 +234,15 @@ public class OverworldCharacterLogicTest {
     public void testLeftCollision() {
         mockRandom(0);
 
+        TiledMapTileLayer.Cell cell1 = createBlockingCell();
+        TiledMapTileLayer.Cell cell2 = createBlockingCell();
+
         TiledMapTileLayer obstaclesLayer = mock(TiledMapTileLayer.class);
-        when(obstaclesLayer.getCell(4, 2)).thenReturn(mock(TiledMapTileLayer.Cell.class));
-        when(obstaclesLayer.getCell(4, 1)).thenReturn(mock(TiledMapTileLayer.Cell.class));
+        when(obstaclesLayer.getCell(4, 2)).thenReturn(cell1);
+        when(obstaclesLayer.getCell(4, 1)).thenReturn(cell2);
 
         overworldCharacterLogic.initCenter(500, 200);
-        overworldCharacterLogic.setObstaclesLayer(obstaclesLayer);
+        overworldCharacterLogic.setLayers(Arrays.asList(obstaclesLayer));
         overworldCharacterLogic.setMoveTarget(new GridPoint2(400, 200));
 
         overworldCharacterLogic.update(0.01f);
@@ -236,12 +254,15 @@ public class OverworldCharacterLogicTest {
     public void testRightCollision() {
         mockRandom(0);
 
+        TiledMapTileLayer.Cell cell1 = createBlockingCell();
+        TiledMapTileLayer.Cell cell2 = createBlockingCell();
+
         TiledMapTileLayer obstaclesLayer = mock(TiledMapTileLayer.class);
-        when(obstaclesLayer.getCell(6, 2)).thenReturn(mock(TiledMapTileLayer.Cell.class));
-        when(obstaclesLayer.getCell(6, 1)).thenReturn(mock(TiledMapTileLayer.Cell.class));
+        when(obstaclesLayer.getCell(6, 2)).thenReturn(cell1);
+        when(obstaclesLayer.getCell(6, 1)).thenReturn(cell2);
 
         overworldCharacterLogic.initCenter(490, 200);
-        overworldCharacterLogic.setObstaclesLayer(obstaclesLayer);
+        overworldCharacterLogic.setLayers(Arrays.asList(obstaclesLayer));
         overworldCharacterLogic.setMoveTarget(new GridPoint2(590, 200));
 
         overworldCharacterLogic.update(0.01f);
@@ -254,7 +275,7 @@ public class OverworldCharacterLogicTest {
         mockRandom(0);
 
         overworldCharacterLogic.initCenter(500, 200);
-        overworldCharacterLogic.setObstaclesLayer(mock(TiledMapTileLayer.class));
+        overworldCharacterLogic.setLayers(Arrays.asList(mock(TiledMapTileLayer.class)));
         overworldCharacterLogic.setMoveTarget(new GridPoint2(505, 200));
 
         overworldCharacterLogic.update(0.01f);
@@ -270,7 +291,7 @@ public class OverworldCharacterLogicTest {
         mockRandom(0);
 
         overworldCharacterLogic.initCenter(500, 200);
-        overworldCharacterLogic.setObstaclesLayer(mock(TiledMapTileLayer.class));
+        overworldCharacterLogic.setLayers(Arrays.asList(mock(TiledMapTileLayer.class)));
         overworldCharacterLogic.setMoveTarget(new GridPoint2(800, 600));
 
         overworldCharacterLogic.update(0.01f);
@@ -334,6 +355,19 @@ public class OverworldCharacterLogicTest {
 
         PowerMockito.mockStatic(ThreadLocalRandom.class);
         when(ThreadLocalRandom.current()).thenReturn(threadLocalRandom);
+    }
+
+    private TiledMapTileLayer.Cell createBlockingCell() {
+        MapProperties mapProperties = mock(MapProperties.class);
+        when(mapProperties.get(OverworldConstants.BLOCK)).thenReturn("true");
+
+        TiledMapTile tile = mock(TiledMapTile.class);
+        when(tile.getProperties()).thenReturn(mapProperties);
+
+        TiledMapTileLayer.Cell cell = mock(TiledMapTileLayer.Cell.class);
+        when(cell.getTile()).thenReturn(tile);
+
+        return cell;
     }
 }
 
