@@ -1,0 +1,48 @@
+
+tileset.png
+size: 256,64
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+tile-H-sand-1
+  rotate: false
+  xy: 5, 5
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+tile-H-sand-2
+  rotate: false
+  xy: 42, 5
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+tile-H-sand-3
+  rotate: false
+  xy: 79, 5
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+tile_grass-1
+  rotate: false
+  xy: 116, 5
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+tile_grass-2
+  rotate: false
+  xy: 153, 5
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+tile_grass-3
+  rotate: false
+  xy: 190, 5
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
