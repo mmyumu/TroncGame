@@ -8,6 +8,7 @@ import com.badlogic.gdx.Screen;
 import javax.inject.Inject;
 
 import fr.mmyumu.troncgame.audio.Musical;
+import fr.mmyumu.troncgame.fight.FightScreen;
 import fr.mmyumu.troncgame.persistence.GameStatePersister;
 
 /**
@@ -44,6 +45,13 @@ public class GameInputProcessor extends InputAdapter {
         } else if (keycode == Input.Keys.C) {
             Gdx.app.debug(TAG, "Clear game state");
             gameStatePersister.clear();
+        } else if(keycode == Input.Keys.K) {
+            Screen screen = troncGame.getScreen();
+
+            if (screen instanceof FightScreen) {
+                FightScreen fightScreen = (FightScreen) screen;
+                fightScreen.endFight();
+            }
         }
         return false;
     }
