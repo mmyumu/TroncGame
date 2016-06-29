@@ -121,7 +121,7 @@ public class FightScreen extends ScreenAdapter implements Musical, InputProcesso
         fightPopUpMenu.act(delta);
     }
 
-    private void endFight() {
+    public void endFight() {
         stopPlaying();
 
         Gdx.input.setInputProcessor(null);
