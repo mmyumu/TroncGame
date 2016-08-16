@@ -16,11 +16,12 @@ import javax.inject.Named;
 import fr.mmyumu.troncgame.Constants;
 import fr.mmyumu.troncgame.ScreenState;
 import fr.mmyumu.troncgame.TroncGame;
+import fr.mmyumu.troncgame.map.Map;
+import fr.mmyumu.troncgame.map.MapData;
 import fr.mmyumu.troncgame.model.GameCharacter;
 import fr.mmyumu.troncgame.model.manager.CharacterManager;
 import fr.mmyumu.troncgame.overworld.game.OverworldCharacter;
 import fr.mmyumu.troncgame.overworld.game.OverworldGameInputProcessor;
-import fr.mmyumu.troncgame.overworld.game.OverworldMap;
 import fr.mmyumu.troncgame.overworld.menu.OverworldMenu;
 import fr.mmyumu.troncgame.overworld.ui.OverworldUI;
 import fr.mmyumu.troncgame.overworld.ui.OverworldUIInputProcessor;
@@ -37,6 +38,7 @@ public class OverworldScreen extends ScreenAdapter {
     private static final int MAX = 10;
 
     private final TroncGame troncGame;
+    private final CharacterManager characterManager;
     private final AssetManager assetManager;
     private final ScalingViewport gameViewport;
     private final GameStatePersister gameStatePersister;
@@ -44,13 +46,14 @@ public class OverworldScreen extends ScreenAdapter {
     private OverworldMenu overworldMenu;
 
     private OverworldCharacter mainCharacter;
-    private OverworldMap map;
+    private Map map;
 
     private ScreenState screenState;
 
     @Inject
     public OverworldScreen(TroncGame troncGame, CharacterManager characterManager, AssetManager assetManager, @Named("game") ScalingViewport gameViewport, GameStatePersister gameStatePersister) {
         this.troncGame = troncGame;
+        this.characterManager = characterManager;
         this.assetManager = assetManager;
         this.gameViewport = gameViewport;
         this.gameStatePersister = gameStatePersister;
@@ -58,12 +61,16 @@ public class OverworldScreen extends ScreenAdapter {
         initStages();
 
         screenState = ScreenState.RUNNING;
+    }
 
+    public void initMap(MapData mapData) {
         OrthographicCamera gameCamera = (OrthographicCamera) gameViewport.getCamera();
-        map = new OverworldMap(OverworldConstants.MapPath.VILLAGE, gameCamera, assetManager);
-
-
+        this.map = new Map(mapData, gameCamera, assetManager, OverworldConstants.TILE_HEIGHT);
         mainCharacter = loadOverworldCharacter(characterManager.getTeam().getMainCharacter());
+    }
+
+    public void load() {
+
     }
 
     private void initStages() {

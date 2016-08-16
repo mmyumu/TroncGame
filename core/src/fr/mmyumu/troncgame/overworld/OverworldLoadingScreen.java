@@ -11,6 +11,9 @@ import javax.inject.Inject;
 
 import fr.mmyumu.troncgame.DisplayableLoadingScreen;
 import fr.mmyumu.troncgame.TroncGame;
+import fr.mmyumu.troncgame.map.Map;
+import fr.mmyumu.troncgame.map.MapData;
+import fr.mmyumu.troncgame.map.MapType;
 import fr.mmyumu.troncgame.model.GameCharacterDef;
 import fr.mmyumu.troncgame.model.ItemDef;
 import fr.mmyumu.troncgame.model.manager.ModelManager;
@@ -21,6 +24,7 @@ import fr.mmyumu.troncgame.model.manager.ModelManager;
  */
 public class OverworldLoadingScreen extends DisplayableLoadingScreen {
     private ModelManager modelManager;
+    private MapData mapData;
 
     @Inject
     public OverworldLoadingScreen(TroncGame troncGame, AssetManager assetManager, ModelManager modelManager) {
@@ -28,15 +32,21 @@ public class OverworldLoadingScreen extends DisplayableLoadingScreen {
         this.modelManager = modelManager;
     }
 
+    public void setMapData(MapData mapData) {
+        this.mapData = mapData;
+    }
+
     @Override
     protected Screen getNextScreen() {
-        return troncGame.getOverworldComponent().createOverworldScreen();
+        OverworldScreen overworldScreen = troncGame.getOverworldComponent().createOverworldScreen();
+        overworldScreen.initMap(mapData);
+        return overworldScreen;
     }
 
     @Override
     protected void load() {
         assetManager.setLoader(TiledMap.class, new TmxMapLoader(new InternalFileHandleResolver()));
-        assetManager.load(OverworldConstants.MapPath.VILLAGE, TiledMap.class);
+        assetManager.load(mapData.getPath(), TiledMap.class);
         assetManager.load(OverworldConstants.TexturePath.MENU_LIST, Texture.class);
 
         loadCharacters();
