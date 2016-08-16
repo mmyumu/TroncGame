@@ -9,6 +9,9 @@ import com.badlogic.gdx.utils.I18NBundle;
 import javax.inject.Inject;
 
 import fr.mmyumu.troncgame.TroncGame;
+import fr.mmyumu.troncgame.map.MapData;
+import fr.mmyumu.troncgame.map.MapType;
+import fr.mmyumu.troncgame.overworld.OverworldLoadingScreen;
 import fr.mmyumu.troncgame.persistence.GameStatePersister;
 import fr.mmyumu.troncgame.persistence.ScreenID;
 
@@ -43,7 +46,9 @@ public class MainMenuContinue extends MainMenuButton {
         Screen screen;
         switch (screenID) {
             case OVERWORLD:
-                screen = troncGame.getOverworldComponent().createOverworldLoadingScreen();
+                OverworldLoadingScreen loadingScreen = troncGame.getOverworldComponent().createOverworldLoadingScreen();
+                loadingScreen.setMapData(new MapData(MapType.OVERWORLD_MAP, "outdoor", "start"));
+                screen = loadingScreen;
                 break;
             case FIGHT:
                 screen = troncGame.getFightComponent().createFightLoadingScreen();

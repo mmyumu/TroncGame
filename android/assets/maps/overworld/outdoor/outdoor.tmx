@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="left-down" width="100" height="100" tilewidth="32" tileheight="32" nextobjectid="18">
+<map version="1.0" orientation="orthogonal" renderorder="left-down" width="100" height="100" tilewidth="32" tileheight="32" nextobjectid="22">
  <tileset firstgid="1" name="tileset" tilewidth="32" tileheight="32" spacing="2" margin="1" tilecount="45" columns="15">
   <image source="tiles/tileset.png" width="512" height="128"/>
   <tile id="0">
@@ -54,7 +54,7 @@
   </tile>
   <tile id="32">
    <properties>
-    <property name="block" type="bool" value="true"/>
+    <property name="block" type="bool" value="false"/>
    </properties>
   </tile>
   <tile id="33">
@@ -80,7 +80,23 @@
  </layer>
  <layer name="Background-mountains" width="100" height="100">
   <data encoding="base64" compression="zlib">
-   eJzt0bGKAkEQRdHR1dzZXWNB/f9vtM0MJhT6MpwLDyosOP/LspwssfPY39jBEnt8eDzHVpuy64bH+9acPg14zI9HKx6teLTi0YpHKx6teLTi0YpHKx6teLTi0YpHKx6teLTi0YpHKx6teLTi0YpHKx6teLTi0YpHKx6teLTi0YpHKx6teLTi0YpHq7143GY/8KX24nGZ/cCX2ovHXuLRikcrHq14tOLRikcrHq14tOLRikcrHq14tOLRikcrHq14tOLRikcrHq14tOLRikcrHq14tOLRikcrHq14tOLRikcrHq14tOLRikcrHq14tOLRikcrHq14tOLRikcrHq14tOLRikcrHq14tOLRikcrHq14tOLRikcrHq14tNry+B072ZT9bHjY/L09jmOrJXYfewEqGTp/
+   eJzt3clqAkEARdFKTPYZzDpk+P9vjC4CRlQQDHW7ORceuOzmgKsuajvGeLDEHnd73e3OEvs68Pje7dmm7O2Ex/635nRowGN+PFrxaMWjFY9WPFrxaMWjFY9WPFrxaMWjFY9WPFrxaMWjFY9WPFrxaMWjFY9WPFrxaMWjFY9Wa/PYjsvfKNdbm8elb8KX8F48Wi3d4/j/aTN4zOyaMytLeC8erXi04tFq6R734+95r49x/izY56RnvKale/z2PvsBbtRaPJ5mP8CNWovHWuLRikcrHq14tOLRikcrHq14tOLRikcrHq14tOLRikcrHq14tOLRikcrHq14tOLRikcrHq14tOLRikcrHq14tOLRikcrHq14tOLRikcrHq14tOLRikcrHq14tOLRikcrHq14tOLRikcrHq14tOLRikcrHq14tOLRikcrHq14tDrl8TLO38Fk/7vNCQ+bv73H8V0BNm/7uxh+AFUEPVI=
   </data>
  </layer>
+ <objectgroup name="Exits">
+  <object id="19" x="1568" y="1162" width="32" height="32">
+   <properties>
+    <property name="entranceName" value="south"/>
+    <property name="mapName" value="field001"/>
+    <property name="mapType" value="overworld"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup name="Entrances">
+  <object id="21" x="1568" y="1472" width="32" height="32">
+   <properties>
+    <property name="name" value="start"/>
+   </properties>
+  </object>
+ </objectgroup>
 </map>

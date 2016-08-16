@@ -14,7 +14,7 @@ public interface OverworldConstants {
     String BLOCK = "block";
 
     interface MapPath {
-        String VILLAGE = "maps/outdoor/outdoor.tmx";
+        String VILLAGE = "maps/overworld/outdoor/outdoor.tmx";
     }
 
     interface TexturePath {

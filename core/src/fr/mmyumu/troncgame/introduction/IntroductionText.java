@@ -15,15 +15,19 @@ import javax.inject.Inject;
 
 import fr.mmyumu.troncgame.Constants;
 import fr.mmyumu.troncgame.FontManager;
+import fr.mmyumu.troncgame.LoadingScreen;
 import fr.mmyumu.troncgame.TroncGame;
 import fr.mmyumu.troncgame.dialog.DialogCharacter;
 import fr.mmyumu.troncgame.dialog.DialogListener;
 import fr.mmyumu.troncgame.dialog.DialogManager;
 import fr.mmyumu.troncgame.dialog.DialogMode;
 import fr.mmyumu.troncgame.dialog.DialogSlot;
+import fr.mmyumu.troncgame.map.MapData;
+import fr.mmyumu.troncgame.map.MapType;
 import fr.mmyumu.troncgame.model.GameCharacterDef;
 import fr.mmyumu.troncgame.model.manager.CharacterManager;
 import fr.mmyumu.troncgame.model.manager.ThemeManager;
+import fr.mmyumu.troncgame.overworld.OverworldLoadingScreen;
 
 /**
  * Display the text of the introduction
@@ -84,6 +88,8 @@ public class IntroductionText extends Actor implements DialogListener {
 
     @Override
     public void dialogOver() {
-        troncGame.setScreen(troncGame.getOverworldComponent().createOverworldLoadingScreen());
+        OverworldLoadingScreen loadingScreen = troncGame.getOverworldComponent().createOverworldLoadingScreen();
+        loadingScreen.setMapData(new MapData(MapType.OVERWORLD_MAP, "outdoor", "start"));
+        troncGame.setScreen(loadingScreen);
     }
 }
