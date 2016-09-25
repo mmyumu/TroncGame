@@ -18,7 +18,7 @@ public interface FightConstants {
     int LABEL_HEIGHT = 50;
 
     interface MusicPath {
-        String FIRST_CHIPTUNE = "music/first_chiptune.ogg";
+        String FIRST_CHIPTUNE = "music/Chiptune2.ogg";
     }
 
     interface TexturePath {
