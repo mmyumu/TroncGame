@@ -89,7 +89,8 @@ public class IntroductionText extends Actor implements DialogListener {
     @Override
     public void dialogOver() {
         OverworldLoadingScreen loadingScreen = troncGame.getOverworldComponent().createOverworldLoadingScreen();
-        loadingScreen.setMapData(new MapData(MapType.OVERWORLD_MAP, "outdoor", "start"));
+        loadingScreen.loadMap(new MapData(MapType.OVERWORLD_MAP, "outdoor"), "start");
+//        loadingScreen.setMapData(new MapData(MapType.OVERWORLD_MAP, "outdoor", "start"));
         troncGame.setScreen(loadingScreen);
     }
 }

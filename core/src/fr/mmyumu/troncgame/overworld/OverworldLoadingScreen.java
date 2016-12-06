@@ -11,9 +11,7 @@ import javax.inject.Inject;
 
 import fr.mmyumu.troncgame.DisplayableLoadingScreen;
 import fr.mmyumu.troncgame.TroncGame;
-import fr.mmyumu.troncgame.map.Map;
 import fr.mmyumu.troncgame.map.MapData;
-import fr.mmyumu.troncgame.map.MapType;
 import fr.mmyumu.troncgame.model.GameCharacterDef;
 import fr.mmyumu.troncgame.model.ItemDef;
 import fr.mmyumu.troncgame.model.manager.ModelManager;
@@ -25,6 +23,7 @@ import fr.mmyumu.troncgame.model.manager.ModelManager;
 public class OverworldLoadingScreen extends DisplayableLoadingScreen {
     private ModelManager modelManager;
     private MapData mapData;
+    private String entrance;
 
     @Inject
     public OverworldLoadingScreen(TroncGame troncGame, AssetManager assetManager, ModelManager modelManager) {
@@ -32,21 +31,28 @@ public class OverworldLoadingScreen extends DisplayableLoadingScreen {
         this.modelManager = modelManager;
     }
 
-    public void setMapData(MapData mapData) {
+    public void loadMap(MapData mapData, String entrance) {
         this.mapData = mapData;
+        this.entrance = entrance;
     }
 
     @Override
     protected Screen getNextScreen() {
         OverworldScreen overworldScreen = troncGame.getOverworldComponent().createOverworldScreen();
-        overworldScreen.initMap(mapData);
+        if (mapData != null) {
+            overworldScreen.loadMap(mapData, entrance);
+        } else {
+            overworldScreen.loadLastMap();
+        }
         return overworldScreen;
     }
 
     @Override
     protected void load() {
         assetManager.setLoader(TiledMap.class, new TmxMapLoader(new InternalFileHandleResolver()));
-        assetManager.load(mapData.getPath(), TiledMap.class);
+        if (mapData != null) {
+            assetManager.load(mapData.getPath(), TiledMap.class);
+        }
         assetManager.load(OverworldConstants.TexturePath.MENU_LIST, Texture.class);
 
         loadCharacters();
@@ -65,7 +71,7 @@ public class OverworldLoadingScreen extends DisplayableLoadingScreen {
     }
 
     private void loadTexturePath(String texturePath) {
-        if(texturePath != null && !texturePath.isEmpty()) {
+        if (texturePath != null && !texturePath.isEmpty()) {
             assetManager.load(texturePath, Texture.class);
         }
     }
