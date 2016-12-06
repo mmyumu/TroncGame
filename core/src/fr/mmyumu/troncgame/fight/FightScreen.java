@@ -21,6 +21,7 @@ import fr.mmyumu.troncgame.fight.popup.FightPopUpMenu;
 import fr.mmyumu.troncgame.fight.popup.FightPopUpMenuIcon;
 import fr.mmyumu.troncgame.fight.ui.FightUI;
 import fr.mmyumu.troncgame.map.MapData;
+import fr.mmyumu.troncgame.map.MapType;
 import fr.mmyumu.troncgame.overworld.OverworldLoadingScreen;
 
 /**
@@ -134,7 +135,9 @@ public class FightScreen extends ScreenAdapter implements Musical, InputProcesso
             @Override
             public void run() {
                 OverworldLoadingScreen loadingScreen = troncGame.getOverworldComponent().createOverworldLoadingScreen();
-                loadingScreen.setMapData(new MapData());
+//                String mapPath = null;
+//                loadingScreen.setMapPath(mapPath);
+//                loadingScreen.setMapData(new MapData(MapType.OVERWORLD_MAP, "outdoor", "start"));
                 troncGame.setScreen(loadingScreen);
             }
         }, END_DELAY);

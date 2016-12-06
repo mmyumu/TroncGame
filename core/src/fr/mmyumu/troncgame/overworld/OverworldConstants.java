@@ -1,7 +1,5 @@
 package fr.mmyumu.troncgame.overworld;
 
-import java.util.Map;
-
 /**
  * Constants for the Overworld
  * Created by mmyumu on 30/10/2015.
