@@ -47,7 +47,7 @@ public class MainMenuContinue extends MainMenuButton {
         switch (screenID) {
             case OVERWORLD:
                 OverworldLoadingScreen loadingScreen = troncGame.getOverworldComponent().createOverworldLoadingScreen();
-                loadingScreen.setMapData(new MapData(MapType.OVERWORLD_MAP, "outdoor", "start"));
+//                loadingScreen.setMapData(null);
                 screen = loadingScreen;
                 break;
             case FIGHT:
