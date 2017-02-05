@@ -7,10 +7,6 @@ import com.badlogic.gdx.Input;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.powermock.core.classloader.annotations.PrepareForTest;
-import org.powermock.modules.junit4.PowerMockRunner;
-
-import java.util.concurrent.ThreadLocalRandom;
 
 import fr.mmyumu.troncgame.overworld.game.OverworldCharacterLogic;
 
@@ -21,8 +17,6 @@ import static org.mockito.Mockito.mock;
  * Test the logic of the Overworld GameCharacter
  * Created by mmyumu on 21/11/2015.
  */
-@RunWith(PowerMockRunner.class)
-@PrepareForTest({ThreadLocalRandom.class, OverworldCharacterLogic.class})
 public class GameCharacterTest {
 
     private GameCharacter gameCharacter;

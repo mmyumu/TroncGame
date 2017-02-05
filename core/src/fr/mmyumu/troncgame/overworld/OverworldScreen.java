@@ -8,7 +8,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.viewport.ScalingViewport;
 
-import java.util.concurrent.ThreadLocalRandom;
+import java.util.Random;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -48,6 +48,8 @@ public class OverworldScreen extends ScreenAdapter {
 
     private ScreenState screenState;
 
+    private Random r;
+
     @Inject
     public OverworldScreen(TroncGame troncGame, CharacterManager characterManager, AssetManager assetManager, @Named("game") ScalingViewport gameViewport, GameStatePersister gameStatePersister) {
         this.troncGame = troncGame;
@@ -58,6 +60,7 @@ public class OverworldScreen extends ScreenAdapter {
         initStages();
 
         screenState = ScreenState.RUNNING;
+        r = new Random();
 
         OrthographicCamera gameCamera = (OrthographicCamera) gameViewport.getCamera();
         map = new OverworldMap(OverworldConstants.MapPath.VILLAGE, gameCamera, assetManager);
@@ -195,7 +198,7 @@ public class OverworldScreen extends ScreenAdapter {
     private void checkFight(float delta) {
         if (mainCharacter.getMoveTarget() != null) {
             int randomMax = (int) (MAX / delta);
-            int random = ThreadLocalRandom.current().nextInt(0, randomMax);
+            int random = r.nextInt(randomMax);
             Gdx.app.debug(TAG, "Random=" + random + " randomMax=" + randomMax);
             if (random == randomMax - 1) {
                 mainCharacter.setMoveTarget(null);

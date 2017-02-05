@@ -12,14 +12,10 @@ import com.badlogic.gdx.math.Vector2;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.powermock.api.mockito.PowerMockito;
-import org.powermock.core.classloader.annotations.PrepareForTest;
-import org.powermock.modules.junit4.PowerMockRunner;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.concurrent.ThreadLocalRandom;
+import java.util.Random;
 
 import fr.mmyumu.troncgame.TestUtils;
 import fr.mmyumu.troncgame.model.GameCharacter;
@@ -37,8 +33,6 @@ import static org.mockito.Mockito.when;
  * Test the logic of the Overworld GameCharacter
  * Created by mmyumu on 21/11/2015.
  */
-@RunWith(PowerMockRunner.class)
-@PrepareForTest({ThreadLocalRandom.class, OverworldCharacterLogic.class})
 public class OverworldCharacterLogicTest {
 
     private OverworldCharacterLogic overworldCharacterLogic;
@@ -350,11 +344,8 @@ public class OverworldCharacterLogicTest {
     }
 
     private void mockRandom(int randomValue) {
-        ThreadLocalRandom threadLocalRandom = mock(ThreadLocalRandom.class);
-        when(threadLocalRandom.nextInt(anyInt(), anyInt())).thenReturn(randomValue);
-
-        PowerMockito.mockStatic(ThreadLocalRandom.class);
-        when(ThreadLocalRandom.current()).thenReturn(threadLocalRandom);
+        Random r = mock(Random.class);
+        when(r.nextInt(anyInt())).thenReturn(randomValue);
     }
 
     private TiledMapTileLayer.Cell createBlockingCell() {
