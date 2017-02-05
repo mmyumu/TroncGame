@@ -116,9 +116,7 @@ project(":core") {
         compile "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
 
         testCompile "junit:junit:4.12"
-        testCompile "org.mockito:mockito-core:1.+"
-        testCompile "org.powermock:powermock-module-junit4:1.+"
-        testCompile "org.powermock:powermock-api-mockito:1.+"
+        testCompile "org.mockito:mockito-core:2.7.2"
         testCompile "com.badlogicgames.gdx:gdx-backend-headless:$gdxVersion"
     }
 }
