@@ -9,7 +9,7 @@ import com.badlogic.gdx.utils.I18NBundle;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.concurrent.ThreadLocalRandom;
+import java.util.Random;
 
 import javax.inject.Inject;
 
@@ -45,6 +45,8 @@ public class FightLogic {
 
     private FightState fightState;
 
+    private Random r;
+
 
     @Inject
     public FightLogic(AssetManager assetManager, I18NBundle bundle, Skin skin, CharacterManager characterManager, EnemyFightTeamGenerator enemyFightTeamGenerator, FightPopUpMenuLogic popUpMenuLogic) {
@@ -54,6 +56,8 @@ public class FightLogic {
         this.characterManager = characterManager;
         this.enemyFightTeamGenerator = enemyFightTeamGenerator;
         this.popUpMenuLogic = popUpMenuLogic;
+
+        r = new Random();
 
         startNew();
     }
@@ -203,7 +207,7 @@ public class FightLogic {
     }
 
     private FightCharacter computeTargetCharacter() {
-        int random = ThreadLocalRandom.current().nextInt(0, fightTeam.size());
+        int random = r.nextInt(fightTeam.size());
         return fightTeam.get(random);
     }
 
