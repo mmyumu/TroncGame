@@ -6,7 +6,6 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
-import com.badlogic.gdx.math.Vector2;
 
 import fr.mmyumu.troncgame.CompassPoint;
 import fr.mmyumu.troncgame.FontManager;
@@ -20,9 +19,9 @@ public class FightPopUpMenuIcon extends FightPopUpMenuElement {
     private final boolean action;
     private Texture texture;
     private float alpha;
-    private BitmapFont font;
-    private GlyphLayout layout;
-    private String title;
+    private final BitmapFont font;
+    private final GlyphLayout layout;
+    private final String title;
 
     public FightPopUpMenuIcon(String texturePath, CompassPoint compassPoint, AssetManager assetManager, String title, FontManager fontManager, boolean action) {
         super(compassPoint);

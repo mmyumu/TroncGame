@@ -20,7 +20,7 @@ public class MainMenuStart extends MainMenuButton {
 
     private final TroncGame troncGame;
     private final GameStatePersister gameStatePersister;
-    private ModelManager modelManager;
+    private final ModelManager modelManager;
 
     @Inject
     public MainMenuStart(TroncGame troncGame, AssetManager assetManager, I18NBundle bundle, GameStatePersister gameStatePersister, ModelManager modelManager, Integer y) {

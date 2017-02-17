@@ -33,7 +33,7 @@ public class IntroductionText extends Actor implements DialogListener {
     private static final int TEXT_WIDTH = 1000;
     private static final int TEXT_HEIGHT = 500;
     private final DialogManager dialogManager;
-    private TroncGame troncGame;
+    private final TroncGame troncGame;
 
 
     @Inject
@@ -70,11 +70,6 @@ public class IntroductionText extends Actor implements DialogListener {
         super.act(delta);
 
         dialogManager.update(delta);
-    }
-
-    @Override
-    public Actor hit(float x, float y, boolean touchable) {
-        return super.hit(x, y, touchable);
     }
 
     @Override

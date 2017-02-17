@@ -21,7 +21,7 @@ import static com.badlogic.gdx.scenes.scene2d.actions.Actions.sequence;
 public class FightPopUpMenuNotReady extends FightPopUpMenuElement {
     private static final float RADIUS = 100f;
 
-    private Label label;
+    private final Label label;
 
     @Inject
     public FightPopUpMenuNotReady(I18NBundle bundle, Skin skin) {

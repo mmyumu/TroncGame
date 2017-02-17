@@ -5,9 +5,9 @@ package fr.mmyumu.troncgame.model;
  * Created by mmyumu on 14/02/2016.
  */
 public class ItemDef {
-    private String identifier;
+    private final String identifier;
     private String name;
-    private String texturePath;
+    private final String texturePath;
 
     public ItemDef(String identifier, String name, String texturePath) {
         this.identifier = identifier;

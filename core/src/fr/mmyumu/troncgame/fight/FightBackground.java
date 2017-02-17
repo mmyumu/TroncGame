@@ -13,7 +13,7 @@ import fr.mmyumu.troncgame.Constants;
  */
 public class FightBackground extends Actor {
 
-    private AssetManager assetManager;
+    private final AssetManager assetManager;
     private boolean darkened;
 
     public FightBackground(AssetManager assetManager) {

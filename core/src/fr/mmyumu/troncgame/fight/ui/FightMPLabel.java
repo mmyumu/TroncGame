@@ -10,7 +10,7 @@ import fr.mmyumu.troncgame.fight.FightCharacter;
  * Created by mmyumu on 24/01/2016.
  */
 public class FightMPLabel extends Label {
-    private FightCharacter fightCharacter;
+    private final FightCharacter fightCharacter;
 
     public FightMPLabel(FightCharacter fightCharacter, Skin skin) {
         super(String.valueOf(fightCharacter.getCharacter().getCurrentMp()), skin);

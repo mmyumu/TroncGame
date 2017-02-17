@@ -24,7 +24,7 @@ public class CharacterManager {
     private static final String TAG = "CharacterManager";
 
     private Team team;
-    private Map<String, GameCharacterDef> characters;
+    private final Map<String, GameCharacterDef> characters;
 
     @Inject
     public CharacterManager() {

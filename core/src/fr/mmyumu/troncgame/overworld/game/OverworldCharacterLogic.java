@@ -26,7 +26,7 @@ public class OverworldCharacterLogic {
     private final Speed speed;
     private final GameCharacter character;
     private List<TiledMapTileLayer> layers;
-    private Vector2 center;
+    private final Vector2 center;
     private GridPoint2 moveTarget;
 
     public OverworldCharacterLogic(GameCharacter character) {

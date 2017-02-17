@@ -2,7 +2,6 @@ package fr.mmyumu.troncgame.menu.main;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -23,7 +22,6 @@ import fr.mmyumu.troncgame.Constants;
 public abstract class MainMenuButton extends Actor {
     private final AssetManager assetManager;
     private final I18NBundle bundle;
-    private final ShapeRenderer shapeRenderer;
 
     private Texture mainMenu;
     private BitmapFont font;
@@ -31,8 +29,6 @@ public abstract class MainMenuButton extends Actor {
     public MainMenuButton(AssetManager assetManager, I18NBundle bundle, int y) {
         this.assetManager = assetManager;
         this.bundle = bundle;
-
-        shapeRenderer = new ShapeRenderer();
 
         loadFonts();
         loadTexture();

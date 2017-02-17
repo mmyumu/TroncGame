@@ -2,8 +2,6 @@ package fr.mmyumu.troncgame.model.manager;
 
 import javax.inject.Inject;
 
-import fr.mmyumu.troncgame.model.ModelConstants;
-
 /**
  * Allow to do operations on model
  * Created by mmyumu on 03/03/2016.
