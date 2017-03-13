@@ -5,8 +5,6 @@ import com.badlogic.gdx.utils.viewport.ScalingViewport;
 
 import javax.inject.Inject;
 
-import fr.mmyumu.troncgame.TroncGame;
-
 /**
  * Display the introduction elements
  * Created by mmyumu on 22/02/2016.

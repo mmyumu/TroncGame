@@ -24,8 +24,8 @@ import fr.mmyumu.troncgame.model.exception.NotFoundException;
 public class ItemManager {
     private static final String TAG = "ItemManager";
 
-    private Map<String, ItemDef> items;
-    private Map<String, WeaponDef> weapons;
+    private final Map<String, ItemDef> items;
+    private final Map<String, WeaponDef> weapons;
 
     public interface ID {
         String BASIC_SWORD = "sword.basic";

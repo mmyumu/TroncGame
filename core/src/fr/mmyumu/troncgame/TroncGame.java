@@ -20,12 +20,12 @@ import fr.mmyumu.troncgame.modules.ModelModule;
 import fr.mmyumu.troncgame.modules.OverworldModule;
 
 public class TroncGame extends Game {
-    private ModelComponent modelComponent;
-    private GameComponent gameComponent;
-    private MainMenuComponent mainMenuComponent;
-    private OverworldComponent overworldComponent;
-    private FightComponent fightComponent;
-    private IntroductionComponent introductionComponent;
+    private final ModelComponent modelComponent;
+    private final GameComponent gameComponent;
+    private final MainMenuComponent mainMenuComponent;
+    private final OverworldComponent overworldComponent;
+    private final FightComponent fightComponent;
+    private final IntroductionComponent introductionComponent;
 
     public TroncGame() {
         ModelModule modelModule = new ModelModule();

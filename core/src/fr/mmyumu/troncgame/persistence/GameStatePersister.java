@@ -26,7 +26,7 @@ public class GameStatePersister {
     private static final String CHARACTER_EQUIPMENT_WEAPON = "character.equipment.weapon";
 
     private final ModelManager modelManager;
-    private Preferences preferences;
+    private final Preferences preferences;
 
     @Inject
     public GameStatePersister(ModelManager modelManager) {

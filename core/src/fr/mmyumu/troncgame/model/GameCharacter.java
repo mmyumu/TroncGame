@@ -9,14 +9,14 @@ import com.badlogic.gdx.Gdx;
 public class GameCharacter {
     private static final String TAG = "GameCharacter";
 
-    private GameCharacterDef definition;
+    private final GameCharacterDef definition;
 
     private String name;
 
     private int currentHp;
     private int currentMp;
 
-    private Equipment equipment;
+    private final Equipment equipment;
 
     public GameCharacter(GameCharacterDef characterDef) {
         this.equipment = new Equipment();

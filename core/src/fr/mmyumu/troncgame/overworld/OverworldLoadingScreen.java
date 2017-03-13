@@ -20,7 +20,7 @@ import fr.mmyumu.troncgame.model.manager.ModelManager;
  * Created by mmyumu on 28/10/2015.
  */
 public class OverworldLoadingScreen extends DisplayableLoadingScreen {
-    private ModelManager modelManager;
+    private final ModelManager modelManager;
 
     @Inject
     public OverworldLoadingScreen(TroncGame troncGame, AssetManager assetManager, ModelManager modelManager) {

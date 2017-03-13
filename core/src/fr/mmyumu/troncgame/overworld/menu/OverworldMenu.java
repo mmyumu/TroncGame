@@ -19,7 +19,7 @@ import fr.mmyumu.troncgame.overworld.ui.OverworldFPS;
 public class OverworldMenu extends Stage {
     private static final String TAG = "OverworldMenu";
 
-    private Lazy<OverworldScreen> overworldScreen;
+    private final Lazy<OverworldScreen> overworldScreen;
 
     @Inject
     public OverworldMenu(ScalingViewport viewport, Lazy<OverworldScreen> overworldScreen, @Named("menu") OverworldFPS overworldFPS, OverworldMenuList overworldMenuList) {

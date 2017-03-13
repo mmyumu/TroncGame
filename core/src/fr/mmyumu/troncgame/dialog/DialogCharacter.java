@@ -7,8 +7,8 @@ import fr.mmyumu.troncgame.model.GameCharacter;
  * Created by mmyumu on 06/03/2016.
  */
 public class DialogCharacter {
-    private GameCharacter character;
-    private DialogSlot slot;
+    private final GameCharacter character;
+    private final DialogSlot slot;
 
     public DialogCharacter(GameCharacter character, DialogSlot slot) {
         this.character = character;

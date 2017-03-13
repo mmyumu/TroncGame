@@ -18,13 +18,13 @@ public class DialogLine {
     private final DialogMode mode;
     private final I18NBundle bundle;
     private final BitmapFont font;
-    private float x;
-    private float y;
-    private float width;
-    private float height;
-    private int align;
+    private final float x;
+    private final float y;
+    private final float width;
+    private final float height;
+    private final int align;
 
-    private float timer;
+    private final float timer;
 
     private int textIndex;
     private int startIndex;

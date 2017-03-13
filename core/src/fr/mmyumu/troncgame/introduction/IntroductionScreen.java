@@ -12,8 +12,8 @@ import fr.mmyumu.troncgame.TroncGame;
  * Created by mmyumu on 22/02/2016.
  */
 public class IntroductionScreen extends ScreenAdapter {
-    private TroncGame troncGame;
-    private ScalingViewport viewport;
+    private final TroncGame troncGame;
+    private final ScalingViewport viewport;
     private Introduction introduction;
 
     public IntroductionScreen(TroncGame troncGame, ScalingViewport viewport) {

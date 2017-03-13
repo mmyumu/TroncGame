@@ -22,7 +22,7 @@ import fr.mmyumu.troncgame.model.ModelConstants;
 public class ThemeManager {
     private static final String TAG = "ThemeManager";
     private static final float MAX_COLOR_VALUE = 255;
-    private Map<String, DialogTheme> dialogThemes;
+    private final Map<String, DialogTheme> dialogThemes;
 
     @Inject
     public ThemeManager() {

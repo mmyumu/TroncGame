@@ -40,7 +40,7 @@ public class EnemyFightTeamGenerator {
         GameCharacter enemy2 = new GameCharacter(characterManager.getCharacters().get("soldier"));
         enemy1.setName("Soldier 2");
 
-        enemyFightTeam.add(new FightCharacter(skin, 1500, FightConstants.MAIN_INFOS_HEIGHT + 20 + 200 * 1, enemy1, assetManager.get(enemy1.getDefinition().getFightWaitingTexturePath(), Texture.class), false));
+        enemyFightTeam.add(new FightCharacter(skin, 1500, FightConstants.MAIN_INFOS_HEIGHT + 20 + 200, enemy1, assetManager.get(enemy1.getDefinition().getFightWaitingTexturePath(), Texture.class), false));
         enemyFightTeam.add(new FightCharacter(skin, 1500, FightConstants.MAIN_INFOS_HEIGHT + 20 + 200 * 2, enemy2, assetManager.get(enemy2.getDefinition().getFightWaitingTexturePath(), Texture.class), false));
 
         return enemyFightTeam;

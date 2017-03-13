@@ -43,12 +43,12 @@ public class OverworldScreen extends ScreenAdapter {
     private OverworldUI overworldUI;
     private OverworldMenu overworldMenu;
 
-    private OverworldCharacter mainCharacter;
-    private OverworldMap map;
+    private final OverworldCharacter mainCharacter;
+    private final OverworldMap map;
 
     private ScreenState screenState;
 
-    private Random r;
+    private final Random r;
 
     @Inject
     public OverworldScreen(TroncGame troncGame, CharacterManager characterManager, AssetManager assetManager, @Named("game") ScalingViewport gameViewport, GameStatePersister gameStatePersister) {

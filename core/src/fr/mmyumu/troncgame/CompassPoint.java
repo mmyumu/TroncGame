@@ -7,7 +7,7 @@ package fr.mmyumu.troncgame;
 public enum CompassPoint {
     EAST(0f), NORTH(90f), WEST(180f), SOUTH(270f);
 
-    private float angle;
+    private final float angle;
 
     CompassPoint(float angle) {
         this.angle = angle;

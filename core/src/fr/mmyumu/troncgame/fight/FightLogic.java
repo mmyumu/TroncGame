@@ -45,7 +45,7 @@ public class FightLogic {
 
     private FightState fightState;
 
-    private Random r;
+    private final Random r;
 
 
     @Inject
