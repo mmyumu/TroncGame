@@ -43,8 +43,8 @@ public class DialogManager extends InputAdapter {
         this.bundle = bundle;
         this.themeManager = themeManager;
 
-        dialogListeners = new ArrayList<DialogListener>();
-        lines = new ArrayList<DialogLine>();
+        dialogListeners = new ArrayList<>();
+        lines = new ArrayList<>();
 
         lineIndex = 0;
     }

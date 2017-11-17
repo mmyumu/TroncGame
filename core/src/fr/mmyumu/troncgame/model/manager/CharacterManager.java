@@ -28,7 +28,7 @@ public class CharacterManager {
 
     @Inject
     public CharacterManager() {
-        this.characters = new HashMap<String, GameCharacterDef>();
+        this.characters = new HashMap<>();
 
         try {
             loadXml();

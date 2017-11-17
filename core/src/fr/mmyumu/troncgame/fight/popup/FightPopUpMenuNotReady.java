@@ -43,12 +43,7 @@ public class FightPopUpMenuNotReady extends FightPopUpMenuElement {
         label.setColor(1, 1, 1, 1);
 
         RunnableAction run = new RunnableAction();
-        run.setRunnable(new Runnable() {
-            @Override
-            public void run() {
-                hide();
-            }
-        });
+        run.setRunnable(this::hide);
 
         label.addAction(sequence(fadeOut(1), run));
         label.setBounds(getX(), getY(), getWidth(), getHeight());

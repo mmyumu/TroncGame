@@ -65,7 +65,7 @@ public class OverworldMap {
     }
 
     private int[] initLayersId(String filter) {
-        List<Integer> layersIdList = new ArrayList<Integer>();
+        List<Integer> layersIdList = new ArrayList<>();
         for (MapLayer layer : map.getLayers()) {
             if (layer.getName().contains(filter)) {
                 layersIdList.add(map.getLayers().getIndex(layer));
@@ -100,7 +100,7 @@ public class OverworldMap {
     }
 
     public List<TiledMapTileLayer> getTileLayers() {
-        List<TiledMapTileLayer> layers = new ArrayList<TiledMapTileLayer>();
+        List<TiledMapTileLayer> layers = new ArrayList<>();
         for (MapLayer layer : map.getLayers()) {
             if (layer instanceof TiledMapTileLayer) {
                 TiledMapTileLayer tileLayer = (TiledMapTileLayer) layer;

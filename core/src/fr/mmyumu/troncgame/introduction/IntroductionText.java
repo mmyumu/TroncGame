@@ -50,7 +50,7 @@ public class IntroductionText extends Actor implements DialogListener {
         BitmapFont fontVisitor = fontManager.loadVisitor(new Color(1f, 1f, 1f, 1f), fontManager.parameters(64, 2));
 //        BitmapFont fontKarmatic = fontManager.loadKarmaticArcade(new Color(1f, 1f, 1f, 1f), fontManager.parameters(50, 0));
 
-        List<DialogCharacter> loremIpsumCharacters = new ArrayList<DialogCharacter>();
+        List<DialogCharacter> loremIpsumCharacters = new ArrayList<>();
         loremIpsumCharacters.add(new DialogCharacter(characterManager.getTeam().getMainCharacter(), DialogSlot.LEFT));
         loremIpsumCharacters.add(new DialogCharacter(characterManager.getTeam().getSideKickCharacter(), DialogSlot.RIGHT));
 

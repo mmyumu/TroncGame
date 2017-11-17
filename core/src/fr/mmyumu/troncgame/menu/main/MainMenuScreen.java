@@ -39,7 +39,7 @@ public class MainMenuScreen extends ScreenAdapter {
     }
 
     private void initStages() {
-        List<Actor> buttons = new ArrayList<Actor>();
+        List<Actor> buttons = new ArrayList<>();
         buttons.add(troncGame.getMainMenuComponent().createMainMenuStart());
 
         if(gameStatePersister.hasSavedGame()) {

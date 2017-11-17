@@ -9,7 +9,7 @@ import com.badlogic.gdx.utils.I18NBundle;
 import java.util.List;
 
 /**
- * A line of a dialog. It contains all the informations needed to display a line of dialog which is part of a dialog.
+ * A line of a dialog. It contains all the information needed to display a line of dialog which is part of a dialog.
  * Created by mmyumu on 06/03/2016.
  */
 public class DialogLine {

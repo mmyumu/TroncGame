@@ -14,7 +14,7 @@ public class Team {
     private final Map<String, GameCharacter> characters;
 
     public Team() {
-        characters = new LinkedHashMap<String, GameCharacter>();
+        characters = new LinkedHashMap<>();
     }
 
     public GameCharacter put(String identifier, GameCharacter character) {
