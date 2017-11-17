@@ -30,10 +30,10 @@ public abstract class LoadingScreen extends ScreenAdapter {
 
     @Override
     public void render(float delta) {
+        Gdx.app.debug(TAG, "Progress " + assetManager.getProgress());
         if (assetManager.update()) {
             troncGame.setScreen(getNextScreen());
         }
-        Gdx.app.debug(TAG, ".");
         draw();
     }
 

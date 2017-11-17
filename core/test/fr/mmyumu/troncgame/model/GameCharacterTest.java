@@ -25,7 +25,7 @@ public class GameCharacterTest {
 
         gameCharacter = new GameCharacter(createCharacterDef());
 
-                Weapon testWeapon = new Weapon(createWeaponDef());
+        Weapon testWeapon = new Weapon(createWeaponDef());
 
         gameCharacter.getEquipment().equip(testWeapon);
     }

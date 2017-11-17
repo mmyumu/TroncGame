@@ -60,7 +60,7 @@ public class OverworldCharacter extends OverworldCharacterLogic {
 
         batch.setProjectionMatrix(camera.combined);
         batch.setColor(1, 1, 1, 1);
-        batch.draw(currentTexture, getX(), getY(), 90, 90);
+        batch.draw(currentTexture, getX(), getY(), WIDTH, HEIGHT);
         batch.end();
     }
 

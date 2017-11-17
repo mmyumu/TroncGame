@@ -13,13 +13,7 @@ public class OverworldConstants {
 
     public static final String BLOCK = "block";
 
-    public class MapPath {
-        public static final String VILLAGE = "maps/outdoor/outdoor.tmx";
-
-        private MapPath() {
-            // Private constructor since it's a utility class
-        }
-    }
+    public static final String ENTRANCE_LAYER = "Entrances";
 
     public class TexturePath {
         public static final String MENU_LIST = "data/overworld/menu_list.png";

@@ -93,10 +93,6 @@
   </object>
  </objectgroup>
  <objectgroup name="Entrances">
-  <object id="21" x="1568" y="1472" width="32" height="32">
-   <properties>
-    <property name="name" value="start"/>
-   </properties>
-  </object>
+  <object id="21" name="start" x="1568" y="1472" width="32" height="32"/>
  </objectgroup>
 </map>

@@ -44,30 +44,58 @@ public class SurroundingHitboxCalculator {
         int topIndex = (int) (top / tileHeight);
 
         for (TiledMapTileLayer layer : layers) {
-            TiledMapTileLayer.Cell bottomLeftCell = layer.getCell(leftIndex, bottomIndex);
-            TiledMapTileLayer.Cell middleLeftCell = layer.getCell(leftIndex, middleIndex);
-            TiledMapTileLayer.Cell topLeftCell = layer.getCell(leftIndex, topIndex);
+            hitBoxes.addAll(retrieveRectanglesFromBlockingCells(layer,
+                    new int[]{leftIndex, bottomIndex},
+                    new int[]{leftIndex, middleIndex},
+                    new int[]{leftIndex, topIndex},
 
-            TiledMapTileLayer.Cell bottomCenterCell = layer.getCell(centerIndex, bottomIndex);
-            TiledMapTileLayer.Cell topCenterCell = layer.getCell(centerIndex, topIndex);
+                    new int[]{centerIndex, bottomIndex},
+                    new int[]{centerIndex, topIndex},
 
-            TiledMapTileLayer.Cell bottomRightCell = layer.getCell(rightIndex, bottomIndex);
-            TiledMapTileLayer.Cell middleRightCell = layer.getCell(rightIndex, middleIndex);
-            TiledMapTileLayer.Cell topRightCell = layer.getCell(rightIndex, topIndex);
-
-            addCellIfBlocking(hitBoxes, bottomLeftCell, leftIndex, bottomIndex);
-            addCellIfBlocking(hitBoxes, middleLeftCell, leftIndex, middleIndex);
-            addCellIfBlocking(hitBoxes, topLeftCell, leftIndex, topIndex);
-
-            addCellIfBlocking(hitBoxes, bottomCenterCell, centerIndex, bottomIndex);
-            addCellIfBlocking(hitBoxes, topCenterCell, centerIndex, topIndex);
-
-            addCellIfBlocking(hitBoxes, bottomRightCell, rightIndex, bottomIndex);
-            addCellIfBlocking(hitBoxes, middleRightCell, rightIndex, middleIndex);
-            addCellIfBlocking(hitBoxes, topRightCell, rightIndex, topIndex);
+                    new int[]{rightIndex, bottomIndex},
+                    new int[]{rightIndex, middleIndex},
+                    new int[]{rightIndex, topIndex}
+            ));
         }
 
+//        for (TiledMapTileLayer layer : layers) {
+//            TiledMapTileLayer.Cell bottomLeftCell = layer.getCell(leftIndex, bottomIndex);
+//            TiledMapTileLayer.Cell middleLeftCell = layer.getCell(leftIndex, middleIndex);
+//            TiledMapTileLayer.Cell topLeftCell = layer.getCell(leftIndex, topIndex);
+//
+//            TiledMapTileLayer.Cell bottomCenterCell = layer.getCell(centerIndex, bottomIndex);
+//            TiledMapTileLayer.Cell topCenterCell = layer.getCell(centerIndex, topIndex);
+//
+//            TiledMapTileLayer.Cell bottomRightCell = layer.getCell(rightIndex, bottomIndex);
+//            TiledMapTileLayer.Cell middleRightCell = layer.getCell(rightIndex, middleIndex);
+//            TiledMapTileLayer.Cell topRightCell = layer.getCell(rightIndex, topIndex);
+//
+//            addCellIfBlocking(hitBoxes, bottomLeftCell, leftIndex, bottomIndex);
+//            addCellIfBlocking(hitBoxes, middleLeftCell, leftIndex, middleIndex);
+//            addCellIfBlocking(hitBoxes, topLeftCell, leftIndex, topIndex);
+//
+//            addCellIfBlocking(hitBoxes, bottomCenterCell, centerIndex, bottomIndex);
+//            addCellIfBlocking(hitBoxes, topCenterCell, centerIndex, topIndex);
+//
+//            addCellIfBlocking(hitBoxes, bottomRightCell, rightIndex, bottomIndex);
+//            addCellIfBlocking(hitBoxes, middleRightCell, rightIndex, middleIndex);
+//            addCellIfBlocking(hitBoxes, topRightCell, rightIndex, topIndex);
+//        }
+
         return hitBoxes;
+    }
+
+    private List<Rectangle> retrieveRectanglesFromBlockingCells(TiledMapTileLayer layer, int[]... indexesArray) {
+        List<Rectangle> rectangles = new ArrayList<Rectangle>();
+        for (int[] indexes : indexesArray) {
+            TiledMapTileLayer.Cell cell = layer.getCell(indexes[0], indexes[1]);
+
+            if (isBlockingCell(cell)) {
+                rectangles.add(new Rectangle(indexes[0] * OverworldConstants.TILE_WIDTH, indexes[1] * OverworldConstants.TILE_HEIGHT, OverworldConstants.TILE_WIDTH, OverworldConstants.TILE_HEIGHT));
+            }
+        }
+
+        return rectangles;
     }
 
     private void addCellIfBlocking(List<Rectangle> hitBoxes, TiledMapTileLayer.Cell cell, int horizontalIndex, int verticalIndex) {
