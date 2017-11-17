@@ -31,6 +31,7 @@ public class IntroductionScreen extends ScreenAdapter {
     private void initStages() {
         IntroductionText introductionText = troncGame.getIntroductionComponent().introductionText();
 
+        // TODO: factory?
         introduction = troncGame.getIntroductionComponent().introduction();
         introduction.init(introductionText);
     }

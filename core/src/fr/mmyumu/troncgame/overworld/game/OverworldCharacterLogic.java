@@ -20,6 +20,8 @@ import fr.mmyumu.troncgame.overworld.OverworldConstants;
 public class OverworldCharacterLogic {
     private static final String TAG = "OverworldCharacter";
     private static final int MOVE_SPEED = 900;
+    protected static final int HEIGHT = 50;
+    protected static final int WIDTH = 50;
 
     private final Rectangle hitbox;
 
@@ -174,9 +176,10 @@ public class OverworldCharacterLogic {
     }
 
     private float computeMaximumHorizontalMovementOnCollision(float speedX) {
-        Rectangle characterHitboxAfterMove = new Rectangle(getX() + speedX, getY(), OverworldConstants.TILE_WIDTH, OverworldConstants.TILE_HEIGHT);
+        Rectangle characterHitboxAfterMove = new Rectangle(getX() + speedX, getY(), WIDTH, HEIGHT);
         List<Rectangle> obstaclesHitbox = retrieveSurroundingHitboxes(characterHitboxAfterMove);
 
+        // TODO: factorize with the vertical one?
         for (Rectangle obstacleHitbox : obstaclesHitbox) {
             Rectangle intersection = new Rectangle();
             if (Intersector.intersectRectangles(characterHitboxAfterMove, obstacleHitbox, intersection)) {
@@ -195,7 +198,7 @@ public class OverworldCharacterLogic {
     }
 
     private float computeMaximumVerticalMovementOnCollision(float speedY) {
-        Rectangle characterHitboxAfterMove = new Rectangle(getX(), getY() + speedY, OverworldConstants.TILE_WIDTH, OverworldConstants.TILE_HEIGHT);
+        Rectangle characterHitboxAfterMove = new Rectangle(getX(), getY() + speedY, WIDTH, HEIGHT);
         List<Rectangle> obstaclesHitbox = retrieveSurroundingHitboxes(characterHitboxAfterMove);
 
         for (Rectangle obstacleHitbox : obstaclesHitbox) {
@@ -238,46 +241,72 @@ public class OverworldCharacterLogic {
         int topIndex = (int) (top / OverworldConstants.TILE_HEIGHT);
 
         for (TiledMapTileLayer layer : layers) {
-            TiledMapTileLayer.Cell bottomLeftCell = layer.getCell(leftIndex, bottomIndex);
-            TiledMapTileLayer.Cell middleLeftCell = layer.getCell(leftIndex, middleIndex);
-            TiledMapTileLayer.Cell topLeftCell = layer.getCell(leftIndex, topIndex);
+            hitBoxes.addAll(retrieveRectanglesFromBlockingCells(layer,
+                    new int[] {leftIndex, bottomIndex},
+                    new int[] {leftIndex, middleIndex},
+                    new int[] {leftIndex, topIndex},
 
-            TiledMapTileLayer.Cell bottomCenterCell = layer.getCell(centerIndex, bottomIndex);
-            TiledMapTileLayer.Cell topCenterCell = layer.getCell(centerIndex, topIndex);
+                    new int[] {centerIndex, bottomIndex},
+                    new int[] {centerIndex, topIndex},
 
-            TiledMapTileLayer.Cell bottomRightCell = layer.getCell(rightIndex, bottomIndex);
-            TiledMapTileLayer.Cell middleRightCell = layer.getCell(rightIndex, middleIndex);
-            TiledMapTileLayer.Cell topRightCell = layer.getCell(rightIndex, topIndex);
+                    new int[] {rightIndex, bottomIndex},
+                    new int[] {rightIndex, middleIndex},
+                    new int[] {rightIndex, topIndex}
+            ));
 
-            if (isBlockingCell(bottomLeftCell)) {
-                hitBoxes.add(new Rectangle(leftIndex * OverworldConstants.TILE_WIDTH, bottomIndex * OverworldConstants.TILE_HEIGHT, OverworldConstants.TILE_WIDTH, OverworldConstants.TILE_HEIGHT));
-            }
-            if (isBlockingCell(middleLeftCell)) {
-                hitBoxes.add(new Rectangle(leftIndex * OverworldConstants.TILE_WIDTH, middleIndex * OverworldConstants.TILE_HEIGHT, OverworldConstants.TILE_WIDTH, OverworldConstants.TILE_HEIGHT));
-            }
-            if (isBlockingCell(topLeftCell)) {
-                hitBoxes.add(new Rectangle(leftIndex * OverworldConstants.TILE_WIDTH, topIndex * OverworldConstants.TILE_HEIGHT, OverworldConstants.TILE_WIDTH, OverworldConstants.TILE_HEIGHT));
-            }
-
-            if (isBlockingCell(bottomCenterCell)) {
-                hitBoxes.add(new Rectangle(centerIndex * OverworldConstants.TILE_WIDTH, bottomIndex * OverworldConstants.TILE_HEIGHT, OverworldConstants.TILE_WIDTH, OverworldConstants.TILE_HEIGHT));
-            }
-            if (isBlockingCell(topCenterCell)) {
-                hitBoxes.add(new Rectangle(centerIndex * OverworldConstants.TILE_WIDTH, topIndex * OverworldConstants.TILE_HEIGHT, OverworldConstants.TILE_WIDTH, OverworldConstants.TILE_HEIGHT));
-            }
-
-            if (isBlockingCell(bottomRightCell)) {
-                hitBoxes.add(new Rectangle(rightIndex * OverworldConstants.TILE_WIDTH, bottomIndex * OverworldConstants.TILE_HEIGHT, OverworldConstants.TILE_WIDTH, OverworldConstants.TILE_HEIGHT));
-            }
-            if (isBlockingCell(middleRightCell)) {
-                hitBoxes.add(new Rectangle(rightIndex * OverworldConstants.TILE_WIDTH, middleIndex * OverworldConstants.TILE_HEIGHT, OverworldConstants.TILE_WIDTH, OverworldConstants.TILE_HEIGHT));
-            }
-            if (isBlockingCell(topRightCell)) {
-                hitBoxes.add(new Rectangle(rightIndex * OverworldConstants.TILE_WIDTH, topIndex * OverworldConstants.TILE_HEIGHT, OverworldConstants.TILE_WIDTH, OverworldConstants.TILE_HEIGHT));
-            }
+//            TiledMapTileLayer.Cell bottomLeftCell = layer.getCell(leftIndex, bottomIndex);
+//            TiledMapTileLayer.Cell middleLeftCell = layer.getCell(leftIndex, middleIndex);
+//            TiledMapTileLayer.Cell topLeftCell = layer.getCell(leftIndex, topIndex);
+//
+//            TiledMapTileLayer.Cell bottomCenterCell = layer.getCell(centerIndex, bottomIndex);
+//            TiledMapTileLayer.Cell topCenterCell = layer.getCell(centerIndex, topIndex);
+//
+//            TiledMapTileLayer.Cell bottomRightCell = layer.getCell(rightIndex, bottomIndex);
+//            TiledMapTileLayer.Cell middleRightCell = layer.getCell(rightIndex, middleIndex);
+//            TiledMapTileLayer.Cell topRightCell = layer.getCell(rightIndex, topIndex);
+//
+//            if (isBlockingCell(bottomLeftCell)) {
+//                hitBoxes.add(new Rectangle(leftIndex * OverworldConstants.TILE_WIDTH, bottomIndex * OverworldConstants.TILE_HEIGHT, OverworldConstants.TILE_WIDTH, OverworldConstants.TILE_HEIGHT));
+//            }
+//            if (isBlockingCell(middleLeftCell)) {
+//                hitBoxes.add(new Rectangle(leftIndex * OverworldConstants.TILE_WIDTH, middleIndex * OverworldConstants.TILE_HEIGHT, OverworldConstants.TILE_WIDTH, OverworldConstants.TILE_HEIGHT));
+//            }
+//            if (isBlockingCell(topLeftCell)) {
+//                hitBoxes.add(new Rectangle(leftIndex * OverworldConstants.TILE_WIDTH, topIndex * OverworldConstants.TILE_HEIGHT, OverworldConstants.TILE_WIDTH, OverworldConstants.TILE_HEIGHT));
+//            }
+//
+//            if (isBlockingCell(bottomCenterCell)) {
+//                hitBoxes.add(new Rectangle(centerIndex * OverworldConstants.TILE_WIDTH, bottomIndex * OverworldConstants.TILE_HEIGHT, OverworldConstants.TILE_WIDTH, OverworldConstants.TILE_HEIGHT));
+//            }
+//            if (isBlockingCell(topCenterCell)) {
+//                hitBoxes.add(new Rectangle(centerIndex * OverworldConstants.TILE_WIDTH, topIndex * OverworldConstants.TILE_HEIGHT, OverworldConstants.TILE_WIDTH, OverworldConstants.TILE_HEIGHT));
+//            }
+//
+//            if (isBlockingCell(bottomRightCell)) {
+//                hitBoxes.add(new Rectangle(rightIndex * OverworldConstants.TILE_WIDTH, bottomIndex * OverworldConstants.TILE_HEIGHT, OverworldConstants.TILE_WIDTH, OverworldConstants.TILE_HEIGHT));
+//            }
+//            if (isBlockingCell(middleRightCell)) {
+//                hitBoxes.add(new Rectangle(rightIndex * OverworldConstants.TILE_WIDTH, middleIndex * OverworldConstants.TILE_HEIGHT, OverworldConstants.TILE_WIDTH, OverworldConstants.TILE_HEIGHT));
+//            }
+//            if (isBlockingCell(topRightCell)) {
+//                hitBoxes.add(new Rectangle(rightIndex * OverworldConstants.TILE_WIDTH, topIndex * OverworldConstants.TILE_HEIGHT, OverworldConstants.TILE_WIDTH, OverworldConstants.TILE_HEIGHT));
+//            }
         }
 
         return hitBoxes;
+    }
+
+    private List<Rectangle> retrieveRectanglesFromBlockingCells(TiledMapTileLayer layer, int[]... indexesArray) {
+        List<Rectangle> rectangles = new ArrayList<Rectangle>();
+        for (int[] indexes : indexesArray) {
+            TiledMapTileLayer.Cell cell = layer.getCell(indexes[0], indexes[1]);
+
+            if (isBlockingCell(cell)) {
+                rectangles.add(new Rectangle(indexes[0] * OverworldConstants.TILE_WIDTH, indexes[1] * OverworldConstants.TILE_HEIGHT, OverworldConstants.TILE_WIDTH, OverworldConstants.TILE_HEIGHT));
+            }
+        }
+
+        return rectangles;
     }
 
     public boolean isBlockingCell(TiledMapTileLayer.Cell cell) {

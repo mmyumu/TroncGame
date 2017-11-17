@@ -4,14 +4,19 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.MapLayer;
+import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.MapProperties;
+import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import com.badlogic.gdx.math.Vector2;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import fr.mmyumu.troncgame.overworld.OverworldConstants;
 
 /**
  * Manage a map
@@ -21,21 +26,21 @@ public class Map {
     private static final String TAG = "Map";
 
     private final TiledMap map;
-    private final MapData mapData;
+    //private final MapData mapData;
     private final OrthographicCamera camera;
     private final int width;
     private final int height;
 
     private final TiledMapRenderer renderer;
+    private final float ratio;
 
     private int[] backgroundLayersId;
     private int[] foregroundLayersId;
 
-    public Map(MapData mapData, OrthographicCamera camera, AssetManager assetManager, int tileHeight) {
-        this.mapData = mapData;
+    public Map(String path, OrthographicCamera camera, AssetManager assetManager, int tileHeight) {
         this.camera = camera;
 
-        map = assetManager.get(mapData.getPath());
+        map = assetManager.get(path, TiledMap.class);
 
         MapProperties prop = map.getProperties();
         int mapWidth = prop.get("width", Integer.class);
@@ -43,7 +48,7 @@ public class Map {
         int tilePixelWidth = prop.get("tilewidth", Integer.class);
         int tilePixelHeight = prop.get("tileheight", Integer.class);
 
-        float ratio = tileHeight / (float) tilePixelHeight;
+        ratio = tileHeight / (float) tilePixelHeight;
 
         width = (int) (mapWidth * tilePixelWidth * ratio);
         height = (int) (mapHeight * tilePixelHeight * ratio);
@@ -91,6 +96,7 @@ public class Map {
         renderer.render(foregroundLayersId);
     }
 
+
     public int getWidth() {
         return width;
     }
@@ -111,15 +117,20 @@ public class Map {
         return layers;
     }
 
-    public List<TiledMapTileLayer> getExits() {
-        List<TiledMapTileLayer> layers = new ArrayList<TiledMapTileLayer>();
+    public Vector2 getEntrancePosition(String entrance) {
         for (MapLayer layer : map.getLayers()) {
-            if (layer instanceof TiledMapTileLayer) {
-                TiledMapTileLayer tileLayer = (TiledMapTileLayer) layer;
-                layers.add(tileLayer);
+            if (layer.getName().equals(OverworldConstants.ENTRANCE_LAYER)) {
+                for (MapObject mapObject : layer.getObjects()) {
+                    if (mapObject instanceof RectangleMapObject && entrance.equals(mapObject.getName())) {
+                        RectangleMapObject rectangleMapObject = (RectangleMapObject) mapObject;
+                        Vector2 center = new Vector2();
+                        rectangleMapObject.getRectangle().getCenter(center);
+//                        return new Vector2(rectangleMapObject.getRectangle().getX(), rectangleMapObject.getRectangle().getY());
+                        return new Vector2(center.x * ratio, center.y * ratio);
+                    }
+                }
             }
         }
-
-        return layers;
+        throw new MapException("The entrance position '" + entrance + "' cannot be retrieved");
     }
 }
