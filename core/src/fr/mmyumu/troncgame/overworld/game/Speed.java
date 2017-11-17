@@ -7,9 +7,6 @@ import com.badlogic.gdx.math.Vector2;
  * Created by mmyumu on 03/10/2015.
  */
 class Speed extends Vector2 {
-    public Speed() {
-    }
-
     public void invertX() {
         x = -x;
     }

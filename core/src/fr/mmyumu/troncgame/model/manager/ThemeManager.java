@@ -72,7 +72,11 @@ public class ThemeManager {
     }
 
 
-    public interface ID {
-        String BROWN = "dialog.brown";
+    public class ID {
+        public static final String BROWN = "dialog.brown";
+
+        private ID() {
+            // Private constructor since it's a utility class
+        }
     }
 }

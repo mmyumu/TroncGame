@@ -151,11 +151,11 @@ public class OverworldScreen extends ScreenAdapter {
         float oldX = gameViewport.getCamera().position.x;
         float oldY = gameViewport.getCamera().position.y;
 
-        float minX = Math.max(mainCharacter.getX(), Constants.WIDTH / 2);
-        float newX = Math.min((map.getWidth() - Constants.WIDTH / 2), minX);
+        float minX = Math.max(mainCharacter.getX(), Constants.WIDTH / 2f);
+        float newX = Math.min((map.getWidth() - Constants.WIDTH / 2f), minX);
 
-        float minY = Math.max(mainCharacter.getY(), Constants.HEIGHT / 2);
-        float newY = Math.min((map.getHeight() - Constants.HEIGHT / 2), minY);
+        float minY = Math.max(mainCharacter.getY(), Constants.HEIGHT / 2f);
+        float newY = Math.min((map.getHeight() - Constants.HEIGHT / 2f), minY);
 
         gameViewport.getCamera().position.set(newX, newY, 0);
         gameViewport.getCamera().update();

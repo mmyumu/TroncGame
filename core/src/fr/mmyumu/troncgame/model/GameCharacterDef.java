@@ -21,9 +21,6 @@ public class GameCharacterDef {
     private String overworldLeftTexturePath;
     private String overworldRightTexturePath;
 
-    public GameCharacterDef() {
-    }
-
     public String getIdentifier() {
         return identifier;
     }

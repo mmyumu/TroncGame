@@ -22,6 +22,7 @@ import fr.mmyumu.troncgame.model.Team;
  */
 public class CharacterManager {
     private static final String TAG = "CharacterManager";
+    public static final String ATTRIBUTE_FALSE_VALUE = "false";
 
     private Team team;
     private final Map<String, GameCharacterDef> characters;
@@ -50,9 +51,9 @@ public class CharacterManager {
     private void parseCharacterElement(GameCharacterDef character, XmlReader.Element characterElement) {
         String id = characterElement.getAttribute("id");
         String name = characterElement.getAttribute("name");
-        boolean friendly = Boolean.valueOf(characterElement.getAttribute("friendly", "false"));
-        boolean usingAI = Boolean.valueOf(characterElement.getAttribute("usingAI", "false"));
-        boolean playable = Boolean.valueOf(characterElement.getAttribute("playable", "false"));
+        boolean friendly = Boolean.valueOf(characterElement.getAttribute("friendly", ATTRIBUTE_FALSE_VALUE));
+        boolean usingAI = Boolean.valueOf(characterElement.getAttribute("usingAI", ATTRIBUTE_FALSE_VALUE));
+        boolean playable = Boolean.valueOf(characterElement.getAttribute("playable", ATTRIBUTE_FALSE_VALUE));
 
         int attack = Integer.valueOf(characterElement.getChildByName("attack").getText());
         int actionSpeed = Integer.valueOf(characterElement.getChildByName("actionSpeed").getText());
@@ -118,9 +119,13 @@ public class CharacterManager {
         return team;
     }
 
-    public interface ID {
-        String MAIN = "main";
-        String SIDE_KICK = "sideKick";
-        String BEST_FRIEND = "bestFriend";
+    public class ID {
+        public static final String MAIN = "main";
+        public static final String SIDE_KICK = "sideKick";
+        public static final String BEST_FRIEND = "bestFriend";
+
+        private ID() {
+            // Private constructor since it's a utility class
+        }
     }
 }

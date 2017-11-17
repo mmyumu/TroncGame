@@ -27,8 +27,12 @@ public class ItemManager {
     private final Map<String, ItemDef> items;
     private final Map<String, WeaponDef> weapons;
 
-    public interface ID {
-        String BASIC_SWORD = "sword.basic";
+    public class ID {
+        public static final String BASIC_SWORD = "sword.basic";
+
+        private ID() {
+            // Private constructor since it's a utility class
+        }
     }
 
     @Inject

@@ -121,7 +121,7 @@ public class DialogLine {
             return text.substring(startIndex, index + 1);
         }
 
-        int nextWordIndex = text.indexOf(" ", index);
+        int nextWordIndex = text.indexOf(' ', index);
         if (nextWordIndex < 0) {
             nextWordIndex = text.length() - 1;
         }

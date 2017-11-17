@@ -99,6 +99,8 @@ public class FightLogic {
                 }
                 popUpMenuLogic.selectIcon(touchedIcon);
                 break;
+            default:
+                // Do nothing
         }
 
     }
