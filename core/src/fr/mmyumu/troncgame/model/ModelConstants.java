@@ -4,15 +4,27 @@ package fr.mmyumu.troncgame.model;
  * Constants used by the model
  * Created by mmyumu on 14/02/2016.
  */
-public interface ModelConstants {
-    interface TexturePath {
-        String FIST = "data/items/weapons/fist.png";
-        String BASIC_SWORD = "data/items/weapons/basic_sword.png";
+public class ModelConstants {
+    public class TexturePath {
+        public static final String FIST = "data/items/weapons/fist.png";
+        public static final String BASIC_SWORD = "data/items/weapons/basic_sword.png";
+
+        private TexturePath() {
+            // Private constructor since it's a utility class
+        }
     }
 
-    interface DataPath {
-        String ITEMS = "data/items.xml";
-        String CHARACTERS = "data/characters.xml";
-        String THEMES = "data/themes.xml";
+    public class DataPath {
+        public static final String ITEMS = "data/items.xml";
+        public static final String CHARACTERS = "data/characters.xml";
+        public static final String THEMES = "data/themes.xml";
+
+        private DataPath() {
+            // Private constructor since it's a utility class
+        }
+    }
+
+    private ModelConstants() {
+        // Private constructor since it's a utility class
     }
 }

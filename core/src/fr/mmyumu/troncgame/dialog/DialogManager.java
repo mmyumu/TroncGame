@@ -70,7 +70,7 @@ public class DialogManager extends InputAdapter {
         previousInputProcessor = Gdx.input.getInputProcessor();
         Gdx.input.setInputProcessor(this);
 
-        if (lines.size() > 0) {
+        if (!lines.isEmpty()) {
             currentLine = lines.get(lineIndex);
         }
     }
@@ -98,7 +98,7 @@ public class DialogManager extends InputAdapter {
     }
 
     public boolean isFullyDisplayed() {
-        return currentLine.isFullyDisplayed() && (lines.size() == 0 || lines.size() - 1 == lineIndex);
+        return currentLine.isFullyDisplayed() && (lines.isEmpty() || lines.size() - 1 == lineIndex);
     }
 
     public void init(float x, float y, float width, float height, String theme) {

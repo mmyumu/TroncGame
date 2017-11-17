@@ -1,4 +1,4 @@
-package fr.mmyumu.troncgame;
+package fr.mmyumu.troncgame.util;
 
 import com.badlogic.gdx.Gdx;
 
