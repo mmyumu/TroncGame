@@ -40,7 +40,7 @@ public class FightCharacter extends FightCharacterLogic {
         this.label = new Label("", skin);
 
         this.label.setAlignment(Align.center);
-        this.queueDamages = new LinkedList<Integer>();
+        this.queueDamages = new LinkedList<>();
 
         setName(character.retrieveName());
     }
@@ -102,12 +102,7 @@ public class FightCharacter extends FightCharacterLogic {
 
     private void initDamageLabel(float x, float y, int damage) {
         RunnableAction run = new RunnableAction();
-        run.setRunnable(new Runnable() {
-            @Override
-            public void run() {
-                hideDamage();
-            }
-        });
+        run.setRunnable(this::hideDamage);
 
         Action action = sequence(moveTo(x, y), parallel(fadeOut(1), moveTo(x, y + 50, 1)), run);
 

@@ -33,8 +33,8 @@ public class ItemManager {
 
     @Inject
     public ItemManager() {
-        this.items = new HashMap<String, ItemDef>();
-        this.weapons = new HashMap<String, WeaponDef>();
+        this.items = new HashMap<>();
+        this.weapons = new HashMap<>();
 
         try {
             loadXml();

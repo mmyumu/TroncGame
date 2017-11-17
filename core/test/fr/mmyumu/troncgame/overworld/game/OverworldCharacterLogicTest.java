@@ -14,6 +14,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
@@ -67,9 +68,9 @@ public class OverworldCharacterLogicTest {
 
     @Test
     public void testSetObstaclesLayer() {
-        overworldCharacterLogic.setLayers(Arrays.asList(mock(TiledMapTileLayer.class)));
+        overworldCharacterLogic.setLayers(Collections.singletonList(mock(TiledMapTileLayer.class)));
 
-        List<TiledMapTileLayer> layers = (List) TestUtils.retrieveValueFromObject(overworldCharacterLogic, "layers");
+        List<TiledMapTileLayer> layers = (List<TiledMapTileLayer>) TestUtils.retrieveValueFromObject(overworldCharacterLogic, "layers");
         assertNotNull("Layers after setter", layers);
     }
 
@@ -107,7 +108,7 @@ public class OverworldCharacterLogicTest {
         mockRandom(0);
 
         overworldCharacterLogic.initCenter(500, 200);
-        overworldCharacterLogic.setLayers(Arrays.asList(mock(TiledMapTileLayer.class)));
+        overworldCharacterLogic.setLayers(Collections.singletonList(mock(TiledMapTileLayer.class)));
         overworldCharacterLogic.setMoveTarget(new GridPoint2(500, 300));
 
         overworldCharacterLogic.update(0.01f);
@@ -121,7 +122,7 @@ public class OverworldCharacterLogicTest {
         mockRandom(0);
 
         overworldCharacterLogic.initCenter(500, 200);
-        overworldCharacterLogic.setLayers(Arrays.asList(mock(TiledMapTileLayer.class)));
+        overworldCharacterLogic.setLayers(Collections.singletonList(mock(TiledMapTileLayer.class)));
         overworldCharacterLogic.setMoveTarget(new GridPoint2(500, 100));
 
         overworldCharacterLogic.update(0.01f);
@@ -135,7 +136,7 @@ public class OverworldCharacterLogicTest {
         mockRandom(0);
 
         overworldCharacterLogic.initCenter(500, 200);
-        overworldCharacterLogic.setLayers(Arrays.asList(mock(TiledMapTileLayer.class)));
+        overworldCharacterLogic.setLayers(Collections.singletonList(mock(TiledMapTileLayer.class)));
         overworldCharacterLogic.setMoveTarget(new GridPoint2(400, 200));
 
         overworldCharacterLogic.update(0.01f);
@@ -149,7 +150,7 @@ public class OverworldCharacterLogicTest {
         mockRandom(0);
 
         overworldCharacterLogic.initCenter(500, 200);
-        overworldCharacterLogic.setLayers(Arrays.asList(mock(TiledMapTileLayer.class)));
+        overworldCharacterLogic.setLayers(Collections.singletonList(mock(TiledMapTileLayer.class)));
         overworldCharacterLogic.setMoveTarget(new GridPoint2(600, 200));
 
         overworldCharacterLogic.update(0.01f);
@@ -171,7 +172,7 @@ public class OverworldCharacterLogicTest {
 
 
         overworldCharacterLogic.initCenter(500, 220);
-        overworldCharacterLogic.setLayers(Arrays.asList(obstaclesLayer));
+        overworldCharacterLogic.setLayers(Collections.singletonList(obstaclesLayer));
         overworldCharacterLogic.setMoveTarget(new GridPoint2(500, 320));
 
         overworldCharacterLogic.update(0.01f);
@@ -195,7 +196,7 @@ public class OverworldCharacterLogicTest {
         when(obstaclesLayer.getCell(6, 1)).thenReturn(cell4);
 
         overworldCharacterLogic.initCenter(490, 220);
-        overworldCharacterLogic.setLayers(Arrays.asList(obstaclesLayer));
+        overworldCharacterLogic.setLayers(Collections.singletonList(obstaclesLayer));
         overworldCharacterLogic.setMoveTarget(new GridPoint2(600, 320));
 
         overworldCharacterLogic.update(0.01f);
@@ -216,7 +217,7 @@ public class OverworldCharacterLogicTest {
         when(obstaclesLayer.getCell(6, 1)).thenReturn(cell2);
 
         overworldCharacterLogic.initCenter(500, 230);
-        overworldCharacterLogic.setLayers(Arrays.asList(obstaclesLayer));
+        overworldCharacterLogic.setLayers(Collections.singletonList(obstaclesLayer));
         overworldCharacterLogic.setMoveTarget(new GridPoint2(500, 130));
 
         overworldCharacterLogic.update(0.01f);
@@ -236,7 +237,7 @@ public class OverworldCharacterLogicTest {
         when(obstaclesLayer.getCell(4, 1)).thenReturn(cell2);
 
         overworldCharacterLogic.initCenter(500, 200);
-        overworldCharacterLogic.setLayers(Arrays.asList(obstaclesLayer));
+        overworldCharacterLogic.setLayers(Collections.singletonList(obstaclesLayer));
         overworldCharacterLogic.setMoveTarget(new GridPoint2(400, 200));
 
         overworldCharacterLogic.update(0.01f);
@@ -256,7 +257,7 @@ public class OverworldCharacterLogicTest {
         when(obstaclesLayer.getCell(6, 1)).thenReturn(cell2);
 
         overworldCharacterLogic.initCenter(490, 200);
-        overworldCharacterLogic.setLayers(Arrays.asList(obstaclesLayer));
+        overworldCharacterLogic.setLayers(Collections.singletonList(obstaclesLayer));
         overworldCharacterLogic.setMoveTarget(new GridPoint2(590, 200));
 
         overworldCharacterLogic.update(0.01f);
@@ -269,7 +270,7 @@ public class OverworldCharacterLogicTest {
         mockRandom(0);
 
         overworldCharacterLogic.initCenter(500, 200);
-        overworldCharacterLogic.setLayers(Arrays.asList(mock(TiledMapTileLayer.class)));
+        overworldCharacterLogic.setLayers(Collections.singletonList(mock(TiledMapTileLayer.class)));
         overworldCharacterLogic.setMoveTarget(new GridPoint2(505, 200));
 
         overworldCharacterLogic.update(0.01f);
@@ -285,7 +286,7 @@ public class OverworldCharacterLogicTest {
         mockRandom(0);
 
         overworldCharacterLogic.initCenter(500, 200);
-        overworldCharacterLogic.setLayers(Arrays.asList(mock(TiledMapTileLayer.class)));
+        overworldCharacterLogic.setLayers(Collections.singletonList(mock(TiledMapTileLayer.class)));
         overworldCharacterLogic.setMoveTarget(new GridPoint2(800, 600));
 
         overworldCharacterLogic.update(0.01f);

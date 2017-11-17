@@ -30,16 +30,14 @@ public class FightPopUpMenuLogic {
 
         this.fightPopUpMenuWeaponsIcon = fightPopUpMenuWeaponsIcon;
 
-        popMenuIcons = new ArrayList<FightPopUpMenuIcon>();
+        popMenuIcons = new ArrayList<>();
         popMenuIcons.add(fightPopUpMenuSpellsIcon);
         popMenuIcons.add(fightPopUpMenuWeaponsIcon);
     }
 
     public List<FightPopUpMenuElement> getPopUpMenuElements() {
-        List<FightPopUpMenuElement> actors = new ArrayList<FightPopUpMenuElement>();
-        for (FightPopUpMenuIcon popUpMenuIcon : popMenuIcons) {
-            actors.add(popUpMenuIcon);
-        }
+        List<FightPopUpMenuElement> actors = new ArrayList<>();
+        actors.addAll(popMenuIcons);
 
         actors.add(popUpMenuNotReady);
         return actors;

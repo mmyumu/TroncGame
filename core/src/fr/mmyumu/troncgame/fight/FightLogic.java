@@ -73,7 +73,7 @@ public class FightLogic {
     }
 
     private List<FightCharacter> createFightTeam() {
-        List<FightCharacter> fightTeam = new ArrayList<FightCharacter>();
+        List<FightCharacter> fightTeam = new ArrayList<>();
         Collection<GameCharacter> characters = characterManager.getTeam().getCharacters();
         int i = 0;
         for (GameCharacter character : characters) {

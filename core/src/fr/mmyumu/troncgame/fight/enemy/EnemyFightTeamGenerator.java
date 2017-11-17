@@ -31,7 +31,7 @@ public class EnemyFightTeamGenerator {
     }
 
     public List<FightCharacter> generate() {
-        List<FightCharacter> enemyFightTeam = new ArrayList<FightCharacter>();
+        List<FightCharacter> enemyFightTeam = new ArrayList<>();
 
         // TODO: generate according to the location of the game character
 

@@ -221,7 +221,7 @@ public class OverworldCharacterLogic {
      * @return the surrounding hitboxes
      */
     private List<Rectangle> retrieveSurroundingHitboxes(Rectangle hitbox) {
-        List<Rectangle> hitBoxes = new ArrayList<Rectangle>();
+        List<Rectangle> hitBoxes = new ArrayList<>();
 
         float left = hitbox.x;
         float center = hitbox.x + hitbox.width / 2;

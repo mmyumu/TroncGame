@@ -6,9 +6,6 @@ import com.badlogic.gdx.Input;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-
-import fr.mmyumu.troncgame.overworld.game.OverworldCharacterLogic;
 
 import static junit.framework.TestCase.assertEquals;
 import static org.mockito.Mockito.mock;

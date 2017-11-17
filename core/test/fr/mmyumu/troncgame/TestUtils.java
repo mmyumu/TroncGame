@@ -12,9 +12,7 @@ public class TestUtils {
             Field field = object.getClass().getDeclaredField(memberName);
             field.setAccessible(true);
             return field.get(object);
-        } catch (NoSuchFieldException e) {
-            throw new TestReflectionException("Error while retrieving the value of the member " + memberName + " in class " + object.getClass().getName() + "[object=" + object + "]", e);
-        } catch (IllegalAccessException e) {
+        } catch (NoSuchFieldException | IllegalAccessException e) {
             throw new TestReflectionException("Error while retrieving the value of the member " + memberName + " in class " + object.getClass().getName() + "[object=" + object + "]", e);
         }
     }

@@ -26,7 +26,7 @@ public class ThemeManager {
 
     @Inject
     public ThemeManager() {
-        this.dialogThemes = new HashMap<String, DialogTheme>();
+        this.dialogThemes = new HashMap<>();
 
         try {
             loadXml();
