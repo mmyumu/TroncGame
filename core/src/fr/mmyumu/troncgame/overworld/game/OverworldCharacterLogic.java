@@ -18,7 +18,7 @@ import fr.mmyumu.troncgame.util.SurroundingHitboxCalculator;
  * Created by mmyumu on 21/11/2015.
  */
 public class OverworldCharacterLogic {
-    private static final String TAG = "OverworldCharacter";
+    private static final String TAG = "OverworldCharacterLogic";
     private static final int MOVE_SPEED = 900;
 
     private final Rectangle hitbox;
@@ -223,63 +223,6 @@ public class OverworldCharacterLogic {
     private List<Rectangle> retrieveSurroundingHitboxes(Rectangle hitbox) {
         SurroundingHitboxCalculator surroudingHitboxCalculator = new SurroundingHitboxCalculator(hitbox, layers, OverworldConstants.TILE_WIDTH, OverworldConstants.TILE_HEIGHT);
         return surroudingHitboxCalculator.compute();
-//        List<Rectangle> hitBoxes = new ArrayList<>();
-//
-//        float left = hitbox.x;
-//        float center = hitbox.x + hitbox.width / 2;
-//        float right = hitbox.x + hitbox.width;
-//        float bottom = hitbox.y;
-//        float middle = hitbox.y + hitbox.height / 2;
-//        float top = hitbox.y + hitbox.height;
-//
-//        int leftIndex = (int) (left / OverworldConstants.TILE_WIDTH);
-//        int centerIndex = (int) (center / OverworldConstants.TILE_WIDTH);
-//        int rightIndex = (int) (right / OverworldConstants.TILE_WIDTH);
-//        int bottomIndex = (int) (bottom / OverworldConstants.TILE_HEIGHT);
-//        int middleIndex = (int) (middle / OverworldConstants.TILE_HEIGHT);
-//        int topIndex = (int) (top / OverworldConstants.TILE_HEIGHT);
-//
-//        for (TiledMapTileLayer layer : layers) {
-//            TiledMapTileLayer.Cell bottomLeftCell = layer.getCell(leftIndex, bottomIndex);
-//            TiledMapTileLayer.Cell middleLeftCell = layer.getCell(leftIndex, middleIndex);
-//            TiledMapTileLayer.Cell topLeftCell = layer.getCell(leftIndex, topIndex);
-//
-//            TiledMapTileLayer.Cell bottomCenterCell = layer.getCell(centerIndex, bottomIndex);
-//            TiledMapTileLayer.Cell topCenterCell = layer.getCell(centerIndex, topIndex);
-//
-//            TiledMapTileLayer.Cell bottomRightCell = layer.getCell(rightIndex, bottomIndex);
-//            TiledMapTileLayer.Cell middleRightCell = layer.getCell(rightIndex, middleIndex);
-//            TiledMapTileLayer.Cell topRightCell = layer.getCell(rightIndex, topIndex);
-//
-//            if (isBlockingCell(bottomLeftCell)) {
-//                hitBoxes.add(new Rectangle(leftIndex * OverworldConstants.TILE_WIDTH, bottomIndex * OverworldConstants.TILE_HEIGHT, OverworldConstants.TILE_WIDTH, OverworldConstants.TILE_HEIGHT));
-//            }
-//            if (isBlockingCell(middleLeftCell)) {
-//                hitBoxes.add(new Rectangle(leftIndex * OverworldConstants.TILE_WIDTH, middleIndex * OverworldConstants.TILE_HEIGHT, OverworldConstants.TILE_WIDTH, OverworldConstants.TILE_HEIGHT));
-//            }
-//            if (isBlockingCell(topLeftCell)) {
-//                hitBoxes.add(new Rectangle(leftIndex * OverworldConstants.TILE_WIDTH, topIndex * OverworldConstants.TILE_HEIGHT, OverworldConstants.TILE_WIDTH, OverworldConstants.TILE_HEIGHT));
-//            }
-//
-//            if (isBlockingCell(bottomCenterCell)) {
-//                hitBoxes.add(new Rectangle(centerIndex * OverworldConstants.TILE_WIDTH, bottomIndex * OverworldConstants.TILE_HEIGHT, OverworldConstants.TILE_WIDTH, OverworldConstants.TILE_HEIGHT));
-//            }
-//            if (isBlockingCell(topCenterCell)) {
-//                hitBoxes.add(new Rectangle(centerIndex * OverworldConstants.TILE_WIDTH, topIndex * OverworldConstants.TILE_HEIGHT, OverworldConstants.TILE_WIDTH, OverworldConstants.TILE_HEIGHT));
-//            }
-//
-//            if (isBlockingCell(bottomRightCell)) {
-//                hitBoxes.add(new Rectangle(rightIndex * OverworldConstants.TILE_WIDTH, bottomIndex * OverworldConstants.TILE_HEIGHT, OverworldConstants.TILE_WIDTH, OverworldConstants.TILE_HEIGHT));
-//            }
-//            if (isBlockingCell(middleRightCell)) {
-//                hitBoxes.add(new Rectangle(rightIndex * OverworldConstants.TILE_WIDTH, middleIndex * OverworldConstants.TILE_HEIGHT, OverworldConstants.TILE_WIDTH, OverworldConstants.TILE_HEIGHT));
-//            }
-//            if (isBlockingCell(topRightCell)) {
-//                hitBoxes.add(new Rectangle(rightIndex * OverworldConstants.TILE_WIDTH, topIndex * OverworldConstants.TILE_HEIGHT, OverworldConstants.TILE_WIDTH, OverworldConstants.TILE_HEIGHT));
-//            }
-//        }
-//
-//        return hitBoxes;
     }
 
     public GameCharacter getCharacter() {
