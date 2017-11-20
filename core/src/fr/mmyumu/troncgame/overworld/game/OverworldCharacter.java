@@ -1,5 +1,6 @@
 package fr.mmyumu.troncgame.overworld.game;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Texture;
@@ -13,6 +14,7 @@ import fr.mmyumu.troncgame.model.GameCharacter;
  * Created by mmyumu on 30/10/2015.
  */
 public class OverworldCharacter extends OverworldCharacterLogic {
+    private static final String TAG = "OverworldCharacter";
     private final SpriteBatch batch;
     private final Camera camera;
 
@@ -55,7 +57,7 @@ public class OverworldCharacter extends OverworldCharacterLogic {
             } else if (angle >= 315 && angle < 360) {
                 currentTexture = textureRight;
             }
-            System.out.println("angle=" + angle);
+            Gdx.app.debug(TAG, "angle=" + angle);
         }
 
         batch.setProjectionMatrix(camera.combined);

@@ -73,16 +73,16 @@ public class FightLogic {
     }
 
     private List<FightCharacter> createFightTeam() {
-        List<FightCharacter> fightTeam = new ArrayList<>();
+        List<FightCharacter> createdFightTeam = new ArrayList<>();
         Collection<GameCharacter> characters = characterManager.getTeam().getCharacters();
         int i = 0;
         for (GameCharacter character : characters) {
             FightCharacter fightCharacter = new FightCharacter(skin, 100, FightConstants.MAIN_INFOS_HEIGHT + 20 + 400 - (200 * i), character, assetManager.get(character.getDefinition().getFightWaitingTexturePath(), Texture.class), true);
-            fightTeam.add(fightCharacter);
+            createdFightTeam.add(fightCharacter);
             i++;
         }
 
-        return fightTeam;
+        return createdFightTeam;
     }
 
     public void iconTouched(FightPopUpMenuIcon touchedIcon) {
@@ -202,8 +202,8 @@ public class FightLogic {
     private void playAICharacters() {
         for (FightCharacter character : enemyFightTeam) {
             if (character.getCharacter().isAlive() && character.isReady()) {
-                FightCharacter targetCharacter = computeTargetCharacter();
-                character.attack(targetCharacter);
+                FightCharacter computedTargetCharacter = computeTargetCharacter();
+                character.attack(computedTargetCharacter);
             }
         }
     }
