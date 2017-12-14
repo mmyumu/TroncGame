@@ -7,7 +7,7 @@ android:
 before_install:
 - chmod +x gradlew
 addons:
-  sonarqube:
+  sonarcloud:
     organization: mmyumu-github
     branches:
     - master
