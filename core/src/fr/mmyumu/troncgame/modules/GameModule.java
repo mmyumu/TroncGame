@@ -94,7 +94,7 @@ public class GameModule {
 
     @Provides
     GameStatePersister provideGameStatePersister(ModelManager modelManager) {
-        return new GameStatePersister(modelManager);
+        return new GameStatePersister(modelManager, Gdx.app.getPreferences("gameState"));
     }
 
     @Provides

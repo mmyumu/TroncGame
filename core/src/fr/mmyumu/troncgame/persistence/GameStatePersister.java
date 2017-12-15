@@ -9,15 +9,13 @@ import javax.inject.Inject;
 import fr.mmyumu.troncgame.model.GameCharacter;
 import fr.mmyumu.troncgame.model.Weapon;
 import fr.mmyumu.troncgame.model.manager.ModelManager;
-import fr.mmyumu.troncgame.overworld.game.OverworldCharacter;
+import fr.mmyumu.troncgame.overworld.game.OverworldCharacterLogic;
 
 /**
  * Utility class to save the state of the game
  * Created by mmyumu on 31/01/2016.
  */
 public class GameStatePersister {
-    private static final String PREF_NAME_OPTION = "gameState";
-
     private static final String SCREEN = "screen";
     private static final String OVERWORLD_CHARACTER_X = "overworld.character.x";
     private static final String OVERWORLD_CHARACTER_Y = "overworld.character.y";
@@ -29,9 +27,10 @@ public class GameStatePersister {
     private final Preferences preferences;
 
     @Inject
-    public GameStatePersister(ModelManager modelManager) {
+    public GameStatePersister(ModelManager modelManager, Preferences preferences) {
         this.modelManager = modelManager;
-        this.preferences = Gdx.app.getPreferences(PREF_NAME_OPTION);
+        this.preferences = preferences;
+        //this.preferences = Gdx.app.getPreferences(PREF_NAME_OPTION);
     }
 
     public void save(ScreenID screenID) {
@@ -39,7 +38,7 @@ public class GameStatePersister {
         preferences.flush();
     }
 
-    public void save(OverworldCharacter mainCharacter) {
+    public void save(OverworldCharacterLogic mainCharacter) {
         preferences.putFloat(OVERWORLD_CHARACTER_X, mainCharacter.getCenter().x);
         preferences.putFloat(OVERWORLD_CHARACTER_Y, mainCharacter.getCenter().y);
 
