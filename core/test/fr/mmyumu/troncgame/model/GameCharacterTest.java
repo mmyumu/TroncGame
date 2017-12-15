@@ -23,7 +23,7 @@ public class GameCharacterTest {
         Gdx.app = mock(Application.class);
         Gdx.input = mock(Input.class);
 
-        gameCharacter = new GameCharacter(createCharacterDef());
+        gameCharacter = new GameCharacter(GameCharacterUtil.createCharacterDef());
 
                 Weapon testWeapon = new Weapon(createWeaponDef());
 
@@ -32,23 +32,6 @@ public class GameCharacterTest {
 
     private WeaponDef createWeaponDef() {
         return new WeaponDef("test.weapon", "Test weapon", "test/texture", 10);
-    }
-
-    private GameCharacterDef createCharacterDef() {
-        GameCharacterDef gameCharacterDef = new GameCharacterDef();
-
-        gameCharacterDef.setIdentifier("test.character");
-        gameCharacterDef.setName("Test character");
-        gameCharacterDef.setFriendly(true);
-        gameCharacterDef.setUsingAI(false);
-        gameCharacterDef.setPlayable(true);
-
-        gameCharacterDef.setAttack(52);
-        gameCharacterDef.setActionSpeed(30);
-        gameCharacterDef.setHp(135);
-        gameCharacterDef.setMp(74);
-
-        return gameCharacterDef;
     }
 
     private GameCharacterDef createTargetCharacterDef() {
