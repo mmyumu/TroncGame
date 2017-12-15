@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<characters xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="characters.xsd">
+    <character id="main" name="Daia" friendly="true" playable="true">
+        <attack>8</attack>
+        <actionSpeed>40</actionSpeed>
+        <hp>118</hp>
+        <mp>72</mp>
+        <fight>
+            <waitingTexture>data/fight/heroine_droite.png</waitingTexture>
+        </fight>
+        <overworld>
+            <topTexture>data/overworld/heroine_dos.png</topTexture>
+            <bottomTexture>data/overworld/heroine_face.png</bottomTexture>
+            <leftTexture>data/overworld/heroine_gauche.png</leftTexture>
+            <rightTexture>data/overworld/heroine_droite.png</rightTexture>
+        </overworld>
+    </character>
+    <character id="sideKick" name="Neykallo" friendly="true" playable="true">
+        <attack>9</attack>
+        <actionSpeed>30</actionSpeed>
+        <hp>131</hp>
+        <mp>61</mp>
+        <fight>
+            <waitingTexture>data/fight/compagnon_droite.png</waitingTexture>
+        </fight>
+    </character>
+    <character id="soldier" name="Soldier" usingAI="true">
+        <attack>9</attack>
+        <actionSpeed>35</actionSpeed>
+        <hp>20</hp>
+        <mp>10</mp>
+        <fight>
+            <waitingTexture>data/fight/ennemi_gauche.png</waitingTexture>
+        </fight>
+    </character>
+    <character id="bestFriend" name="Mirena" usingAI="true">
+        <attack>1</attack>
+        <actionSpeed>10</actionSpeed>
+        <hp>10</hp>
+        <mp>10</mp>
+    </character>
+</characters>

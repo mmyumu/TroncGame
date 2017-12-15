@@ -1,18 +1,17 @@
 package fr.mmyumu.troncgame.model.manager;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.XmlReader;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.inject.Inject;
 
 import fr.mmyumu.troncgame.model.ItemDef;
-import fr.mmyumu.troncgame.model.ModelConstants;
 import fr.mmyumu.troncgame.model.Weapon;
 import fr.mmyumu.troncgame.model.WeaponDef;
 import fr.mmyumu.troncgame.model.exception.NotFoundException;
@@ -26,6 +25,7 @@ public class ItemManager {
 
     private final Map<String, ItemDef> items;
     private final Map<String, WeaponDef> weapons;
+    private InputStream inputStream;
 
     public class ID {
         public static final String BASIC_SWORD = "sword.basic";
@@ -36,7 +36,8 @@ public class ItemManager {
     }
 
     @Inject
-    public ItemManager() {
+    public ItemManager(InputStream inputStream) {
+        this.inputStream = inputStream;
         this.items = new HashMap<>();
         this.weapons = new HashMap<>();
 
@@ -49,7 +50,7 @@ public class ItemManager {
 
     private void loadXml() throws IOException {
         XmlReader reader = new XmlReader();
-        XmlReader.Element root = reader.parse(new FileHandle(ModelConstants.DataPath.ITEMS));
+        XmlReader.Element root = reader.parse(inputStream);
         Array<XmlReader.Element> weaponElements = root.getChildrenByName("weapon");
         for (XmlReader.Element weaponElement : weaponElements) {
             String id = weaponElement.getAttribute("id");

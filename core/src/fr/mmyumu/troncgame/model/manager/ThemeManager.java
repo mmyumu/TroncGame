@@ -1,19 +1,18 @@
 package fr.mmyumu.troncgame.model.manager;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.XmlReader;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.inject.Inject;
 
 import fr.mmyumu.troncgame.dialog.theme.DialogTheme;
-import fr.mmyumu.troncgame.model.ModelConstants;
 
 /**
  * Manage the themes of the game
@@ -23,9 +22,11 @@ public class ThemeManager {
     private static final String TAG = "ThemeManager";
     private static final float MAX_COLOR_VALUE = 255;
     private final Map<String, DialogTheme> dialogThemes;
+    private InputStream inputStream;
 
     @Inject
-    public ThemeManager() {
+    public ThemeManager(InputStream inputStream) {
+        this.inputStream = inputStream;
         this.dialogThemes = new HashMap<>();
 
         try {
@@ -37,7 +38,7 @@ public class ThemeManager {
 
     private void loadXml() throws IOException {
         XmlReader reader = new XmlReader();
-        XmlReader.Element root = reader.parse(new FileHandle(ModelConstants.DataPath.THEMES));
+        XmlReader.Element root = reader.parse(inputStream);
         Array<XmlReader.Element> dialogElements = root.getChildrenByName("dialog");
         for (XmlReader.Element dialogElement : dialogElements) {
             String id = dialogElement.getAttribute("id");

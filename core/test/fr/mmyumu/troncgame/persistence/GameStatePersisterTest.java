@@ -12,29 +12,23 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
-import org.mockito.stubbing.OngoingStubbing;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.logging.FileHandler;
-
-import javax.inject.Inject;
+import java.io.InputStream;
+import java.net.URL;
 
 import fr.mmyumu.troncgame.model.GameCharacter;
-import fr.mmyumu.troncgame.model.GameCharacterDef;
 import fr.mmyumu.troncgame.model.GameCharacterUtil;
 import fr.mmyumu.troncgame.model.manager.CharacterManager;
 import fr.mmyumu.troncgame.model.manager.ItemManager;
 import fr.mmyumu.troncgame.model.manager.ModelManager;
 import fr.mmyumu.troncgame.model.manager.ThemeManager;
 import fr.mmyumu.troncgame.overworld.game.OverworldCharacterLogic;
-import fr.mmyumu.troncgame.persistence.stubs.PreferencesStub;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
-import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 /**
  * Created by mmyumu on 14/12/2017.
@@ -53,7 +47,13 @@ public class GameStatePersisterTest {
         Gdx.app = mock(Application.class);
         Gdx.input = mock(Input.class);
 
-        modelManager = new ModelManager(new ItemManager(), new CharacterManager(), new ThemeManager());
+        URL resource = this.getClass().getResource(".");
+
+        InputStream itemsInputStream = this.getClass().getClassLoader().getResourceAsStream ("items.xml");
+        InputStream charactersInputStream = this.getClass().getClassLoader().getResourceAsStream ("characters.xml");
+        InputStream themesInputStream = this.getClass().getClassLoader().getResourceAsStream ("themes.xml");
+
+        modelManager = new ModelManager(new ItemManager(itemsInputStream), new CharacterManager(charactersInputStream), new ThemeManager(themesInputStream));
 
         File newFile = new File(testFolder.getRoot().getAbsolutePath() + "/gameStateTest.xml");
         try {
@@ -98,12 +98,24 @@ public class GameStatePersisterTest {
     @Test
     public void testSaveModel() {
         modelManager.newGame();
+
         gameStatePersister.saveModel();
 
         modelManager.getItemManager().getItems().clear();
         modelManager.getCharacterManager().getCharacters().clear();
+        modelManager.getCharacterManager().getTeam().clear();
         modelManager.getThemeManager().getDialogThemes().clear();
 
+        assertEquals("Number of items",0, modelManager.getItemManager().getItems().size());
+        assertEquals("Number of characters",0, modelManager.getCharacterManager().getCharacters().size());
+        assertEquals("Number of team characters",0, modelManager.getCharacterManager().getTeam().getCharacters().size());
+        assertEquals("Number of themes",0, modelManager.getThemeManager().getDialogThemes().size());
+
         gameStatePersister.loadModel();
+
+        assertEquals("Number of items",1, modelManager.getItemManager().getItems().size());
+        assertEquals("Number of characters",4, modelManager.getCharacterManager().getCharacters().size());
+        assertEquals("Number of team characters",2, modelManager.getCharacterManager().getTeam().getCharacters().size());
+        assertEquals("Number of themes",1, modelManager.getThemeManager().getDialogThemes().size());
     }
 }

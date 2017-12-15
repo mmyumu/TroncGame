@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<themes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="themes.xsd">
+    <dialog name="Brown dialog theme" id="dialog.brown">
+        <top>data/dialog/brown/top.png</top>
+        <bottom>data/dialog/brown/bottom.png</bottom>
+        <left>data/dialog/brown/left.png</left>
+        <right>data/dialog/brown/right.png</right>
+        <topLeft>data/dialog/brown/top-left.png</topLeft>
+        <topRight>data/dialog/brown/top-right.png</topRight>
+        <bottomLeft>data/dialog/brown/bottom-left.png</bottomLeft>
+        <bottomRight>data/dialog/brown/bottom-right.png</bottomRight>
+        <backgroundColor>
+            <red>188</red>
+            <green>170</green>
+            <blue>164</blue>
+        </backgroundColor>
+    </dialog>
+</themes>

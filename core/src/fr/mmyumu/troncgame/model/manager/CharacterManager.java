@@ -1,11 +1,11 @@
 package fr.mmyumu.troncgame.model.manager;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.XmlReader;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -13,7 +13,6 @@ import javax.inject.Inject;
 
 import fr.mmyumu.troncgame.model.GameCharacter;
 import fr.mmyumu.troncgame.model.GameCharacterDef;
-import fr.mmyumu.troncgame.model.ModelConstants;
 import fr.mmyumu.troncgame.model.Team;
 
 /**
@@ -26,9 +25,11 @@ public class CharacterManager {
 
     private Team team;
     private final Map<String, GameCharacterDef> characters;
+    private InputStream inputStream;
 
     @Inject
-    public CharacterManager() {
+    public CharacterManager(InputStream inputStream) {
+        this.inputStream = inputStream;
         this.characters = new HashMap<>();
 
         try {
@@ -40,7 +41,7 @@ public class CharacterManager {
 
     private void loadXml() throws IOException {
         XmlReader reader = new XmlReader();
-        XmlReader.Element root = reader.parse(new FileHandle(ModelConstants.DataPath.CHARACTERS));
+        XmlReader.Element root = reader.parse(inputStream);
         Array<XmlReader.Element> characterElements = root.getChildrenByName("character");
         for (XmlReader.Element characterElement : characterElements) {
             GameCharacterDef character = new GameCharacterDef();
@@ -78,14 +79,14 @@ public class CharacterManager {
     }
 
     private void parseFightElement(GameCharacterDef character, XmlReader.Element fightElement) {
-        if(fightElement != null) {
+        if (fightElement != null) {
             String waitingTexture = fightElement.getChildByName("waitingTexture").getText();
             character.setFightWaitingTexturePath(waitingTexture);
         }
     }
 
     private void parseOverworldElement(GameCharacterDef character, XmlReader.Element overworldElement) {
-        if(overworldElement != null) {
+        if (overworldElement != null) {
             String topTexture = overworldElement.getChildByName("topTexture").getText();
             character.setOverworldTopTexturePath(topTexture);
 

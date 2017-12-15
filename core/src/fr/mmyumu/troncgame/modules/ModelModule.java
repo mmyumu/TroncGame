@@ -1,8 +1,11 @@
 package fr.mmyumu.troncgame.modules;
 
+import com.badlogic.gdx.files.FileHandle;
+
 import dagger.Module;
 import dagger.Provides;
 import fr.mmyumu.troncgame.ActivityScope;
+import fr.mmyumu.troncgame.model.ModelConstants;
 import fr.mmyumu.troncgame.model.manager.CharacterManager;
 import fr.mmyumu.troncgame.model.manager.ItemManager;
 import fr.mmyumu.troncgame.model.manager.ModelManager;
@@ -17,19 +20,19 @@ public class ModelModule {
     @Provides
     @ActivityScope
     ItemManager provideItemManager() {
-        return new ItemManager();
+        return new ItemManager(new FileHandle(ModelConstants.DataPath.ITEMS).read());
     }
 
     @Provides
     @ActivityScope
     CharacterManager provideCharacterManager() {
-        return new CharacterManager();
+        return new CharacterManager(new FileHandle(ModelConstants.DataPath.CHARACTERS).read());
     }
 
     @Provides
     @ActivityScope
     ThemeManager provideThemeManager() {
-        return new ThemeManager();
+        return new ThemeManager(new FileHandle(ModelConstants.DataPath.THEMES).read());
     }
 
     @Provides

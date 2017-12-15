@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="items.xsd">
+    <weapon id="sword.basic" name="Basic sword">
+        <attack>7</attack>
+        <texture>data/items/weapons/basic_sword.png</texture>
+    </weapon>
+</items>
