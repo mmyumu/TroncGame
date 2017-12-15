@@ -14,6 +14,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import fr.mmyumu.troncgame.dialog.theme.DialogTheme;
+import fr.mmyumu.troncgame.dialog.theme.DialogThemeRenderer;
 import fr.mmyumu.troncgame.model.manager.ThemeManager;
 
 /**
@@ -32,6 +33,7 @@ public class DialogManager extends InputAdapter {
     private float width;
     private float height;
     private DialogTheme dialogTheme;
+    private DialogThemeRenderer dialogThemeRenderer;
     private int lineIndex;
     private DialogLine currentLine;
 
@@ -62,7 +64,7 @@ public class DialogManager extends InputAdapter {
     }
 
     public void draw(Batch batch, float parentAlpha) {
-        dialogTheme.draw(batch, parentAlpha, assetManager, x - MARGIN, y - MARGIN, width + (MARGIN * 2), height + (MARGIN * 2));
+        dialogThemeRenderer.draw(batch, parentAlpha, assetManager, x - MARGIN, y - MARGIN, width + (MARGIN * 2), height + (MARGIN * 2));
         currentLine.draw(batch, parentAlpha);
     }
 
@@ -107,5 +109,6 @@ public class DialogManager extends InputAdapter {
         this.width = width;
         this.height = height;
         this.dialogTheme = themeManager.getDialogThemes().get(theme);
+        dialogThemeRenderer = new DialogThemeRenderer(dialogTheme);
     }
 }

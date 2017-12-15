@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="fr.mmyumu.troncgame.model.GameCharacterTest" tests="7" skipped="0" failures="0" errors="0" timestamp="2017-11-23T10:22:12" hostname="LFR022695" time="0.667">
+  <properties/>
+  <testcase name="testAccessors" classname="fr.mmyumu.troncgame.model.GameCharacterTest" time="0.652"/>
+  <testcase name="testName" classname="fr.mmyumu.troncgame.model.GameCharacterTest" time="0.0"/>
+  <testcase name="testMP" classname="fr.mmyumu.troncgame.model.GameCharacterTest" time="0.0"/>
+  <testcase name="testActionSpeed" classname="fr.mmyumu.troncgame.model.GameCharacterTest" time="0.0"/>
+  <testcase name="testAttack" classname="fr.mmyumu.troncgame.model.GameCharacterTest" time="0.015"/>
+  <testcase name="testIsDead" classname="fr.mmyumu.troncgame.model.GameCharacterTest" time="0.0"/>
+  <testcase name="testIsAlive" classname="fr.mmyumu.troncgame.model.GameCharacterTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

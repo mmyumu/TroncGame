@@ -4,10 +4,10 @@ import dagger.Subcomponent;
 import fr.mmyumu.troncgame.ActivityScope;
 import fr.mmyumu.troncgame.menu.main.MainMenu;
 import fr.mmyumu.troncgame.menu.main.MainMenuBackground;
-import fr.mmyumu.troncgame.menu.main.MainMenuContinue;
+import fr.mmyumu.troncgame.menu.main.start.MainMenuButtonStart;
+import fr.mmyumu.troncgame.menu.main.continueButton.MainMenuContinue;
 import fr.mmyumu.troncgame.menu.main.MainMenuLoadingScreen;
 import fr.mmyumu.troncgame.menu.main.MainMenuScreen;
-import fr.mmyumu.troncgame.menu.main.MainMenuStart;
 import fr.mmyumu.troncgame.modules.MainMenuModule;
 
 /**
@@ -25,7 +25,7 @@ public interface MainMenuComponent {
 
     MainMenu createMainMenu();
 
-    MainMenuStart createMainMenuStart();
+    MainMenuButtonStart createMainMenuStart();
 
     MainMenuContinue createMainMenuContinue();
 

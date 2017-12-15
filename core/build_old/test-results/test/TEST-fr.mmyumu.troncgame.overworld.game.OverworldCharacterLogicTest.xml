@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="fr.mmyumu.troncgame.overworld.game.OverworldCharacterLogicTest" tests="18" skipped="0" failures="0" errors="0" timestamp="2017-11-23T10:22:13" hostname="LFR022695" time="0.328">
+  <properties/>
+  <testcase name="testCameraMovedWithoutMoveTarget" classname="fr.mmyumu.troncgame.overworld.game.OverworldCharacterLogicTest" time="0.0"/>
+  <testcase name="testTopAndRightCollision" classname="fr.mmyumu.troncgame.overworld.game.OverworldCharacterLogicTest" time="0.297"/>
+  <testcase name="testDiagonalMovement" classname="fr.mmyumu.troncgame.overworld.game.OverworldCharacterLogicTest" time="0.0"/>
+  <testcase name="testSetObstaclesLayer" classname="fr.mmyumu.troncgame.overworld.game.OverworldCharacterLogicTest" time="0.0"/>
+  <testcase name="testInitCenter" classname="fr.mmyumu.troncgame.overworld.game.OverworldCharacterLogicTest" time="0.0"/>
+  <testcase name="testUpdateWithBottomMoveTarget" classname="fr.mmyumu.troncgame.overworld.game.OverworldCharacterLogicTest" time="0.0"/>
+  <testcase name="testLeftCollision" classname="fr.mmyumu.troncgame.overworld.game.OverworldCharacterLogicTest" time="0.015"/>
+  <testcase name="testTopCollision" classname="fr.mmyumu.troncgame.overworld.game.OverworldCharacterLogicTest" time="0.0"/>
+  <testcase name="testUpdateWithoutMoveTarget" classname="fr.mmyumu.troncgame.overworld.game.OverworldCharacterLogicTest" time="0.0"/>
+  <testcase name="testSetMoveTarget" classname="fr.mmyumu.troncgame.overworld.game.OverworldCharacterLogicTest" time="0.0"/>
+  <testcase name="testShortMovement" classname="fr.mmyumu.troncgame.overworld.game.OverworldCharacterLogicTest" time="0.0"/>
+  <testcase name="testUpdateWithRightMoveTarget" classname="fr.mmyumu.troncgame.overworld.game.OverworldCharacterLogicTest" time="0.0"/>
+  <testcase name="testDefaultCoordinates" classname="fr.mmyumu.troncgame.overworld.game.OverworldCharacterLogicTest" time="0.0"/>
+  <testcase name="testRightCollision" classname="fr.mmyumu.troncgame.overworld.game.OverworldCharacterLogicTest" time="0.0"/>
+  <testcase name="testBottomCollision" classname="fr.mmyumu.troncgame.overworld.game.OverworldCharacterLogicTest" time="0.0"/>
+  <testcase name="testUpdateWithLeftMoveTarget" classname="fr.mmyumu.troncgame.overworld.game.OverworldCharacterLogicTest" time="0.016"/>
+  <testcase name="testUpdateWithTopMoveTarget" classname="fr.mmyumu.troncgame.overworld.game.OverworldCharacterLogicTest" time="0.0"/>
+  <testcase name="testCameraMovedWithMoveTarget" classname="fr.mmyumu.troncgame.overworld.game.OverworldCharacterLogicTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

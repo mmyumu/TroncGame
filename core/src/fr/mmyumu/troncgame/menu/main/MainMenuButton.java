@@ -18,7 +18,9 @@ import fr.mmyumu.troncgame.Constants;
  * Button of the main menu
  * Created by mmyumu on 31/01/2016.
  */
-public abstract class MainMenuButton extends Actor {
+public abstract class MainMenuButton<L extends MainMenuButtonLogic> extends Actor {
+    private final L mainMenuButtonLogic;
+
     private final AssetManager assetManager;
     private final I18NBundle bundle;
 
@@ -28,6 +30,8 @@ public abstract class MainMenuButton extends Actor {
     public MainMenuButton(AssetManager assetManager, I18NBundle bundle, int y) {
         this.assetManager = assetManager;
         this.bundle = bundle;
+
+        mainMenuButtonLogic = initMenuButtonLogic();
 
         loadFonts();
         loadTexture();
@@ -41,11 +45,13 @@ public abstract class MainMenuButton extends Actor {
         initListener();
     }
 
+    protected abstract L initMenuButtonLogic();
+
     private void initListener() {
         addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                buttonClicked(event, x, y);
+                mainMenuButtonLogic.buttonClicked();
             }
         });
     }
@@ -68,8 +74,6 @@ public abstract class MainMenuButton extends Actor {
     public void draw(Batch batch, float alpha) {
         font.draw(batch, bundle.get(getPropertyKey()), getX(), getY() + getHeight());
     }
-
-    protected abstract void buttonClicked(InputEvent event, float x, float y);
 
     protected abstract String getPropertyKey();
 }
