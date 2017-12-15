@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Action;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.actions.RunnableAction;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -23,18 +24,18 @@ import static com.badlogic.gdx.scenes.scene2d.actions.Actions.sequence;
  * Generic behaviors of characters in a Fight
  * Created by mmyumu on 04/12/2015.
  */
-public class FightCharacter extends FightCharacterLogic {
+public class FightCharacter extends Actor {
     private static final float RADIUS = 20f;
 
     private final Texture texture;
     private final boolean hasFightPopUpMenu;
     private final Label label;
     private final LinkedList<Integer> queueDamages;
+    private final FightCharacterLogic fightCharacterLogic;
 
     private boolean darkened;
 
     public FightCharacter(Skin skin, int x, int y, GameCharacter character, Texture texture, boolean hasFightPopUpMenu) {
-        super(x, y, character);
         this.texture = texture;
         this.hasFightPopUpMenu = hasFightPopUpMenu;
         this.label = new Label("", skin);
@@ -43,11 +44,14 @@ public class FightCharacter extends FightCharacterLogic {
         this.queueDamages = new LinkedList<>();
 
         setName(character.retrieveName());
+        setPosition(x, y);
+        setBounds(x, y, FightConstants.CHARACTER_WIDTH, FightConstants.CHARACTER_HEIGHT);
     }
 
     @Override
     public void act(float delta) {
         super.act(delta);
+        fightCharacterLogic.update(delta);
         label.act(delta);
 
         if (label.getActions().size == 0 && !queueDamages.isEmpty()) {
